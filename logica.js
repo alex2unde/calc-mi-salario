@@ -1,7 +1,4 @@
-const categoriaSelec = document.getElementById('opcionesCat').value;
-const antigSelec = document.getElementById('opcionesAnt').value;
-const vinoSelec = document.getElementById('opcionesVino').value;
-const trabajoMesCompleto = document.querySelector('input[name="opcion"]:checked')?.value === "2";
+
 
 class Operario {
 
@@ -39,16 +36,17 @@ class Operario {
     ley19032 = 0.03;
     sindicato = 0.02;
     sepelio = 9606;
-    obraSocial = 25110;
-    preciosVinos = {0: 0, 1: 6387, 2: 6387, 3: 10413, 4: 10413, 5: 9842, 6: 9842, 7: 13856, 8: 13856, 9: 16949,
-    10: 16949, 11: 13944, 12: 13944, 13: 13184, 14: 14186, 15: 13184, 16: 14186, 17: 14186, 18: 14186, 19: 14186, 
-    20: 26701, 21: 26701, 22: 15802, 23: 15802, 24: 15802, 25: 15802, 26: 15802, 27: 15802, 28: 20610,
+    ospav = 0.03;
+    obraSocial = 31140;
+    preciosVinos = {0: 0, 1: 6387, 2: 6387, 3: 10413, 4: 10413, 5: 10138, 6: 10138, 7: 10138, 8: 10138, 9: 10138,
+    10: 10138, 39:12165, 11: 14362, 12: 14362, 13: 13579, 14: 15605, 15: 13579, 16: 13579, 17: 13579, 18: 13579, 19: 13579, 
+    20: 29372, 21: 29372, 22: 15802, 23: 15802, 24: 15802, 25: 15802, 26: 15802, 27: 15802, 28: 20610,
     29: 20610, 30: 20610, 31: 24140, 32: 24140, 33: 15262, 34: 15262, 35: 15262, 36: 17050, 37: 15262,
     38: 15753};
 
     constructor(categoria, noRem ,antiguedad, vino, vino2, tieneTitulo, horasExt50,
     horasExt100, jubilacion, ley19032, obraSocial, sindicato1, presenperf, 
-    presencomp, refri, horasTrabajadas, sepel,) {
+    presencomp, refri, horasTrabajadas, sepel, ospav,) {
         this.categoria = categoria;
         this.antiguedad = antiguedad;
         this.vino = vino;
@@ -66,16 +64,17 @@ class Operario {
         this.presencomp = presencomp;
         this.refri = refri;
         this.sepel = sepel;
+        this.ospav = ospav;
     }
 
     basicoCompleto() {
 
         // Sueldo básico + antigüedad
-        let basico = this.valorCategoria[this.categoria] || 0;
+        let basico = this.valorCategoria[this.categoria];
         let adicionalAntiguedad = basico * 0.01 * (this.antiguedad || 0);
 
         // Asignación no remunerativa
-        let asigNoRem = this.asigNoRem[this.noRem] || 0;
+        let asigNoRem = this.asigNoRem[this.noRem];
 
         // Título secundaria
         let adicionalTitulo;
@@ -119,7 +118,7 @@ class Operario {
         let adicionalVino = adicionalVino1 + adicionalVino2;
 
         // Suma total antes de descuentos
-        let total = basico + adicionalAntiguedad +  + adicionalTitulo +
+        let total = basico + adicionalAntiguedad +  adicionalTitulo +
                     adicionalPerfec + adicionalComplet + adicionalHorasTrabajadas;
 
         // Descuentos
@@ -128,13 +127,16 @@ class Operario {
         let descuentoSindicato = total * this.sindicato1;
         let descuentoObraSocial = this.obraSocial || 0;
         let descuentoSepelio = this.sepel || 0;
+        let descuentoOspav = 0;
+        if (this.ospav){
+            descuentoOspav = total * this.ospav;
+        }
 
         let descuentos = descuentoSepelio + descuentoJubilacion +
-         descuentoLey19032 + descuentoSindicato + adicionalVino + descuentoObraSocial;
+         descuentoLey19032 + descuentoSindicato + adicionalVino + descuentoObraSocial + descuentoOspav;
 
         // Resultado final
         return (total - descuentos) + (adicionalRefri + asigNoRem);
     }
 }
-
 
