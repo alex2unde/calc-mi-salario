@@ -86,6 +86,7 @@
     <option value="8">NAMPE Tempranillo 6 x 750</option>
     <option value="9">NAMPE Merlot 6 x 750</option>
     <option value="10">NAMPE Syrah 6 x 750</option>
+    <option value="39">NAMPE Blanco Dulce Natural 6 x 750</option>
     <option value="11">NAMPE Malbec 6 x 1125</option>
     <option value="12">NAMPE Cabernet 6 x 1125</option>
     <option value="13">CHACABUCO Viognier 6 x 750</option>
@@ -132,6 +133,7 @@
     <option value="8">NAMPE Tempranillo 6 x 750</option>
     <option value="9">NAMPE Merlot 6 x 750</option>
     <option value="10">NAMPE Syrah 6 x 750</option>
+    <option value="39">NAMPE Blanco Dulce Natural 6 x 750</option>
     <option value="11">NAMPE Malbec 6 x 1125</option>
     <option value="12">NAMPE Cabernet 6 x 1125</option>
     <option value="13">CHACABUCO Viognier 6 x 750</option>
@@ -195,6 +197,16 @@
 </label>
 
 <br>
+<label class="otraObra" >Obra social
+  <div>
+<select  id="otraObra">
+  <option value="0">OSPAV</option>
+  <option value="1">Boreal</option>
+</select>
+</div>
+</label>
+
+<br>
 
 <button class="btnCalc" id="calcularBtn">Calcular</button>
 <div id="resultado">
@@ -203,7 +215,7 @@
 
 <script src="logica.js"></script>
 
-<!-- ocualtar y mostrar campo horas trabajadas -->
+<!-- Mostrar horas trabajadas -->
  <script>
 
 document.querySelectorAll('input[name="opcion"]').forEach(function(radio) {
@@ -220,6 +232,7 @@ document.querySelectorAll('input[name="opcion"]').forEach(function(radio) {
 </script>
 
 <script>
+
 document.getElementById('calcularBtn').addEventListener('click', function() {
     // Captura los valores del formulario
     const categoria = document.getElementById('opcionesCat').value;
@@ -235,9 +248,10 @@ document.getElementById('calcularBtn').addEventListener('click', function() {
     const presenperf = true;
     const presencomp = true;
     const refri = true;
+    const obraSocialSeleccionada = document.getElementById('otraObra').value;
 
     // Crea el operario
-    const operario = new Operario(
+   const operario = new Operario(
         categoria,
         noRem,
         antiguedad,
@@ -248,7 +262,7 @@ document.getElementById('calcularBtn').addEventListener('click', function() {
         horasExt100,
         0.11,
         0.03,
-        25110,
+        31139,
         0.02,
         presenperf,
         presencomp,
@@ -257,9 +271,10 @@ document.getElementById('calcularBtn').addEventListener('click', function() {
         9606,
     );
 
-    // Calcula cada ítem
-    const basico = operario.valorCategoria[operario.categoria] || 0;
-    const adicionalAntiguedad = basico * 0.01 * (operario.antiguedad || 0);
+    // Se realizan los calculos
+    const valorBaseCategoria = operario.valorCategoria[operario.categoria];
+    const basico = trabajoMesCompleto ? 0 : valorBaseCategoria;
+    const adicionalAntiguedad = valorBaseCategoria * 0.01 * (operario.antiguedad || 0);
     const asigNoRem = operario.asigNoRem[operario.noRem] || 0;
     const adicionalTitulo = operario.tieneTitulo ? operario.titulo : 0;
     const adicionalPerfec = operario.presenperf ? operario.presentPerfec : 0;
@@ -267,22 +282,31 @@ document.getElementById('calcularBtn').addEventListener('click', function() {
     const adicionalRefri = operario.refri ? operario.refrigerio : 0;
     const adicionalVino = (operario.preciosVinos[operario.vino] || 0);
     const adicionalVino2 = (operario.preciosVinos[operario.vino2] || 0);
-    const horas50 = (basico / 189) * 1.5 * (operario.horasEx50 || 0);
-    const horas100 = (basico / 189) * 2 * (operario.horasEx100 || 0);
+    const valorHora = trabajoMesCompleto ? operario.valorHora[operario.categoria] : (basico / 189);
+
+    const horas50 = valorHora * 1.5 * (operario.horasEx50 || 0);
+    const horas100 = valorHora * 2 * (operario.horasEx100 || 0);
 
     let adicionalHorasTrabajadas = 0;
     if (trabajoMesCompleto) {
     adicionalHorasTrabajadas = (operario.valorHora[operario.categoria] || 0) * (operario.horasTrabajadas || 0);
     }
 
-    const subTotal = basico + adicionalAntiguedad +  + adicionalTitulo +
+    const subTotal = basico + adicionalAntiguedad + adicionalTitulo +
                   adicionalPerfec + adicionalComplet + 
                   adicionalHorasTrabajadas + horas50 + horas100;
 
     const descuentoJubilacion = subTotal * operario.jubilacion;
     const descuentoLey19032 = subTotal * operario.ley19032;
     const descuentoSindicato = subTotal * operario.sindicato1;
-    const descuentoObraSocial = operario.obraSocial || 0;
+    
+    let descuentoObraSocial = 0;
+    if (obraSocialSeleccionada === "0") { // OSPAV
+    descuentoObraSocial = subTotal * 0.03;
+    } else if (obraSocialSeleccionada === "1") { // Boreal
+    descuentoObraSocial = 31139;
+    }
+
     const sepelio = 9606;
 
     const descuentos = descuentoJubilacion + descuentoLey19032 + descuentoSindicato + 
@@ -308,10 +332,10 @@ document.getElementById('calcularBtn').addEventListener('click', function() {
         Jubilación: - $${descuentoJubilacion.toFixed(2)}<br>
         Ley 19032: - $${descuentoLey19032.toFixed(2)}<br>
         Sindicato: - $${descuentoSindicato.toFixed(2)}<br>
-        Sepelio: - $${operario.sepelio}<br>
+        Sepelio: - $${sepelio}<br>
         Vino retirado: $${adicionalVino}<br>
         Vino retirado: $${adicionalVino2}<br>
-        Obra social: - $${descuentoObraSocial}<br>
+        Obra social: - $${descuentoObraSocial.toFixed(2)}<br>
         <hr>
         <strong>Total:</strong> <span class="totalFinal">$ ${sueldoFinal.toFixed(2)}</span>
     `;
