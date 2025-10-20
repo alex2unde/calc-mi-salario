@@ -1,40 +1,138 @@
 body {
-    background-color: #000000;
-   background-image: url(imagenes/papTapiVino.jpg);
-    background-size: 80px 80px ;
+    background-image: url('imagenes/mujerescocechando.jpeg');
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
 }
 
 .h1{
-    color: white;
-    font-size: 50spx;
+    color: #ffffff;
+    font-size: 30px;
     text-align: left;
     background-color: rgb(0, 0, 0);
     font-family: 'fjalla one', sans-serif;
-    margin-top: 0%;
+    margin: 0%;
+    padding: 0%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    justify-content: space-between;
 }
 
+.h1 small {
+    margin: 0%;
+    text-align: right;
+    font-size: 20px;
+    font-weight: lighter;
+    font-family: 'verdana'; 
+    color: #ffffff;       
+    padding: 0%;
+    width: 100%;          /* Espaciado interno opcional */
+    border-radius: 4px;    
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+}
+
+/* color de la c del titulo */
+.color1{
+    background-color: #9872ff;  
+    color: #ffffff;             
+    border-radius: 4px;   
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* color de la s del titulo */
+.color2{
+    background-color: #ff7285;  
+    color: #ffffff;        
+    border-radius: 4px;   
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/*estilo del contenedor del título*/
 .conth1{
     text-align: center;
-    margin-bottom: 0px;
-    background-color: rgb(0, 0, 0);
+    margin-top: 0px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0);
     box-shadow: #000000 0px 0px 10px;
     padding-bottom: 0%;
+    margin-right: 0%;
+}
+
+.items b{
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    text-align: right;
+    font-family:'Franklin Gothic Medium';
+    margin-bottom: 10px;
+}
+
+.descuentos small{
+    font-weight: lighter;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    text-align: right;
+    font-family:'Franklin Gothic Medium';
+    margin-bottom: 10px;
 }
 
 /* Todo el cuadro de categoria, antiguedad, secundario, vinos, mes, horas extra, obra social */
-.cat, .ant, .Sec, .vin, .mes, .horasEx, .otraObra{
+.items{
     color: rgb(255, 255, 255);
     font-size: 25px;
     border-radius: 10px;
-    border-color: #ffffff;
+    border: 0.5px solid #ffffff3f;
     text-align: left;
-    background-color: #96949439;
+    background-color: #00000066;
     backdrop-filter: blur(5px);
     font-family: 'verdana';
-    padding: 10px;
+    padding: 20px;
     display: block;
-    width: 50%;
+    width: 35%;
     box-shadow: #000000 0px 0px 10px;
+    margin-left: 30px;
+}
+
+.vin{
+    padding: 20px;
+    height: 100px;
+}
+
+.cat, .ant, .Sec, .mes, .horasEx{
+    padding: 20px;
+}
+
+.descuentos{
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    border-radius: 10px;
+    border: 0.5px solid #ffffff3f;
+    text-align: left;
+    background-color: #00000066;
+    backdrop-filter: blur(5px);
+    font-family: 'verdana';
+    padding: 20px;
+    margin-left: 30px;
+    display: block;
+    width: 35%;
+    box-shadow: #000000 0px 0px 10px;
+}
+
+.anticipo{
+    padding-left: 20px;
+    margin-top: 20px;
+    background-color: #00000000;
+}
+
+.otraObra{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #00000000;
 }
 
 /* ingreso oculto si la opcion es NO */
@@ -46,43 +144,67 @@ body {
 
 /* Opciones del mes completo, hs extras, retiro vino, opciones vino1 y 2, antiguedad y categorias*/
 #opcionesMes, #horasExtras, #opcionesRetiro, #opcionesVino, #opcionesVino2, #opcionesAnt, #opcionesCat{
-    color: rgb(3, 3, 3);
+    font-weight: 10;
+    color: rgb(255, 255, 255);
     font-size: 20px;
     text-align: left;
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.115);
     font-family: 'verdana';
     border-radius: 5px;
 }
-/* opciones de obra social */
-#otraObra {
+
+/* div de las opciones de los vinos */
+.vinOPciones{
+    font-weight: 10;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    text-align: left;
+    background-color: #00000000;
     width: 320px;   
     max-width: 100%;
-    font-size: 1em;
+    font-family: 'verdana';
     border-radius: 5px;
+    padding-left: 20px;
+}
+
+/* opciones de obra social */
+#otraObra {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    text-align: left;
+    background-color: rgba(0, 0, 0, 0);
+    width: 320px;   
+    max-width: 100%;
+    font-weight: 100;
+    border-radius: 5px;
+}
+
+.obras{
+    padding-left: 20px;
 }
 
 /* boton para calcular */
 .btnCalc{
     font-size: 30px;
     text-align: center;
-    background-color:  rgb(0, 0, 0);
+    background-color:  rgb(202, 18, 76);
     font-family: 'verdana';
     padding: 10px;
     display: block;
-    width: 20%;
+    width: 10%;
+    margin-left: 30px;
     margin-top: 20px;
     margin-bottom: 20px;
-    border-color: antiquewhite;
-    color: white; 
+    border-color: rgb(17, 9, 9);
+    color: rgb(255, 255, 255); 
     border-radius: 10px; 
     cursor: pointer; 
 }
 
 .btnCalc:hover {
-    background-color: #99a702; 
+    background-color: #e21f1f; 
     border-color: rgb(0, 0, 0);
-    color: black;
-    font-weight: bold;
+    color: #ffffff !important;
     box-shadow: #000000 0px 0px 10px;
 }
 
@@ -93,7 +215,8 @@ body {
     right: 40px;
     width: 500px;
     min-height: 100px;
-    background-color: #58585861;
+    background-color: #00000066;
+    border: 0.5px solid #ffffff3f;
     backdrop-filter: blur(5px);
     color: rgba(255, 255, 255, 0.679);
     border-radius: 10px;
@@ -102,12 +225,18 @@ body {
     font-size: 1.2em;
     font-family: 'verdana';
     z-index: 100;
+    margin: 0;
+    margin-top: 50px;
 }
 
 .totalFinal{
     font-size: 50px;
     font-weight: bold;
-    color: #c7d71a;
+    background: linear-gradient(90deg, #ffffff 0%, #9872ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
     margin-top: 10px;
 }
 
@@ -123,48 +252,103 @@ select::-webkit-scrollbar-thumb {
 }
 
 select::-webkit-scrollbar-thumb:hover {
-    background: #4051b5;
+    background: #de0864;
+}
+
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #000000;
+    color: #919090;
+    font-family: 'verdana';
+    margin-bottom: 0;
+    width: 100%;
+    box-shadow: #000000 0px 0px 10px;
+}
+
+.footerText {
+    font-size: 14px;
+    margin: 0;
+    margin-bottom: 0px;
+}
+.footerText1 {
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.svgGmail, .svgLink{
+    vertical-align: middle;
+    height: 30px;
+    width: 30px;
 }
 
 /*Diseño responsivo*/
 @media (max-width: 600px ) {
-    
     body{
-        background-color: #2b0202;
+        background-image: url('imagenes/mujerescocechando.jpeg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: local; /* Otra alternativa para móviles */
+        
     }
+    
     .h1 {
         font-size: 1.6em;
-        margin-top: 10px;
+        margin-top: 0px;
         text-align: center;
         margin-bottom: 20px;
     }
-    .cat, .ant, .Sec, .vin, .mes, .horasEx, .otraObra {
-        width: 95vw;
-        text-align: center;
-        margin: 0 auto 15px auto;
+
+    .h1 small {
+        font-size: 0.6em;
+        display: block;
+        margin-top: 5px;
     }
+
+.items{
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    border-radius: 10px;
+    border: 0.5px solid #ffffff3f;
+    text-align: center;
+    background-color: #00000056;
+    backdrop-filter: blur(5px);
+    font-family: 'verdana';
+    padding: 10px;
+    display: block;
+    width: 90%;
+    box-shadow: #000000 0px 0px 10px;
+    margin: auto;
+}
+
     #resultado {
         font-size: 1em;
         padding: 12px;
         position: static;
         width: 95vw;
-        margin: 20px auto 10px auto;
+        margin: 20px auto;
         border-radius: 12px;
         box-shadow: #000000 0px 0px 10px;
         background-color: #58585861;
         backdrop-filter: blur(5px);
         color: white;
-        padding: 5px 5px 5px 5px;;
+        padding: 5px;
         font-size: 1em;
     }
+
     select, input[type="number"], input[type="radio"] {
         font-size: 1em;
         max-width: 98vw;
     }
+    
     .btnCalc {
-        width: 90vw;
+        width: 50vw;
         font-size: 1em;
         padding: 10px 0;
-        margin-left: 10px;
+        margin: 0 auto;
+        color: rgb(255, 255, 255); 
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     }
 }
