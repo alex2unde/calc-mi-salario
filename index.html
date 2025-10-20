@@ -9,8 +9,14 @@
 
 <body>
 <div class="conth1">
-<h1 class="h1">Calcular mi salario / Bodega</h1>
+<h1 class="h1"><b><strong class="color1">C</strong>ALCULAR mi. <br> <strong class="color2">S</strong>ALARIO</b> <small>(escala salarial de bodega C.C.C.85/89
+Julio y agosto 2025)</small></h1>
 </div>
+
+<!-- */Cuadro de items*/ -->
+<div class="items"><b>Items</b> 
+
+<br>
 
 <label class="cat">Categoria: 
 <select id="opcionesCat">
@@ -23,6 +29,37 @@
 </label>
 
 <br>
+
+<form class="Sec" id="tituloSec">
+  <label>¿Titulo? 
+    <input type="radio" name="titulo" value="si"> Si
+  </label>
+  <label>
+    <input type="radio" name="titulo" value="no"> No
+  </label>
+</form>
+
+<label class="horasEx">Horas extras al 50%: 
+  <input type="number" id="horasEx50" min="0" max="99">
+</label>
+<br>
+<label class="horasEx">Horas extras al 100%: 
+  <input type="number" id="horasEx100" min="0" max="99">
+</label>
+
+<form class="mes">
+  <label>¿Trabajo el mes completo? 
+    <br>
+    <input type="radio" name="opcion" value="1"> Si
+  </label>
+  <label>
+    <input type="radio" name="opcion" value="2"> No
+  </label>
+  <br>
+  <label class="horasTrabajadas" id="horasCampo">Horas trabajadas: 
+  <input type="number" id="horasTrab" min="0" max="199">
+</label>
+</form>
 
 <label class="ant">Antiguedad: 
 <select id="opcionesAnt">
@@ -59,21 +96,15 @@
 </select>
 </label>
 
-<br>
-
-<form class="Sec" id="tituloSec">
-  <label>¿Titulo? 
-    <input type="radio" name="titulo" value="si"> Si
-  </label>
-  <label>
-    <input type="radio" name="titulo" value="no"> No
-  </label>
-</form>
+</div>
 
 <br>
+
+<!-- */Cuadro de descuentos*/ -->
+<div class="descuentos"><small>Descuentos</small> <br>
 
 <label class="vin">¿Vino retirado? 
-  <div>
+  <div class="vinOPciones">
 <select id="opcionesVino">
     <option value="0">NO</option>
     <option value="1">VB Chablis 6x 750</option>
@@ -171,51 +202,62 @@
   </div>
 </label>
 
-<br>
-
-<form class="mes">
-  <label>¿Trabajo el mes completo? 
-    <br>
-    <input type="radio" name="opcion" value="1"> Si
-  </label>
-  <label>
-    <input type="radio" name="opcion" value="2"> No
-  </label>
-  <br>
-  <label class="horasTrabajadas" id="horasCampo">Horas trabajadas: 
-  <input type="number" id="horasTrab" min="0" max="199">
-</label>
-</form>
-
-<br>
-
-<label class="horasEx">Horas extras al 50%: 
-  <input type="number" id="horasEx50" min="0" max="99">
-</label>
-<label class="horasEx">Horas extras al 100%: 
-  <input type="number" id="horasEx100" min="0" max="99">
-</label>
-
-<br>
+<div class="obras">
 <label class="otraObra" >Obra social
-  <div>
 <select  id="otraObra">
   <option value="0">OSPAV</option>
   <option value="1">Boreal</option>
 </select>
-</div>
 </label>
+</div>
 
 <br>
 
-<button class="btnCalc" id="calcularBtn">Calcular</button>
-<div id="resultado">
-  
+<label class="anticipo">Anticipo
+<input type="number">
+</label>
+
 </div>
+
+<div id="resultado"> </div>
+
+<button class="btnCalc" id="calcularBtn">Calcular</button>
+
+<footer class="footer">
+
+<svg width="40" height="100" viewBox="0 0 80 300" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="80" height="80" fill="#FF69B4"/>
+    <text x="40" y="60" font-family="Arial, sans-serif" font-size="56" fill="white" text-anchor="middle" font-weight="bold">C</text>
+    
+    <rect x="0" y="100" width="80" height="80" fill="#000000"/>
+    <text x="40" y="160" font-family="Arial, sans-serif" font-size="32" fill="white" text-anchor="middle">mi.</text>
+    
+    <rect x="0" y="200" width="80" height="80" fill="#9370DB"/>
+    <text x="40" y="260" font-family="Arial, sans-serif" font-size="56" fill="white" text-anchor="middle" font-weight="bold">S</text>
+</svg>
+
+<br>
+
+<p class="footerText">Calcular mi salario, es</p>
+<p class="footerText1">desarrollado por Alexis Cortez.</p>
+
+<a href="https://mail.google.com/mail/?view=cm&fs=1&to=alexczz89@gmail.com&su=Consulta sobre calculadora de salarios&body=Hola Alexis%0D%0A%0D%0A" target="_blank">
+<svg class="svgGmail" viewBox="0 49.4 512 399.42"><g fill="none" fill-rule="evenodd">
+    <g fill-rule="nonzero"><path fill="#4285f4" d="M34.91 448.818h81.454V251L0 163.727V413.91c0 19.287 15.622 34.91 34.91 34.91z"/>
+      <path fill="#34a853" d="M395.636 448.818h81.455c19.287 0 34.909-15.622 34.909-34.909V163.727L395.636 251z"/>
+      <path fill="#fbbc04" d="M395.636 99.727V251L512 163.727v-46.545c0-43.142-49.25-67.782-83.782-41.891z"/>
+    </g><path fill="#ea4335" d="M116.364 251V99.727L256 204.455 395.636 99.727V251L256 355.727z"/>
+    <path fill="#c5221f" fill-rule="nonzero" d="M0 117.182v46.545L116.364 251V99.727L83.782 75.291C49.25 49.4 0 74.04 0 117.18z"/>
+  </g></svg></a>
+
+<a href="">
+<svg class="svgLink" preserveAspectRatio="xMidYMid" viewBox="0 0 256 256"><path d="M218.123 218.127h-37.931v-59.403c0-14.165-.253-32.4-19.728-32.4-19.756 0-22.779 15.434-22.779 31.369v60.43h-37.93V95.967h36.413v16.694h.51a39.907 39.907 0 0 1 35.928-19.733c38.445 0 45.533 25.288 45.533 58.186l-.016 67.013ZM56.955 79.27c-12.157.002-22.014-9.852-22.016-22.009-.002-12.157 9.851-22.014 22.008-22.016 12.157-.003 22.014 9.851 22.016 22.008A22.013 22.013 0 0 1 56.955 79.27m18.966 138.858H37.95V95.967h37.97v122.16ZM237.033.018H18.89C8.58-.098.125 8.161-.001 18.471v219.053c.122 10.315 8.576 18.582 18.89 18.474h218.144c10.336.128 18.823-8.139 18.966-18.474V18.454c-.147-10.33-8.635-18.588-18.966-18.453" fill="#0A66C2"/></svg>
+</a>
+
+</footer>
 
 <script src="logica.js"></script>
 
-<!-- Mostrar horas trabajadas -->
  <script>
 
 document.querySelectorAll('input[name="opcion"]').forEach(function(radio) {
