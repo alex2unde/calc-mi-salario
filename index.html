@@ -3,14 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calcular mi salario / Balbo</title>
+    <title>Calcular mi salario / Bodega</title>
     <link rel="stylesheet" href="Estylos.css">
 </head>
 
 <body>
-<div class="conth1">
-<h1 class="h1">Calcular mi salario / Bodega</h1>
-</div>
+  
+<header class="header">
+<a href="index.html"><img class="logo" src="imagenes/logoPrincipaljpeg.jpeg" 
+alt="Calcular mi salario"></a>
+
+<nav class="nav">
+  <ul class="nav__links">
+
+    <li><a href="#">Info.</a>
+      <ul class="info">
+        <li><a href="#info">Esta calculadora esa basada en la legislación
+           laboral vigente y la escala salarial de bodega C.C.T. 85/89 
+           - septiembre - octubre de 2025.
+            </a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="rubros"><a href="#">Rubro</a>
+      <ul class="rubro">
+       <li><a href="#">Bodegas</a></li>
+       <li><a href="#">Viñedos</a></li>
+      </ul>
+    </li>
+
+    <li class="gmail"><a href="#">Contacto</a>
+      <ul class="navContacto">
+        <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=alexczz89@gmail.com&su=Consulta sobre calculadora de salarios&body=Hola Alexis%0D%0A%0D%0A" target="_blank">Correo via Gmail</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+</header>
+
+<main class="principal">
+
+<div class="items"><small>+ Items +</small> <hr> <br>
 
 <label class="cat">Categoria: 
 <select id="opcionesCat">
@@ -22,7 +57,36 @@
 </select>
 </label>
 
-<br>
+<form class="Sec" id="tituloSec">
+  <label>¿Titulo? 
+    <input type="radio" name="titulo" value="si"> Si
+  </label>
+  <label>
+    <input type="radio" name="titulo" value="no"> No
+  </label>
+</form>
+
+<label class="horasEx">Horas extras al 50%: 
+  <input type="number" id="horasEx50" min="0" max="99">
+</label>
+<br class="br-sec">
+<label class="horasEx">Horas extras al 100%: 
+  <input type="number" id="horasEx100" min="0" max="99">
+</label>
+
+<form class="mes">
+  <label>¿Trabajo el mes completo? 
+    <br>
+    <input type="radio" name="opcion" value="1"> Si
+  </label>
+  <label>
+    <input type="radio" name="opcion" value="2"> No
+  </label>
+  <br>
+  <label class="horasTrabajadas" id="horasCampo">Horas trabajadas: 
+  <input type="number" id="horasTrab" min="0" max="199">
+</label>
+</form>
 
 <label class="ant">Antiguedad: 
 <select id="opcionesAnt">
@@ -59,21 +123,12 @@
 </select>
 </label>
 
-<br>
+</div>
 
-<form class="Sec" id="tituloSec">
-  <label>¿Titulo? 
-    <input type="radio" name="titulo" value="si"> Si
-  </label>
-  <label>
-    <input type="radio" name="titulo" value="no"> No
-  </label>
-</form>
-
-<br>
+<div class="descuentos"><small>- Descuentos -</small> <hr> <br>
 
 <label class="vin">¿Vino retirado? 
-  <div>
+  <div class="vinOPciones">
 <select id="opcionesVino">
     <option value="0">NO</option>
     <option value="1">VB Chablis 6x 750</option>
@@ -109,17 +164,17 @@
     <option value="30">RESERVA Cabernet 6 x 750</option>
     <option value="31">GRAN CORTE Edicion Limitada 4 x 750</option>
     <option value="32">GRAN CORTE GRAN BLNCO 4 x 750</option>
-    <option value="33">CONEJO VERDE Malbec 6 x 750</option>
-    <option value="34">CONEJO VERDE Malbec bajo alcohol 6 x 750</option>
-    <option value="35">CONEJO VERDE Blanc de Blancs 6 x 750</option>
-    <option value="36">CONEJO VERDE Chenin dulce 6 x 750</option>
-    <option value="37">CONEJO VERDE Rose 6 x 750</option>
-    <option value="38">CONEJO VERDE Espumante Rosado 6 x 750</option>
-    <option value="38">CONEJO VERDE Torrontes Dulzon 6 x 750</option>
-    <option value="38">CONEJO VERDE Chenin dulce 12 x 500</option>
-    <option value="38">CONEJO VERDE Rose 12 x 500</option>
-    <option value="38">LOS HAROLDOS Vino Espumante Extra Brut 6 x 750</option>
-    <option value="38">LOS HAROLDOS Vino Espumante Rose 6 x 750</option>
+    <option value="33">GRAN CORTE GRAN MALBEC 4 x 750</option>
+    <option value="34">GRAN CORTE GRAN FRANC 4 x 750</option>
+    <option value="35">CONEJO VERDE Malbec 6 x 750</option>
+    <option value="36">CONEJO VERDE Malbec bajo alcohol 6 x 750</option>
+    <option value="37">CONEJO VERDE Blanc de Blancs 6 x 750</option>
+    <option value="38">CONEJO VERDE Chenin dulce 6 x 750</option>
+    <option value="39">CONEJO VERDE Rose 6 x 750</option>
+    <option value="40">CONEJO VERDE Espumante Rosado 6 x 750</option>
+    <option value="41">CONEJO VERDE Torrontes Dulzon 6 x 750</option>
+    <option value="42">LOS HAROLDOS Vino Espumante Extra Brut 6 x 750</option>
+    <option value="43">LOS HAROLDOS Vino Espumante Rose 6 x 750</option>
 </select>
 <select id="opcionesVino2">
     <option value="0">NO</option>
@@ -156,67 +211,72 @@
     <option value="30">RESERVA Cabernet 6 x 750</option>
     <option value="31">GRAN CORTE Edicion Limitada 4 x 750</option>
     <option value="32">GRAN CORTE GRAN BLNCO 4 x 750</option>
-    <option value="33">CONEJO VERDE Malbec 6 x 750</option>
-    <option value="34">CONEJO VERDE Malbec bajo alcohol 6 x 750</option>
-    <option value="35">CONEJO VERDE Blanc de Blancs 6 x 750</option>
-    <option value="36">CONEJO VERDE Chenin dulce 6 x 750</option>
-    <option value="37">CONEJO VERDE Rose 6 x 750</option>
-    <option value="38">CONEJO VERDE Espumante Rosado 6 x 750</option>
-    <option value="38">CONEJO VERDE Torrontes Dulzon 6 x 750</option>
-    <option value="38">CONEJO VERDE Chenin dulce 12 x 500</option>
-    <option value="38">CONEJO VERDE Rose 12 x 500</option>
-    <option value="38">LOS HAROLDOS Vino Espumante Extra Brut 6 x 750</option>
-    <option value="38">LOS HAROLDOS Vino Espumante Rose 6 x 750</option>
+    <option value="33">GRAN CORTE GRAN MALBEC 4 x 750</option>
+    <option value="34">GRAN CORTE GRAN FRANC 4 x 750</option>
+    <option value="35">CONEJO VERDE Malbec 6 x 750</option>
+    <option value="36">CONEJO VERDE Malbec bajo alcohol 6 x 750</option>
+    <option value="37">CONEJO VERDE Blanc de Blancs 6 x 750</option>
+    <option value="38">CONEJO VERDE Chenin dulce 6 x 750</option>
+    <option value="39">CONEJO VERDE Rose 6 x 750</option>
+    <option value="40">CONEJO VERDE Espumante Rosado 6 x 750</option>
+    <option value="41">CONEJO VERDE Torrontes Dulzon 6 x 750</option>
+    <option value="42">LOS HAROLDOS Vino Espumante Extra Brut 6 x 750</option>
+    <option value="43">LOS HAROLDOS Vino Espumante Rose 6 x 750</option>
 </select>
   </div>
 </label>
 
-<br>
-
-<form class="mes">
-  <label>¿Trabajo el mes completo? 
-    <br>
-    <input type="radio" name="opcion" value="1"> Si
-  </label>
-  <label>
-    <input type="radio" name="opcion" value="2"> No
-  </label>
-  <br>
-  <label class="horasTrabajadas" id="horasCampo">Horas trabajadas: 
-  <input type="number" id="horasTrab" min="0" max="199">
+<form class="obras">
+<label class="otraObra" >Obra social<br>
+<input type="radio"  name="obraSocial" value="3">Si</input>
 </label>
+<label class="otraObra" >
+<input type="radio" name="obraSocial" value="4">No</input>
+</label>
+<br>
 </form>
-
-<br>
-
-<label class="horasEx">Horas extras al 50%: 
-  <input type="number" id="horasEx50" min="0" max="99">
+<label class="anticipo">Anticipo
+<input type="number" id="anticipo" min="0" max="999999">
 </label>
-<label class="horasEx">Horas extras al 100%: 
-  <input type="number" id="horasEx100" min="0" max="99">
-</label>
-
 <br>
-<label class="otraObra" >Obra social
-  <div>
-<select  id="otraObra">
-  <option value="0">OSPAV</option>
-  <option value="1">Boreal</option>
-</select>
 </div>
-</label>
 
-<br>
+<div id="resultado"> </div>
 
+<div class="calcular">
 <button class="btnCalc" id="calcularBtn">Calcular</button>
-<div id="resultado">
-  
 </div>
+
+</main>
+
+<footer class="footer">
+<img class="logoFooter" src="imagenes/logo2.jpeg" 
+alt="Calcular mi salario">
+
+<br>
+
+<p class="footerText">Calcular mi salario, es</p>
+<p class="footerText1">desarrollado por Alexis Cortez.</p>
+
+<a href="https://mail.google.com/mail/?view=cm&fs=1&to=alexczz89@gmail.com&su=Consulta sobre calculadora de salarios&body=Hola Alexis%0D%0A%0D%0A" 
+target="_blank">
+<svg class="svgGmail" viewBox="0 49.4 512 399.42"><g fill="none" fill-rule="evenodd">
+    <g fill-rule="nonzero"><path fill="#4285f4" d="M34.91 448.818h81.454V251L0 163.727V413.91c0 19.287 15.622 34.91 34.91 34.91z"/>
+      <path fill="#34a853" d="M395.636 448.818h81.455c19.287 0 34.909-15.622 34.909-34.909V163.727L395.636 251z"/>
+      <path fill="#fbbc04" d="M395.636 99.727V251L512 163.727v-46.545c0-43.142-49.25-67.782-83.782-41.891z"/>
+    </g><path fill="#ea4335" d="M116.364 251V99.727L256 204.455 395.636 99.727V251L256 355.727z"/>
+    <path fill="#c5221f" fill-rule="nonzero" d="M0 117.182v46.545L116.364 251V99.727L83.782 75.291C49.25 49.4 0 74.04 0 117.18z"/>
+  </g></svg></a>
+
+<a href="">
+<svg class="svgLink" preserveAspectRatio="xMidYMid" viewBox="0 0 256 256"><path d="M218.123 218.127h-37.931v-59.403c0-14.165-.253-32.4-19.728-32.4-19.756 0-22.779 15.434-22.779 31.369v60.43h-37.93V95.967h36.413v16.694h.51a39.907 39.907 0 0 1 35.928-19.733c38.445 0 45.533 25.288 45.533 58.186l-.016 67.013ZM56.955 79.27c-12.157.002-22.014-9.852-22.016-22.009-.002-12.157 9.851-22.014 22.008-22.016 12.157-.003 22.014 9.851 22.016 22.008A22.013 22.013 0 0 1 56.955 79.27m18.966 138.858H37.95V95.967h37.97v122.16ZM237.033.018H18.89C8.58-.098.125 8.161-.001 18.471v219.053c.122 10.315 8.576 18.582 18.89 18.474h218.144c10.336.128 18.823-8.139 18.966-18.474V18.454c-.147-10.33-8.635-18.588-18.966-18.453" fill="#0A66C2"/></svg>
+</a>
+
+</footer>
 
 <script src="logica.js"></script>
 
-<!-- Mostrar horas trabajadas -->
- <script>
+<script>
 
 document.querySelectorAll('input[name="opcion"]').forEach(function(radio) {
     radio.addEventListener('change', function() {
@@ -232,7 +292,6 @@ document.querySelectorAll('input[name="opcion"]').forEach(function(radio) {
 </script>
 
 <script>
-
 document.getElementById('calcularBtn').addEventListener('click', function() {
     // Captura los valores del formulario
     const categoria = document.getElementById('opcionesCat').value;
@@ -248,7 +307,8 @@ document.getElementById('calcularBtn').addEventListener('click', function() {
     const presenperf = true;
     const presencomp = true;
     const refri = true;
-    const obraSocialSeleccionada = document.getElementById('otraObra').value;
+    const obraSocial = document.querySelector('input[name="obraSocial"]:checked')?.value;
+    const anticipo = parseInt(document.getElementById('anticipo').value) || 0;
 
     // Crea el operario
    const operario = new Operario(
@@ -262,13 +322,13 @@ document.getElementById('calcularBtn').addEventListener('click', function() {
         horasExt100,
         0.11,
         0.03,
-        31139,
         0.02,
         presenperf,
         presencomp,
         refri,
         horasTrabajadas,
         9606,
+        anticipo,
     );
 
     // Se realizan los calculos
@@ -283,6 +343,7 @@ document.getElementById('calcularBtn').addEventListener('click', function() {
     const adicionalVino = (operario.preciosVinos[operario.vino] || 0);
     const adicionalVino2 = (operario.preciosVinos[operario.vino2] || 0);
     const valorHora = trabajoMesCompleto ? operario.valorHora[operario.categoria] : (basico / 189);
+
 
     const horas50 = valorHora * 1.5 * (operario.horasEx50 || 0);
     const horas100 = valorHora * 2 * (operario.horasEx100 || 0);
@@ -301,22 +362,24 @@ document.getElementById('calcularBtn').addEventListener('click', function() {
     const descuentoSindicato = subTotal * operario.sindicato1;
     
     let descuentoObraSocial = 0;
-    if (obraSocialSeleccionada === "0") { // OSPAV
+    if (obraSocial === "3") { // opcion Si
     descuentoObraSocial = subTotal * 0.03;
-    } else if (obraSocialSeleccionada === "1") { // Boreal
-    descuentoObraSocial = 31139;
+    } else if (obraSocial === "4") { // Opcion No
+    descuentoObraSocial = 0;
     }
 
     const sepelio = 9606;
 
-    const descuentos = descuentoJubilacion + descuentoLey19032 + descuentoSindicato + 
-    descuentoObraSocial + adicionalVino + adicionalVino2 + sepelio;
+    const descuentosLegales = descuentoJubilacion + descuentoLey19032 + descuentoSindicato + 
+    descuentoObraSocial; 
+    const gastosAdicionales = adicionalVino + adicionalVino2;
+    const gastosTotales = descuentosLegales + gastosAdicionales + anticipo + sepelio;
 
-    const sueldoFinal = (subTotal - descuentos) + (adicionalRefri + asigNoRem);
+    const sueldoFinal = (subTotal - gastosTotales) + (adicionalRefri + asigNoRem);
 
     // Muestra el detalle en el div resultado
     document.getElementById('resultado').innerHTML = `
-        <strong>Detalle de tu sueldo:</strong><br>
+        <strong class="resultado2">Detalle de tu sueldo:</strong><br><hr><br>
         Básico: $${basico}<br>
         Antigüedad: $${adicionalAntiguedad}<br>
         Horas extras 50%: $${horas50.toFixed(2)}<br>
@@ -328,7 +391,6 @@ document.getElementById('calcularBtn').addEventListener('click', function() {
         Refrigerio: $${adicionalRefri}<br>
         ${trabajoMesCompleto ? `Horas trabajadas: $${adicionalHorasTrabajadas}<br>` : ""}
         <hr>
-        <strong>Descuentos:</strong><br>
         Jubilación: - $${descuentoJubilacion.toFixed(2)}<br>
         Ley 19032: - $${descuentoLey19032.toFixed(2)}<br>
         Sindicato: - $${descuentoSindicato.toFixed(2)}<br>
@@ -336,8 +398,9 @@ document.getElementById('calcularBtn').addEventListener('click', function() {
         Vino retirado: $${adicionalVino}<br>
         Vino retirado: $${adicionalVino2}<br>
         Obra social: - $${descuentoObraSocial.toFixed(2)}<br>
+        ${anticipo ? `Anticipo: - $${anticipo}` : 'Anticipo: - $0'}<br>
         <hr>
-        <strong>Total:</strong> <span class="totalFinal">$ ${sueldoFinal.toFixed(2)}</span>
+        <strong class="resultado2">Total:</strong> <span class="totalFinal">$${sueldoFinal.toFixed(2)}</span>
     `;
 });
 </script>
