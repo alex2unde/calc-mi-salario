@@ -10,11 +10,11 @@ class Operario {
     };
 
     valorHora = {
-    comun: 2243,
-    especial: 2468,
-    calificado: 2647,
-    foguista: 2828,
-    encargado: 3033
+    comun: 2467,
+    especial: 2715,
+    calificado: 2814,
+    foguista: 3110,
+    encargado: 3209
     };
 
     asigNoRem = {
@@ -143,4 +143,5 @@ class Operario {
         return (total - descuentos) + (adicionalRefri + asigNoRem);
     }
 }
+
 
