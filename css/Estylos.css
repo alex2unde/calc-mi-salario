@@ -1,0 +1,1173 @@
+* {
+    box-sizing: border-box;
+}
+
+/*body con imagen de fondo en la pagina de calculadora*/
+ .bodyCalculadora{
+    background-image: url('/assets/imagenes/mujerescocechando.jpeg');
+    background-color: #000000;
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+}
+
+/*body con imagen de fondo en el home*/
+ .bodyHome{
+    background-color: #000000;
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+}
+
+/*estilo del logo*/
+.logo{
+    height: 100px;
+    width: auto;
+    border-radius: 10px;
+    margin-left: 40px;
+}
+
+/*estilo del header*/
+.header{
+    background-color: rgb(4, 4, 4);
+    box-shadow: hsl(0, 0%, 0%) 0px 0px 10px;
+    display: flex;
+    align-items: right;
+    position: relative;
+    justify-content: space-between;
+    font-size: 10px;
+}
+
+/*estilo de la barra de navegacion*/
+.nav{
+    display: flex;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    padding: 20px;
+    font-family: 'verdana';
+}
+
+/*Estilo de los enlaces de navegación*/
+.nav a{
+    position: relative;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    padding: 20px;
+    font-size: 18px;
+    font-family: 'verdana';
+    background: #ffffff;
+    background: linear-gradient(90deg,rgba(255, 255, 255, 1)
+    0%, rgba(4, 4, 4, 4) 1%);
+    transition: color 0.3s;
+}
+
+/* estilo de info, rubros y contacto */
+.nav__links{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 0;
+}
+
+.nav__links > li {
+    position: relative;
+}
+
+/*ocultar los submenus*/
+.nav__links ul {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    flex-direction: column;
+    z-index: 10;
+    border-radius: 5px;
+    top: 100%;
+    min-width: 100px;
+}
+
+/*ancho minimo para mostrar info*/
+.nav__links .info{
+    min-width: 250px;
+}
+
+/* estilo de los enlaces dentro de los submenus*/
+.nav__links ul li a {
+    display: block;
+    padding: 12px 20px;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+/*mostrar submenu al hover*/
+.nav__links li:hover ul{
+    display: block;
+    background-color: rgb(0, 0, 0);
+    top: 40px;
+    left: 0;
+    border-radius: 5px;
+    box-shadow: #000000 0px 0px 10px;
+}
+
+/*estilo de la primer seccion del home*/
+.sec1{
+    display: flex;
+    background-color: #000000;
+    /* padding-bottom: 50px; */
+}
+
+.div2-seccion1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+}
+
+/*estilo de la imagen de la primer seccion del home*/
+.imgSec1{
+    mask-image: linear-gradient(90deg, rgb(0, 0, 0) 0%, transparent);
+    max-height: 600px;
+}
+
+.div2-seccion1{
+    margin-right: 20px;
+}
+
+/*estilo del h1*/
+.h1-home{
+    font-size: 70px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    margin-top: 35px;
+    margin-bottom: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}   
+
+/*estilo del parrafo debajo del h1*/
+.parrafoSec1{
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    margin-top: -20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}   
+
+/*estilo del enlace para ir a la calculadora*/
+.irAcalcular{
+    font-size: 25px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    text-decoration: none;
+    padding: 15px 25px;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+    align-items: center;
+    position: 50%;
+    margin-top: 20px;
+}
+
+/*contenedor hijo de la segunda seccion del home*/
+.sec2{
+    background-color: #3a6bba;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    align-items: center;
+    max-width: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 100px;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    border-radius: 60px;
+}
+
+/*contenedor del primer ejemplo*/
+.div-ejemplo1{
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+}
+
+/*contenedor del segundo ejemplo*/
+.div-ejemplo2{
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+}
+
+.div-ejemplo3{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/*h2 (Como se usa?) del la segunda seccion del home*/
+.h2-seccion2{
+    background-color: #3a6bba;
+    max-width: 450px;
+    margin: auto;
+    font-size: 60px;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 10px;
+    padding-bottom: 30px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/*estilo del parrafo de la segunda seccion del home*/
+.parrafoSec2{
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    max-width: auto;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.parrafoFinalSec2{
+    font-size: 36px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    max-width: 300px;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.sec3{
+    background-color: #c84d4d;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    position: relative;
+    align-items: center;
+    max-width: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 100px;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    border-radius: 60px;
+}
+
+.h2-seccion3{
+    grid-row: 1;
+    grid-column: 2;
+    max-width: 450px;
+    margin: auto;
+    font-size: 60px;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 10px;
+    padding-bottom: 30px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.parrafoSec3{
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    max-width: auto;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/*estilo de las imagenes de la tercer seccion del home*/
+.imgSec3{
+    max-width: 300px;
+    max-height: 300px;
+    margin: 10px;
+    box-shadow: rgba(0, 0, 0, 0.3);
+}
+
+.imgSec3:hover {
+    transform: scale(3);
+    transition: transform 0.8s ease;
+    z-index: 10;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+
+}
+    
+
+.divInfo1, .divInfo2, .divInfo3{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.imgEjemplo-I{
+    /* mask-image: linear-gradient(90deg, rgb(0, 0, 0) 0%, transparent); */
+    max-width: 350px;
+    max-height: 300px;
+}
+
+.imgEjemplo-2{
+    /* mask-image: linear-gradient(90deg, transparent, rgb(0, 0, 0) 100%); */
+    max-width: 350px;
+    max-height: 300px;
+}
+
+.boonCalcular{
+    max-width: 200px;
+    max-height: 300px;
+}
+
+/*estilo de la palabra "Items"*/
+.items small{
+    font: lighter 20px 'Franklin Gothic Medium';
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.525);
+    text-align: right;
+    margin-bottom: 10px;
+    background: #ffffff00;
+}
+
+/*estilo de la palabra "Descuentos"*/
+.descuentos small{
+    font: lighter 20px 'Franklin Gothic Medium';
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.525);
+    text-align: right;
+    margin-bottom: 10px;
+    background: #ffffff00;
+}
+
+/*estilo de las lineas divisorias*/
+hr {
+    border: 0;
+    height: 2.4px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 10px 0;
+}
+
+/*estilo de la palabra "Detalle de tu sueldo"*/
+.resultado2{
+    font: lighter 20px 'Franklin Gothic Medium';
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.525);
+    text-align: right;
+    margin-bottom: 10px;
+    background: #ffffff00;
+}   
+
+/*estilo del contenedor principal main*/
+.principal{
+    min-width: auto;
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 489px 480fr;
+    grid-template-rows: auto auto auto;
+    gap: 30px;
+    padding: 20px;
+}
+
+/* Todo el cuadro de categoria, antiguedad, secundario, vinos, mes, horas extra, obra social */
+.items{
+    grid-column: 1;
+    grid-row: 1;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    border-radius: 10px;
+    border: 0.5px solid #ffffff3f;
+    text-align: left;
+    background-color: #0000006e;
+    backdrop-filter: blur(12px);
+    font-family: 'verdana';
+    box-shadow: #000000 0px 0px 10px;
+    max-height: 410px;
+    max-width: 480px;
+    padding: 20px;
+}
+
+.compartirWhatsApp{
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: 1fr;
+    flex-direction: row;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    border-radius: 10px;
+    border: 0.5px solid #ffffff3f;
+    text-align: left;
+    align-items: center;
+    justify-content: center;
+    background-color: #0000006e;
+    backdrop-filter: blur(12px);
+    font-family: 'verdana';
+    box-shadow: #000000 0px 0px 10px;
+    max-height: 410px;
+    max-width: 480px;
+    padding: 20px;
+    position: relative;
+    justify-items: center;
+}
+
+.comparWhas1{
+    grid-row: 1;
+    grid-column: 1;
+    text-decoration: none;
+    list-style: none;
+    color: rgb(255, 255, 255);   
+    align-items: center;
+    justify-content: center;
+}
+
+.comparWhas{
+    text-decoration: none;
+    list-style: none;
+    color: rgb(255, 255, 255);
+    top: -15px;
+    position: relative;
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconoW{
+    height: 50px;
+    width: auto;
+    border-radius: 10px;
+    margin-right: 10px;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#horasEx50{
+    color: rgb(255, 255, 255);
+    margin-left: 10px;
+    font-size: 20px;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    background-color: #ffffff4f;
+}
+
+#horasEx100{
+    color: rgb(255, 255, 255);
+    margin-left: 10px;
+    font-size: 20px;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    background-color: #ffffff4f;
+    margin-left: 0px;
+    margin-top: 5px;
+}
+
+/* cuadro de resultado */ 
+#resultado {
+    grid-column: 2;  /* Segunda columna */
+    background-color: #0000006e;
+    border: 0.5px solid #ffffff3f;
+    backdrop-filter: blur(12px);
+    color: rgba(255, 255, 255, 0.679);
+    border-radius: 10px;
+    box-shadow: #000000 0px 0px 10px;
+    padding: 20px;
+    padding-left: 40px;
+    font-size: 1.2em;
+    font-family: 'verdana';
+    max-width: 480px;
+}
+
+.descuentos{
+    grid-column: 2;  /* Segunda columna */
+    grid-row: 1;  /* Primera fila */
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    border-radius: 10px;
+    border: 0.5px solid #ffffff3f;
+    text-align: left;
+    background-color: #0000006e;
+    backdrop-filter: blur(12px);
+    font-family: 'verdana';
+    max-height: 410px;
+    max-width: 480px;
+    box-shadow: #000000 0px 0px 10px;
+    padding: 20px;
+}
+
+.vin{
+    padding: 20px;
+    height: 100px;
+}
+
+.cat, .ant, .Sec, .mes, .horasEx{
+    padding: 20px;
+}
+
+.anticipo{
+    padding-left: 20px;
+    margin-top: 20px;
+    background-color: #00000000;
+}
+
+#anticipo{
+    color: rgb(255, 255, 255);
+    margin-left: 10px;
+    /* width: 150px; */
+    font-size: 20px;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    background-color: #ffffff4f;
+}
+
+.otraObra{
+    margin-top: 20px;
+    background-color: #00000000;
+}
+
+/* ingreso oculto si la opcion es NO */
+.horasTrabajadas{
+    display:none;
+    background-color: #3333330a;
+    backdrop-filter: blur(5px);
+}
+
+/* Opciones del mes completo, hs extras, retiro vino, opciones vino1 y 2, antiguedad y categorias*/
+#opcionesMes, #horasExtras, #opcionesRetiro, #opcionesVino, #opcionesVino2, #opcionesAnt, #opcionesCat{
+    font-weight: 10;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    text-align: left;
+    background-color: rgba(0, 0, 0, 0.115);
+    font-family: 'verdana';
+    border-radius: 5px;
+    max-width: 80%;
+} 
+
+/* div de las opciones de los vinos */
+.vinOPciones{
+    font-weight: 10;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    text-align: left;
+    background-color: #00000000;
+    min-width: 320px;   
+    max-width: 100%;
+    font-family: 'verdana';
+    border-radius: 5px;
+    padding-left: 20px;
+}
+
+/* opciones de obra social */
+#otraObra {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    text-align: left;
+    background-color: rgba(0, 0, 0, 0);
+    width: 217px;   
+    font-weight: 100;
+    border-radius: 5px;
+}
+
+.obras{
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
+
+.totalFinal{
+    font-size: 50px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #ffffff 0%, #8084f9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+    padding: 20px;
+}
+
+/* div del btn calcular */
+.calcular {
+    grid-column: 1;
+    grid-row: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* boton para calcular */
+.btnCalc{
+    font-size: 30px;
+    text-align: center;
+    background: #000000;
+    background: linear-gradient(326deg,rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 50%,
+    rgba(189, 189, 189, 1) 100%);
+    font-family: 'verdana';
+    border-bottom: 2px solid #000000;
+    border-right: 2px solid #000000;
+    color: rgb(255, 255, 255); 
+    box-shadow: 0px 0px 5px 0px #000000;
+    border-radius: 25px; 
+    cursor: pointer; 
+    padding: 30px;
+}
+
+.btnCalc:hover {
+    background: linear-gradient(326deg,
+        rgb(81, 0, 255) 0%,
+        rgb(16, 27, 243) 50%,
+        rgb(78, 93, 255) 100%);  /* ✅ Usa gradiente en lugar de background-color */
+    
+    color: #ffffff !important;
+    box-shadow: 0px 2px 30px rgba(17, 0, 255, 0.8);
+    transition: all 0.3s ease;  /* ✅ Transición suave */
+}
+
+/* Barra de dezplazamiento para los select */
+select::-webkit-scrollbar {
+    width: 8px;
+    background: #e0e0e0;
+}
+
+select::-webkit-scrollbar-thumb {
+    background: #000000;
+    border-radius: 6px;
+}
+
+select::-webkit-scrollbar-thumb:hover {
+    background: #de0864;
+}
+
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #0f0f0f;
+    color: #919090;
+    font-family: 'verdana';
+    margin: 0;
+    width: 100%;
+    box-shadow: #000000 0px 0px 10px;
+}
+
+.logoFooter {
+    height: 50px;
+}
+
+.footerText {
+    font-size: 14px;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.svgGmail, .svgLink{
+    vertical-align: middle;
+    height: 30px;
+    width: 30px;
+}
+
+.svgGmail{
+    margin-right: 10px;
+}
+
+/*Diseño responsivo*/
+@media (max-width: 600px ) 
+{
+    * {
+        box-sizing: border-box; 
+        margin: 0;
+        padding: 0;
+    }
+
+    .bodyCalculadora{
+        background-image: url('../assets/imagenes/mujerescocechando.jpeg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: local; /* Otra alternativa para móviles */
+        margin: 0px;
+        width: 100%;
+        padding: 0px;
+        min-height: 100vh;
+        box-sizing: border-box;
+    }
+    
+    .bodyHome{
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: local; /* Otra alternativa para móviles */
+        margin: 0px;
+        width: 100%;
+        padding: 0px;
+    }
+
+header{
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+        position: fixed;
+    }
+
+    /*estilo de la barra de navegacion*/
+.nav{
+    display: flex;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    padding: 20px;
+    padding-right: 0px;
+    font-family: 'verdana';
+    border-radius: 30px;
+}
+
+.infoIndex{
+    display: none;
+}
+
+.logo{
+    margin-left: 5px;
+}
+
+.gmail, .rubros{
+    display: none;
+}
+
+.nav__links ul li a {
+    display: block;
+    padding: 12px 20px;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 16px;
+    border: 1px solid rgb(255, 255, 255); 
+    transition: all 0.3s ease;
+    }
+
+/*se mueve al centro del submenu y se raslada hacia la izquierda*/
+.nav__links li:hover ul {
+    top: 40px;
+    left: 50%;                        
+    transform: translateX(-90%);       
+    background-color: rgb(0, 0, 0);
+    border-radius: 5px;
+    box-shadow: #000000 0px 0px 10px;
+    border-color: #ffffff;
+}
+
+/*estilo de la primer seccion del home*/
+.sec1{
+    display: flex;
+    background-color: #000000;
+    flex-direction: column;
+}
+
+.div2-seccion1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+}
+
+/*estilo de la imagen de la primer seccion del home*/
+.imgSec1{
+    mask-image: linear-gradient(180deg, rgb(0, 0, 0) 0%, transparent);
+    max-height: 600px;
+    max-width: 100%;
+}
+
+.div2-seccion1{
+    margin:10px;
+}   
+
+/*contenedor hijo de la segunda seccion del home*/
+.sec2{
+    background-color: #3a6bba;
+    display: grid;
+    grid-template-columns: 1fr;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    max-width: auto;
+    margin-left: 10px;
+    /* margin-right: 10px; */
+    margin-top: 50px;
+    margin-bottom: 50px;
+    /* padding: 100px; */
+    padding-bottom: 50px;
+    padding-top: 50px;
+    border-radius: 60px;
+}
+
+/*contenedor del primer ejemplo*/
+.div-ejemplo1{
+background-color: #3a6bba ;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+/*contenedor del segundo ejemplo*/
+.div-ejemplo2{
+background-color: #3a6bba ;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+.div-ejemplo3{
+    background-color: #3a6bba;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/*h2 (Como se usa?) del la segunda seccion del home*/
+.h2-seccion2{
+    background-color: #3a6bba;
+    max-width: 450px;
+    margin: opx;
+    font-size: 50px;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 10px;
+    padding-bottom: 30px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/*estilo del parrafo de la segunda seccion del home*/
+.parrafoSec2{
+    background-color: #3a6bba;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    max-width: 300px;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.parrafoFinalSec2{
+    background-color: #3a6bba;
+    font-size: 36px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    max-width: 300px;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.sec3{
+    background-color: #c84d4d;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr 1fr ;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    max-width: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 50px;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    border-radius: 60px;
+}
+
+.h2-seccion3{
+    background-color: #c84d4d;
+    grid-row: 1;
+    grid-column: 1;
+    max-width: 450px;
+    font-size: 50px;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 10px;
+    /* padding-bottom: 30px; */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.divInfo1, .divInfo2, .divInfo3{
+    background-color: #c84d4d;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.parrafoSec3{
+    background-color: #c84d4d;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    max-width: 300px;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.principal{
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+        gap: 20px;
+        margin: auto;
+        max-width: 100vw;
+        width: 100%;
+        padding: 30px;
+        justify-items: center;
+    }
+
+hr{
+    background: rgba(255, 255, 255, 0.422);
+}
+
+    .items{
+        display: grid;
+        color: rgb(255, 255, 255);
+        font-size: 1.2em;
+        border-radius: 10px;
+        border: 1px solid #ffffff3f;
+        text-align: center;
+        background-color: #00000078;
+        backdrop-filter: blur(15px);
+        font-family: 'verdana';
+        width:90%;
+        box-shadow: #000000 0px 0px 10px;
+        margin: auto;
+        grid-column: 1;
+        grid-row: 1;
+        max-height: 600px;
+    }
+
+    .compartirWhatsApp{
+    grid-column: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    flex-direction: row;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    border-radius: 10px;
+    border: 0.7px solid #ffffff60;
+    text-align: left;
+    align-items: center;
+    justify-content: center;
+    background-color: #0000006e;
+    backdrop-filter: blur(12px);
+    font-family: 'verdana';
+    box-shadow: #000000 0px 0px 10px;
+    max-height: 410px;
+    max-width: 480px;
+    padding: 20px;
+    position: relative;
+}
+
+    #horasEx50{
+    color: rgb(255, 255, 255);
+    margin-left: 10px;
+    /* width: 150px; */
+    font-size: 20px;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    background-color: #ffffff4f;
+    max-width: 50px;
+}
+
+#horasEx100{
+    color: rgb(255, 255, 255);
+    margin-left: 10px;
+    /* width: 150px; */
+    font-size: 20px;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    background-color: #ffffff4f;
+    max-width: 50px;
+    margin-left: 0px;
+    margin-top: 5px;
+}
+
+    .cat{
+        padding: 0px;
+    }
+    .br-sec{
+        display: none;
+    }
+
+    .horasEx{
+        padding: 0px;
+    }
+
+    .ant{
+        padding: 0px;
+    }
+
+    .anticipo{
+        padding-left: 0px;
+    }
+
+    .vinOPciones{
+        padding-left: 0px;
+    }
+
+    .items small{
+        font: lighter 20px 'Franklin Gothic Medium';
+        font-size: 1em;
+        color: rgb(255, 255, 255);
+        text-align: center;
+        margin-bottom: 0px;
+        background: #ffffff00;
+    }
+
+    .descuentos small{
+        font: lighter 20px 'Franklin Gothic Medium';
+        font-size: 1em;
+        color: rgb(255, 255, 255);
+        text-align: center;
+        margin-bottom: 0px;
+        background: #ffffff00;
+    }
+
+    .descuentos{
+        color: rgb(255, 255, 255);
+        font-size: 1.2em;
+        border-radius: 10px;
+        border: 1px solid #ffffff3f;
+        text-align: center;
+        background-color: #0000005c;
+        backdrop-filter: blur(15px);
+        font-family: 'verdana';
+        padding: 20px;
+        width: 300px;
+        box-shadow: #000000 0px 0px 10px;
+        margin: 0;
+        grid-column: 1;
+        grid-row: 2;
+        box-sizing: border-box;
+    }
+
+    .obras{
+        padding-left: 0px;
+        padding-bottom:20px;
+    }
+
+    .vin{
+        text-align: center;
+    }
+
+    #resultado {
+        font-size: 1em;
+        text-align: center;
+        padding: 10px;;
+        width: 300px;
+        margin: 0;
+        border-radius: 12px;
+        border: 1px solid #ffffff3f;
+        box-shadow: #000000 0px 0px 10px;
+        background-color: #58585861;
+        backdrop-filter: blur(15px);
+        color: rgb(235, 234, 234);
+        padding: 5px;
+        padding-top: 20px;
+        font-size: 1em;
+        grid-column: 1;
+        grid-row: 4;
+        box-sizing: border-box;
+        justify-content: center;
+    }
+
+        .resultado2{
+        font: lighter 20px 'Franklin Gothic Medium';
+        font-size: 1.1em;
+        color: rgb(255, 255, 255);
+        text-align: center;
+        margin-bottom: 0px;
+        background: #ffffff00;
+    }
+
+    .totalFinal{
+        font-size: 2.5em;
+        padding: 10px;
+        text-align: center;
+    }
+
+    select, input[type="number"], input[type="radio"] {
+        font-size: 1em;
+        box-sizing: border-box;
+    }
+    
+    .calcular {
+        grid-column: 1;
+        grid-row: 3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        margin-bottom: 25px;
+    }
+
+    .btnCalc {
+        width: 50vw;
+        font-size: 1em;
+        padding: 10px;
+        margin: auto;
+        color: rgb(255, 255, 255); 
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        box-shadow: 10px 8px 15px rgba(0, 0, 0, 0.3);
+    }
+
+.footer {
+        font-size: 0.8em;
+        padding: 5px;
+        margin: 0;
+        width: 100%;
+        box-sizing: border-box;
+        padding-bottom: 30px;
+        background-color: #0f0f0f;
+    }
+
+    .logoFooter {
+        height: 50px;
+    }
+
+}
