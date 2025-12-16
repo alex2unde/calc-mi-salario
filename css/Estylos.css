@@ -260,7 +260,7 @@ justify-content: center;
 }
 
 .sec3{
-    background-color: #c84d4d;
+    background-color: #000000;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
@@ -492,6 +492,7 @@ hr {
 /* cuadro de resultado */ 
 #resultado {
     grid-column: 2;  /* Segunda columna */
+    column-gap: 30px    ;
     background-color: #0000006e;
     border: 0.5px solid #ffffff3f;
     backdrop-filter: blur(12px);
@@ -499,10 +500,31 @@ hr {
     border-radius: 10px;
     box-shadow: #000000 0px 0px 10px;
     padding: 20px;
-    padding-left: 40px;
     font-size: 1.2em;
     font-family: 'verdana';
     max-width: 480px;
+    margin: 20px 0;
+    padding: 20px;
+  
+}
+.resultado-fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 8px 0; */
+
+}
+
+.resultado-fila.total {
+    border-bottom: none;
+    font-weight: bold;
+    padding: 15px 0;
+    /* margin-top: 10px; */
+}
+
+.totalFinal {
+    color: #27ae60;
+    font-size: 1.2em;
 }
 
 .descuentos{
@@ -566,7 +588,7 @@ hr {
     color: rgb(255, 255, 255);
     font-size: 20px;
     text-align: left;
-    background-color: rgba(0, 0, 0, 0.115);
+    background-color: rgba(0, 0, 0, 0.39);
     font-family: 'verdana';
     border-radius: 5px;
     max-width: 80%;
@@ -654,7 +676,7 @@ hr {
 /* Barra de dezplazamiento para los select */
 select::-webkit-scrollbar {
     width: 8px;
-    background: #e0e0e0;
+    background: #000000;
 }
 
 select::-webkit-scrollbar-thumb {
@@ -663,7 +685,7 @@ select::-webkit-scrollbar-thumb {
 }
 
 select::-webkit-scrollbar-thumb:hover {
-    background: #de0864;
+    background: #ffffff;
 }
 
 .footer {
