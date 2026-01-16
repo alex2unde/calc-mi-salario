@@ -1,32 +1,32 @@
 class Operario {
     valorCategoria = {
-        comun: 484592 ,
-        especial: 533052 ,
-        calificado: 571819,
-        foguista: 610586,
-        encargado: 629970
+        comun: 502540,
+        especial: 552794,
+        calificado: 592998,
+        foguista: 633201,
+        encargado: 653302
     };
 
     valorHora = {
-        comun: 2423,
-        especial: 2665,
-        calificado: 2859,
-        foguista: 3053,
-        encargado: 3149
+        comun: 2512,
+        especial: 2764,
+        calificado: 2964,
+        foguista: 3166,
+        encargado: 3266
     };
 
     asigNoRem = {
-        comun: 160554,
-        especial: 176610,
-        calificado: 189454,
-        foguista: 202299,
-        encargado: 208721
+        comun: 166501,
+        especial: 183152,
+        calificado: 196472,
+        foguista: 209792,
+        encargado: 216452
     };
 
-    titulo = 24230;
-    presentPerfec = 24230;
-    presentComplet = 48460;
-    refrigerio = 163785;
+    titulo = 25127;
+    presentPerfec = 25127;
+    presentComplet = 50254;
+    refrigerio = 169851;
     jubilacion = 0.11;
     ley19032 = 0.03;
     sindicato = 0.02;
@@ -81,10 +81,13 @@ class Operario {
         const horas50 = valorHora * 1.5 * (this.horasEx50 || 0);
         const horas100 = valorHora * 2 * (this.horasEx100 || 0);
 
-        let adicionalHorasTrabajadas = 0;
-        if (this.trabajoMesCompleto) {
-            adicionalHorasTrabajadas = (this.valorHora[this.categoria] || 0) * (this.horasTrabajadas || 0);
+       let adicionalHorasTrabajadas = 0;
+        if (!this.trabajoMesCompleto) {
+        adicionalHorasTrabajadas =
+        (this.valorHora[this.categoria] || 0) *
+        (this.horasTrabajadas || 0);
         }
+
 
         const subTotal = basico + adicionalAntiguedad + adicionalTitulo +
                         adicionalPerfec + adicionalComplet + 

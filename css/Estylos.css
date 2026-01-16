@@ -180,6 +180,25 @@
     margin-top: 20px;
 }
 
+/*estilo del boton para descargar la app*/
+.botonDescargar{
+    font-size: 25px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    text-decoration: none;
+    padding: 15px 25px;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+/* parenesis para el texto (Solo Android) */
+.soloAndroid{
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    margin-left: 10px;
+}
+
 /*contenedor hijo de la segunda seccion del home*/
 .sec2{
     background-color: #3a6bba;
@@ -549,6 +568,12 @@ hr {
     height: 100px;
 }
 
+.vinoAclaracion{
+    font-size: 10px;
+    color: rgb(255, 255, 255);
+    margin-left: 10px;
+}
+
 .cat, .ant, .Sec, .mes, .horasEx{
     padding: 20px;
 }
@@ -760,14 +785,16 @@ header{
     }
 
     /*estilo de la barra de navegacion*/
-.nav{
-    display: flex;
+.nav {
     align-items: center;
     color: rgb(255, 255, 255);
-    padding: 20px;
-    padding-right: 0px;
+    padding: 0px;
     font-family: 'verdana';
-    border-radius: 30px;
+    background-color: none;
+}
+
+.navInfo a{
+    border: oldlace;
 }
 
 .infoIndex{
@@ -778,18 +805,23 @@ header{
     margin-left: 5px;
 }
 
-.gmail, .rubros{
+.gmail{
     display: none;
 }
 
-.nav__links ul li a {
-    display: block;
-    padding: 12px 20px;
-    color: rgb(255, 255, 255);
+.navInfo{
+    padding: 10px;
+    font-size: 6px;
+}
+
+.nav__links{
+    display: flex;
+    flex-direction: column;
+    color: rgba(255, 255, 255, 0);
     text-decoration: none;
     font-size: 16px;
-    border: 1px solid rgb(255, 255, 255); 
     transition: all 0.3s ease;
+    background-color: none;
     }
 
 /*se mueve al centro del submenu y se raslada hacia la izquierda*/
@@ -800,7 +832,7 @@ header{
     background-color: rgb(0, 0, 0);
     border-radius: 5px;
     box-shadow: #000000 0px 0px 10px;
-    border-color: #ffffff;
+    /* border-color: #ffffff; */
 }
 
 /*estilo de la primer seccion del home*/
@@ -915,7 +947,7 @@ justify-content: center;
 }
 
 .sec3{
-    background-color: #c84d4d;
+    background-color: #000000;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr 1fr ;
@@ -932,7 +964,7 @@ justify-content: center;
 }
 
 .h2-seccion3{
-    background-color: #c84d4d;
+    background-color: #000000;
     grid-row: 1;
     grid-column: 1;
     max-width: 450px;
@@ -945,7 +977,7 @@ justify-content: center;
 }
 
 .divInfo1, .divInfo2, .divInfo3{
-    background-color: #c84d4d;
+    background-color: #000000;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -955,7 +987,7 @@ justify-content: center;
 }
 
 .parrafoSec3{
-    background-color: #c84d4d;
+    background-color: #000000;
     font-size: 20px;
     color: rgb(255, 255, 255);
     text-align: center;

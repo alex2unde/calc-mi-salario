@@ -1,5 +1,6 @@
 class CalculadoraView {
     constructor() {
+        this.rubro = document.getElementById('opcionRubro');
         this.categoria = document.getElementById('opcionesCat');
         this.antiguedad = document.getElementById('opcionesAnt');
         this.titulo = document.querySelectorAll('input[name="titulo"]');
@@ -18,6 +19,7 @@ class CalculadoraView {
 
     getFormData() {
         return {
+            rubro: this.rubro.value,
             categoria: this.categoria.value,
             antiguedad: parseInt(this.antiguedad.value),
             tieneTitulo: Array.from(this.titulo).find(r => r.checked)?.value === "si",

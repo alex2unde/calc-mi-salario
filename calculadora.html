@@ -17,7 +17,7 @@ alt="Calcular mi salario"></a>
 <nav class="nav">
   <ul class="nav__links">
 
-    <li><a href="#">Info.</a>
+    <li class="navInfo"><a href="#">Info.</a>
       <!-- //es solo para ver la ultima actualizacion -->
       <ul class="info"> 
         <li><a href="#info">Esta calculadora esa basada en la legislación
@@ -25,15 +25,6 @@ alt="Calcular mi salario"></a>
            - Noviembre y Diciembre  de 2025.
             </a>
         </li>
-      </ul>
-    </li>
-
-    <li class="rubros"><a href="#">Rubro</a>
-      <!-- //por si el ususario quiere ver otros rubros y se equivoco al elegir en la 
-        pantalla anterior -->
-      <ul class="rubro">  
-       <li><a href="#">Bodega</a></li>
-       <li><a href="#">Viñedo</a></li>
       </ul>
     </li>
 
@@ -132,6 +123,7 @@ alt="Calcular mi salario"></a>
 <div class="descuentos"><small>- Descuentos -</small> <hr> <br>
 
 <label class="vin">¿Vino retirado? 
+  <p class="vinoAclaracion">(Solo para empleados de Los Haroldos)</p>
   <div class="vinOPciones">
 <select id="opcionesVino">
     <option value="0">NO</option>
@@ -291,9 +283,10 @@ target="_blank">
 <script src="js/presenter/CalculadoraPresenter.js"></script>
 
 <script>
-    // Inicializar la app
+    console.log("Inicializando app...");
     const view = new CalculadoraView();
     const presenter = new CalculadoraPresenter(view);
+    console.log("App inicializada correctamente");
 </script>
 
 </body>
