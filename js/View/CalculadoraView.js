@@ -19,7 +19,7 @@ class CalculadoraView {
 
     getFormData() {
         return {
-            rubro: this.rubro.value,
+            rubro: this.rubro?.value,
             categoria: this.categoria.value,
             antiguedad: parseInt(this.antiguedad.value),
             tieneTitulo: Array.from(this.titulo).find(r => r.checked)?.value === "si",

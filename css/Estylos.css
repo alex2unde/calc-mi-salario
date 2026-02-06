@@ -153,6 +153,7 @@
     margin-top: 35px;
     margin-bottom: 20px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 450px;
 }   
 
 /*estilo del parrafo debajo del h1*/
@@ -754,7 +755,12 @@ select::-webkit-scrollbar-thumb:hover {
         padding: 0;
     }
 
-    .bodyCalculadora{
+    .imgSec1{
+        background-image: url("assets/imagenes/imagenIndexResponsiv.png");
+        mask-image: linear-gradient(90deg, rgb(0, 0, 0) 0%, transparent);
+    }
+
+    .bodyCalculadora{   
         background-image: url('../assets/imagenes/mujerescocechando.jpeg');
         background-size: cover;
         background-position: center;
