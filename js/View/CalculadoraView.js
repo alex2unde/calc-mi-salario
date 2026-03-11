@@ -8,8 +8,6 @@ class CalculadoraView {
         this.horasEx100 = document.getElementById('horasEx100');
         this.mesCompleto = document.querySelectorAll('input[name="opcion"]');
         this.horasTrab = document.getElementById('horasTrab');
-        this.vino = document.getElementById('opcionesVino');
-        this.vino2 = document.getElementById('opcionesVino2');
         this.obraSocial = document.querySelectorAll('input[name="obraSocial"]');
         this.anticipo = document.getElementById('anticipo');
         this.calcularBtn = document.getElementById('calcularBtn');
@@ -27,8 +25,6 @@ class CalculadoraView {
             horasExt100: parseInt(this.horasEx100.value) || 0,
             trabajoMesCompleto: Array.from(this.mesCompleto).find(r => r.checked)?.value === "1",
             horasTrabajadas: parseInt(this.horasTrab.value) || 0,
-            vino: this.vino.value,
-            vino2: this.vino2.value,
             obraSocial: Array.from(this.obraSocial).find(r => r.checked)?.value === "3",
             anticipo: parseInt(this.anticipo.value) || 0
         };
@@ -97,10 +93,6 @@ class CalculadoraView {
             <div class="resultado-fila">
                 <span>Sepelio:</span>
                 <span>- $${resultado.sepelio.toFixed(2)}</span>
-            </div>
-            <div class="resultado-fila">
-                <span>Vino retirado:</span>
-                <span>- $${resultado.adicionalVino.toFixed(2)}</span>
             </div>
             <div class="resultado-fila">
                 <span>Obra social:</span>

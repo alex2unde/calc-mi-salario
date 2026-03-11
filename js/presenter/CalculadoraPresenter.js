@@ -18,8 +18,6 @@ class CalculadoraPresenter {
             const operario = new Operario(
                 datos.categoria,
                 datos.antiguedad,
-                datos.vino,
-                datos.vino2,
                 datos.tieneTitulo,
                 datos.horasExt50,
                 datos.horasExt100,

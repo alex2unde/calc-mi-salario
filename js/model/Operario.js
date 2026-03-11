@@ -33,23 +33,11 @@ class Operario {
     sepelio = 12943;
     obraSocial = 0.03;
 
-    preciosVinos = {
-        0: 0, 1: 6451, 2: 6451, 3: 10517, 4: 10517, 5: 10645, 6: 10645, 7: 10645, 
-        8: 10645, 9: 10645, 10: 10645, 39: 12773, 11: 15080, 12: 15080, 13: 14258, 
-        14: 17165, 15: 14258, 16: 14258, 17: 14258, 18: 14258, 19: 14258, 20: 32309, 
-        21: 32309, 22: 15802, 23: 15802, 24: 15802, 25: 15802, 26: 15802, 27: 15802, 
-        28: 20610, 29: 20610, 30: 20610, 31: 28147, 32: 28147, 33: 28147, 34: 28147, 
-        35: 16506, 36: 16506, 37: 16506, 38: 19711, 39: 16506, 40: 24417, 41: 24417, 
-        42: 23775, 43: 23775
-    };
-
-    constructor(categoria, antiguedad, vino, vino2, tieneTitulo, horasExt50,
+    constructor(categoria, antiguedad,  tieneTitulo, horasExt50,
         horasExt100, jubilacion, ley19032, sindicato1, presenperf, 
         presencomp, refri, horasTrabajadas, sepel, obraSocial, anticipo, trabajoMesCompleto) {
         this.categoria = categoria;
         this.antiguedad = antiguedad || 0;
-        this.vino = vino || 0;
-        this.vino2 = vino2 || 0;
         this.tieneTitulo = tieneTitulo || false;
         this.horasEx50 = horasExt50 || 0;
         this.horasEx100 = horasExt100 || 0;
@@ -75,8 +63,7 @@ class Operario {
         const adicionalPerfec = this.presenperf ? this.presentPerfec : 0;
         const adicionalComplet = this.presencomp ? this.presentComplet : 0;
         const adicionalRefri = this.refri ? this.refrigerio : 0;
-        const adicionalVino = (this.preciosVinos[this.vino] || 0) + (this.preciosVinos[this.vino2] || 0);
-        
+
         const valorHora = this.trabajoMesCompleto ? this.valorHora[this.categoria] : (basico / 189);
         const horas50 = valorHora * 1.5 * (this.horasEx50 || 0);
         const horas100 = valorHora * 2 * (this.horasEx100 || 0);
@@ -98,10 +85,9 @@ class Operario {
         const descuentoSindicato = subTotal * this.sindicato1;
         const descuentoObraSocial = this.obraSocial ? subTotal * 0.03 : 0;
         const sepelio = this.sepel;
-
         const descuentosLegales = descuentoJubilacion + descuentoLey19032 + 
                                  descuentoSindicato + descuentoObraSocial;
-        const gastosTotales = descuentosLegales + adicionalVino + this.anticipo + sepelio;
+        const gastosTotales = descuentosLegales +  this.anticipo + sepelio;
         const sueldoFinal = (subTotal - gastosTotales) + (adicionalRefri + asigNoRem);
 
         return {
@@ -120,7 +106,6 @@ class Operario {
             descuentoSindicato,
             descuentoObraSocial,
             sepelio,
-            adicionalVino,
             sueldoFinal
         };
     }
