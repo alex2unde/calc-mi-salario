@@ -51,51 +51,62 @@ alt="Calcular mi salario"></a>
 
 <main class="principal">
 
-<div class="items"><small>+ Haberes +</small> <hr> <br>
-
-<label class="cat">Categoria: 
-<select id="opcionesCat">
-    <option value="comun">Op. Común</option>
-    <option value="especial">Op. Especializado</option>
-    <option value="calificado">Op. Calificado</option>
-    <option value="foguista">Op. Foguista</option>
-    <option value="encargado">Encargado de sección</option>
-</select>
-</label>
-
-<form class="Sec" id="tituloSec">
-  <label>¿Titulo? 
-    <input type="radio" name="titulo" value="si"> Si
+<form class="items" id="formulario">
+  <small> Panel de Carga </small> <hr>
+  
+  <label class="cat" for="opcionesCat">Categoria: 
+    <select id="opcionesCat">
+    <option value="525154">Op. Común</option>
+    <option value="577669">Op. Especializado</option>
+    <option value="619682">Op. Calificado</option>
+    <option value="661694">Op. Foguista</option>
+    <option value="682700">Encargado de sección</option>
+    </select>
   </label>
-  <label>
-    <input type="radio" name="titulo" value="no"> No
-  </label>
-</form>
 
-<label class="horasEx">Horas extras al 50%: 
-  <input type="number" id="horasEx50" min="0" max="99">
-</label>
-<br class="br-sec">
-<label class="horasEx">Horas extras al 100%: 
-  <input type="number" id="horasEx100" min="0" max="99">
-</label>
+  <span>¿Titulo?</span>
+ 
+<div class="secundarioDiv"> <!-- div para poner los radios en linea. -->
 
-<form class="mes">
-  <label>¿Trabajo el mes completo? 
-    <br>
-    <input type="radio" name="opcion" value="1"> Si
+  <label class="secundario" for="tituloSec1">
+    <input type="radio" name="titulo" id="tituloSec1" value="26258"> Si
   </label>
-  <label>
-    <input type="radio" name="opcion" value="2"> No
-  </label>
-  <br>
-  <label class="horasTrabajadas" id="horasCampo">Horas trabajadas: 
-  <input type="number" id="horasTrab" min="0" max="199">
-</label>
-</form>
 
-<label class="ant">Antiguedad: 
-<select id="opcionesAnt">
+  <label class="secundario" for="tituloSec2">
+    <input type="radio" name="titulo" id="tituloSec2" value="0"> No
+  </label>
+
+</div>
+
+  <label class="horasEx" for="horasEx50">Horas extras al 50%: 
+    <input type="number" name="horasExtra" id="horasEx50" min="0" max="99">
+  </label>
+
+  <label class="horasEx" for="horasEx100">Horas extras al 100%: 
+    <input type="number" name="horasExtra" id="horasEx100" min="0" max="99">
+  </label>
+
+ 
+  <span>¿Trabajo el mes completo?</span> 
+
+<div class="mesDiv"> <!-- div para ordenar los radios en linea. -->
+
+  <label class="mesCompleto" for="mesCompleto1"> 
+    <input type="radio" name="opcion" value="1" id="mesCompleto1"> Si
+  </label>
+
+  <label class="mesCompleto" for="mesCompleto2">
+    <input type="radio" name="opcion" onclick="mostrarInputMes()" value="2" id="mesCompleto2"> No
+  </label>
+
+</div>
+
+  <label class="horasTrabajadas" for="horasTrab" id="horasLabel">Horas trabajadas: 
+    <input type="number" id="horasTrab" min="0" max="199">
+  </label>
+
+  <label class="ant" for="opcionesAnt">Antiguedad: 
+    <select id="opcionesAnt">
     <option value="0">0</option>
     <option value="1">1</option>
     <option value="2">2</option>
@@ -122,36 +133,23 @@ alt="Calcular mi salario"></a>
     <option value="23">23</option>
     <option value="24">24</option>
     <option value="25">25</option>
-    <option value="26">26</option>
-    <option value="27">27</option>
-    <option value="28">28</option>
-    <option value="29">29</option>
-</select>
-</label>
+    </select>
+  </label>
 
-</div>
+  <label class="anticipo" for="anticipo">Anticipo
+    <input type="number" id="anticipo" min="0" max="999999">
+  </label>
 
-<div class="descuentos"><small>- Descuentos -</small> <hr> <br>
-
-<form class="obras">
-<label class="otraObra" >Obra social<br>
-<input type="radio"  name="obraSocial" value="3">Si</input>
-</label>
-<label class="otraObra" >
-<input type="radio" name="obraSocial" value="4">No</input>
-</label>
-<br>
 </form>
-<label class="anticipo">Anticipo
-<input type="number" id="anticipo" min="0" max="999999">
-</label>
-<br>
-</div>
 
-<div id="resultado"> </div>
+<div id="resultado" class="resultado">
+
+  <small>Detalle</small> <hr>
+
+</div>
 
 <div class="calcular">
-<button class="btnCalc" id="calcularBtn">Calcular</button>
+<button class="btnCalc" onclick="controladorPrincipal()" id="calcularBtn">Calcular</button>
 </div>
 
 <div class="compartirWhatsApp">
@@ -167,8 +165,6 @@ alt="Calcular mi salario"></a>
 <footer class="footer">
 <img class="logoFooter" src="assets/imagenes/logo2.jpeg" 
 alt="Calcular mi salario">
-
-<br>
 
 <p class="footerText">© 2026 Calcular mi salario — Desarrollado 
   por Alexis Cortez. Todos los derechos reservados.</p>
@@ -189,16 +185,8 @@ target="_blank">
 
 </footer>
 
-<script src="js/model/Operario.js"></script>
-<script src="js/View/CalculadoraView.js"></script>
-<script src="js/presenter/CalculadoraPresenter.js"></script>
-
-<script>
-    console.log("Inicializando app...");
-    const view = new CalculadoraView();
-    const presenter = new CalculadoraPresenter(view);
-    console.log("App inicializada correctamente");
-</script>
+<script src="js/modeloNuevo.js"></script>
+<script src="js/controladorNuevo.js"></script>
 
 </body>
 

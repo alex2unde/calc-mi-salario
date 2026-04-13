@@ -337,10 +337,8 @@ justify-content: center;
     transition: transform 0.8s ease;
     z-index: 10;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-
 }
     
-
 .divInfo1, .divInfo2, .divInfo3{
     display: flex;
     flex-direction: row;
@@ -372,18 +370,16 @@ justify-content: center;
     font: lighter 20px 'Franklin Gothic Medium';
     font-size: 20px;
     color: rgba(255, 255, 255, 0.525);
-    text-align: right;
-    margin-bottom: 10px;
+    text-align: left;
     background: #ffffff00;
 }
 
-/*estilo de la palabra "Descuentos"*/
-.descuentos small{
+/*estilo de la palabra "detalle"*/
+.resultado small{
     font: lighter 20px 'Franklin Gothic Medium';
     font-size: 20px;
     color: rgba(255, 255, 255, 0.525);
-    text-align: right;
-    margin-bottom: 10px;
+    text-align: left;
     background: #ffffff00;
 }
 
@@ -407,6 +403,7 @@ hr {
 
 /*estilo del contenedor principal main*/
 .principal{
+    align-self: start;
     min-width: auto;
     max-width: 1200px;
     margin: auto;
@@ -418,12 +415,13 @@ hr {
     grid-template-rows: auto auto auto;
     gap: 30px;
     padding: 20px;
+    align-items: start;
 }
 
 /* Todo el cuadro de categoria, antiguedad, secundario, vinos, mes, horas extra, obra social */
 .items{
-    grid-column: 1;
-    grid-row: 1;
+    display: flex;
+    flex-direction: column;
     color: rgb(255, 255, 255);
     font-size: 20px;
     border-radius: 10px;
@@ -433,7 +431,7 @@ hr {
     backdrop-filter: blur(12px);
     font-family: 'verdana';
     box-shadow: #000000 0px 0px 10px;
-    max-height: 410px;
+    max-height: 450px;
     max-width: 480px;
     padding: 20px;
 }
@@ -514,86 +512,49 @@ hr {
     margin-top: 5px;
 }
 
+.resultado1{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#resultado hr {
+    border: none; /* Quitamos el borde feo por defecto */
+    height: 1px; /* Le damos altura */
+    background-color: rgba(255, 255, 255, 0.2); /* Un blanco transparente */
+    width: 100%; /* CLAVE: Para que ocupe todo el ancho del cuadro */
+    margin: 15px 0; /* Espacio arriba y abajo para que respire el diseño */
+}
+
 /* cuadro de resultado */ 
-#resultado {
-    grid-column: 2;  /* Segunda columna */
-    column-gap: 30px    ;
+#resultado { 
+    align-self: start;
     background-color: #0000006e;
     border: 0.5px solid #ffffff3f;
     backdrop-filter: blur(12px);
     color: rgba(255, 255, 255, 0.679);
     border-radius: 10px;
     box-shadow: #000000 0px 0px 10px;
-    padding: 20px;
     font-size: 1.2em;
     font-family: 'verdana';
     max-width: 480px;
-    margin: 20px 0;
     padding: 20px;
-  
-}
-.resultado-fila {
-    display: flex;
     justify-content: space-between;
     align-items: center;
-    /* padding: 8px 0; */
-
-}
-
-.resultado-fila.total {
-    border-bottom: none;
-    font-weight: bold;
-    padding: 15px 0;
-    /* margin-top: 10px; */
-}
-
-.totalFinal {
-    color: #27ae60;
-    font-size: 1.2em;
-}
-
-.descuentos{
-    grid-column: 2;  /* Segunda columna */
-    grid-row: 1;  /* Primera fila */
-    color: rgb(255, 255, 255);
-    font-size: 20px;
-    border-radius: 10px;
-    border: 0.5px solid #ffffff3f;
-    text-align: left;
-    background-color: #0000006e;
-    backdrop-filter: blur(12px);
-    font-family: 'verdana';
-    max-height: 410px;
-    max-width: 480px;
-    box-shadow: #000000 0px 0px 10px;
-    padding: 20px;
-}
-
-.vin{
-    padding: 20px;
-    height: 100px;
-}
-
-.vinoAclaracion{
-    font-size: 10px;
-    color: rgb(255, 255, 255);
-    margin-left: 10px;
+    flex-direction: column;
 }
 
 .cat, .ant, .Sec, .mes, .horasEx{
-    padding: 20px;
+    padding-bottom: 10px;
 }
 
 .anticipo{
-    padding-left: 20px;
-    margin-top: 20px;
-    background-color: #00000000;
+    padding-bottom: 10px;
 }
 
 #anticipo{
+    padding: 20px;
     color: rgb(255, 255, 255);
-    margin-left: 10px;
-    /* width: 150px; */
     font-size: 20px;
     border-radius: 5px;
     border: none;
@@ -601,20 +562,26 @@ hr {
     background-color: #ffffff4f;
 }
 
-.otraObra{
-    margin-top: 20px;
-    background-color: #00000000;
-}
-
 /* ingreso oculto si la opcion es NO */
 .horasTrabajadas{
     display:none;
-    background-color: #3333330a;
-    backdrop-filter: blur(5px);
+
+  
+    padding-bottom: 10px;
+}
+
+#horasTrab{
+    padding: 20px;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    background-color: #ffffff4f;
 }
 
 /* Opciones del mes completo, hs extras, retiro vino, opciones vino1 y 2, antiguedad y categorias*/
-#opcionesMes, #horasExtras, #opcionesRetiro, #opcionesVino, #opcionesVino2, #opcionesAnt, #opcionesCat{
+#opcionesMes, #horasExtras, #opcionesAnt, #opcionesCat{
     font-weight: 10;
     color: rgb(255, 255, 255);
     font-size: 20px;
@@ -625,34 +592,22 @@ hr {
     max-width: 80%;
 } 
 
-/* div de las opciones de los vinos */
-.vinOPciones{
-    font-weight: 10;
-    color: rgb(255, 255, 255);
-    font-size: 20px;
-    text-align: left;
-    background-color: #00000000;
-    min-width: 320px;   
-    max-width: 100%;
-    font-family: 'verdana';
-    border-radius: 5px;
-    padding-left: 20px;
+.secundarioDiv{
+    display: flex;
+    flex-direction: row;
 }
 
-/* opciones de obra social */
-#otraObra {
-    color: rgb(255, 255, 255);
-    font-size: 20px;
-    text-align: left;
-    background-color: rgba(0, 0, 0, 0);
-    width: 217px;   
-    font-weight: 100;
-    border-radius: 5px;
+.secundario{
+    padding-bottom: 10px;
 }
 
-.obras{
-    padding-left: 20px;
-    padding-bottom: 20px;
+.mesDiv{
+    display: flex;
+    flex-direction: row;
+}
+
+.mesCompleto{
+    padding-bottom: 10px;
 }
 
 .totalFinal{
