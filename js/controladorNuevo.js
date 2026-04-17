@@ -1,6 +1,28 @@
+let tipoDeOperario = "efectivo";
+
+function opTemporario() {
+
+    const opcionMesOp = document.getElementById("selectMes");
+    tipoDeOperario = "temporario";
+
+    opcionMesOp.style.display = "block";
+    document.getElementById("temporario").classList.add("activo");
+    document.getElementById("efectivo").classList.remove("activo");
+}
+
+function opEfectivo() {
+
+    const opcionMesOp = document.getElementById("selectMes");
+    tipoDeOperario = "efectivo";
+
+    opcionMesOp.style.display = "none";
+    document.getElementById("efectivo").classList.add("activo");
+    document.getElementById("temporario").classList.remove("activo");
+}
 
 function capturaValores() {
 
+    const numeroMes = Number(document.getElementById("opcionesMes").value);
     const elementCategoria = document.getElementById("opcionesCat");
     const selectCategoria = Number(document.getElementById("opcionesCat").value);
     const valorTitulo = Number(document.getElementById("tituloSec1").value || 0);
@@ -12,7 +34,7 @@ function capturaValores() {
     const inpAnticipo = Number(document.getElementById("anticipo").value || 0);
 
     return {
-        elementCategoria, selectCategoria, valorTitulo, tieneTituloSi, tieneTituloNo, 
+        numeroMes, elementCategoria, selectCategoria, valorTitulo, tieneTituloSi, tieneTituloNo, 
         inpHoras50, inpHoras100, selectAntiguedad, inpAnticipo };
 }
 
@@ -36,7 +58,7 @@ function controladorPrincipal() {
     const divResultado = document.getElementById("resultado");
 
     const {
-        elementCategoria, selectCategoria, valorTitulo, tieneTitulo, tieneTituloSi, 
+        numeroMes ,elementCategoria, selectCategoria, valorTitulo, tieneTitulo, tieneTituloSi, 
         inpHoras50, inpHoras100, selectAntiguedad, inpAnticipo } = capturaValores();
 
     const nombreCategoria = elementCategoria.options[elementCategoria.selectedIndex].text;
@@ -50,9 +72,6 @@ function controladorPrincipal() {
     const valorHoraAl50 = horasAl50 * inpHoras50;
     const horasAl100 = horasExtra100(precioHora);
     const valorHoraAl100 = horasAl100 * inpHoras100;
-
-    const mesHorasInput = mostrarInputMes();
-    const horasValor = calculoHorasMes(mesHorasInput, precioHora);
 
     const noRemunerativo = asignacionNoRem(nombreCategoria);
     
@@ -79,8 +98,7 @@ function controladorPrincipal() {
 
     console.log("Presentismo perfecto: " + presentismoPerfecto);
     console.log("Presentismo completo: " + presentismoCompleto);
-    console.log("Mes completo: " + mesHorasInput);
-    console.log("Horas trabajadas: " + horasValor);
+
     console.log("Precio hora: " + precioHora);
 
     console.log("No remunerativo: " + noRemunerativo);
@@ -90,7 +108,7 @@ function controladorPrincipal() {
 
     const totalHaberes = sumaHaberes(radioMesCompleto ,selectCategoria, antiguedad,
          secundarioCompleto, presentismoPerfecto, presentismoCompleto, valorHoraAl50,
-        valorHoraAl100, horasValor);
+        valorHoraAl100);
 
     const descuentoJubilacion = jubilacion(totalHaberes);
     const descuentoLey19032 = ley19032(totalHaberes);
@@ -114,79 +132,173 @@ function controladorPrincipal() {
 
     console.log("SumaHaberes: " + totalHaberes);
     console.log("Total neto: " + totalFinal);
+    console.log("dias del mes " + new Date(2026, 4, 0).getDate());
+
+    
+    if (tipoDeOperario === "temporario"){
+
+    const horasHabilesDelMes = verificarHorasHabiles(numeroMes);
+    const baseJornal = calculoBaseJornal(precioHora, horasHabilesDelMes);
+    const mesHorasInput = mostrarInputMes();
+    const horasValor = calculoHorasMes(mesHorasInput, precioHora);
+    const haberesTemporario = sumaHaberes(radioMesCompleto, baseJornal, antiguedad, secundarioCompleto, 
+        presentismoPerfecto, presentismoCompleto, valorHoraAl50, valorHoraAl100);
+    const jubilacionTemp = jubilacion(haberesTemporario);
+    const ley19032Temp = ley19032(haberesTemporario);
+    const sindicatoTemp = sindicato(haberesTemporario);
+    const obraSocialTemp = obraSocial(haberesTemporario);
+    const descuentosTemp = totalDescuentos(sepelio, jubilacionTemp, ley19032Temp, 
+        sindicatoTemp, obraSocialTemp);
+    const totalFinalTemp = totalNeto(haberesTemporario, descuentosTemp, anticipo, REFRIGERIO,
+         noRemunerativo);
+
+        console.log("Mes completo: " + mesHorasInput);
+        console.log("Horas Habiles: " + horasHabilesDelMes);
+
 
     divResultado.innerHTML = `
-    ${mesHorasInput 
-    ? `<div class="resultado1"> 
-    <span> Horas trabajadas: </span>
-    <span> $${horasValor.toLocaleString('es-AR')} </span>
-    </div>` 
-    : `<div class="resultado1">
-    <span> Basico: </span>
-    <span> $${selectCategoria.toLocaleString('es-AR')} </span> 
-    </div> `}
+
+    <div class="resultado1">
+        <span> Basico: </span>
+        <span> $${baseJornal.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span> 
+    </div>
     <div class="resultado1"> 
-    <span> Antiguedad: </span>
-    <span> $${antiguedad.toLocaleString('es-AR')} </span>
+        <span> Antiguedad: </span>
+        <span> $${antiguedad.toLocaleString('es-AR')} </span>
+    </div>
+    <div class="resultado1"> 
+        <span> Horas Extra al 50%: </span>
+        <span> $${valorHoraAl50.toLocaleString('es-AR',{ minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
     </div> 
     <div class="resultado1"> 
-    <span> Horas Extra al 50%: </span>
-    <span> $${valorHoraAl50.toLocaleString('es-AR')} </span>
-    </div> 
-    <div class="resultado1"> 
-    <span> Horas Extra al 100%: </span>
-    <span> $${valorHoraAl100.toLocaleString('es-AR')} </span>
+        <span> Horas Extra al 100%: </span>
+        <span> $${valorHoraAl100.toLocaleString('es-AR',{ minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
     </div> 
     <div class="resultado1">
-    <span> Titulo Secundario: </span>
-    <span> $${secundarioCompleto.toLocaleString('es-AR')} </span>
+        <span> Titulo Secundario: </span>
+        <span> $${secundarioCompleto.toLocaleString('es-AR')} </span>
     </div> 
     ${radioMesCompleto 
     ? `<div class="resultado1"> 
-    <span> Presentismo Perf.: </span>
-    <span> $${presentismoPerfecto.toLocaleString('es-AR')} </span>
+        <span> Presentismo Perf.: </span>
+        <span> $${presentismoPerfecto.toLocaleString('es-AR')} </span>
     </div> 
     <div class="resultado1">  
-    <span> Presentismo Comp.: </span>
-    <span> $${presentismoCompleto.toLocaleString('es-AR')} </span>
+        <span> Presentismo Comp.: </span>
+        <span> $${presentismoCompleto.toLocaleString('es-AR')} </span>
     </div>` : ""}
     <div class="resultado1"> 
-     <span> No Remunerativo: </span>
-     <span> $${noRemunerativo.toLocaleString('es-AR')} </span>
+        <span> No Remunerativo: </span>
+        <span> $${noRemunerativo.toLocaleString('es-AR')} </span>
     </div> 
     <div class="resultado1"> 
-    <span> Refrigerio: </span>
-    <span> $${REFRIGERIO.toLocaleString('es-AR')} </span>
-    </div> 
-    <hr>
-    <div class="resultado1"> 
-    <span> Jubilacion: </span>
-    <span> $${descuentoJubilacion.toLocaleString('es-AR')} </span>
-    </div> 
-    <div class="resultado1"> 
-    <span> Ley 19032: </span>
-    <span> $${descuentoLey19032.toLocaleString('es-AR')} </span>
-    </div> 
-    <div class="resultado1"> 
-    <span> Obra social: </span>
-    <span> $${obraSocialDesc.toLocaleString('es-AR')} </span>
-    </div>
-    <div class="resultado1"> 
-    <span> Sindicato: </span>
-    <span> $${descuentoSindicato.toLocaleString('es-AR')} </span>
-    </div> 
-    <div class="resultado1"> 
-    <span> Sepelio: </span>
-    <span> $${sepelio.toLocaleString('es-AR')} </span>
-    </div>
-    <div class="resultado1"> 
-    <span> Anticipo: </span>
-    <span> $${inpAnticipo.toLocaleString('es-AR')} </span>
+        <span> Refrigerio: </span>
+        <span> $${REFRIGERIO.toLocaleString('es-AR')} </span>
     </div> 
     <hr>
     <div class="resultado1"> 
-    <span> Total: </span>
-    <span> $${totalFinal.toLocaleString('es-AR')} </span>
+        <span> Jubilacion: </span>
+        <span> $${jubilacionTemp.toLocaleString('es-AR',{ minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
+    </div> 
+    <div class="resultado1"> 
+        <span> Ley 19032: </span>
+        <span> $${ley19032Temp.toLocaleString('es-AR',{ minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
+    </div> 
+    <div class="resultado1"> 
+        <span> Obra social: </span>
+        <span> $${obraSocialTemp.toLocaleString('es-AR',{ minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
+    </div>
+    <div class="resultado1"> 
+        <span> Sindicato: </span>
+        <span> $${sindicatoTemp.toLocaleString('es-AR',{ minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
+    </div> 
+    <div class="resultado1"> 
+        <span> Sepelio: </span>
+        <span> $${sepelio.toLocaleString('es-AR')} </span>
+    </div>
+    <div class="resultado1"> 
+        <span> Anticipo: </span>
+        <span> $${inpAnticipo.toLocaleString('es-AR')} </span>
+    </div> 
+    <hr>
+    <div class="resultado1"> 
+        <span> Total: </span>
+        <span> $${totalFinalTemp.toLocaleString('es-AR',{ minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
+    </div>
+`;
+
+    }
+    else {  
+
+    divResultado.innerHTML = `
+
+    <div class="resultado1">
+        <span> Basico: </span>
+        <span> $${selectCategoria.toLocaleString('es-AR')} </span> 
+    </div> 
+    <div class="resultado1"> 
+        <span> Antiguedad: </span>
+        <span> $${antiguedad.toLocaleString('es-AR',{ minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
+    </div> 
+    <div class="resultado1"> 
+        <span> Horas Extra al 50%: </span>
+        <span> $${valorHoraAl50.toLocaleString('es-AR',{ minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
+    </div> 
+    <div class="resultado1"> 
+        <span> Horas Extra al 100%: </span>
+        <span> $${valorHoraAl100.toLocaleString('es-AR',{ minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
+    </div> 
+    <div class="resultado1">
+        <span> Titulo Secundario: </span>
+        <span> $${secundarioCompleto.toLocaleString('es-AR')} </span>
+    </div> 
+    ${radioMesCompleto 
+    ? `<div class="resultado1"> 
+        <span> Presentismo Perf.: </span>
+        <span> $${presentismoPerfecto.toLocaleString('es-AR')} </span>
+    </div> 
+    <div class="resultado1">  
+        <span> Presentismo Comp.: </span>
+        <span> $${presentismoCompleto.toLocaleString('es-AR')} </span>
+    </div>` : ""}
+    <div class="resultado1"> 
+        <span> No Remunerativo: </span>
+        <span> $${noRemunerativo.toLocaleString('es-AR')} </span>
+    </div> 
+    <div class="resultado1"> 
+        <span> Refrigerio: </span>
+        <span> $${REFRIGERIO.toLocaleString('es-AR')} </span>
+    </div> 
+    <hr>
+    <div class="resultado1"> 
+        <span> Jubilacion: </span>
+        <span> $${descuentoJubilacion.toLocaleString('es-AR',{ minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
+    </div> 
+    <div class="resultado1"> 
+        <span> Ley 19032: </span>
+        <span> $${descuentoLey19032.toLocaleString('es-AR',{ minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
+    </div> 
+    <div class="resultado1"> 
+        <span> Obra social: </span>
+        <span> $${obraSocialDesc.toLocaleString('es-AR',{ minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
+    </div>
+    <div class="resultado1"> 
+        <span> Sindicato: </span>
+        <span> $${descuentoSindicato.toLocaleString('es-AR',{ minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
+    </div> 
+    <div class="resultado1"> 
+        <span> Sepelio: </span>
+        <span> $${sepelio.toLocaleString('es-AR')} </span>
+    </div>
+    <div class="resultado1"> 
+        <span> Anticipo: </span>
+        <span> $${inpAnticipo.toLocaleString('es-AR')} </span>
+    </div> 
+    <hr>
+    <div class="resultado1"> 
+        <span> Total: </span>
+        <span> $${totalFinal.toLocaleString('es-AR',{ minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
     </div>
     `;
+}
 }

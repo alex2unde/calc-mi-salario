@@ -7,7 +7,48 @@ const ASIGNACION_ENCARGADO = 226191;
 const REFRIGERIO = 177492;
 const sepelio = 14026;
 
-const DIVISOR_JORNALERO = 189;
+const DIVISOR_JORNALERO = 200;
+
+function calculoBaseJornal (valorHora, horasDelMes) {
+
+    return valorHora * horasDelMes;
+}
+
+function verificarHorasHabiles (mesSeleccionado){
+
+    const fechaActual = new Date();
+    const anioActual = fechaActual.getFullYear();
+    const diaDeInicio = new Date(anioActual, Number(mesSeleccionado) + 1, 1);
+    const diasDelMes = new Date(anioActual, Number(mesSeleccionado), 0).getDate();
+    
+    let diaHabil = 0;
+    let diaNoHabil = 0;
+    let diaSabdo = 0;
+
+    for (let i = 1; i <= diasDelMes; i++) { 
+        diaDeInicio.setDate(i);
+
+        let nombreDia = diaDeInicio.toLocaleString('es-AR', { weekday: 'long' });
+        
+        if (nombreDia === "domingo") {
+            diaNoHabil++;
+        }    
+
+        else if (nombreDia === "sábado") {
+            diaSabdo++;
+        }  
+         else {
+            diaHabil++;
+        }
+        }
+
+        let horasSabado = diaSabdo * 4;
+        let horasSemana = diaHabil * 8;
+
+        let horasHabiles = horasSabado + horasSemana;
+       
+        return  horasHabiles;
+}
 
 function validarNumeros (numeros) {
 
@@ -86,7 +127,7 @@ function calcularAntiguedad (categoria) {
 }
 
 function sumaHaberes (radioMes ,categoria, antiguedad, titulo, presentPerfec, 
-    presentComplet, horasEx50, horasEx100, horasValor) {
+    presentComplet, horasEx50, horasEx100) {
 
         if (radioMes) {
 
@@ -95,8 +136,8 @@ function sumaHaberes (radioMes ,categoria, antiguedad, titulo, presentPerfec,
 
         }   else {
 
-            return  antiguedad + titulo +
-             horasEx50 + horasEx100 + horasValor;
+            return categoria + antiguedad + titulo +
+             horasEx50 + horasEx100;
         }
     }
 

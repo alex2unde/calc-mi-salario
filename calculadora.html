@@ -46,13 +46,42 @@ alt="Calcular mi salario"></a>
 
 <div class="info1">
   <p>Esta calculadora esa basada en la legislación laboral vigente 
-    y la escala salarial de bodega C.C.T. 85/89 - enero y febrero de 2026.</p>
+    y la escala salarial de bodega C.C.T. 85/89 - marzo y abril de 2026.</p>
 </div>
 
 <main class="principal">
 
 <form class="items" id="formulario">
+  
   <small> Panel de Carga </small> <hr>
+
+  <div class="tipoDeOperario">
+
+        <button type="button" class="btnTemp" name="tipoOperario" id="temporario" onclick="opTemporario()" value="1"> Temp./jornalero </button>
+
+        <button type="button" class="btnMnsual" name="tipoOperario" id="efectivo" onclick="opEfectivo()" value="2"> Efectivo/mensual </button>
+
+  </div>
+
+  <label class="mesOpcion" for="opcionesMes" id="selectMes">
+
+  Seleccione el mes: 
+    <select id="opcionesMes">
+    <option value="1">Enero</option>
+    <option value="2">Febrero</option>
+    <option value="3">Marzo</option>
+    <option value="4">Abril</option>
+    <option value="5">Mayo</option>
+    <option value="6">Junio</option>
+    <option value="7">Julio</option>
+    <option value="8">Agosto</option>
+    <option value="9">Septiembre</option>
+    <option value="10">Octubre</option>
+    <option value="11">Noviembre</option>
+    <option value="12">Diciembre</option>
+    </select>
+
+  </label>
   
   <label class="cat" for="opcionesCat">Categoria: 
     <select id="opcionesCat">
