@@ -1,222 +1,338 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <title>Calcular mi salario / Calculadora</title>
-    <link rel="stylesheet" href="css/Estylos.css">
-</head>
+    <link rel="stylesheet" href="css/Estylos.css" />
+  </head>
 
-<body class="bodyCalculadora">
-  
-<header class="header">
-<a href="index.html"><img class="logo" src="assets/imagenes/logoPrincipaljpeg.jpeg" 
-alt="Calcular mi salario"></a>
+  <body class="bodyCalculadora">
+    <header class="header">
+      <a href="index.html"
+        ><img
+          class="logo"
+          src="assets/imagenes/logoPrincipaljpeg.jpeg"
+          alt="Calcular mi salario"
+      /></a>
 
-<nav class="nav">
-  <ul class="nav__links">
+      <nav class="nav">
+        <ul class="nav__links">
+          <li class="downloadApp">
+            <a
+              href="assets\archivos\Descargar-CalculadoraApp.apk"
+              download="Instalar_Calculadora1.apk"
+              >Descargar app!</a
+            >
+          </li>
 
-    <li class="downloadApp">
-      <a href="assets\archivos\Descargar-CalculadoraApp.apk" 
-      download="Instalar_Calculadora1.apk">Descargar aplicacion!</a>
+          <li class="navInfo">
+            <a href="#">Info.</a>
+            <!-- //es solo para ver la ultima actualizacion -->
+            <ul class="info">
+              <li>
+                <a href="#info"
+                  >Esta calculadora esa basada en la legislación laboral vigente
+                  y la escala salarial de bodega C.C.T. 85/89 - enero y febrero
+                  de 2026.
+                </a>
+              </li>
+            </ul>
+          </li>
 
-    <li class="navInfo"><a href="#">Info.</a>
-      <!-- //es solo para ver la ultima actualizacion -->
-      <ul class="info"> 
-        <li><a href="#info">Esta calculadora esa basada en la legislación
-           laboral vigente y la escala salarial de bodega C.C.T. 85/89 
-           - enero y febrero de 2026.
-            </a>
-        </li>
-      </ul>
-    </li>
-
-    <li class="gmail"><a href="#">Contacto</a>
-      <ul class="navContacto">
-        <li><a href="https://mail.google.com/mail/?
+          <li class="gmail">
+            <a href="#">Contacto</a>
+            <ul class="navContacto">
+              <li>
+                <a
+                  href="https://mail.google.com/mail/?
           view=cm&fs=1&to=alexczz89@gmail.com&su=Consulta sobre calculadora de 
-          salarios&body=Hola Alexis%0D%0A%0D%0A" 
-          target="_blank">Correo via Gmail</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+          salarios&body=Hola Alexis%0D%0A%0D%0A"
+                  target="_blank"
+                  >Correo via Gmail</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
-</header>
+    <div class="info1">
+      <p>
+        Esta calculadora esa basada en la legislación laboral vigente y la
+        escala salarial de bodega C.C.T. 85/89 - mayo y junio de 2026.
+      </p>
+    </div>
 
-<div class="info1">
-  <p>Esta calculadora esa basada en la legislación laboral vigente 
-    y la escala salarial de bodega C.C.T. 85/89 - marzo y abril de 2026.</p>
-</div>
+    <main class="principal">
+      <form class="items" id="formulario">
+        <small> Panel de Carga </small>
+        <hr />
 
-<main class="principal">
+        <div class="tipoDeOperario">
+          <button
+            type="button"
+            class="btnTemp"
+            name="tipoOperario"
+            id="temporario"
+            onclick="opTemporario()"
+            value="1"
+          >
+            Temp./jornalero
+          </button>
 
-<form class="items" id="formulario">
-  
-  <small> Panel de Carga </small> <hr>
+          <button
+            type="button"
+            class="btnMnsual"
+            name="tipoOperario"
+            id="efectivo"
+            onclick="opEfectivo()"
+            value="2"
+          >
+            Efectivo/mensual
+          </button>
+        </div>
 
-  <div class="tipoDeOperario">
+        <div>
+          <label class="mesOpcion" for="opcionesMes" id="selectMes">
+            <span>Seleccione el mes:</span>
+            <select id="opcionesMes">
+              <option value="1">Enero</option>
+              <option value="2">Febrero</option>
+              <option value="3">Marzo</option>
+              <option value="4">Abril</option>
+              <option value="5">Mayo</option>
+              <option value="6">Junio</option>
+              <option value="7">Julio</option>
+              <option value="8">Agosto</option>
+              <option value="9">Septiembre</option>
+              <option value="10">Octubre</option>
+              <option value="11">Noviembre</option>
+              <option value="12">Diciembre</option>
+            </select>
+          </label>
+        </div>
 
-        <button type="button" class="btnTemp" name="tipoOperario" id="temporario" onclick="opTemporario()" value="1"> Temp./jornalero </button>
+        <div>
+          <label class="cat" for="opcionesCat">
+            <span>Categoria:</span>
+            <select id="opcionesCat">
+              <option value="525154">Op. Común</option>
+              <option value="569679">Ayudante de Reparto</option>
+              <option value="577669">Op. Especializado</option>
+              <option value="624456">1/2 oficial</option>
+              <option value="619682">Calificado/Clarkista</option>
+              <option value="668278">Larga distancia/Tonelero</option>
+              <option value="661694">
+                Oficiales. Mecanicos tetrabrick. Foguistas. Destiladores
+              </option>
+              <option value="682700">
+                Oficiales toneleros vasija grande. Encargados de sección
+              </option>
+            </select>
+          </label>
+        </div>
 
-        <button type="button" class="btnMnsual" name="tipoOperario" id="efectivo" onclick="opEfectivo()" value="2"> Efectivo/mensual </button>
+        <div>
+          <span>¿Titulo?</span>
+          <div class="secundarioDiv">
+            <!-- div para poner los radios en linea. -->
 
-  </div>
+            <label class="secundario" for="tituloSec1">
+              <input type="radio" name="titulo" id="tituloSec1" value="26258" />
+              Si
+            </label>
 
-  <label class="mesOpcion" for="opcionesMes" id="selectMes">
+            <label class="secundario" for="tituloSec2">
+              <input type="radio" name="titulo" id="tituloSec2" value="0" /> No
+            </label>
+          </div>
+        </div>
 
-  Seleccione el mes: 
-    <select id="opcionesMes">
-    <option value="1">Enero</option>
-    <option value="2">Febrero</option>
-    <option value="3">Marzo</option>
-    <option value="4">Abril</option>
-    <option value="5">Mayo</option>
-    <option value="6">Junio</option>
-    <option value="7">Julio</option>
-    <option value="8">Agosto</option>
-    <option value="9">Septiembre</option>
-    <option value="10">Octubre</option>
-    <option value="11">Noviembre</option>
-    <option value="12">Diciembre</option>
-    </select>
+        <div>
+          <label class="horasEx" for="horasEx50">
+            <span>Horas extras al 50%:</span>
+            <input
+              type="number"
+              name="horasExtra"
+              id="horasEx50"
+              min="0"
+              max="99"
+            />
+          </label>
+        </div>
 
-  </label>
-  
-  <label class="cat" for="opcionesCat">Categoria: 
-    <select id="opcionesCat">
-    <option value="525154">Op. Común</option>
-    <option value="577669">Op. Especializado</option>
-    <option value="619682">Op. Calificado</option>
-    <option value="661694">Op. Foguista</option>
-    <option value="682700">Encargado de sección</option>
-    </select>
-  </label>
+        <div>
+          <label class="horasEx" for="horasEx100">
+            <span>Horas extras al 100%:</span>
+            <input
+              type="number"
+              name="horasExtra"
+              id="horasEx100"
+              min="0"
+              max="99"
+            />
+          </label>
+        </div>
 
-  <span>¿Titulo?</span>
- 
-<div class="secundarioDiv"> <!-- div para poner los radios en linea. -->
+        <div>
+          <span>¿Trabajo el mes completo?</span>
 
-  <label class="secundario" for="tituloSec1">
-    <input type="radio" name="titulo" id="tituloSec1" value="26258"> Si
-  </label>
+          <div class="mesDiv">
+            <!-- div para ordenar los radios en linea. -->
 
-  <label class="secundario" for="tituloSec2">
-    <input type="radio" name="titulo" id="tituloSec2" value="0"> No
-  </label>
+            <label class="mesCompleto" for="mesCompleto1">
+              <input type="radio" name="opcion" value="1" id="mesCompleto1" />
+              Si
+            </label>
 
-</div>
+            <label class="mesCompleto" for="mesCompleto2">
+              <input type="radio" name="opcion" value="2" id="mesCompleto2" />
+              No
+            </label>
+          </div>
+        </div>
 
-  <label class="horasEx" for="horasEx50">Horas extras al 50%: 
-    <input type="number" name="horasExtra" id="horasEx50" min="0" max="99">
-  </label>
+        <!-- div para el input de horas trabajadas, se muestra solo si el usuario
+        selecciona que no trabajo el mes completo. queda comentado por que no
+        se va a pedir el input de horas trabajadas. Se va a obviar para solo
+        se vera reflejado la diferencia en cuanto a presentismos. -->
+        <!-- <label class="horasTrabajadas" for="horasTrab" id="horasLabel"
+          >Horas trabajadas:
+          <input type="number" id="horasTrab" min="0" max="199" />
+        </label> -->
 
-  <label class="horasEx" for="horasEx100">Horas extras al 100%: 
-    <input type="number" name="horasExtra" id="horasEx100" min="0" max="99">
-  </label>
+        <div class="labelsIndem">
+          <label class="ant" for="opcionesAnt">
+            <span>Antiguedad:</span>
+            <select id="opcionesAnt">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+              <option value="25">25</option>
+            </select>
+          </label>
+        </div>
 
- 
-  <span>¿Trabajo el mes completo?</span> 
+        <div>
+          <label class="anticipo" for="anticipo">
+            <span>Anticipo:</span>
+            <input type="number" id="anticipo" min="0" max="999999" />
+          </label>
+        </div>
+      </form>
 
-<div class="mesDiv"> <!-- div para ordenar los radios en linea. -->
+      <div id="resultado" class="resultado">
+        <small>Detalle</small>
+        <hr />
+      </div>
 
-  <label class="mesCompleto" for="mesCompleto1"> 
-    <input type="radio" name="opcion" value="1" id="mesCompleto1"> Si
-  </label>
+      <div class="calcular">
+        <button
+          class="btnCalc"
+          onclick="controladorPrincipal()"
+          id="calcularBtn"
+        >
+          Calcular
+        </button>
+      </div>
 
-  <label class="mesCompleto" for="mesCompleto2">
-    <input type="radio" name="opcion" onclick="mostrarInputMes()" value="2" id="mesCompleto2"> No
-  </label>
+      <div class="compartirWhatsApp">
+        <a
+          class="comparWhas1"
+          href="https://wa.me/?text=¡Mirá%20esta%20calculadora%20de%20salarios%20de%20bodega%20y%20viña!%0Ahttps:
+  //https://alex2unde.github.io/calc-mi-salario"
+          target="_blank"
+          class="btn-whatsapp"
+        >
+          <svg class="iconoW" fill="none" viewBox="0 0 360 362">
+            <path
+              fill="#25D366"
+              fill-rule="evenodd"
+              d="M307.546 52.566C273.709 18.684 228.706.017 180.756 0 81.951 0 1.538 80.404 1.504 179.235c-.017 31.594 8.242 62.432 23.928 89.609L0 361.736l95.024-24.925c26.179 14.285 55.659 21.805 85.655 21.814h.077c98.788 0 179.21-80.413 179.244-179.244.017-47.898-18.608-92.926-52.454-126.807v-.008Zm-126.79 275.788h-.06c-26.73-.008-52.952-7.194-75.831-20.765l-5.44-3.231-56.391 14.791 15.05-54.981-3.542-5.638c-14.912-23.721-22.793-51.139-22.776-79.286.035-82.14 66.867-148.973 149.051-148.973 39.793.017 77.198 15.53 105.328 43.695 28.131 28.157 43.61 65.596 43.593 105.398-.035 82.149-66.867 148.982-148.982 148.982v.008Zm81.719-111.577c-4.478-2.243-26.497-13.073-30.606-14.568-4.108-1.496-7.09-2.243-10.073 2.243-2.982 4.487-11.568 14.577-14.181 17.559-2.613 2.991-5.226 3.361-9.704 1.117-4.477-2.243-18.908-6.97-36.02-22.226-13.313-11.878-22.304-26.54-24.916-31.027-2.613-4.486-.275-6.91 1.959-9.136 2.011-2.011 4.478-5.234 6.721-7.847 2.244-2.613 2.983-4.486 4.478-7.469 1.496-2.991.748-5.603-.369-7.847-1.118-2.243-10.073-24.289-13.812-33.253-3.636-8.732-7.331-7.546-10.073-7.692-2.613-.13-5.595-.155-8.586-.155-2.991 0-7.839 1.118-11.947 5.604-4.108 4.486-15.677 15.324-15.677 37.361s16.047 43.344 18.29 46.335c2.243 2.991 31.585 48.225 76.51 67.632 10.684 4.615 19.029 7.374 25.535 9.437 10.727 3.412 20.49 2.931 28.208 1.779 8.604-1.289 26.498-10.838 30.228-21.298 3.73-10.46 3.73-19.433 2.613-21.298-1.117-1.865-4.108-2.991-8.586-5.234l.008-.017Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          <span class="comparWhas">Compartir calculadora</span>
+        </a>
+      </div>
+    </main>
 
-</div>
+    <footer class="footer">
+      <img
+        class="logoFooter"
+        src="assets/imagenes/logo2.jpeg"
+        alt="Calcular mi salario"
+      />
 
-  <label class="horasTrabajadas" for="horasTrab" id="horasLabel">Horas trabajadas: 
-    <input type="number" id="horasTrab" min="0" max="199">
-  </label>
+      <p class="footerText">
+        © 2026 Calcular mi salario — Desarrollado por Alexis Cortez. Todos los
+        derechos reservados.
+      </p>
 
-  <label class="ant" for="opcionesAnt">Antiguedad: 
-    <select id="opcionesAnt">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>   
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-    <option value="11">11</option>
-    <option value="12">12</option>
-    <option value="13">13</option>
-    <option value="14">14</option>
-    <option value="15">15</option>
-    <option value="16">16</option>
-    <option value="17">17</option>
-    <option value="18">18</option>
-    <option value="19">19</option>
-    <option value="20">20</option>  
-    <option value="21">21</option>
-    <option value="22">22</option>
-    <option value="23">23</option>
-    <option value="24">24</option>
-    <option value="25">25</option>
-    </select>
-  </label>
+      <a
+        href="https://mail.google.com/mail/?view=cm&fs=1&to=alexczz89@gmail.com&su=Consulta sobre calculadora de salarios&body=Hola Alexis%0D%0A%0D%0A"
+        target="_blank"
+      >
+        <svg class="svgGmail" viewBox="0 49.4 512 399.42">
+          <g fill="none" fill-rule="evenodd">
+            <g fill-rule="nonzero">
+              <path
+                fill="#4285f4"
+                d="M34.91 448.818h81.454V251L0 163.727V413.91c0 19.287 15.622 34.91 34.91 34.91z"
+              />
+              <path
+                fill="#34a853"
+                d="M395.636 448.818h81.455c19.287 0 34.909-15.622 34.909-34.909V163.727L395.636 251z"
+              />
+              <path
+                fill="#fbbc04"
+                d="M395.636 99.727V251L512 163.727v-46.545c0-43.142-49.25-67.782-83.782-41.891z"
+              />
+            </g>
+            <path
+              fill="#ea4335"
+              d="M116.364 251V99.727L256 204.455 395.636 99.727V251L256 355.727z"
+            />
+            <path
+              fill="#c5221f"
+              fill-rule="nonzero"
+              d="M0 117.182v46.545L116.364 251V99.727L83.782 75.291C49.25 49.4 0 74.04 0 117.18z"
+            />
+          </g></svg
+      ></a>
 
-  <label class="anticipo" for="anticipo">Anticipo
-    <input type="number" id="anticipo" min="0" max="999999">
-  </label>
-
-</form>
-
-<div id="resultado" class="resultado">
-
-  <small>Detalle</small> <hr>
-
-</div>
-
-<div class="calcular">
-<button class="btnCalc" onclick="controladorPrincipal()" id="calcularBtn">Calcular</button>
-</div>
-
-<div class="compartirWhatsApp">
-  <a class="comparWhas1" href="https://wa.me/?text=¡Mirá%20esta%20calculadora%20de%20salarios%20de%20bodega%20y%20viña!%0Ahttps:
-  //https://alex2unde.github.io/calc-mi-salario" target="_blank" class="btn-whatsapp">
-    <svg class="iconoW" fill="none" viewBox="0 0 360 362"><path fill="#25D366" fill-rule="evenodd" d="M307.546 52.566C273.709 18.684 228.706.017 180.756 0 81.951 0 1.538 80.404 1.504 179.235c-.017 31.594 8.242 62.432 23.928 89.609L0 361.736l95.024-24.925c26.179 14.285 55.659 21.805 85.655 21.814h.077c98.788 0 179.21-80.413 179.244-179.244.017-47.898-18.608-92.926-52.454-126.807v-.008Zm-126.79 275.788h-.06c-26.73-.008-52.952-7.194-75.831-20.765l-5.44-3.231-56.391 14.791 15.05-54.981-3.542-5.638c-14.912-23.721-22.793-51.139-22.776-79.286.035-82.14 66.867-148.973 149.051-148.973 39.793.017 77.198 15.53 105.328 43.695 28.131 28.157 43.61 65.596 43.593 105.398-.035 82.149-66.867 148.982-148.982 148.982v.008Zm81.719-111.577c-4.478-2.243-26.497-13.073-30.606-14.568-4.108-1.496-7.09-2.243-10.073 2.243-2.982 4.487-11.568 14.577-14.181 17.559-2.613 2.991-5.226 3.361-9.704 1.117-4.477-2.243-18.908-6.97-36.02-22.226-13.313-11.878-22.304-26.54-24.916-31.027-2.613-4.486-.275-6.91 1.959-9.136 2.011-2.011 4.478-5.234 6.721-7.847 2.244-2.613 2.983-4.486 4.478-7.469 1.496-2.991.748-5.603-.369-7.847-1.118-2.243-10.073-24.289-13.812-33.253-3.636-8.732-7.331-7.546-10.073-7.692-2.613-.13-5.595-.155-8.586-.155-2.991 0-7.839 1.118-11.947 5.604-4.108 4.486-15.677 15.324-15.677 37.361s16.047 43.344 18.29 46.335c2.243 2.991 31.585 48.225 76.51 67.632 10.684 4.615 19.029 7.374 25.535 9.437 10.727 3.412 20.49 2.931 28.208 1.779 8.604-1.289 26.498-10.838 30.228-21.298 3.73-10.46 3.73-19.433 2.613-21.298-1.117-1.865-4.108-2.991-8.586-5.234l.008-.017Z" clip-rule="evenodd"/></svg>
-<span class="comparWhas">Compartir calculadora</span>
-  </a>
-</div>
-
-</main>
-
-<footer class="footer">
-<img class="logoFooter" src="assets/imagenes/logo2.jpeg" 
-alt="Calcular mi salario">
-
-<p class="footerText">© 2026 Calcular mi salario — Desarrollado 
-  por Alexis Cortez. Todos los derechos reservados.</p>
-
-<a href="https://mail.google.com/mail/?view=cm&fs=1&to=alexczz89@gmail.com&su=Consulta sobre calculadora de salarios&body=Hola Alexis%0D%0A%0D%0A" 
-target="_blank">
-<svg class="svgGmail" viewBox="0 49.4 512 399.42"><g fill="none" fill-rule="evenodd">
-    <g fill-rule="nonzero"><path fill="#4285f4" d="M34.91 448.818h81.454V251L0 163.727V413.91c0 19.287 15.622 34.91 34.91 34.91z"/>
-      <path fill="#34a853" d="M395.636 448.818h81.455c19.287 0 34.909-15.622 34.909-34.909V163.727L395.636 251z"/>
-      <path fill="#fbbc04" d="M395.636 99.727V251L512 163.727v-46.545c0-43.142-49.25-67.782-83.782-41.891z"/>
-    </g><path fill="#ea4335" d="M116.364 251V99.727L256 204.455 395.636 99.727V251L256 355.727z"/>
-    <path fill="#c5221f" fill-rule="nonzero" d="M0 117.182v46.545L116.364 251V99.727L83.782 75.291C49.25 49.4 0 74.04 0 117.18z"/>
-  </g></svg></a>
-
-<!-- <a href="">
+      <!-- <a href="">
 <svg class="svgLink" preserveAspectRatio="xMidYMid" viewBox="0 0 256 256"><path d="M218.123 218.127h-37.931v-59.403c0-14.165-.253-32.4-19.728-32.4-19.756 0-22.779 15.434-22.779 31.369v60.43h-37.93V95.967h36.413v16.694h.51a39.907 39.907 0 0 1 35.928-19.733c38.445 0 45.533 25.288 45.533 58.186l-.016 67.013ZM56.955 79.27c-12.157.002-22.014-9.852-22.016-22.009-.002-12.157 9.851-22.014 22.008-22.016 12.157-.003 22.014 9.851 22.016 22.008A22.013 22.013 0 0 1 56.955 79.27m18.966 138.858H37.95V95.967h37.97v122.16ZM237.033.018H18.89C8.58-.098.125 8.161-.001 18.471v219.053c.122 10.315 8.576 18.582 18.89 18.474h218.144c10.336.128 18.823-8.139 18.966-18.474V18.454c-.147-10.33-8.635-18.588-18.966-18.453" fill="#0A66C2"/></svg>
 </a> -->
+    </footer>
 
-</footer>
-
-<script src="js/modeloNuevo.js"></script>
-<script src="js/controladorNuevo.js"></script>
-
-</body>
-
+    <script src="js/modelo.js"></script>
+    <script src="js/controlador-calculadora.js"></script>
+    <script src="js/controlador-Indemnizacion.js"></script>
+  </body>
 </html>

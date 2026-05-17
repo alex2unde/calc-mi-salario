@@ -1,162 +1,149 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
     <title>Calcular mi salario / Inicio</title>
-    <link rel="stylesheet" href="css/Estylos.css">
-</head>
+    <link rel="stylesheet" href="css/Estylos.css" />
+  </head>
 
-<body class="bodyHome">
-    
-<header class="header">
-<a href="index.html"><img class="logo" src="assets/imagenes/logoPrincipaljpeg.jpeg" 
-alt="Calcular mi salario"></a>
+  <body class="bodyHome">
+    <header class="header">
+      <a href="index.html"
+        ><img
+          class="logo"
+          src="assets/imagenes/logoPrincipaljpeg.jpeg"
+          alt="Calcular mi salario"
+      /></a>
 
-<nav class="nav">
-  <ul class="nav__links">
+      <nav class="nav">
+        <ul class="nav__links">
+          <li><a href="calculadora.html">Calculadora</a></li>
 
-    <li><a href="calculadora.html">Calculadora</a></li>
+          <li class="infoIndex">
+            <a href="#">Info.</a>
+            <ul class="info">
+              <li>
+                <a href="#info"
+                  >Esta calculadora esa basada en la legislación laboral vigente
+                  y la escala salarial de bodega C.C.T. 85/89 - Enero - Febrero
+                  de 2026.
+                </a>
+              </li>
+            </ul>
+          </li>
 
-    <li class="infoIndex"><a href="#">Info.</a>
-      <ul class="info">
-        <li><a href="#info">Esta calculadora esa basada en la legislación
-           laboral vigente y la escala salarial de bodega C.C.T. 85/89 
-           - Enero - Febrero de 2026.
-            </a>
-        </li>
-      </ul>
-    </li>
-
-    <!-- <li class="rubros"><a href="#">Rubro</a>
+          <!-- <li class="rubros"><a href="#">Rubro</a>
       <ul class="rubro">
        <li><a href="#">Bodega</a></li>
        <li><a href="#">Viñedo</a></li>
       </ul>
     </li> -->
 
-    <li class="gmail"><a href="#">Contacto</a>
-      <ul class="navContacto">
-        <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=alexczz89@gmail.com&su=Consulta sobre calculadora de salarios&body=Hola Alexis%0D%0A%0D%0A" target="_blank">Correo via Gmail</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+          <li class="gmail">
+            <a href="#">Contacto</a>
+            <ul class="navContacto">
+              <li>
+                <a
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=alexczz89@gmail.com&su=Consulta sobre calculadora de salarios&body=Hola Alexis%0D%0A%0D%0A"
+                  target="_blank"
+                  >Correo via Gmail</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
-</header>
+    <main class="sec1">
+      <div class="imagenPrincipal">
+        <img
+          class="imgSec1"
+          src="assets/imagenes/imagenIndex.png"
+          alt="Calcular mi salario"
+        />
+      </div>
 
-<section class="sec1">
+      <div class="div2-seccion1">
+        <h1 class="h1-home">Calculadora de salario</h1>
+        <br />
 
-  <div class="imagenPrincipal">
-    <img class="imgSec1" src="assets/imagenes/imagenIndex.png" 
-    alt="Calcular mi salario">
-  </div>
+        <p class="parrafoSec1">
+          Calculá tu sueldo neto según la escala de
+          <strong>Bodega C.C.T. 85/89</strong> y conocé estimativamente lo que
+          te corresponde por <strong>indemnización</strong>.
+        </p>
 
-  <div class="div2-seccion1">
-    <h1 class="h1-home">Bienvenido a la calculadora de salario</h1> <br>
-
-    <p class="parrafoSec1">Esta calculadora te permite estimar tu salario 
-      neto mensual según la escala salarial de bodega C.C.T. 85/89. Para calcular tu 
-      indemnizacion, descarga la app móvil.
-    </p>
-
-    <a class="botonDescargar" href="assets\archivos\Descargar-CalculadoraApp.apk" 
+        <!-- <a class="botonDescargar" href="assets\archivos\Descargar-CalculadoraApp.apk" 
     download="Instalar_Calculadora1.apk"><i class="fab fa-android"></i>  Descargar la app!</i></a>
     <p class="soloAndroid">Funciona <strong>SIN INTERNET</strong>, Solo para android. Si aparece una advertencia de seguriadad, 
       selecciona "Descargar de todos 
-    modos." La instalacion es segura.</p>
-    <a class="irAcalcular" href="calculadora.html">Ir a la calculadora de salario</a>
-  </div>
+    modos." La instalacion es segura.</p> -->
 
-</section>
+        <a class="irAcalcular" href="calculadora.html"
+          >Calculadora de salario <i class="fa-solid fa-circle-right"></i
+        ></a>
 
-<!-- <section class="sec3">
-    <h2 class="h2-seccion3" id="info">Información Importante</h2>
+        <a class="irAindemnizacion" href="Indemnizacion.html"
+          >Calcular indemnización <i class="fa-solid fa-circle-right"></i
+        ></a>
+      </div>
+    </main>
 
-    <div class="divInfo1">
-      <img class="imgSec3" src="assets/imagenes/informacion/bonofindeaño.jpeg" alt="comunicado SOEVA">
-    <p class="parrafoSec3"> El sindicato SOEVA San Martín solicitó a las bodegas 
-      y viñedos de la región la entrega de un bono de fin de año no remunerativo, 
-      destinado a aliviar la situación económica de los trabajadores de viña y bodega,
-       quienes son de los más afectados por la inflación. El pedido busca reconocer 
-       el esfuerzo de los empleados que sostienen día a día la actividad vitivinícola 
-       del Este.</p>
-    </div>
+    <footer class="footer">
+      <img
+        class="logoFooter"
+        src="assets/imagenes/logo2.jpeg"
+        alt="Calcular mi salario"
+      />
 
-    <div class="divInfo2">
-      <img class="imgSec3" src="assets/imagenes/informacion/feriadosFoeva.jpeg" alt="comunicado SOEVA">
-    <p class="parrafoSec3">Puntos principales:<br>
+      <br />
 
-Viernes 21 de noviembre: declarado Día No Laborable con fines turísticos.
+      <p class="footerText">
+        © 2026 Calcular mi salario — Desarrollado por Alexis Cortez. Todos los
+        derechos reservados.
+      </p>
 
-Lunes 24 de noviembre: Feriado Nacional por el Día de la Soberanía Nacional, con las
- condiciones de liquidación que corresponden a los feriados nacionales 
- obligatorios.</p>
-    </div>
+      <a
+        href="https://mail.google.com/mail/?view=cm&fs=1&to=alexczz89@gmail.com&su=Consulta 
+sobre calculadora de salarios&body=Hola Alexis%0D%0A%0D%0A"
+        target="_blank"
+      >
+        <svg class="svgGmail" viewBox="0 49.4 512 399.42">
+          <g fill="none" fill-rule="evenodd">
+            <g fill-rule="nonzero">
+              <path
+                fill="#4285f4"
+                d="M34.91 448.818h81.454V251L0 163.727V413.91c0 19.287 15.622 34.91 34.91 34.91z"
+              />
+              <path
+                fill="#34a853"
+                d="M395.636 448.818h81.455c19.287 0 34.909-15.622 34.909-34.909V163.727L395.636 251z"
+              />
+              <path
+                fill="#fbbc04"
+                d="M395.636 99.727V251L512 163.727v-46.545c0-43.142-49.25-67.782-83.782-41.891z"
+              />
+            </g>
+            <path
+              fill="#ea4335"
+              d="M116.364 251V99.727L256 204.455 395.636 99.727V251L256 355.727z"
+            />
+            <path
+              fill="#c5221f"
+              fill-rule="nonzero"
+              d="M0 117.182v46.545L116.364 251V99.727L83.782 75.291C49.25 49.4 0 74.04 0 117.18z"
+            />
+          </g></svg
+      ></a>
 
-    <div class="divInfo3">
-      <img class="imgSec3" src="assets/imagenes/informacion/hoelFoeva.jpeg" alt="escala salarial 2024">
-    <p class="parrafoSec3">La Federación FOEVA publicó el cuadro de tarifas 
-      correspondiente a la temporada alta 2025/2026 del Hotel FOEVA en Mar del Plata.
-Las opciones incluyen media pensión sin bebida (desayuno + cena), con valores
- diferenciados según la condición del huésped.</p>
-    </div>
-
-</section>  -->
-
-<!-- <section class="sec2">
-
-   <h2 class="h2-seccion2">¿Cómo utilizar la calculadora de salario?</h2>
-<div class="contenido-uso">
-   <div class="div-ejemplo1">
-    <img class="imgEjemplo-I" src="assets/imagenes/ejemplos/EJEMPLAZUL1.jpeg" 
-    alt="Captura para ejemplos."> 
-    <p class="parrafoSec2">En el cuadro de ítems, selecciona tu categoría laboral, 
-      antigüedad, si posees título secundario, las horas extras trabajadas, y si 
-      trabajaste el mes completo. También puedes ingresar la cantidad de horas 
-      trabajadas en caso de no haber completado el mes. 
-      Estos datos permiten calcular correctamente tu salario según la escala vigente.</p>
-    </div>
-
-    <div class="div-ejemplo2">
-    <img class="imgEjemplo-2" src="assets/imagenes/ejemplos/EJEMPLAZUL2.jpeg" 
-    alt="Captura para ejemplos.">
-    <p class="parrafoSec2">En el cuadro de descuentos, la opción de vino retirado 
-      aplica solo para empleados de Los Aroldos. Para calcular el descuento del 3% de
-       la obra social, selecciona "Sí" o "No" según corresponda. Si recibiste un 
-       adelanto, puedes ingresarlo para que se descuente automáticamente junto 
-       con los demás conceptos.</p>
-    </div>
-
-  <div class="div-ejemplo3">
-    <p class="parrafoFinalSec2">Y por último, haz clic en el botón "Calcular"</p>
-    <img class="boonCalcular" src="assets/imagenes/ejemplos/boon calcular.jpeg">
-  </div>
-</div>
-</section>  -->
-  
-<footer class="footer">
-<img class="logoFooter" src="assets/imagenes/logo2.jpeg" 
-alt="Calcular mi salario">
-
-<br>
-
-<p class="footerText">© 2026 Calcular mi salario — Desarrollado 
-  por Alexis Cortez. Todos los derechos reservados.</p>
-
-<a href="https://mail.google.com/mail/?view=cm&fs=1&to=alexczz89@gmail.com&su=Consulta 
-sobre calculadora de salarios&body=Hola Alexis%0D%0A%0D%0A" 
-target="_blank">
-<svg class="svgGmail" viewBox="0 49.4 512 399.42"><g fill="none" fill-rule="evenodd">
-    <g fill-rule="nonzero"><path fill="#4285f4" d="M34.91 448.818h81.454V251L0 163.727V413.91c0 19.287 15.622 34.91 34.91 34.91z"/>
-      <path fill="#34a853" d="M395.636 448.818h81.455c19.287 0 34.909-15.622 34.909-34.909V163.727L395.636 251z"/>
-      <path fill="#fbbc04" d="M395.636 99.727V251L512 163.727v-46.545c0-43.142-49.25-67.782-83.782-41.891z"/>
-    </g><path fill="#ea4335" d="M116.364 251V99.727L256 204.455 395.636 99.727V251L256 355.727z"/>
-    <path fill="#c5221f" fill-rule="nonzero" d="M0 117.182v46.545L116.364 251V99.727L83.782 75.291C49.25 49.4 0 74.04 0 117.18z"/>
-  </g></svg></a>
-
-<!-- <a href="">
+      <!-- <a href="">
 <svg class="svgLink" preserveAspectRatio="xMidYMid" viewBox="0 0 256 256"><path d="
   M218.123 218.127h-37.931v-59.403c0-14.165-.253-32.4-19.728-32.4-19.756 0-22.779
    15.434-22.779 31.369v60.43h-37.93V95.967h36.413v16.694h.51a39.907 39.907 0 0 1 35.
@@ -167,8 +154,6 @@ target="_blank">
    .122 10.315 8.576 18.582 18.89 18.474h218.144c10.336.128 18.823-8.139 18.966-18.47
    4V18.454c-.147-10.33-8.635-18.588-18.966-18.453" fill="#0A66C2"/></svg>
 </a> -->
-
-</footer>
-
-</body>
+    </footer>
+  </body>
 </html>

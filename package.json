@@ -1,0 +1,25 @@
+{
+  "name": "proyecto---calc.-mi-sal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alex2unde/calc-mi-salario.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alex2unde/calc-mi-salario/issues"
+  },
+  "homepage": "https://github.com/alex2unde/calc-mi-salario#readme",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.2.1",
+    "globals": "^17.5.0"
+  }
+}
