@@ -831,11 +831,18 @@ select::-webkit-scrollbar-thumb:hover {
     padding: 0;
   }
 
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+  }
+
   body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    margin: 0;
+  }
+  .sec1 {
+    flex: 1;
   }
 
   .imgSec1 {
