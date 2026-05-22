@@ -29,10 +29,19 @@ function renderizarFeriados(listaFeriados) {
   listaFeriados.forEach((feriado) => {
     // Separamos la fecha para mostrarla más linda (ej: "25/05")
     const [anio, mes, dia] = feriado.fecha.split("-");
+    const fechaObjeto = new Date(anio, mes - 1, dia);
+    let nombreDia = fechaObjeto.toLocaleDateString("es-AR", {
+      weekday: "long",
+    });
+    let faltanDias = Math.ceil(
+      (fechaObjeto - new Date()) / (1000 * 60 * 60 * 24),
+    );
 
     contenedor.innerHTML += `
             <div class="tarjeta-feriado">
                 <span class="fecha-badge">${dia}/${mes}</span>
+                <p class="dia-nombre">${nombreDia}</p>
+                <p class="faltan-dias">Faltan ${faltanDias} días</p>
                 <p class="feriado-nombre">${feriado.nombre}</p>
                 <small class="feriado-tipo">${feriado.tipo}</small>
             </div>
