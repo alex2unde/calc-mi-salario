@@ -29,6 +29,7 @@ function capturaValores() {
   const inpHoras100 = Number(document.getElementById("horasEx100").value);
   const selectAntiguedad = Number(document.getElementById("opcionesAnt").value);
   const inpAnticipo = Number(document.getElementById("anticipo").value || 0);
+  const dineroEnNegro = Number(document.getElementById("enNegro").value || 0);
 
   return {
     numeroMes,
@@ -41,6 +42,7 @@ function capturaValores() {
     inpHoras100,
     selectAntiguedad,
     inpAnticipo,
+    dineroEnNegro,
   };
 }
 
@@ -75,6 +77,7 @@ function controladorPrincipal() {
     inpHoras100,
     selectAntiguedad,
     inpAnticipo,
+    dineroEnNegro,
   } = capturaValores();
 
   const nombreCategoria =
@@ -131,6 +134,7 @@ function controladorPrincipal() {
     anticipo,
     REFRIGERIO,
     noRemunerativo,
+    dineroEnNegro,
   );
 
   if (tipoDeOperario === "temporario") {
@@ -169,6 +173,7 @@ function controladorPrincipal() {
       anticipo,
       REFRIGERIO,
       noRemunerativo,
+      dineroEnNegro,
     );
 
     divResultado.innerHTML = `
@@ -213,6 +218,10 @@ function controladorPrincipal() {
         <span> Refrigerio: </span>
         <span> $${REFRIGERIO.toLocaleString("es-AR")} </span>
     </div> 
+    <div class="resultado1">
+        <span> Dinero en negro: </span>
+        <span> $${dineroEnNegro.toLocaleString("es-AR")} </span>
+    </div>
     <hr>
     <div class="resultado1"> 
         <span> Jubilacion: </span>
@@ -287,6 +296,10 @@ function controladorPrincipal() {
         <span> Refrigerio: </span>
         <span> $${REFRIGERIO.toLocaleString("es-AR")} </span>
     </div> 
+        <div class="resultado1">
+        <span> Dinero en negro: </span>
+        <span> $${dineroEnNegro.toLocaleString("es-AR")} </span>
+    </div>
     <hr>
     <div class="resultado1"> 
         <span> Jubilacion: </span>

@@ -148,8 +148,16 @@ function totalNeto(
   anticipo,
   refrigerio,
   noRemunerativo,
+  dineroEnNegro,
 ) {
-  return totalHaberes - descuentos - anticipo + refrigerio + noRemunerativo;
+  return (
+    totalHaberes -
+    descuentos -
+    anticipo +
+    refrigerio +
+    noRemunerativo +
+    dineroEnNegro
+  );
 }
 
 function jubilacion(sueldoBruto) {
