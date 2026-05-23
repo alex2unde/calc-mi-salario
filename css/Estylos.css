@@ -172,6 +172,7 @@ body {
   align-items: center;
   justify-content: center;
   margin-top: 20px;
+  background-color: #151513;
 }
 
 #contenedor-feriados {
@@ -183,9 +184,10 @@ body {
 
 .titulo-feriados {
   font-size: 24px;
-  color: rgb(255, 255, 255);
+  color: rgb(194, 186, 186);
   text-align: center;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin-top: 10px;
 }
 
 .tarjeta-feriado {
@@ -207,6 +209,7 @@ body {
   padding: 3px 8px;
   border-radius: 5px;
   font-weight: bold;
+  border: 1px solid #ffffff;
 }
 
 .feriado-nombre {
@@ -240,6 +243,7 @@ body {
   padding: 3px 8px;
   background: #2786d3;
   margin-top: 2px;
+  border: 1px solid #ffffff;
 }
 
 /*estilo del h1*/
@@ -764,6 +768,18 @@ hr {
 
 .mesCompleto {
   padding-bottom: 10px;
+}
+
+#enNegro {
+  color: rgb(255, 255, 255);
+  margin-left: 10px;
+  padding-top: 10px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  background-color: #ffffff4f;
+  max-width: 500px;
 }
 
 .labelVacacionesDeuda {
