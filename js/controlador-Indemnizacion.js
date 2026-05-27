@@ -26,7 +26,7 @@ function diasAdeudadosVacaciones() {
   return checkbox.checked ? Number(input.value) || 0 : 0;
 }
 
-function controladorIndemnizacion() {
+async function controladorIndemnizacion() {
   const divResultado = document.getElementById("resultadoIndemnizacion");
 
   const {
@@ -141,6 +141,26 @@ function controladorIndemnizacion() {
   );
   console.log(totalIndemnizacionConCausa + " total indemnización con causa");
 
+  const dolarVenta = await cotizacionDolar();
+  const totalEnDolaresSC = convertirPesosADolares(
+    totalIndemnizacionSCP,
+    dolarVenta,
+  );
+  const totalEnDolaresCC = convertirPesosADolares(
+    totalIndemnizacionConCausa,
+    dolarVenta,
+  );
+
+  const realVenta = await cotizacionReal();
+  const totalEnRealesSC = convertirPesosAReales(
+    totalIndemnizacionSCP,
+    realVenta,
+  );
+  const totalEnRealesCC = convertirPesosAReales(
+    totalIndemnizacionConCausa,
+    realVenta,
+  );
+
   divResultado.innerHTML = `
     <div class="resultado1">
         <p>Fecha de ingreso: </p>
@@ -237,15 +257,31 @@ function controladorIndemnizacion() {
     ${
       tipoDespido === "Sin_causa"
         ? `
-    <div class="resultado1">
-        <p>Total indemnización sin causa: </p>
-        <p>$${totalIndemnizacionSCP.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+    <div class="resultadoFinal">
+        <p class="tituloTotal">Total indemnización sin causa: </p>
+        <div class="resultEnMonedas">
+        <span class="tituloEnPesos"> En pesos: </span> <span> <span class="numeroPesos">$${totalIndemnizacionSCP.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+        </div>
+        <div class="resultEnMonedas">
+        <span class="tituloEnDolares"> En dólares: </span> <span class="numeroDolares">$${totalEnDolaresSC.toLocaleString("en-US", { style: "currency", currency: "USD" })}</span>
+        </div>
+        <div class="resultEnMonedas">
+        <span class="tituloEnReales"> En reales: </span> <span class="numeroReal">${totalEnRealesSC.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
+        </div>    
     </div>
   `
         : `
-    <div class="resultado1">
-        <p>Total indemnización con causa: </p>
-        <p>$${totalIndemnizacionConCausa.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+    <div class="resultadoFinal">
+        <p class="tituloTotal">Total indemnización con causa: </p>
+        <div class="resultEnMonedas">
+        <span class="tituloEnPesos"> En pesos: </span> <span> <span class="numeroPesos">$${totalIndemnizacionConCausa.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+        </div>
+        <div class="resultEnMonedas">
+        <span class="tituloEnDolares"> En dólares: </span> <span class="numeroDolares">$${totalEnDolaresCC.toLocaleString("en-US", { style: "currency", currency: "USD" })}</span>
+        </div>
+        <div class="resultEnMonedas">
+        <span class="tituloEnReales"> En reales: </span> <span class="numeroReal">${totalEnRealesCC.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
+        </div>
     </div>
   `
     }
@@ -258,7 +294,6 @@ const inputVacaciones = document.getElementById("diasVacaciones");
 // Seleccionamos el label para ocultar también el texto "Días de vacaciones..."
 const labelVacaciones = document.querySelector(".labelVacacionesDeuda");
 
-// 2. Ponemos al "guardia" (Listener) a escuchar el checkbox
 checkVacaciones.addEventListener("change", function () {
   // Esta lógica se ejecuta CADA VEZ que haces clic en el checkbox
   if (checkVacaciones.checked) {

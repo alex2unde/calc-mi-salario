@@ -478,3 +478,47 @@ function totalConCausaOrenuncia(
     vacacionesDeudaSAC
   );
 }
+
+//---------------------Dolar-------------------------------------------------
+
+async function cotizacionDolar() {
+  try {
+    const respuesta = await fetch("https://dolarapi.com/v1/dolares/blue");
+    const datos = await respuesta.json();
+
+    return datos.venta;
+  } catch (error) {
+    console.error("Error al obtener la cotización del dólar:", error);
+    return null;
+  }
+}
+
+function convertirPesosADolares(montoEnPesos, cotizacionDolar) {
+  if (cotizacionDolar) {
+    return montoEnPesos / cotizacionDolar;
+  } else {
+    return null;
+  }
+}
+
+//---------------------A reales---------------------------------
+
+async function cotizacionReal() {
+  try {
+    const respuesta = await fetch("https://dolarapi.com/v1/cotizaciones/brl");
+    const datos = await respuesta.json();
+
+    return datos.venta;
+  } catch (error) {
+    console.error("Error al obtener la cotización del real:", error);
+    return null;
+  }
+}
+
+function convertirPesosAReales(montoEnPesos, cotizacionReal) {
+  if (cotizacionReal) {
+    return montoEnPesos / cotizacionReal;
+  } else {
+    return null;
+  }
+}

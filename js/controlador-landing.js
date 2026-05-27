@@ -41,7 +41,7 @@ function renderizarFeriados(listaFeriados) {
             <div class="tarjeta-feriado">
                 <span class="fecha-badge">${dia}/${mes}</span>
                 <p class="dia-nombre">${nombreDia}</p>
-                <p class="faltan-dias">Faltan ${faltanDias} días</p>
+                ${faltanDias === 0 ? '<p class="faltan-dias">Hoy</p>' : `<p class="faltan-dias">Faltan ${faltanDias} días</p>`}
                 <p class="feriado-nombre">${feriado.nombre}</p>
                 <small class="feriado-tipo">${feriado.tipo}</small>
             </div>

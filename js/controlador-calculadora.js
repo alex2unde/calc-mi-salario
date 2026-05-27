@@ -63,7 +63,7 @@ function capturaValores() {
 //   }
 // }
 
-function controladorPrincipal() {
+async function controladorPrincipal() {
   const divResultado = document.getElementById("resultado");
 
   const {
@@ -136,6 +136,12 @@ function controladorPrincipal() {
     noRemunerativo,
     dineroEnNegro,
   );
+
+  const dolarVenta = await cotizacionDolar();
+  const totalEnDolares = convertirPesosADolares(totalFinal, dolarVenta);
+
+  const realVenta = await cotizacionReal();
+  const totalEnReales = convertirPesosAReales(totalFinal, realVenta);
 
   if (tipoDeOperario === "temporario") {
     // Si el operario es temporario, el básico se calcula en base a las horas trabajadas, sino se toma el valor de la categoría.
@@ -248,9 +254,17 @@ function controladorPrincipal() {
         <span> $${inpAnticipo.toLocaleString("es-AR")} </span>
     </div> 
     <hr>
-    <div class="resultado1"> 
-        <span> Total: </span>
-        <span> $${totalFinalTemp.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
+    <div class="resultadoFinal"> 
+        <span class="tituloTotal"> Total: </span>
+        <div class="resultEnMonedas">
+        <span class="tituloEnPesos"> En pesos: </span> <span class="numeroPesos"> $${totalFinalTemp.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
+        </div>
+        <div class="resultEnMonedas">
+        <span class="tituloEnDolares"> En dolares:  </span> <span class="numeroDolares"> $${totalEnDolares.toLocaleString("en-US", { style: "currency", currency: "USD" })} </span>
+        </div>
+        <div class="resultEnMonedas">
+        <span class="tituloEnReales"> En reales:  </span> <span class="numeroReal"> ${totalEnReales.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })} </span>
+        </div>
     </div>
 `;
   } else {
@@ -326,9 +340,17 @@ function controladorPrincipal() {
         <span> $${inpAnticipo.toLocaleString("es-AR")} </span>
     </div> 
     <hr>
-    <div class="resultado1"> 
-        <span> Total: </span>
-        <span> $${totalFinal.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
+    <div class="resultadoFinal"> 
+        <span class="tituloTotal"> Total: </span>
+        <div class="resultEnMonedas">
+        <span class="tituloEnPesos"> En pesos:  </span> <span class="numeroPesos"> $${totalFinal.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
+        </div>
+        <div class="resultEnMonedas">
+        <span class="tituloEnDolares"> En dolares:  </span> <span class="numeroDolares"> $${totalEnDolares.toLocaleString("en-US", { style: "currency", currency: "USD" })} </span>
+        </div>
+        <div class="resultEnMonedas">
+        <span class="tituloEnReales"> En reales:  </span> <span class="numeroReal"> ${totalEnReales.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })} </span>
+        </div>
     </div>
     `;
   }
