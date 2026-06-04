@@ -5,7 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <title>Calcular mi salario / Calculadora</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="css/Estylos.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍷</text></svg>"
+    />
   </head>
 
   <body class="bodyCalculadora">
@@ -271,13 +282,74 @@
         </button>
       </div>
 
-      <div class="compartirWhatsApp">
+      <div class="compartir_y_btnPDF">
+        <button class="btnPDF" id="botonPDF">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="80"
+            height="80"
+            viewBox="0 0 128 128"
+          >
+            <path
+              d="M10 10 v108 a6 6 0 0 0 6 6 h96 a6 6 0 0 0 6 -6 v-84 L96 10 Z"
+              fill="#F0F0F0"
+            />
+
+            <path
+              d="M118 34 h-16 a6 6 0 0 1 -6 -6 v-18 L118 34 Z"
+              fill="#DCDCDC"
+            />
+
+            <rect
+              x="25"
+              y="25"
+              width="60"
+              height="4"
+              rx="2"
+              ry="2"
+              fill="#A0A0A0"
+            />
+            <rect
+              x="25"
+              y="37"
+              width="50"
+              height="4"
+              rx="2"
+              ry="2"
+              fill="#A0A0A0"
+            />
+
+            <rect
+              x="20"
+              y="70"
+              width="88"
+              height="48"
+              rx="8"
+              ry="8"
+              fill="#E53935"
+            />
+
+            <text
+              x="64"
+              y="105"
+              font-family="Arial, sans-serif"
+              font-size="36"
+              font-weight="bold"
+              fill="#FFFFFF"
+              text-anchor="middle"
+            >
+              PDF
+            </text>
+          </svg>
+
+          <span class="comparWhas">Descargar PDF</span>
+        </button>
+
         <a
-          class="comparWhas1"
+          class="compartirWhatsApp"
           href="https://wa.me/?text=¡Mirá%20esta%20calculadora%20de%20salarios%20de%20bodega%20y%20viña!%0Ahttps:
-  //https://alex2unde.github.io/calc-mi-salario"
+  //https://sueldobodega.com.ar/calculadora.html"
           target="_blank"
-          class="btn-whatsapp"
         >
           <svg class="iconoW" fill="none" viewBox="0 0 360 362">
             <path
@@ -287,10 +359,54 @@
               clip-rule="evenodd"
             />
           </svg>
-          <span class="comparWhas">Compartir calculadora</span>
+          <span class="comparWhas">Compartir</span>
+        </a>
+      </div>
+
+      <div class="div-donacion">
+        <a
+          href="https://mpago.la/2Xpn2Fm"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="aDonacion"
+        >
+          🥯 ¿Donar una tortita? ($325)
+          <small class="explica-donacion"
+            >Con tu tortita me ayudás a cubrir el tiempo que le dedico a
+            mantener la calculadora al día con los últimos aumentos.
+            Gracias!</small
+          >
         </a>
       </div>
     </main>
+
+    <div class="div-sugerencias" id="divSugerencias">
+      <i
+        class="fa-etch fa-solid fa-comment"
+        style="color: rgb(22, 61, 245)"
+      ></i>
+      <small class="sugerencias-icoino">Sugerencias</small>
+
+      <form
+        class="formularioSugerencias"
+        id="formularioSugerencias"
+        action="https://formspree.io/f/mkoagbwv"
+        method="POST"
+      >
+        <small>¿Tenés alguna sugerencia?</small>
+        <hr />
+        <label for="sugerencias">
+          <textarea
+            id="sugerencias"
+            placeholder="Escribí tu sugerencia aquí..."
+            maxlength="500"
+            name="sugerencia"
+            required
+          ></textarea>
+        </label>
+        <button class="btnEnviar" id="enviarSugerencia">Enviar</button>
+      </form>
+    </div>
 
     <footer class="footer">
       <img
@@ -341,6 +457,7 @@
 </a> -->
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="js/modelo.js"></script>
     <script src="js/controlador-calculadora.js"></script>
     <script src="js/controlador-Indemnizacion.js"></script>

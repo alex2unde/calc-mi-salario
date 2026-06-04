@@ -26,7 +26,9 @@ function diasAdeudadosVacaciones() {
   return checkbox.checked ? Number(input.value) || 0 : 0;
 }
 
-async function controladorIndemnizacion() {
+async function controladorIndemnizacion(event) {
+  event.preventDefault();
+
   const divResultado = document.getElementById("resultadoIndemnizacion");
 
   const {
@@ -260,13 +262,13 @@ async function controladorIndemnizacion() {
     <div class="resultadoFinal">
         <p class="tituloTotal">Total indemnización sin causa: </p>
         <div class="resultEnMonedas">
-        <span class="tituloEnPesos"> En pesos: </span> <span> <span class="numeroPesos">$${totalIndemnizacionSCP.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+            <span class="tituloEnPesos"> En pesos: </span> <span> <span class="numeroPesos">$${totalIndemnizacionSCP.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> </span>
         </div>
-        <div class="resultEnMonedas">
-        <span class="tituloEnDolares"> En dólares: </span> <span class="numeroDolares">$${totalEnDolaresSC.toLocaleString("en-US", { style: "currency", currency: "USD" })}</span>
+        <div class="resultEnMonedas no-pdf">
+            <span class="tituloEnDolares"> En dólares: </span> <span class="numeroDolares">$${totalEnDolaresSC.toLocaleString("en-US", { style: "currency", currency: "USD" })}</span>
         </div>
-        <div class="resultEnMonedas">
-        <span class="tituloEnReales"> En reales: </span> <span class="numeroReal">${totalEnRealesSC.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
+        <div class="resultEnMonedas no-pdf">
+            <span class="tituloEnReales"> En reales: </span> <span class="numeroReal">${totalEnRealesSC.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
         </div>    
     </div>
   `
@@ -274,13 +276,13 @@ async function controladorIndemnizacion() {
     <div class="resultadoFinal">
         <p class="tituloTotal">Total indemnización con causa: </p>
         <div class="resultEnMonedas">
-        <span class="tituloEnPesos"> En pesos: </span> <span> <span class="numeroPesos">$${totalIndemnizacionConCausa.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+            <span class="tituloEnPesos"> En pesos: </span> <span> <span class="numeroPesos">$${totalIndemnizacionConCausa.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> </span>
         </div>
-        <div class="resultEnMonedas">
-        <span class="tituloEnDolares"> En dólares: </span> <span class="numeroDolares">$${totalEnDolaresCC.toLocaleString("en-US", { style: "currency", currency: "USD" })}</span>
+        <div class="resultEnMonedas no-pdf">
+            <span class="tituloEnDolares"> En dólares: </span> <span class="numeroDolares">$${totalEnDolaresCC.toLocaleString("en-US", { style: "currency", currency: "USD" })}</span>
         </div>
-        <div class="resultEnMonedas">
-        <span class="tituloEnReales"> En reales: </span> <span class="numeroReal">${totalEnRealesCC.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
+        <div class="resultEnMonedas no-pdf">
+            <span class="tituloEnReales"> En reales: </span> <span class="numeroReal">${totalEnRealesCC.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
         </div>
     </div>
   `
