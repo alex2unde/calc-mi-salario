@@ -199,7 +199,7 @@ body {
   border-radius: 10px;
   padding: 15px;
   text-align: center;
-  min-width: 130px;
+  max-width: 165px;
   justify-content: space-between;
 }
 
@@ -747,14 +747,13 @@ hr {
   background-color: rgba(0, 0, 0, 0.39);
   font-family: "verdana";
   border-radius: 5px;
-  max-width: 180px;
+  max-width: 290px;
 }
 
 #diasVacaciones {
   color: rgb(255, 255, 255);
   font-size: 20px;
   border-radius: 5px;
-  border: none;
   padding: 5px;
   background-color: rgba(0, 0, 0, 0.39);
   max-width: 90px;
@@ -764,16 +763,25 @@ hr {
   color: rgb(255, 255, 255);
   font-size: 20px;
   border-radius: 5px;
-  border: solid 0.5px rgb(255, 255, 255);
   padding: 5px;
   background-color: rgba(0, 0, 0, 0.39);
   max-width: 130px;
 }
 
+#dias-suspencion {
+  padding: 20px;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  background-color: #ffffff4f;
+}
+
 .secundarioDiv {
-  display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  margin: 5px;
 }
 
 .secundario {
@@ -788,6 +796,7 @@ hr {
 
 .mesCompleto {
   padding-bottom: 10px;
+  margin: 5px;
 }
 
 #enNegro {
@@ -1006,6 +1015,7 @@ select::-webkit-scrollbar-thumb:hover {
   margin-right: 20px;
 }
 
+/* Estilo para el botón de sugerencias */
 .div-sugerencias {
   bottom: 150px;
   right: 20px;
@@ -1016,20 +1026,13 @@ select::-webkit-scrollbar-thumb:hover {
   margin-left: 20px;
   position: fixed;
   align-items: center;
+  flex-direction: row-reverse;
 }
-
-.sugerencias-icoino {
-  font-size: 13px;
-  color: rgb(255, 255, 255);
-  border-radius: 50%;
-  padding: 10px;
+.div-sugerencias svg {
+  width: 50px;
+  height: 45px;
+  color: #ffffff;
 }
-
-.div-sugerencias i {
-  z-index: 11;
-  font-size: 55px;
-}
-
 .formularioSugerencias {
   display: none;
   flex-direction: column;
@@ -1182,17 +1185,20 @@ select::-webkit-scrollbar-thumb:hover {
     flex: 1;
   }
 
-  .imgSec1 {
+  /* .imgSec1 {
     mask-image: linear-gradient(90deg, rgb(0, 0, 0) 0%, transparent);
     margin: auto;
-  }
+  } */
 
   .imagenPrincipal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-height: 40px;
-    min-width: 100%;
+    .imagenPrincipal {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 100%;
+      background-image: url("../assets/imagenes/bandera-argentina.png");
+      mask-image: linear-gradient(90deg, rgb(0, 0, 0) 0%, transparent);
+    }
   }
 
   .h1-home {
@@ -1366,7 +1372,6 @@ select::-webkit-scrollbar-thumb:hover {
     margin: 0;
     grid-column: 1;
     grid-row: 1;
-    max-height: 650px;
     justify-content: space-between;
     align-items: center;
   }

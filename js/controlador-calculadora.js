@@ -27,6 +27,9 @@ function capturaValores() {
   const tieneTituloNo = document.getElementById("tituloSec2").checked;
   const inpHoras50 = Number(document.getElementById("horasEx50").value);
   const inpHoras100 = Number(document.getElementById("horasEx100").value);
+  const diasSuspension = Number(
+    document.getElementById("dias-suspencion").value || 0,
+  );
   const selectAntiguedad = Number(document.getElementById("opcionesAnt").value);
   const inpAnticipo = Number(document.getElementById("anticipo").value || 0);
   const dineroEnNegro = Number(document.getElementById("enNegro").value || 0);
@@ -40,6 +43,7 @@ function capturaValores() {
     tieneTituloNo,
     inpHoras50,
     inpHoras100,
+    diasSuspension,
     selectAntiguedad,
     inpAnticipo,
     dineroEnNegro,
@@ -63,6 +67,7 @@ function capturaValores() {
 //   }
 // }
 
+// variable global para usarlo en ambos controladores (calculadora e indemnización)
 const iconoSugerencias = document.getElementById("divSugerencias");
 const formularioSug = document.getElementById("formularioSugerencias");
 
@@ -134,6 +139,7 @@ async function controladorPrincipal() {
     tieneTituloSi,
     inpHoras50,
     inpHoras100,
+    diasSuspension,
     selectAntiguedad,
     inpAnticipo,
     dineroEnNegro,
@@ -151,6 +157,12 @@ async function controladorPrincipal() {
   const valorHoraAl50 = horasAl50 * inpHoras50;
   const horasAl100 = horasExtra100(precioHora);
   const valorHoraAl100 = horasAl100 * inpHoras100;
+
+  const valorDiaSuspension = valorDiaEfectivo(selectCategoria);
+  const suspenciones = calcularSuspensionEfectivo(
+    diasSuspension,
+    valorDiaSuspension,
+  );
 
   const noRemunerativo = asignacionNoRem(nombreCategoria);
 
@@ -185,6 +197,7 @@ async function controladorPrincipal() {
     descuentoLey19032,
     descuentoSindicato,
     obraSocialDesc,
+    suspenciones,
   );
 
   const totalFinal = totalNeto(
@@ -203,13 +216,16 @@ async function controladorPrincipal() {
   const totalEnReales = convertirPesosAReales(totalFinal, realVenta);
 
   if (tipoDeOperario === "temporario") {
-    // Si el operario es temporario, el básico se calcula en base a las horas trabajadas, sino se toma el valor de la categoría.
+    // Si el operario es temporario, el básico se calcula en base a las horas trabajadas, sino, se toma el valor de la categoría.
     // const mesHorasInput = mostrarInputMes();
     // const horasValor = calculoHorasMes(mesHorasInput, precioHora);
     //queda comentado por que no se va a pedir el input de horas trabajadas.
 
     const horasHabilesDelMes = verificarHorasHabiles(numeroMes);
     const baseJornal = calculoBaseJornal(precioHora, horasHabilesDelMes);
+    const valorDia = diaDelJornal(precioHora);
+
+    const SuspensionJornal = calcularSuspensionJornal(diasSuspension, valorDia);
 
     const haberesTemporario = sumaHaberes(
       radioMesCompleto,
@@ -231,6 +247,7 @@ async function controladorPrincipal() {
       ley19032Temp,
       sindicatoTemp,
       obraSocialTemp,
+      SuspensionJornal,
     );
     const totalFinalTemp = totalNeto(
       haberesTemporario,
@@ -259,6 +276,10 @@ async function controladorPrincipal() {
         <span> Horas Extra al 100%: </span>
         <span> $${valorHoraAl100.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
     </div> 
+    <div class="resultado1">
+        <span> Suspencion: (${diasSuspension}) dias</span>
+        <span> $${SuspensionJornal.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
+    </div>
     <div class="resultado1">
         <span> Titulo Secundario: </span>
         <span> $${secundarioCompleto.toLocaleString("es-AR")} </span>
@@ -346,6 +367,10 @@ async function controladorPrincipal() {
         <span> Horas Extra al 100%: </span>
         <span> $${valorHoraAl100.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
     </div> 
+    <div class="resultado1">
+        <span> Suspencion: (${diasSuspension}) dias</span>
+        <span> $${suspenciones.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
+    </div>
     <div class="resultado1">
         <span> Titulo Secundario: </span>
         <span> $${secundarioCompleto.toLocaleString("es-AR")} </span>

@@ -26,6 +26,65 @@ function diasAdeudadosVacaciones() {
   return checkbox.checked ? Number(input.value) || 0 : 0;
 }
 
+const iconoSugerencias = document.getElementById("divSugerencias");
+const formularioSug = document.getElementById("formularioSugerencias");
+
+// 1. SOLUCIÓN AL CLIC ADENTRO: Frenar la burbuja
+formularioSug.addEventListener("click", (event) => {
+  event.stopPropagation(); // El clic muere en el form, no llega al div padre
+});
+
+// 2. Abrir y cerrar con el ícono
+iconoSugerencias.addEventListener("click", () => {
+  if (formularioSug.style.display === "block") {
+    formularioSug.style.display = "none";
+  } else {
+    formularioSug.style.display = "block";
+  }
+});
+
+// 3. Cerrar al hacer clic afuera
+document.addEventListener("click", (event) => {
+  if (formularioSug.style.display === "block") {
+    if (
+      !formularioSug.contains(event.target) &&
+      !iconoSugerencias.contains(event.target)
+    ) {
+      formularioSug.style.display = "none";
+    }
+  }
+});
+
+// 4. SOLUCIÓN AL ENVÍO: Enviar "en silencio" sin recargar la página
+formularioSug.addEventListener("submit", async (event) => {
+  // Frenamos la recarga automática
+  event.preventDefault();
+
+  // Recolectamos lo que el usuario escribió
+  const formData = new FormData(formularioSug);
+
+  try {
+    // Usamos fetch para enviar los datos a la URL que pusiste en el action de tu HTML
+    const response = await fetch(formularioSug.action, {
+      method: "POST",
+      body: formData,
+      headers: {
+        Accept: "application/json", // Le decimos a Formspree que no nos redirija
+      },
+    });
+
+    if (response.ok) {
+      alert("¡Sugerencia enviada con éxito! Gracias por ayudarnos.");
+      formularioSug.reset(); // Limpia los campos (nombre, mensaje, etc)
+      formularioSug.style.display = "none"; // Cierra la ventanita
+    } else {
+      alert("Hubo un problema al enviar la sugerencia.");
+    }
+  } catch (error) {
+    alert("Error de conexión. Revisá tu internet e intentá nuevamente.");
+  }
+});
+
 async function controladorIndemnizacion(event) {
   event.preventDefault();
 
@@ -164,6 +223,7 @@ async function controladorIndemnizacion(event) {
   );
 
   divResultado.innerHTML = `
+  <div id="divPDF">
     <div class="resultado1">
         <p>Fecha de ingreso: </p>
         <p>${fechaInit}</p>
@@ -285,6 +345,7 @@ async function controladorIndemnizacion(event) {
             <span class="tituloEnReales"> En reales: </span> <span class="numeroReal">${totalEnRealesCC.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
         </div>
     </div>
+    </div>
   `
     }
   `;
@@ -304,4 +365,32 @@ checkVacaciones.addEventListener("change", function () {
     labelVacaciones.style.display = "none"; // Se oculta todo
     inputVacaciones.value = ""; // Limpiamos el número si lo desmarcan
   }
+});
+
+// Generar PDF.
+const botonDescarga = document.getElementById("botonPDF");
+botonDescarga.addEventListener("click", () => {
+  const capturaAqui = document.getElementById("divPDF");
+
+  if (!capturaAqui) {
+    alert("Primero debes realizar el cálculo para generar el PDF.");
+    return;
+  }
+
+  const configPDF = {
+    margin: 5, // Un margen pequeño para aprovechar el espacio
+    filename: "sueldo-calculado.pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    pagebreak: { mode: ["css", "legacy"] }, // Evita cortes bruscos
+    html2canvas: {
+      scale: 2,
+      useCORS: true, // Importante si usas imágenes o estilos externos
+      letterRendering: true,
+      scrollY: 0, // Asegura que no se corte si hay scroll en la página
+    },
+    // Cambiamos a A4 y definimos orientación vertical
+    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+  };
+
+  html2pdf().set(configPDF).from(capturaAqui).save();
 });

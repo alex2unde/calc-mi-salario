@@ -16,6 +16,10 @@ function calculoBaseJornal(valorHora, horasDelMes) {
   return valorHora * horasDelMes;
 }
 
+function diaDelJornal(valorHora) {
+  return valorHora * 8;
+}
+
 function verificarHorasHabiles(mesSeleccionado) {
   const fechaActual = new Date();
   const anioActual = fechaActual.getFullYear();
@@ -76,6 +80,18 @@ function horasExtra50(valorHora) {
 
 function horasExtra100(valorHora) {
   return valorHora * 2;
+}
+
+function valorDiaEfectivo(basico) {
+  return basico / 25;
+}
+
+function calcularSuspensionEfectivo(diasSuspension, valorDiaSuspension) {
+  return diasSuspension * valorDiaSuspension;
+}
+
+function calcularSuspensionJornal(diasSuspension, valorDiaJornal) {
+  return diasSuspension * valorDiaJornal;
 }
 
 function calculoHorasMes(horasInput, valorHoras) {
@@ -182,13 +198,15 @@ function totalDescuentos(
   descuentoLey19032,
   descuentoSindicato,
   OBRA_SOCIAL,
+  suspensiones,
 ) {
   return (
     sepelio +
     descuentoJubilacion +
     descuentoLey19032 +
     descuentoSindicato +
-    OBRA_SOCIAL
+    OBRA_SOCIAL +
+    suspensiones
   );
 }
 
