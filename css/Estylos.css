@@ -1,3 +1,41 @@
+:root {
+  --fondo-principal: url("../assets/imagenes/mujerescocechando.jpeg");
+  --fondo-sec1: #000000;
+  --color-texto: #ffffff;
+  --fondo-formulario: #0000006e;
+  --color-botones: #ffffff;
+  --cuadro-selecInput: rgba(0, 0, 0, 0.39);
+  --borde-form: #888888;
+  --fondo-explica-donacion: #ff9b0d6e;
+}
+
+body.modo-claro {
+  --fondo-principal: url("../assets/imagenes/mujeres.modoclaro.jpg");
+  --fondo-sec1: #ffffff;
+  --color-texto: #000000;
+  --fondo-formulario: #ffffff;
+  --color-botones: #000000;
+  --fondo-explica-donacion: #ff9b0d6e;
+  --borde-form: #000000;
+  --cuadro-selecInput: rgb(230, 230, 230);
+}
+
+.toggleModo {
+  font-size: 30px;
+  position: fixed;
+  top: 120px;
+  left: 20px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.toggleModo i {
+  color: var(--color-botones);
+  transition: color 0.3s;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -8,14 +46,20 @@ body {
 
 /*body con imagen de fondo en la pagina de calculadora*/
 .bodyCalculadora {
-  background-image: url("../assets/imagenes/mujerescocechando.jpeg");
-  background-color: #000000;
+  background-image: var(--fondo-principal);
+  color: var(--color-texto);
+
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   margin: 0;
   padding: 0;
+
+  transition:
+    background-image 0.5s ease,
+    background-color 0.5s ease,
+    color 0.5s ease;
 }
 
 .info1 {
@@ -134,7 +178,7 @@ body {
 /*estilo de la primer seccion del home*/
 .sec1 {
   display: flex;
-  background-color: #000000;
+  background-color: var(--fondo-principal);
   justify-content: flex-end;
 }
 
@@ -408,8 +452,8 @@ body {
 small {
   font: lighter 20px "Franklin Gothic Medium";
   font-size: 20px;
-  color: rgba(255, 255, 255, 0.525);
-  text-align: left;
+  color: var(--color-texto);
+  text-align: center;
   background: #ffffff00;
 }
 
@@ -424,9 +468,8 @@ small {
 
 /*estilo de las lineas divisorias*/
 hr {
-  border: 0;
   height: 2.4px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-texto);
   margin: 10px 0;
 }
 
@@ -461,10 +504,11 @@ hr {
 .items {
   display: flex;
   flex-direction: column;
-  color: rgb(255, 255, 255);
+  color: var(--color-texto);
+  background-color: var(--fondo-formulario);
   font-size: 20px;
   border-radius: 10px;
-  border: 0.5px solid #ffffff3f;
+  border: 2px solid var(--borde-form);
   text-align: left;
   background-color: #0000006e;
   backdrop-filter: blur(12px);
@@ -473,6 +517,8 @@ hr {
   max-height: auto;
   max-width: 450px;
   padding: 20px;
+  background-color: var(--fondo-formulario);
+  transition: background-color 0.5s ease;
 }
 
 .tipoDeOperario {
@@ -486,70 +532,45 @@ hr {
   color: rgb(5, 139, 14);
   font-size: 20px;
   border-radius: 5px;
-  border: solid 0.5px rgb(5, 139, 14);
+  border: solid 3px rgb(5, 139, 14);
   padding: 5px;
-  background-color: rgb(6, 45, 8);
+  background-color: rgb(255, 255, 255);
   cursor: pointer;
 }
 
 .btnTemp:hover {
-  background: linear-gradient(
-    326deg,
-    rgb(89, 255, 0) 0%,
-    rgb(50, 243, 16) 50%,
-    rgb(6, 155, 24) 100%
-  );
-
+  background: #19b501;
   color: #ffffff !important;
-  box-shadow: 0px 2px 30px rgba(15, 255, 27, 0.8);
   transition: all 0.1s ease;
 }
 
 .btnMnsual {
-  color: rgb(34, 51, 180);
+  background: rgb(36, 53, 180);
+  color: rgb(36, 53, 180);
   font-size: 20px;
   border-radius: 5px;
-  border: solid 0.5px rgb(34, 51, 180);
+  border: solid 3px rgb(36, 53, 180);
   padding: 5px;
-  background-color: rgb(19, 42, 78);
+  background-color: rgb(252, 253, 255);
   cursor: pointer;
 }
 
 .btnMnsual:hover {
-  background: linear-gradient(
-    326deg,
-    rgb(45, 152, 240) 0%,
-    rgb(36, 99, 202) 50%,
-    rgb(36, 53, 180) 100%
-  );
-
+  background: rgb(36, 53, 180);
   color: #ffffff !important;
-  box-shadow: 0px 2px 30px rgba(51, 75, 255, 0.8);
   transition: all 0.1s ease;
 }
 
 /* Estado encendido fijo para el botón VERDE */
 .btnTemp.activo {
-  background: linear-gradient(
-    326deg,
-    rgb(89, 255, 0) 0%,
-    rgb(50, 243, 16) 50%,
-    rgb(6, 155, 24) 100%
-  );
+  background: #19b501;
   color: #ffffff !important;
-  box-shadow: 0px 2px 30px rgba(15, 255, 27, 0.8);
 }
 
 /* Estado encendido fijo para el botón AZUL */
 .btnMnsual.activo {
-  background: linear-gradient(
-    326deg,
-    rgb(45, 152, 240) 0%,
-    rgb(36, 99, 202) 50%,
-    rgb(36, 53, 180) 100%
-  );
+  background: rgb(36, 53, 180);
   color: #ffffff !important;
-  box-shadow: 0px 2px 30px rgba(51, 75, 255, 0.8);
 }
 
 .mesOpcion {
@@ -561,38 +582,28 @@ hr {
   display: flex;
   text-decoration: none;
   flex-direction: row;
-  color: rgb(255, 255, 255);
-  font-size: 20px;
-  border-radius: 10px;
-  border: 0.5px solid #ffffff3f;
   text-align: left;
   align-items: center;
   justify-content: center;
   justify-items: center;
-  background-color: #0000006e;
-  backdrop-filter: blur(12px);
-  font-family: "verdana";
-  box-shadow: #000000 0px 0px 10px;
   max-height: 410px;
   max-width: 480px;
   padding: 20px;
   position: relative;
-}
 
-.comparWhas1 {
-  grid-row: 1;
-  grid-column: 1;
-  text-decoration: none;
-  list-style: none;
-  color: rgb(255, 255, 255);
-  align-items: center;
-  justify-content: center;
+  font-size: 20px;
+  border-radius: 10px;
+  border: 2px solid var(--borde-form);
+  background-color: var(--fondo-formulario);
+  backdrop-filter: blur(12px);
+  font-family: "verdana";
+  box-shadow: #000000 0px 0px 5px;
 }
 
 .comparWhas {
   text-decoration: none;
   list-style: none;
-  color: rgb(255, 255, 255);
+  color: var(--color-texto);
 
   position: relative;
   display: inline-block;
@@ -603,23 +614,24 @@ hr {
 .aDonacion {
   display: flex;
   text-decoration: none;
-  flex-direction: row;
-  color: rgb(255, 255, 255);
-  font-size: 20px;
-  border-radius: 10px;
-  border: 0.5px solid #ffffff3f;
+  flex-direction: column;
   text-align: left;
   align-items: center;
   justify-content: center;
   justify-items: center;
-  background-color: #9156036e;
-  backdrop-filter: blur(12px);
-  font-family: "verdana";
-  box-shadow: #000000 0px 0px 10px;
   max-height: 410px;
   max-width: 480px;
   padding: 20px;
   position: relative;
+
+  background-color: #ffa700eb;
+  backdrop-filter: blur(12px);
+  font-family: "verdana";
+  box-shadow: #000000 0px 0px 10px;
+  color: var(--color-texto);
+  font-size: 25px;
+  border-radius: 10px;
+  border: 2px solid var(--borde-form);
 }
 
 .iconoW {
@@ -631,23 +643,24 @@ hr {
 }
 
 #horasEx50 {
-  color: rgb(255, 255, 255);
+  color: var(--color-texto);
+  background-color: var(--cuadro-selecInput);
+
   margin-left: 10px;
   font-size: 20px;
   border-radius: 5px;
-  border: none;
+  border: solid 1px var(--borde-form);
   padding: 5px;
-  background-color: #ffffff4f;
 }
 
 #horasEx100 {
-  color: rgb(255, 255, 255);
-  margin-left: 10px;
+  background-color: var(--cuadro-selecInput);
+  color: var(--color-texto);
+
   font-size: 20px;
   border-radius: 5px;
-  border: none;
+  border: solid 1px var(--borde-form);
   padding: 5px;
-  background-color: #ffffff4f;
   margin-left: 0px;
   margin-top: 5px;
 }
@@ -661,21 +674,22 @@ hr {
 #resultado hr {
   border: none; /* Quitamos el borde feo por defecto */
   height: 1px; /* Le damos altura */
-  background-color: rgba(255, 255, 255, 0.2); /* Un blanco transparente */
+  background-color: var(--color-texto);
   width: 100%; /* CLAVE: Para que ocupe todo el ancho del cuadro */
   margin: 15px 0; /* Espacio arriba y abajo para que respire el diseño */
 }
 
 /* cuadro de resultado */
 #resultado {
-  background-color: #0000006e;
-  border: 0.5px solid #ffffff3f;
+  background-color: var(--fondo-formulario);
+  border: 2px solid var(--borde-form);
   backdrop-filter: blur(12px);
-  color: rgba(255, 255, 255, 0.679);
+  color: var(--color-texto);
   border-radius: 10px;
   box-shadow: #000000 0px 0px 10px;
   font-size: 1.2em;
   font-family: "verdana";
+
   max-width: 480px;
   padding: 20px;
   justify-content: space-between;
@@ -696,12 +710,12 @@ hr {
 
 #anticipo {
   padding: 20px;
-  color: rgb(255, 255, 255);
+  color: var(--color-texto);
   font-size: 20px;
   border-radius: 5px;
-  border: none;
+  border: solid 1px var(--borde-form);
   padding: 5px;
-  background-color: #ffffff4f;
+  background-color: var(--cuadro-selecInput);
 }
 
 /* ingreso oculto si la opcion es NO */
@@ -729,24 +743,26 @@ hr {
 #fechaFin,
 #tipoDespido {
   font-weight: 10;
-  color: rgb(255, 255, 255);
+  color: var(--color-texto);
   font-size: 20px;
   text-align: left;
-  background-color: rgba(0, 0, 0, 0.39);
+  background-color: var(--cuadro-selecInput);
   font-family: "verdana";
   border-radius: 5px;
+  border: solid 1px var(--borde-form);
   max-width: 80%;
   gap: 0px;
 }
 
 #opcionesCat {
   font-weight: 10;
-  color: rgb(255, 255, 255);
+  color: var(--color-texto);
   font-size: 20px;
   text-align: left;
-  background-color: rgba(0, 0, 0, 0.39);
+  background-color: var(--cuadro-selecInput);
   font-family: "verdana";
   border-radius: 5px;
+  border: solid 1px var(--borde-form);
   max-width: 290px;
 }
 
@@ -760,22 +776,22 @@ hr {
 }
 
 #ultimoSueldo {
-  color: rgb(255, 255, 255);
+  color: var(--color-texto);
   font-size: 20px;
   border-radius: 5px;
   padding: 5px;
-  background-color: rgba(0, 0, 0, 0.39);
+  background-color: var(--cuadro-selecInput);
   max-width: 130px;
 }
 
 #dias-suspencion {
   padding: 20px;
-  color: rgb(255, 255, 255);
+  color: var(--color-texto);
   font-size: 20px;
   border-radius: 5px;
-  border: none;
+  border: solid 1px var(--borde-form);
   padding: 5px;
-  background-color: #ffffff4f;
+  background-color: var(--cuadro-selecInput);
 }
 
 .secundarioDiv {
@@ -800,14 +816,14 @@ hr {
 }
 
 #enNegro {
-  color: rgb(255, 255, 255);
+  color: var(--color-texto);
   margin-left: 10px;
   padding-top: 10px;
   font-size: 20px;
   border-radius: 5px;
-  border: none;
+  border: solid 1px var(--borde-form);
   padding: 5px;
-  background-color: #ffffff4f;
+  background-color: var(--cuadro-selecInput);
   max-width: 500px;
 }
 
@@ -876,7 +892,7 @@ hr {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  color: rgb(255, 255, 255);
+  color: var(--color-texto);
   font-size: 20px;
   text-align: left;
   font-family: "verdana";
@@ -890,14 +906,15 @@ hr {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: rgb(255, 255, 255);
-  font-size: 20px;
   text-align: left;
-  font-family: "verdana";
   max-height: auto;
   padding: 10px;
-  border: 0.5px solid #ffffff3f;
-  background-color: #0000006e;
+
+  font-family: "verdana";
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  border: 2px solid var(--borde-form);
+  background-color: var(--fondo-formulario);
   backdrop-filter: blur(12px);
   border-radius: 10px;
   box-shadow: #000000 0px 0px 10px;
@@ -910,6 +927,7 @@ hr {
 
 .resultado1 p {
   margin: 0px;
+  color: var(--color-texto);
 }
 
 .resultadoFinal {
@@ -925,26 +943,26 @@ hr {
 
 .tituloTotal {
   font-size: 20px;
-  color: rgb(255, 255, 255);
+  color: var(--color-texto);
   text-align: center;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 .tituloEnPesos {
   font-size: 20px;
-  color: rgb(255, 255, 255);
+  color: var(--color-texto);
   text-align: center;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 .tituloEnReales {
   font-size: 20px;
-  color: rgb(255, 255, 255);
+  color: var(--color-texto);
   text-align: center;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 .tituloEnDolares {
   font-size: 20px;
-  color: rgb(255, 255, 255);
+  color: var(--color-texto);
   text-align: center;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
@@ -1005,6 +1023,7 @@ select::-webkit-scrollbar-thumb:hover {
   flex-direction: row;
   align-items: stretch;
   justify-content: flex-start;
+  gap: 10px;
 }
 
 .div-donacion {
@@ -1031,7 +1050,7 @@ select::-webkit-scrollbar-thumb:hover {
 .div-sugerencias svg {
   width: 50px;
   height: 45px;
-  color: #ffffff;
+  color: var(--color-texto);
 }
 .formularioSugerencias {
   display: none;
@@ -1039,7 +1058,7 @@ select::-webkit-scrollbar-thumb:hover {
   color: rgb(141, 33, 33);
   font-size: 20px;
   border-radius: 10px;
-  border: 0.5px solid #ffffff3f;
+  border: 2px solid var(--borde-form);
   text-align: left;
   background-color: #0000006e;
   backdrop-filter: blur(12px);
@@ -1105,12 +1124,8 @@ select::-webkit-scrollbar-thumb:hover {
 .btnPDF {
   display: flex;
   flex-direction: row;
-  color: rgb(255, 255, 255);
   border-radius: 10px;
-  border: 0.5px solid #ffffff3f;
   font-size: 20px;
-  background-color: #0000006e;
-  backdrop-filter: blur(12px);
   font-family: "verdana";
   max-height: 410px;
   max-width: 480px;
@@ -1120,6 +1135,12 @@ select::-webkit-scrollbar-thumb:hover {
   align-items: center;
   justify-content: center;
   justify-items: center;
+
+  background-color: var(--fondo-formulario);
+  backdrop-filter: blur(12px);
+  color: var(--color-texto);
+  border: 2px solid var(--borde-form);
+  box-shadow: #000000 0px 0px 5px;
 }
 
 #divPDF {
@@ -1212,7 +1233,8 @@ select::-webkit-scrollbar-thumb:hover {
     text-align: center;
     font-size: 15px;
     padding: 20px;
-    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    font-family:
+      "Franklin Gothic Medium", "Arial Narrow", "Arial", "sans-serif";
   }
 
   .bodyCalculadora {
@@ -1394,17 +1416,18 @@ select::-webkit-scrollbar-thumb:hover {
   }
 
   .compartirWhatsApp {
-    color: rgb(255, 255, 255);
+    color: var(--color-texto);
     font-size: 20px;
     border-radius: 10px;
-    border: 0.7px solid #ffffff60;
-    text-align: left;
-    align-items: center;
-    justify-content: center;
+    border: 2px solid var(--borde-form);
     background-color: #0000006e;
     backdrop-filter: blur(12px);
     font-family: "verdana";
-    box-shadow: #000000 0px 0px 10px;
+    box-shadow: #000000 0px 0px 5px;
+
+    text-align: left;
+    align-items: center;
+    justify-content: center;
     max-height: 410px;
     max-width: 480px;
     padding: 20px;
@@ -1412,7 +1435,7 @@ select::-webkit-scrollbar-thumb:hover {
   }
 
   #horasEx50 {
-    color: rgb(255, 255, 255);
+    color: var(--color-texto);
     margin-left: 10px;
     padding-top: 10px;
     font-size: 20px;
@@ -1424,7 +1447,7 @@ select::-webkit-scrollbar-thumb:hover {
   }
 
   #horasEx100 {
-    color: rgb(255, 255, 255);
+    color: var(--color-texto);
     margin-left: 10px;
     /* width: 150px; */
     font-size: 20px;
@@ -1513,7 +1536,7 @@ select::-webkit-scrollbar-thumb:hover {
     border-radius: 12px;
     border: 1px solid #ffffff3f;
     box-shadow: #000000 0px 0px 10px;
-    background-color: #58585861;
+    background-color: var(--fondo-formulario);
     backdrop-filter: blur(15px);
     color: rgb(235, 234, 234);
     padding: 5px;
@@ -1525,6 +1548,7 @@ select::-webkit-scrollbar-thumb:hover {
   .resultadoIndem {
     color: rgb(235, 234, 234);
     font-size: 1em;
+    border: var(--borde-form) 2px solid;
   }
 
   .resultado2 {
@@ -1606,31 +1630,32 @@ select::-webkit-scrollbar-thumb:hover {
 
   .aDonacion {
     display: flex;
-    text-decoration: none;
     flex-direction: column;
-    color: rgb(255, 255, 255);
-    font-size: 20px;
-    border-radius: 10px;
-    border: 0.5px solid #ffffff3f;
     text-align: left;
     align-items: center;
     justify-content: center;
     justify-items: center;
-    background-color: #9156036e;
-    backdrop-filter: blur(12px);
-    font-family: "verdana";
-    box-shadow: #000000 0px 0px 10px;
     max-height: 410px;
     max-width: 480px;
     padding: 10px;
     position: relative;
+
+    text-decoration: none;
+    color: var(--color-texto);
+    font-size: 20px;
+    border-radius: 10px;
+    border: 2px solid var(--borde-form);
+    background-color: var(--fondo-explica-donacion);
+    backdrop-filter: blur(12px);
+    font-family: "verdana";
+    box-shadow: #000000 0px 0px 10px;
   }
 
   .explica-donacion {
     margin: 3px;
     font: lighter 20px "Franklin Gothic Medium";
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.525);
+    color: #ffffff;
     text-align: center;
     background: #ffffff00;
   }

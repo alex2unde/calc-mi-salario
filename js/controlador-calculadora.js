@@ -1,3 +1,24 @@
+//modo claro/oscuro.
+const btnModo = document.getElementById("toggleModo");
+// Buscamos específicamente la etiqueta <i> que está adentro del botón
+const iconoModo = btnModo.querySelector("i");
+
+btnModo.addEventListener("click", () => {
+  // 1. Cambiamos el modo de la página
+  document.body.classList.toggle("modo-claro");
+
+  // 2. Cambiamos el ícono
+  if (document.body.classList.contains("modo-claro")) {
+    // Si pasamos a modo claro, sacamos el sol y ponemos la luna
+    iconoModo.classList.remove("fa-sun");
+    iconoModo.classList.add("fa-moon");
+  } else {
+    // Si volvemos a modo oscuro, sacamos la luna y ponemos el sol
+    iconoModo.classList.remove("fa-moon");
+    iconoModo.classList.add("fa-sun");
+  }
+});
+
 let tipoDeOperario = "efectivo";
 
 function opTemporario() {
