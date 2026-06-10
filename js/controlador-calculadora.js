@@ -236,6 +236,9 @@ async function controladorPrincipal() {
   const realVenta = await cotizacionReal();
   const totalEnReales = convertirPesosAReales(totalFinal, realVenta);
 
+  const chilenoVenta = await cotizacionChileno();
+  const totalEnChilenos = convertirAchilenos(totalFinal, chilenoVenta);
+
   if (tipoDeOperario === "temporario") {
     // Si el operario es temporario, el básico se calcula en base a las horas trabajadas, sino, se toma el valor de la categoría.
     // const mesHorasInput = mostrarInputMes();
@@ -366,6 +369,9 @@ async function controladorPrincipal() {
         <div class="resultEnMonedas no-pdf">
         <span class="tituloEnReales"> En reales:  </span> <span class="numeroReal"> ${totalEnReales.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })} </span>
         </div>
+        <div class="resultEnMonedas no-pdf">
+        <span class="tituloEnChilenos"> En chilenos:  </span> <span class="numeroChileno"> ${totalEnChilenos.toLocaleString("es-CL", { style: "currency", currency: "CLP" })} </span>
+        </div>
     </div>
 </div>
 `;
@@ -456,6 +462,9 @@ async function controladorPrincipal() {
         </div>
         <div class="resultEnMonedas no-pdf">
         <span class="tituloEnReales"> En reales:  </span> <span class="numeroReal"> ${totalEnReales.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })} </span>
+        </div>
+        <div class="resultEnMonedas no-pdf">
+        <span class="tituloEnChilenos"> En chilenos:  </span> <span class="numeroChileno"> ${totalEnChilenos.toLocaleString("es-CL", { style: "currency", currency: "CLP" })} </span>
         </div>
     </div>
 </div>

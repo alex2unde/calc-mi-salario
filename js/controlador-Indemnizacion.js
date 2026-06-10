@@ -121,27 +121,20 @@ async function controladorIndemnizacion(event) {
   } = obtencionDeDatos();
 
   const diasTotales = anioDiasTotales(fechaInit, fechaFinit);
-  console.log(diasTotales + " días del ult. año");
 
   const diasTrabajado = diasTrabajadosTotales(fechaInit, fechaFinit);
-  console.log(diasTrabajado + " días trabajados");
 
   const liquidxMeses = calcularMes(fechaInit, fechaFinit);
-  console.log(liquidxMeses + " meses trabajados");
 
   const añosTrabajados = calcularAños(diasTrabajado);
-  console.log(añosTrabajados + " años computados");
 
   const liquidxAños = calcularAntiguedadIndem(añosTrabajados, mayorSueldo);
-  console.log(liquidxAños + " indemnización x antiguedad");
 
   const SACaguinaldo = calcularAguinaldoProporcional(fechaFinit, mayorSueldo);
-  console.log(SACaguinaldo + " SACaguinaldo proporcional");
 
   const diasTrabajadosUanio = diasTrabajadosUltAnio(fechaFinit);
 
   const vacaciones = vacacionesSegunAntiguedad(añosTrabajados);
-  console.log(vacaciones + " días de vacaciones");
 
   const vacacionesProp = vacacionesProporcionales(
     vacaciones,
@@ -149,54 +142,41 @@ async function controladorIndemnizacion(event) {
     diasTrabajadosUanio,
     diasTotales,
   );
-  console.log(vacacionesProp + " vacacionesProp proporcional");
 
   const SACvacaciones = vacacionesSAC(vacacionesProp);
-  console.log(SACvacaciones + " SAC vacaciones proporcional");
 
   const diasQueLeDeben = diasAdeudadosVacaciones();
-  console.log(diasQueLeDeben + " días de vacaciones adeudados");
 
   const deudaVacaciones = vacacionesAdeudadas(diasQueLeDeben, mayorSueldo);
-  console.log(deudaVacaciones + " vacaciones adeudadas");
 
   const deudaVacacionesSAC = vacacionesAdeudadasSAC(deudaVacaciones);
-  console.log(deudaVacacionesSAC + " SAC vacaciones adeudadas");
 
   const diasUltimoMes = diasDelUltimoMes(fechaFinit);
-  console.log(diasUltimoMes + " días del último mes");
 
   const diasTrabajadosUltMes = diasUltMes(fechaFinit);
-  console.log(diasTrabajadosUltMes + " días trabajados en el último mes");
 
   const valorHoraCalculado = valorHora(selectCategoria, DIVISOR_JORNALERO);
-  console.log(valorHoraCalculado + " valor hora");
 
   const valorUltimoMesCalculado = valorUltimoMes(
     diasTrabajadosUltMes,
     valorHoraCalculado,
   );
-  console.log(valorUltimoMesCalculado + " valor del último mes trabajado");
 
   const intMesDespido = IntegracionMesDespido(
     diasTrabajadosUltMes,
     valorHoraCalculado,
     diasUltimoMes,
   );
-  console.log(intMesDespido + " integración mes de despido");
 
   const intMesDespidoSAC = integracionMesDespidoSAC(intMesDespido);
-  console.log(intMesDespidoSAC + " SAC integración mes de despido");
 
   const preAvisoCalculado = preAvisoCalculo(
     diasTrabajado,
     mayorSueldo,
     añosTrabajados,
   );
-  console.log(preAvisoCalculado + " preaviso");
 
   const preavisoSAC = SACsobrePreaviso(preAvisoCalculado);
-  console.log(preavisoSAC + " SAC sobre preaviso");
 
   const totalIndemnizacionSCP = totalSinCausayCP(
     vacacionesProp,
@@ -211,7 +191,6 @@ async function controladorIndemnizacion(event) {
     deudaVacaciones,
     deudaVacacionesSAC,
   );
-  console.log(totalIndemnizacionSCP + " total indemnización");
 
   const totalIndemnizacionConCausa = totalConCausaOrenuncia(
     valorUltimoMesCalculado,
@@ -221,7 +200,6 @@ async function controladorIndemnizacion(event) {
     vacacionesProp,
     SACvacaciones,
   );
-  console.log(totalIndemnizacionConCausa + " total indemnización con causa");
 
   const dolarVenta = await cotizacionDolar();
   const totalEnDolaresSC = convertirPesosADolares(
@@ -241,6 +219,16 @@ async function controladorIndemnizacion(event) {
   const totalEnRealesCC = convertirPesosAReales(
     totalIndemnizacionConCausa,
     realVenta,
+  );
+
+  const chilenoVenta = await cotizacionChileno();
+  const totalEnChilenosSC = convertirAchilenos(
+    totalIndemnizacionSCP,
+    chilenoVenta,
+  );
+  const totalEnChilenosCC = convertirAchilenos(
+    totalIndemnizacionConCausa,
+    chilenoVenta,
   );
 
   divResultado.innerHTML = `
@@ -350,7 +338,10 @@ async function controladorIndemnizacion(event) {
         </div>
         <div class="resultEnMonedas no-pdf">
             <span class="tituloEnReales"> En reales: </span> <span class="numeroReal">${totalEnRealesSC.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
-        </div>    
+        </div>   
+        <div class="resultEnMonedas no-pdf">
+            <span class="tituloEnChilenos"> En pesos chilenos: </span> <span class="numeroChileno">${totalEnChilenosSC.toLocaleString("es-CL", { style: "currency", currency: "CLP" })}</span>
+        </div> 
     </div>
   `
         : `
@@ -364,6 +355,9 @@ async function controladorIndemnizacion(event) {
         </div>
         <div class="resultEnMonedas no-pdf">
             <span class="tituloEnReales"> En reales: </span> <span class="numeroReal">${totalEnRealesCC.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
+        </div>
+        <div class="resultEnMonedas no-pdf">
+            <span class="tituloEnChilenos"> En pesos chilenos: </span> <span class="numeroChileno">${totalEnChilenosCC.toLocaleString("es-CL", { style: "currency", currency: "CLP" })}</span>
         </div>
     </div>
     </div>

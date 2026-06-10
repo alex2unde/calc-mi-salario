@@ -6,7 +6,7 @@
   --color-botones: #ffffff;
   --cuadro-selecInput: rgba(0, 0, 0, 0.39);
   --borde-form: #888888;
-  --fondo-explica-donacion: #ff9a0d;
+  --fondo-explica-donacion: #d48618;
   --tiulo-feriado: #ffff;
   --tarjeta-feriado: #515151;
 }
@@ -242,7 +242,7 @@ body {
 .tarjeta-feriado {
   display: flex;
   flex-direction: column;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--tarjeta-feriado);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 10px;
@@ -264,7 +264,7 @@ body {
 .feriado-nombre {
   margin-top: 10px;
   font-size: 14px;
-  color: rgb(255, 255, 255);
+  color: var(--color-texto);
 }
 
 .feriado-tipo {
@@ -298,7 +298,7 @@ body {
 /*estilo del h1*/
 .h1-home {
   font-size: 70px;
-  color: rgb(255, 255, 255);
+  color: var(--color-texto);
   text-align: center;
   margin-top: 35px;
   margin-bottom: 20px;
@@ -680,11 +680,11 @@ hr {
 }
 
 #resultado hr {
-  border: none; /* Quitamos el borde feo por defecto */
-  height: 1px; /* Le damos altura */
+  border: none;
+  height: 1px;
   background-color: var(--color-texto);
-  width: 100%; /* CLAVE: Para que ocupe todo el ancho del cuadro */
-  margin: 15px 0; /* Espacio arriba y abajo para que respire el diseño */
+  width: 100%;
+  margin: 15px 0;
 }
 
 /* cuadro de resultado */
@@ -892,7 +892,6 @@ hr {
   ); /* ✅ Usa gradiente en lugar de background-color */
 
   color: #ffffff !important;
-  box-shadow: 0px 2px 30px rgba(17, 0, 255, 0.8);
   transition: all 0.3s ease; /* ✅ Transición suave */
 }
 
@@ -974,13 +973,19 @@ hr {
   text-align: center;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
+.tituloEnChilenos {
+  font-size: 20px;
+  color: var(--color-texto);
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
 
 .numeroPesos {
   font-size: 25px;
   color: rgb(0, 0, 0);
   background-color: #ffffff;
   border-radius: 10px;
-  padding: 1px;
+  padding: 3px;
   text-align: center;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
@@ -989,7 +994,7 @@ hr {
   color: rgb(255, 255, 255);
   background-color: #19b501;
   border-radius: 10px;
-  padding: 1px;
+  padding: 3px;
   text-align: center;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
@@ -998,7 +1003,16 @@ hr {
   color: rgb(0, 0, 0);
   background-color: #fff700;
   border-radius: 10px;
-  padding: 1px;
+  padding: 3px;
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.numeroChileno {
+  font-size: 20px;
+  color: rgb(255, 255, 255);
+  background-color: #ff0000;
+  border-radius: 10px;
+  padding: 3px;
   text-align: center;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
@@ -1063,18 +1077,24 @@ select::-webkit-scrollbar-thumb:hover {
 .formularioSugerencias {
   display: none;
   flex-direction: column;
-  color: rgb(141, 33, 33);
+  color: var(--color-texto);
   font-size: 20px;
   border-radius: 10px;
   border: 2px solid var(--borde-form);
   text-align: left;
-  background-color: #0000006e;
+  background-color: #ffffff6e;
   backdrop-filter: blur(12px);
   font-family: "verdana";
   box-shadow: #000000 0px 0px 10px;
   max-height: 410px;
   max-width: 480px;
   padding: 20px;
+}
+.formularioSugerencias small {
+  font-size: 20px;
+  color: var(--color-texto);
+  text-align: center;
+  background: #ffffff00;
 }
 
 .btnEnviar {

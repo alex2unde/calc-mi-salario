@@ -519,8 +519,6 @@ function convertirPesosADolares(montoEnPesos, cotizacionDolar) {
   }
 }
 
-//---------------------A reales---------------------------------
-
 async function cotizacionReal() {
   try {
     const respuesta = await fetch("https://dolarapi.com/v1/cotizaciones/brl");
@@ -536,6 +534,26 @@ async function cotizacionReal() {
 function convertirPesosAReales(montoEnPesos, cotizacionReal) {
   if (cotizacionReal) {
     return montoEnPesos / cotizacionReal;
+  } else {
+    return null;
+  }
+}
+
+async function cotizacionChileno() {
+  try {
+    const respuesta = await fetch("https://dolarapi.com/v1/cotizaciones/clp");
+    const datos = await respuesta.json();
+
+    return datos.venta;
+  } catch (error) {
+    console.error("Error al obtener la cotización del peso chileno:", error);
+    return null;
+  }
+}
+
+function convertirAchilenos(montoEnPesos, cotizacionChileno) {
+  if (cotizacionChileno) {
+    return montoEnPesos / cotizacionChileno;
   } else {
     return null;
   }
