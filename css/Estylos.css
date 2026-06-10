@@ -1,23 +1,27 @@
 :root {
   --fondo-principal: url("../assets/imagenes/mujerescocechando.jpeg");
-  --fondo-sec1: #000000;
+  --color-sec1: #000000;
   --color-texto: #ffffff;
   --fondo-formulario: #0000006e;
   --color-botones: #ffffff;
   --cuadro-selecInput: rgba(0, 0, 0, 0.39);
   --borde-form: #888888;
-  --fondo-explica-donacion: #ff9b0d6e;
+  --fondo-explica-donacion: #ff9a0d;
+  --tiulo-feriado: #ffff;
+  --tarjeta-feriado: #515151;
 }
 
 body.modo-claro {
   --fondo-principal: url("../assets/imagenes/mujeres.modoclaro.jpg");
-  --fondo-sec1: #ffffff;
+  --color-sec1: #ffffff;
   --color-texto: #000000;
   --fondo-formulario: #ffffff;
   --color-botones: #000000;
-  --fondo-explica-donacion: #ff9b0d6e;
+  --fondo-explica-donacion: #ff9a0d;
   --borde-form: #000000;
   --cuadro-selecInput: rgb(230, 230, 230);
+  --tiulo-feriado: #515151;
+  --tarjeta-feriado: rgb(184 186 134);
 }
 
 .toggleModo {
@@ -178,7 +182,7 @@ body {
 /*estilo de la primer seccion del home*/
 .sec1 {
   display: flex;
-  background-color: var(--fondo-principal);
+  background-color: var(--color-sec1);
   justify-content: flex-end;
 }
 
@@ -217,6 +221,7 @@ body {
   align-items: center;
   justify-content: center;
   margin-top: 20px;
+  padding-bottom: 20px;
 }
 
 #contenedor-feriados {
@@ -228,7 +233,7 @@ body {
 
 .titulo-feriados {
   font-size: 24px;
-  color: rgb(194, 186, 186);
+  color: var(--tiulo-feriado);
   text-align: center;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   margin-top: 10px;
@@ -304,7 +309,7 @@ body {
 /*estilo del parrafo debajo del h1*/
 .parrafoSec1 {
   font-size: 20px;
-  color: rgb(255, 255, 255);
+  color: var(--color-texto);
   text-align: center;
   margin-top: -20px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
@@ -317,8 +322,9 @@ body {
   text-align: center;
   text-decoration: none;
   padding: 15px 25px;
-  border: 2px solid rgb(255, 255, 255);
+  border: 2px solid var(--borde-form);
   border-radius: 10px;
+  box-shadow: #000000 0px 0px 10px;
   background-color: rgb(64, 117, 224);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   transition:
@@ -335,8 +341,9 @@ body {
   text-align: center;
   text-decoration: none;
   padding: 15px 25px;
-  border: 2px solid rgb(255, 255, 255);
+  border: 2px solid var(--borde-form);
   border-radius: 10px;
+  box-shadow: #000000 0px 0px 10px;
   background-color: rgb(212, 35, 35);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   transition:
@@ -645,11 +652,11 @@ hr {
 #horasEx50 {
   color: var(--color-texto);
   background-color: var(--cuadro-selecInput);
+  border-radius: 5px;
+  border: solid 1px var(--borde-form);
 
   margin-left: 10px;
   font-size: 20px;
-  border-radius: 5px;
-  border: solid 1px var(--borde-form);
   padding: 5px;
 }
 
@@ -669,6 +676,7 @@ hr {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  color: var(--color-texto);
 }
 
 #resultado hr {
@@ -1204,26 +1212,46 @@ select::-webkit-scrollbar-thumb:hover {
   }
   .sec1 {
     flex: 1;
+    background-color: var(--color-sec1);
+    display: flex;
+    flex-direction: column;
   }
 
-  /* .imgSec1 {
-    mask-image: linear-gradient(90deg, rgb(0, 0, 0) 0%, transparent);
-    margin: auto;
-  } */
+  .toggleModo {
+    font-size: 30px;
+    position: fixed;
+    top: 100px;
+    left: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  .toggleModo i {
+    color: var(--color-botones);
+    transition: color 0.3s;
+  }
 
   .imagenPrincipal {
-    .imagenPrincipal {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-width: 100%;
-      background-image: url("../assets/imagenes/bandera-argentina.png");
-      mask-image: linear-gradient(90deg, rgb(0, 0, 0) 0%, transparent);
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100%;
+    background-image: url("../assets/imagenes/bandera-argentina.png");
+    mask-image: linear-gradient(90deg, rgb(0, 0, 0) 0%, transparent);
+  }
+
+  /*estilo de la imagen de la primer seccion del home*/
+  .imgSec1 {
+    mask-image: linear-gradient(180deg, rgb(0, 0, 0) 0%, transparent);
+    max-height: 600px;
+    max-width: 100%;
   }
 
   .h1-home {
     margin-top: 0px;
+    color: var(--color-texto);
   }
 
   .info1 {
@@ -1238,7 +1266,7 @@ select::-webkit-scrollbar-thumb:hover {
   }
 
   .bodyCalculadora {
-    background-image: url("../assets/imagenes/mujerescocechando.jpeg");
+    background-image: var(--fondo-principal);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -1318,26 +1346,12 @@ select::-webkit-scrollbar-thumb:hover {
     /* border-color: #ffffff; */
   }
 
-  /*estilo de la primer seccion del home*/
-  .sec1 {
-    display: flex;
-    background-color: #000000;
-    flex-direction: column;
-  }
-
   .div2-seccion1 {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-left: 50px;
-  }
-
-  /*estilo de la imagen de la primer seccion del home*/
-  .imgSec1 {
-    mask-image: linear-gradient(180deg, rgb(0, 0, 0) 0%, transparent);
-    max-height: 600px;
-    max-width: 100%;
   }
 
   .div2-seccion1 {
@@ -1350,7 +1364,42 @@ select::-webkit-scrollbar-thumb:hover {
     align-items: center;
     justify-content: center;
     margin-top: 20px;
-    background-color: #151513;
+    background-color: var(--cuadro-selecInput);
+  }
+
+  .titulo-feriados {
+    font-size: 24px;
+    color: var(--tiulo-feriado);
+    text-align: center;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    margin-top: 10px;
+  }
+
+  .feriado-nombre {
+    margin-top: 10px;
+    font-size: 14px;
+    color: var(--color-texto);
+  }
+
+  .feriado-tipo {
+    font-size: 18px;
+    color: rgb(247, 255, 2);
+    margin-top: 5px;
+    text-align: center;
+    border-color: #000000;
+  }
+
+  .tarjeta-feriado {
+    display: flex;
+    flex-direction: column;
+    background: var(--tarjeta-feriado);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    max-width: 165px;
+    justify-content: space-between;
   }
 
   .principal {
@@ -1371,31 +1420,32 @@ select::-webkit-scrollbar-thumb:hover {
   }
 
   .items hr {
-    border: none; /* Quitamos el borde feo por defecto */
-    height: 1px; /* Le damos altura */
-    background-color: rgba(255, 255, 255, 0.2); /* Un blanco transparente */
-    width: 100%; /* CLAVE: Para que ocupe todo el ancho del cuadro */
-    margin: 15px 0; /* Espacio arriba y abajo para que respire el diseño */
+    border: none;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 100%;
+    margin: 15px 0;
   }
 
   .items {
     display: flex;
     flex-direction: column;
-    color: rgb(255, 255, 255);
-    font-size: 1.2em;
-    border-radius: 10px;
-    border: 1px solid #ffffff3f;
     text-align: center;
-    background-color: #00000078;
-    backdrop-filter: blur(15px);
-    font-family: "verdana";
     width: 95%;
-    box-shadow: #000000 0px 0px 10px;
     margin: 0;
     grid-column: 1;
     grid-row: 1;
     justify-content: space-between;
     align-items: center;
+
+    color: var(--color-texto);
+    font-size: 1.2em;
+    border-radius: 10px;
+    border: 2px solid var(--borde-form);
+    background-color: var(--fondo-formulario);
+    backdrop-filter: blur(15px);
+    font-family: "verdana";
+    box-shadow: #000000 0px 0px 10px;
   }
 
   .labelsIndem,
@@ -1403,16 +1453,17 @@ select::-webkit-scrollbar-thumb:hover {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    color: rgb(255, 255, 255);
-    font-size: 20px;
     text-align: left;
-    font-family: "verdana";
     max-height: auto;
     padding: 10px;
     padding-left: 0px;
     gap: 0px;
     flex-direction: column;
     align-items: center;
+
+    color: var(--color-texto);
+    font-size: 20px;
+    font-family: "verdana";
   }
 
   .compartirWhatsApp {
@@ -1420,45 +1471,20 @@ select::-webkit-scrollbar-thumb:hover {
     font-size: 20px;
     border-radius: 10px;
     border: 2px solid var(--borde-form);
-    background-color: #0000006e;
+    background-color: var(--fondo-formulario);
     backdrop-filter: blur(12px);
     font-family: "verdana";
     box-shadow: #000000 0px 0px 5px;
 
+    display: flex;
+    flex-direction: column;
     text-align: left;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     max-height: 410px;
     max-width: 480px;
     padding: 20px;
     position: relative;
-  }
-
-  #horasEx50 {
-    color: var(--color-texto);
-    margin-left: 10px;
-    padding-top: 10px;
-    font-size: 20px;
-    border-radius: 5px;
-    border: none;
-    padding: 5px;
-    background-color: #ffffff4f;
-    max-width: 50px;
-  }
-
-  #horasEx100 {
-    color: var(--color-texto);
-    margin-left: 10px;
-    /* width: 150px; */
-    font-size: 20px;
-    border-radius: 5px;
-    border: none;
-    padding: 5px;
-    background-color: #ffffff4f;
-    max-width: 50px;
-    margin-left: 0px;
-    margin-top: 5px;
-    margin-bottom: 10px;
   }
 
   .tipoDeOperario {
@@ -1534,7 +1560,6 @@ select::-webkit-scrollbar-thumb:hover {
     width: 300px;
     margin: 0;
     border-radius: 12px;
-    border: 1px solid #ffffff3f;
     box-shadow: #000000 0px 0px 10px;
     background-color: var(--fondo-formulario);
     backdrop-filter: blur(15px);
@@ -1591,24 +1616,16 @@ select::-webkit-scrollbar-thumb:hover {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     box-shadow: 10px 8px 15px rgba(0, 0, 0, 0.3);
   }
-  .compartirWhatsApp {
-    display: flex;
-    color: rgb(255, 255, 255);
-    font-size: 20px;
-    border-radius: 10px;
-    border: 0.7px solid #ffffff60;
-    text-align: left;
+
+  .comparWhas {
+    text-decoration: none;
+    list-style: none;
+    color: var(--color-texto);
+
+    position: relative;
+    display: inline-block;
     align-items: center;
-    justify-content: space-between;
-    background-color: #0000006e;
-    backdrop-filter: blur(12px);
-    font-family: "verdana";
-    box-shadow: #000000 0px 0px 10px;
-    max-height: 410px;
-    max-width: 480px;
-    padding: 20px;
-    /* position: relative; */
-    flex-direction: column;
+    justify-content: center;
   }
 
   .compartir_y_btnPDF {
@@ -1645,7 +1662,7 @@ select::-webkit-scrollbar-thumb:hover {
     font-size: 20px;
     border-radius: 10px;
     border: 2px solid var(--borde-form);
-    background-color: var(--fondo-explica-donacion);
+    background: var(--fondo-explica-donacion);
     backdrop-filter: blur(12px);
     font-family: "verdana";
     box-shadow: #000000 0px 0px 10px;
@@ -1655,9 +1672,27 @@ select::-webkit-scrollbar-thumb:hover {
     margin: 3px;
     font: lighter 20px "Franklin Gothic Medium";
     font-size: 14px;
-    color: #ffffff;
+    color: var(--color-texto);
     text-align: center;
-    background: #ffffff00;
+    background: var(--fondo-explica-donacion);
+  }
+
+  .div-sugerencias {
+    bottom: 165px;
+    right: 20px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 20px;
+    position: fixed;
+    align-items: center;
+    flex-direction: row-reverse;
+  }
+  .div-sugerencias svg {
+    width: 50px;
+    height: 45px;
+    color: var(--color-texto);
   }
 
   .footer {
