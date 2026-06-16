@@ -1,3 +1,57 @@
+// PWA -------------------------------------------------------------------------------------
+// Verificamos si el navegador del usuario soporta Service Workers
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("./sw.js")
+      .then((registration) => {
+        console.log(
+          "¡Service Worker registrado con éxito!",
+          registration.scope,
+        );
+      })
+      .catch((error) => {
+        console.log("Falló el registro del Service Worker:", error);
+      });
+  });
+}
+
+let eventoInstalacion;
+const botonInstalar = document.getElementById("btnInstalarApp");
+
+// 1. Atrapamos el evento del navegador
+window.addEventListener("beforeinstallprompt", (e) => {
+  // Frenamos el mini-cartel automático del navegador
+  e.preventDefault();
+
+  // Guardamos el evento en nuestra variable para usarlo después
+  eventoInstalacion = e;
+
+  // ¡Mostramos tu botón en la página!
+  botonInstalar.style.display = "block";
+});
+
+// 2. Le damos vida a tu botón
+botonInstalar.addEventListener("click", async () => {
+  if (eventoInstalacion !== null) {
+    // Cuando hacen clic, disparamos el cartel oficial de instalación del celular
+    eventoInstalacion.prompt();
+
+    // Esperamos a ver qué elige el usuario (Aceptar o Cancelar)
+    const { outcome } = await eventoInstalacion.userChoice;
+
+    if (outcome === "accepted") {
+      console.log("¡El usuario instaló la aplicación!");
+      // Como ya la instaló, volvemos a ocultar el botón
+      botonInstalar.style.display = "none";
+    }
+
+    // Limpiamos la variable
+    eventoInstalacion = null;
+  }
+});
+
+// -------------------------------------------------------------------------------------------------
 //modo claro/oscuro.
 const btnModo = document.getElementById("toggleModo");
 // Buscamos específicamente la etiqueta <i> que está adentro del botón
@@ -18,6 +72,8 @@ btnModo.addEventListener("click", () => {
     iconoModo.classList.add("fa-sun");
   }
 });
+
+// --------------------------------------------------------------------------------------------------
 
 function obtenerFeriados() {
   const url = "https://api.argentinadatos.com/v1/feriados/2026";
@@ -70,5 +126,4 @@ function renderizarFeriados(listaFeriados) {
   });
 }
 
-// Ejecutamos la función apenas se carga la landing page
 window.onload = obtenerFeriados;

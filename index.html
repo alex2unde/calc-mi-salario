@@ -11,6 +11,8 @@
     />
     <title>Calcular mi salario / Inicio</title>
     <link rel="stylesheet" href="css/Estylos.css" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#1a1a1a" />
   </head>
 
   <body class="bodyHome">
@@ -76,7 +78,11 @@
       </div>
 
       <div class="div2-seccion1">
-        <h1 class="h1-home">Calculadora de salario</h1>
+        <h1 class="h1-home">
+          <span class="h1-calculadora">Calculadora</span> de
+          <span class="h1-salario">salario</span> e
+          <span class="h1-indemnizacion">indemnización</span>
+        </h1>
         <br />
 
         <p class="parrafoSec1">
@@ -98,6 +104,14 @@
         <a class="irAindemnizacion" href="Indemnizacion.html"
           >Calcular indemnización <i class="fa-solid fa-circle-right"></i
         ></a>
+
+        <button
+          id="btnInstalarApp"
+          style="display: none"
+          class="tu-clase-de-botones"
+        >
+          📱 Instalar Calculadora en el Celular
+        </button>
       </div>
 
       <div class="div-feriados">

@@ -1,0 +1,21 @@
+{
+  "name": "Sueldo de Bodega - Calculadora",
+  "short_name": "Sueldos Bodega",
+  "description": "Calculadora de sueldos e indemnizaciones para trabajadores vitivinícolas.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#1a1a1a",
+  "icons": [
+    {
+      "src": "./assets/imagenes/tu-icono-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/imagenes/tu-icono-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

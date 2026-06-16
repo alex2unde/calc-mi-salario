@@ -172,11 +172,20 @@ async function controladorPrincipal() {
 
   const secundarioCompleto = tituloSiNo(tieneTituloSi, valorTitulo);
 
-  const precioHora = valorHora(selectCategoria, DIVISOR_JORNALERO);
+  const antiguedadCalculo = calcularAntiguedad(selectCategoria);
+  const antiguedad = antiguedadCalculo * selectAntiguedad;
 
-  const horasAl50 = horasExtra50(precioHora);
+  const precioHora = valorHora(selectCategoria, DIVISOR_JORNALERO);
+  //valor de la hora con antiguedad agregada por recibo de balbo.
+  const precioHoraConItems = valorHoraConItemsPext(
+    selectCategoria,
+    DIVISOR_JORNALERO,
+    antiguedad,
+  );
+
+  const horasAl50 = horasExtra50(precioHoraConItems);
   const valorHoraAl50 = horasAl50 * inpHoras50;
-  const horasAl100 = horasExtra100(precioHora);
+  const horasAl100 = horasExtra100(precioHoraConItems);
   const valorHoraAl100 = horasAl100 * inpHoras100;
 
   const valorDiaSuspension = valorDiaEfectivo(selectCategoria);
@@ -186,9 +195,6 @@ async function controladorPrincipal() {
   );
 
   const noRemunerativo = asignacionNoRem(nombreCategoria);
-
-  const antiguedadCalculo = calcularAntiguedad(selectCategoria);
-  const antiguedad = antiguedadCalculo * selectAntiguedad;
 
   const presentismoPerfecto = calculoPresPerfecto(basicoComun);
   const presentismoCompleto = calculoPresCompleto(basicoComun);

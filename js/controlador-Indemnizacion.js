@@ -164,8 +164,8 @@ async function controladorIndemnizacion(event) {
 
   const intMesDespido = IntegracionMesDespido(
     diasTrabajadosUltMes,
-    valorHoraCalculado,
-    diasUltimoMes,
+    mayorSueldo,
+    30,
   );
 
   const intMesDespidoSAC = integracionMesDespidoSAC(intMesDespido);

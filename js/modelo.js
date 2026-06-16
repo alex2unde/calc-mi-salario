@@ -7,7 +7,7 @@ const ASIGNACION_LARGA_DISTANCIA = 221412;
 const ASIGNACION_FOGUISTA = 228671;
 const ASIGNACION_ENCARGADO = 235_931;
 
-const REFRIGERIO = 185135;
+const REFRIGERIO = 188135;
 const sepelio = 14630;
 
 const DIVISOR_JORNALERO = 200;
@@ -74,12 +74,15 @@ function valorHora(categoria, divisorJornalero) {
   return categoria / divisorJornalero;
 }
 
-function horasExtra50(valorHora) {
-  return valorHora * 1.5;
+function valorHoraConItemsPext(categoria, divisorJornalero, antiguedad) {
+  return (categoria + antiguedad) / divisorJornalero;
+}
+function horasExtra50(valorHoraCitems) {
+  return valorHoraCitems * 1.5;
 }
 
-function horasExtra100(valorHora) {
-  return valorHora * 2;
+function horasExtra100(valorHoraCitems) {
+  return valorHoraCitems * 2;
 }
 
 function valorDiaEfectivo(basico) {
@@ -328,7 +331,7 @@ function diasTrabajadosUltAnio(fechaFin) {
 
   const milisegundosPorDia = 1000 * 60 * 60 * 24;
   const milisegundosTrabajados = fechaEgreso - fechaInicioAnio;
-  const diasTrabajados = milisegundosTrabajados / milisegundosPorDia;
+  const diasTrabajados = milisegundosTrabajados / milisegundosPorDia + 1;
 
   return diasTrabajados;
 }
@@ -428,13 +431,13 @@ function SACsobrePreaviso(mayorSueldo) {
   return mayorSueldo / 12;
 }
 
-function IntegracionMesDespido(diasUltMes, valorDeHora, diasDelMes) {
+function IntegracionMesDespido(diasUltMes, mayorSueldo, diasDelMes = 30) {
   const diasNoTrabajados = diasDelMes - diasUltMes;
-  const valorDia = diasNoTrabajados * 8;
 
-  return valorDia * valorDeHora;
+  const valorDiaNormal = mayorSueldo / diasDelMes;
+
+  return diasNoTrabajados * valorDiaNormal;
 }
-
 function integracionMesDespidoSAC(integracionMesDespido) {
   return integracionMesDespido / 12;
 }
