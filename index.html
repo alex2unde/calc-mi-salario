@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <meta http-equiv="refresh" content="0; url=https://sueldobodega.com.ar" /> -->
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link
       rel="stylesheet"
@@ -13,6 +12,20 @@
     <link rel="stylesheet" href="css/Estylos.css" />
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#1a1a1a" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+      onload="renderMathInElement(document.body)"
+    ></script>
   </head>
 
   <body class="bodyHome">
@@ -64,31 +77,23 @@
       </nav>
     </header>
 
+    <!-- boton modo claro/oscuro -->
     <button type="button" id="toggleModo" class="toggleModo">
       <i class="fa-solid fa-sun"></i>
     </button>
 
+    <!-- Titulo h1 seccion bienvenida -->
     <main class="sec1">
-      <div class="imagenPrincipal">
-        <!-- <img
-          class="imgSec1"
-          src="assets/imagenes/bandera-argentina.png"
-          alt="Calcular mi salario"
-        /> -->
-      </div>
+      <!-- <div class="imagenPrincipal"></div> -->
 
       <div class="div2-seccion1">
-        <h1 class="h1-home">
-          <span class="h1-calculadora">Calculadora</span> de
-          <span class="h1-salario">salario</span> e
-          <span class="h1-indemnizacion">indemnización</span>
-        </h1>
+        <h1 class="h1-home">Calculadora de salario e indemnización</h1>
         <br />
 
         <p class="parrafoSec1">
-          Calculá tu sueldo neto según la escala de
-          <strong>Bodega C.C.T. 85/89</strong> y conocé estimativamente lo que
-          te corresponde por <strong>indemnización</strong>.
+          Calculá tu sueldo neto según la escala de<br />
+          <strong>Bodega C.C.T. 85/89</strong> y conocé estimativamente <br />
+          lo que te corresponde por <strong>indemnización</strong>.
         </p>
 
         <!-- <a class="botonDescargar" href="assets\archivos\Descargar-CalculadoraApp.apk" 
@@ -96,15 +101,15 @@
     <p class="soloAndroid">Funciona <strong>SIN INTERNET</strong>, Solo para android. Si aparece una advertencia de seguriadad, 
       selecciona "Descargar de todos 
     modos." La instalacion es segura.</p> -->
+        <div class="div-btns-calculadoras">
+          <a class="irAcalcular" href="calculadora.html"
+            >Calculadora de salario <i class="fa-solid fa-circle-right"></i
+          ></a>
 
-        <a class="irAcalcular" href="calculadora.html"
-          >Calculadora de salario <i class="fa-solid fa-circle-right"></i
-        ></a>
-
-        <a class="irAindemnizacion" href="Indemnizacion.html"
-          >Calcular indemnización <i class="fa-solid fa-circle-right"></i
-        ></a>
-
+          <a class="irAindemnizacion" href="Indemnizacion.html"
+            >Calcular indemnización <i class="fa-solid fa-circle-right"></i
+          ></a>
+        </div>
         <button
           id="btnInstalarApp"
           style="display: none"
@@ -120,17 +125,397 @@
       </div>
     </main>
 
+    <section class="seccion-informativa-legal">
+      <h2 class="h2-informacion">
+        Transparencia en tus Cálculos: Fórmulas y Leyes Aplicadas
+      </h2>
+      <div class="div-logoPrinc_miniExplicacion">
+        <svg
+          class="icono-h2"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="icono-h2"
+        >
+          <path d="M12 3v15" />
+
+          <path d="M8 21h8" />
+          <path d="M12 18l-2 3" />
+          <path d="M12 18l2 3" />
+
+          <path d="M3 7h18" />
+
+          <path d="M6 7l-3 6h6l-3-6z" />
+          <path d="M3 13c0 2 1.5 3 3 3s3-1 3-3" />
+
+          <path d="M18 7l-3 6h6l-3-6z" />
+          <path d="M15 13c0 2 1.5 3 3 3s3-1 3-3" />
+        </svg>
+
+        <p class="introduccion-legal">
+          Fórmulas y porcentajes validados según la legislación laboral
+          argentina y el Convenio Colectivo de Trabajo de Bodegas (C.C.T.
+          85/89).
+        </p>
+      </div>
+
+      <div class="div-acordeones-padre">
+        <!-- contenido explicativo del funcionamiento de la calc. de salario. -->
+        <div class="div-calculadora">
+          <div class="tarjeta-titulo-calculadora">
+            <h3>Calculadora de salario</h3>
+            <svg
+              class="icono-h3-salario"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="4" y="2" width="16" height="20" rx="2" />
+
+              <line x1="8" y1="6" x2="16" y2="6" />
+
+              <line x1="8" y1="11" x2="8" y2="11" />
+              <line x1="12" y1="11" x2="12" y2="11" />
+              <line x1="16" y1="11" x2="16" y2="11" />
+
+              <line x1="8" y1="15" x2="8" y2="15" />
+              <line x1="12" y1="15" x2="12" y2="15" />
+
+              <line x1="16" y1="14" x2="16" y2="14" />
+              <line x1="16" y1="17" x2="16" y2="17" />
+            </svg>
+          </div>
+
+          <details class="details-calculadora">
+            <summary>Sueldo bruto <span>+</span></summary>
+            <div class="tarjeta-legal-sueldo">
+              <ul>
+                <li>
+                  <strong>Sueldo Básico:</strong> Determinado según la categoría
+                  del convenio (ej: Op. Común, Op. Especializado..). Para el
+                  personal mensualizado es un numero fijo y para el jornalero se
+                  calcula multiplicando las horas reales trabajadas por el valor
+                  hora vigente.
+                </li>
+                <li>
+                  <strong>Antiguedad: </strong>
+                </li>
+
+                <li>
+                  1 a 5 años de antigüedad: Se adiciona un 1% por cada año de
+                  servicio.
+                </li>
+                <li>
+                  De 6 a 10 años de antigüedad: El porcentaje se eleva al 1.25%
+                  por cada año.
+                </li>
+                <li>
+                  De 11 a 15 años de antigüedad: El porcentaje se eleva al 1.5%
+                  por cada año.
+                </li>
+                <li>
+                  De 16 a 20 años de antigüedad: El porcentaje se eleva al 1.75%
+                  por cada año.
+                </li>
+                <li>
+                  Más de 20 años de antigüedad: Se asigna el tope máximo del 2%
+                  por cada año de servicio.
+                </li>
+                <li>
+                  <strong>Horas Extras (50% y 100%):</strong> En el panel de
+                  carga una vez ingresada la cantidad de horas extras acumuladas
+                  en el mes, la calculadora no usa solo el básico: suma tu
+                  sueldo Básico + el adicional por antigüedad que hayas
+                  seleccionado en el menú desplegable, y a ese total lo divide
+                  por las horas mensuales correspondientes. Una vez obtenido ese
+                  valor hora real, las unidades ingresadas en el cuadro de 50% /
+                  100%se multiplican por el valor base más la mitad.
+                </li>
+                <li>
+                  <strong>Presentismo / Asistencia:</strong> Adicional
+                  obligatorio del C.C.T. que exige asistencia perfecta. Se
+                  pierde de forma automática al registrar faltas o días de
+                  suspensión.
+                </li>
+                <li>
+                  <strong> No Registrados ("Plata en negro"):</strong> Esta
+                  variable de entrada se comporta como un sumando directo al
+                  neto final. Está diseñada para contemplar cualquier tipo de
+                  plus de mano de obra, bonificación extraordinaria, premio
+                  fuera de convenio o asignación complementaria que no forme
+                  parte de la estructura imponible declarada en el recibo.
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="details-calculadora">
+            <summary>Descuentos <span>+</span></summary>
+            <div class="tarjeta-legal-descuentos">
+              <ul>
+                <li>
+                  <strong>Jubilación (11%):</strong> Retención destinada al
+                  fondo previsional general (ANSES).
+                </li>
+                <li>
+                  <strong>Ley 19.032 (3%):</strong> Aporte destinado al
+                  financiamiento del PAMI.
+                </li>
+                <li>
+                  <strong>Obra Social (3%):</strong> Destinado a la cobertura de
+                  salud.
+                </li>
+                <li>
+                  <strong>Sindicato (2% a 3%):</strong> Cuota sindical
+                  correspondiente a la afiliación gremial.
+                </li>
+                <li>
+                  <strong>Anticipos y Deducciones de Haberes:</strong> Este
+                  parámetro opera como un valor negativo directo sobre el saldo
+                  a percibir. Su función es registrar los descuentos por
+                  adelantos de sueldo otorgados a mitad de mes, así como también
+                  el valor del vino retirado por el operario.
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="details-calculadora">
+            <summary>
+              Fuentes de Datos y Actualizaciones Salariales <span>+</span>
+            </summary>
+            <div class="tarjeta-legal-fuentes">
+              <ul>
+                <li>
+                  Los parámetros salariales, escalas vigentes y acuerdos
+                  paritarios que nutren el motor de cálculo se indexan de manera
+                  oficial tomando como fuente directa al Sindicato de Obreros y
+                  Empleados Vitivinícolas y Afines (SOEVA - Filial Rivadavia). A
+                  través de su plataforma: <br />
+                  <a
+                    class="link-fuente-legal"
+                    href="https://soevarivadavia.org.ar/nueva/?page_id=2463#"
+                    >soevarivadavia.org.ar →</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </details>
+        </div>
+
+        <!-- contenido explicativo del funcionamiento de la calc. de indemnizacion. -->
+        <div class="div-indemnizacion">
+          <div class="tarjeta-titulo-indemnizacion">
+            <h3>Calculadora de indemnización</h3>
+            <svg
+              class="icono-h3-indemnizacion"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <!-- Documento (Contrato/Recibo) con esquina doblada -->
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h5" />
+              <polyline points="14 2 14 8 20 8" />
+              <path d="M20 13V8" />
+
+              <!-- Líneas de texto abstractas en el documento -->
+              <line x1="8" y1="13" x2="12" y2="13" />
+              <line x1="8" y1="17" x2="10" y2="17" />
+
+              <!-- Moneda (Indemnización/Pago) superpuesta en la esquina inferior -->
+              <circle cx="17" cy="17" r="5" />
+
+              <!-- Símbolo de valor ($) perfectamente centrado dentro de la moneda -->
+              <path d="M17 14.5v5" />
+              <path
+                d="M18 16a1 1 0 0 0-1-1h-1a1 1 0 0 0 0 2h2a1 1 0 0 1 0 2h-1a1 1 0 0 1-1-1"
+              />
+            </svg>
+          </div>
+
+          <details class="details-indeminzacion">
+            <summary>
+              Base Indemnizatoria Tarifada (Antigüedad): <span>+</span>
+            </summary>
+            <div class="tarjeta-legal-indemnizacion">
+              <ul>
+                El motor aplica el
+                <strong>artículo 245 de la LCT</strong
+                >, computando un (1) mes de sueldo por cada año de servicio o
+                fracción mayor a tres (3) meses.
+                <br /><br />
+
+                <li>
+                  <strong>Cómputo de Fracción Temporal:</strong>
+
+                  <div class="ecuacion-contenedor">
+                    $$ \text{Si Meses Restantes} > 3 \implies \text{Años
+                    Computados} = \text{Años Completos} + 1 $$
+                  </div>
+                  <div class="ecuacion-contenedor">
+                    $$ \text{Si Meses Restantes} \le 3 \implies \text{Años
+                    Computados} = \text{Años Completos} $$
+                  </div>
+                </li>
+
+                <li>
+                  <strong>Cálculo Base Antigüedad:</strong>
+                  <div class="ecuacion-contenedor">
+                    $$ \text{Indemnización Art. 245} = \text{Mejor Remuneración}
+                    \times \text{Años Computados} $$
+                  </div>
+                </li>
+                <br />
+                <li>
+                  <strong>Criterio de Auditoría:</strong> El dividendo se
+                  parametriza utilizando la mejor remuneración mensual, normal y
+                  habitual devengada durante el último año de servicios o tiempo
+                  de prestación.
+                </li>
+                <li>
+                  <strong
+                    >El Sueldo Anual Complementario (SAC) proporcional:
+                  </strong>
+                  Evalúa el tiempo trabajado de manera efectiva dentro del
+                  semestre del despido.
+                  <div class="ecuacion-contenedor">
+                    $$ \text{Aguinaldo Proporcional} = \frac{\text{Mayor Sueldo
+                    Mensual}}{2} \times \left( \frac{\text{Días Trabajados en el
+                    Semestre}}{\text{Días Totales del Semestre (181)}} \right)
+                    $$
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="details-indeminzacion">
+            <summary>
+              Estructura de Conceptos Proporcionales y Vacacionales:<span
+                >+</span
+              >
+            </summary>
+            <div class="tarjeta-legal-indemnizacion">
+              <ul>
+                <li>
+                  El algoritmo automatiza el cálculo de los días trabajados en
+                  el mes de la extinción, el aguinaldo acumulado a la fecha de
+                  egreso y las vacaciones no gozadas aplicando de manera
+                  estricta el divisor legal de 25 días exigido por el Artículo
+                  155 de la LCT.
+                  <br />
+
+                  <strong>Vacaciones Proporcionales (Base 25):</strong>
+                  <p class="ecuacion-contenedor">
+                    $$\text{Vac. Proporcionales} = \frac{\text{Mejor
+                    Remuneración}}{25} \times \left( \frac{\text{Días Trabajados
+                    en el Año}}{\text{Días Totales del Año}} \times
+                    \text{Vacaciones correspondientes} \right)$$
+                  </p>
+                  <strong> Incidencia de SAC sobre Vacaciones: </strong>
+
+                  <p>
+                    $$\text{SAC s/ Vacaciones} = \frac{\text{Monto Vacaciones
+                    Adeudadas o Proporcionales}}{12}$$
+                  </p>
+                </li>
+                <li>
+                  <strong>Vacaciones Adeudadas:</strong>
+                  <div class="ecuacion-contenedor">
+                    $$ \text{Vacaciones Adeudadas} = \frac{\text{Mejor
+                    Remuneración}}{25} \times \text{Días de Licencia según
+                    Antigüedad (21)} $$
+
+                    <strong>SAC sobre Vacaciones Adeudadas</strong>
+                    <div class="ecuacion-contenedor">
+                      $$ \text{SAC Vacaciones Adeudadas} =
+                      \frac{\text{Vacaciones Adeudadas}}{12} $$
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="details-indeminzacion">
+            <summary>
+              Indemnización por Omisión de Preaviso<span>+</span>
+            </summary>
+            <div class="tarjeta-legal-indemnizacion">
+              <ul>
+                <li>
+                  <strong>Cálculo de Indemnización por Preaviso Omiso:</strong>
+                  <div class="ecuacion-contenedor">
+                    $$ \text{Indemnización por Preaviso} = \text{Mejor
+                    Remuneración} \times \text{Meses de Preaviso según Ley (2)}
+                    $$
+                  </div>
+                </li>
+                <li>
+                  <strong>SAC sobre Preaviso Omiso:</strong>El monto del
+                  preaviso omitido también genera el derecho a percibir su
+                  doceava parte de aguinaldo correspondiente:
+                  <div class="ecuacion-contenedor">
+                    $$ \text{SAC sobre Preaviso} = \frac{\text{Indemnización por
+                    Preaviso}}{12} $$
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="details-indeminzacion">
+            <summary>
+              Integración del Mes de Despido y Preaviso Omiso: <span>+</span>
+            </summary>
+            <ul>
+              <li>
+                Cuando la fecha de egreso no coincide con el último día del mes,
+                el sistema determina los días faltantes para la conclusión del
+                período. Asimismo, si se parametriza la ausencia de preaviso, el
+                motor calcula la indemnización sustitutiva de uno o dos meses
+                según la antigüedad del dependiente, adicionando el SAC
+                correspondiente ($1/12$) de forma automática sobre ambos
+                conceptos.
+              </li>
+              <li>
+                <strong>SAC sobre Integración del Mes de Despido:</strong> s
+                días integrados deben computar su parte proporcional de
+                aguinaldo dividiendo el total por 12:
+                <div class="ecuacion-contenedor">
+                  $$ \text{SAC Integración Mes de Despido} =
+                  \frac{\text{Integración Mes de Despido}}{12} $$
+                </div>
+              </li>
+            </ul>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <footer class="footer">
       <img
         class="logoFooter"
         src="assets/imagenes/LOGO-BLANCO-Y-NEGRO (1).jpg"
-        alt="Calcular mi salario"
+        alt="Logo de Sueldo Bodega"
       />
 
       <br />
 
       <p class="footerText">
-        © 2026 Calcular mi salario — Desarrollado por Alexis Cortez. Todos los
+        © 2026 Sueldo bodega — Desarrollado por Alexis Cortez. Todos los
         derechos reservados.
       </p>
 
