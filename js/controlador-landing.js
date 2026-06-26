@@ -1,3 +1,11 @@
+//boton del menu responsive-----------------------------------------------------------------
+const botonMenu = document.getElementById("menu");
+const navDesplega = document.getElementById("nav__links");
+
+botonMenu.addEventListener("click", () => {
+  navDesplega.classList.toggle("active");
+});
+
 // PWA -------------------------------------------------------------------------------------
 // Verificamos si el navegador del usuario soporta Service Workers
 if ("serviceWorker" in navigator) {

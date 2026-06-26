@@ -1,3 +1,11 @@
+//boton del menu responsive-----------------------------------------------------------------
+const botonMenu = document.getElementById("menu");
+const navDesplega = document.getElementById("nav__links");
+
+botonMenu.addEventListener("click", () => {
+  navDesplega.classList.toggle("active");
+});
+
 //modo claro/oscuro.
 const btnModo = document.getElementById("toggleModo");
 // Buscamos específicamente la etiqueta <i> que está adentro del botón

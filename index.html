@@ -38,20 +38,21 @@
       /></a>
 
       <nav class="nav">
-        <ul class="nav__links">
-          <li><a href="calculadora.html">Calculadora</a></li>
+        <button class="btn-menu" id="menu">
+          <span>Menú</span>
+        </button>
+
+        <ul class="nav__links" id="nav__links">
+          <li class="gmail">
+            <a href="#">Calculadoras</a>
+            <ul class="navContacto">
+              <li><a href="calculadora.html">De salario</a></li>
+              <li><a href="Indemnizacion.html">De indemnizacion</a></li>
+            </ul>
+          </li>
 
           <li class="infoIndex">
-            <a href="#">Info.</a>
-            <ul class="info">
-              <li>
-                <a href="#info"
-                  >Esta calculadora esa basada en la legislación laboral vigente
-                  y la escala salarial de bodega C.C.T. 85/89 - Enero - Febrero
-                  de 2026.
-                </a>
-              </li>
-            </ul>
+            <a href="#informacion"> Informacion </a>
           </li>
 
           <!-- <li class="rubros"><a href="#">Rubro</a>
@@ -70,6 +71,17 @@
                   target="_blank"
                   >Correo via Gmail</a
                 >
+              </li>
+              <li>
+                <a
+                  href="https://www.instagram.com/sueldobodega"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="instagram-link"
+                  aria-label="Seguinos en Instagram"
+                >
+                  Instagram
+                </a>
               </li>
             </ul>
           </li>
@@ -125,7 +137,7 @@
       </div>
     </main>
 
-    <section class="seccion-informativa-legal">
+    <section class="seccion-informativa-legal" id="informacion">
       <h2 class="h2-informacion">
         Transparencia en tus Cálculos: Fórmulas y Leyes Aplicadas
       </h2>
@@ -259,7 +271,7 @@
 
           <details class="details-calculadora">
             <summary>Descuentos <span>+</span></summary>
-            <div class="tarjeta-legal-descuentos">
+            <div class="tarjeta-legal-sueldo">
               <ul>
                 <li>
                   <strong>Jubilación (11%):</strong> Retención destinada al
@@ -292,7 +304,7 @@
             <summary>
               Fuentes de Datos y Actualizaciones Salariales <span>+</span>
             </summary>
-            <div class="tarjeta-legal-fuentes">
+            <div class="tarjeta-legal-sueldo">
               <ul>
                 <li>
                   Los parámetros salariales, escalas vigentes y acuerdos
@@ -349,7 +361,7 @@
             <summary>
               Base Indemnizatoria Tarifada (Antigüedad): <span>+</span>
             </summary>
-            <div class="tarjeta-legal-indemnizacion">
+            <div class="tarjeta-legal-sueldo">
               <ul>
                 El motor aplica el
                 <strong>artículo 245 de la LCT</strong
@@ -407,7 +419,7 @@
                 >+</span
               >
             </summary>
-            <div class="tarjeta-legal-indemnizacion">
+            <div class="tarjeta-legal-sueldo">
               <ul>
                 <li>
                   El algoritmo automatiza el cálculo de los días trabajados en
@@ -453,7 +465,7 @@
             <summary>
               Indemnización por Omisión de Preaviso<span>+</span>
             </summary>
-            <div class="tarjeta-legal-indemnizacion">
+            <div class="tarjeta-legal-sueldo">
               <ul>
                 <li>
                   <strong>Cálculo de Indemnización por Preaviso Omiso:</strong>
@@ -480,26 +492,28 @@
             <summary>
               Integración del Mes de Despido y Preaviso Omiso: <span>+</span>
             </summary>
-            <ul>
-              <li>
-                Cuando la fecha de egreso no coincide con el último día del mes,
-                el sistema determina los días faltantes para la conclusión del
-                período. Asimismo, si se parametriza la ausencia de preaviso, el
-                motor calcula la indemnización sustitutiva de uno o dos meses
-                según la antigüedad del dependiente, adicionando el SAC
-                correspondiente ($1/12$) de forma automática sobre ambos
-                conceptos.
-              </li>
-              <li>
-                <strong>SAC sobre Integración del Mes de Despido:</strong> s
-                días integrados deben computar su parte proporcional de
-                aguinaldo dividiendo el total por 12:
-                <div class="ecuacion-contenedor">
-                  $$ \text{SAC Integración Mes de Despido} =
-                  \frac{\text{Integración Mes de Despido}}{12} $$
-                </div>
-              </li>
-            </ul>
+            <div class="tarjeta-legal-sueldo">
+              <ul>
+                <li>
+                  Cuando la fecha de egreso no coincide con el último día del
+                  mes, el sistema determina los días faltantes para la
+                  conclusión del período. Asimismo, si se parametriza la
+                  ausencia de preaviso, el motor calcula la indemnización
+                  sustitutiva de uno o dos meses según la antigüedad del
+                  dependiente, adicionando el SAC correspondiente ($1/12$) de
+                  forma automática sobre ambos conceptos.
+                </li>
+                <li>
+                  <strong>SAC sobre Integración del Mes de Despido:</strong> s
+                  días integrados deben computar su parte proporcional de
+                  aguinaldo dividiendo el total por 12:
+                  <div class="ecuacion-contenedor">
+                    $$ \text{SAC Integración Mes de Despido} =
+                    \frac{\text{Integración Mes de Despido}}{12} $$
+                  </div>
+                </li>
+              </ul>
+            </div>
           </details>
         </div>
       </div>
@@ -519,40 +533,68 @@
         derechos reservados.
       </p>
 
-      <a
-        href="https://mail.google.com/mail/?view=cm&fs=1&to=alexczz89@gmail.com&su=Consulta 
-sobre calculadora de salarios&body=Hola Alexis%0D%0A%0D%0A"
-        target="_blank"
-      >
-        <svg class="svgGmail" viewBox="0 49.4 512 399.42">
-          <g fill="none" fill-rule="evenodd">
-            <g fill-rule="nonzero">
+      <div class="div-iconos-footer">
+        <a
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=alexczz89@gmail.com&su=Consulta sobre calculadora de salarios&body=Hola Alexis%0D%0A%0D%0A"
+          target="_blank"
+        >
+          <svg class="svgGmail" viewBox="0 49.4 512 399.42">
+            <g fill="none" fill-rule="evenodd">
+              <g fill-rule="nonzero">
+                <path
+                  fill="currentColor"
+                  d="M34.91 448.818h81.454V251L0 163.727V413.91c0 19.287 15.622 34.91 34.91 34.91z"
+                />
+                <path
+                  fill="currentColor"
+                  d="M395.636 448.818h81.455c19.287 0 34.909-15.622 34.909-34.909V163.727L395.636 251z"
+                />
+                <path
+                  fill="currentColor"
+                  d="M395.636 99.727V251L512 163.727v-46.545c0-43.142-49.25-67.782-83.782-41.891z"
+                />
+              </g>
               <path
-                fill="#4285f4"
-                d="M34.91 448.818h81.454V251L0 163.727V413.91c0 19.287 15.622 34.91 34.91 34.91z"
+                fill="currentColor"
+                opacity="0.8"
+                d="M116.364 251V99.727L256 204.455 395.636 99.727V251L256 355.727z"
               />
               <path
-                fill="#34a853"
-                d="M395.636 448.818h81.455c19.287 0 34.909-15.622 34.909-34.909V163.727L395.636 251z"
-              />
-              <path
-                fill="#fbbc04"
-                d="M395.636 99.727V251L512 163.727v-46.545c0-43.142-49.25-67.782-83.782-41.891z"
+                fill="currentColor"
+                opacity="0.9"
+                fill-rule="nonzero"
+                d="M0 117.182v46.545L116.364 251V99.727L83.782 75.291C49.25 49.4 0 74.04 0 117.18z"
               />
             </g>
-            <path
-              fill="#ea4335"
-              d="M116.364 251V99.727L256 204.455 395.636 99.727V251L256 355.727z"
-            />
-            <path
-              fill="#c5221f"
-              fill-rule="nonzero"
-              d="M0 117.182v46.545L116.364 251V99.727L83.782 75.291C49.25 49.4 0 74.04 0 117.18z"
-            />
-          </g></svg
-      ></a>
+          </svg>
+        </a>
 
-      <!-- <a href="">
+        <a
+          href="https://www.instagram.com/sueldobodega"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="instagram-link"
+          aria-label="Seguinos en Instagram"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="instagram-icono"
+          >
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
+
+        <!-- <a href="">
 <svg class="svgLink" preserveAspectRatio="xMidYMid" viewBox="0 0 256 256"><path d="
   M218.123 218.127h-37.931v-59.403c0-14.165-.253-32.4-19.728-32.4-19.756 0-22.779
    15.434-22.779 31.369v60.43h-37.93V95.967h36.413v16.694h.51a39.907 39.907 0 0 1 35.
@@ -563,6 +605,7 @@ sobre calculadora de salarios&body=Hola Alexis%0D%0A%0D%0A"
    .122 10.315 8.576 18.582 18.89 18.474h218.144c10.336.128 18.823-8.139 18.966-18.47
    4V18.454c-.147-10.33-8.635-18.588-18.966-18.453" fill="#0A66C2"/></svg>
 </a> -->
+      </div>
     </footer>
 
     <script src="js/controlador-landing.js"></script>
