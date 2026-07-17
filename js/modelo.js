@@ -1,25 +1,23 @@
-const ASIGNACION_COMUN = 181485;
-const ASIGNACION_AYUDANTE_REPARTO = 188744;
-const ASIGNACION_ESPECIAL = 199634;
-const ASIGNACION_MEDIO_OFICIAL = 206893;
-const ASIGNACION_CALIFICADO = 214152;
-const ASIGNACION_LARGA_DISTANCIA = 221412;
-const ASIGNACION_FOGUISTA = 228671;
-const ASIGNACION_ENCARGADO = 235_931;
+const ASIGNACION_COMUN = 188978;
+const ASIGNACION_AYUDANTE_REPARTO = 196537;
+const ASIGNACION_ESPECIAL = 207875;
+const ASIGNACION_MEDIO_OFICIAL = 215434;
+const ASIGNACION_CALIFICADO = 222994;
+const ASIGNACION_LARGA_DISTANCIA = 230554;
+const ASIGNACION_FOGUISTA = 238112;
+const ASIGNACION_ENCARGADO = 245671;
 
-const REFRIGERIO = 188135;
-const sepelio = 14630;
+const REFRIGERIO = 192779;
+const sepelio = 15234;
 
 const DIVISOR_JORNALERO = 200;
 
 function calculoBaseJornal(valorHora, horasDelMes) {
   return valorHora * horasDelMes;
 }
-
 function diaDelJornal(valorHora) {
   return valorHora * 8;
 }
-
 function verificarHorasHabiles(mesSeleccionado) {
   const fechaActual = new Date();
   const anioActual = fechaActual.getFullYear();
@@ -51,7 +49,6 @@ function verificarHorasHabiles(mesSeleccionado) {
 
   return horasHabiles;
 }
-
 function validarNumeros(numeros) {
   const regexNumero = /^\d+$/;
 
@@ -63,44 +60,35 @@ function validarNumeros(numeros) {
     return 0;
   }
 }
-
 function tituloSiNo(tieneTitulo, titulo) {
   const valorDelTitulo = tieneTitulo ? titulo : 0;
 
   return valorDelTitulo;
 }
-
 function valorHora(categoria, divisorJornalero) {
   return categoria / divisorJornalero;
 }
-
 function valorHoraConItemsPext(categoria, divisorJornalero, antiguedad) {
   return (categoria + antiguedad) / divisorJornalero;
 }
 function horasExtra50(valorHoraCitems) {
   return valorHoraCitems * 1.5;
 }
-
 function horasExtra100(valorHoraCitems) {
   return valorHoraCitems * 2;
 }
-
 function valorDiaEfectivo(basico) {
   return basico / 25;
 }
-
 function calcularSuspensionEfectivo(diasSuspension, valorDiaSuspension) {
   return diasSuspension * valorDiaSuspension;
 }
-
 function calcularSuspensionJornal(diasSuspension, valorDiaJornal) {
   return diasSuspension * valorDiaJornal;
 }
-
 function calculoHorasMes(horasInput, valorHoras) {
   return Number(horasInput) * Number(valorHoras);
 }
-
 function asignacionNoRem(nombreCategoria) {
   switch (nombreCategoria) {
     case "Op. Común":
@@ -123,19 +111,15 @@ function asignacionNoRem(nombreCategoria) {
       return console.log("Error en asignacionNoRem");
   }
 }
-
 function calculoPresCompleto(basicoComun) {
   return basicoComun * 0.1;
 }
-
 function calculoPresPerfecto(basicoComun) {
   return basicoComun * 0.05;
 }
-
 function calcularAntiguedad(categoria) {
   return categoria * 0.01;
 }
-
 function sumaHaberes(
   radioMes,
   categoria,
@@ -160,7 +144,6 @@ function sumaHaberes(
     return categoria + antiguedad + titulo + horasEx50 + horasEx100;
   }
 }
-
 function totalNeto(
   totalHaberes,
   descuentos,
@@ -178,23 +161,18 @@ function totalNeto(
     dineroEnNegro
   );
 }
-
 function jubilacion(sueldoBruto) {
   return sueldoBruto * 0.11;
 }
-
 function ley19032(sueldoBruto) {
   return sueldoBruto * 0.03;
 }
-
 function sindicato(sueldoBruto) {
   return sueldoBruto * 0.02;
 }
-
 function obraSocial(sueldoBruto) {
   return sueldoBruto * 0.03;
 }
-
 function totalDescuentos(
   sepelio,
   descuentoJubilacion,
@@ -212,7 +190,6 @@ function totalDescuentos(
     suspensiones
   );
 }
-
 function sueldoFinal(totalSuma, totalDescuentos) {
   return totalSuma - totalDescuentos;
 }
