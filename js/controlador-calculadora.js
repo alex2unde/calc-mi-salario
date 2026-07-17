@@ -27,6 +27,7 @@ btnModo.addEventListener("click", () => {
   }
 });
 
+// Variable global para saber si el operario es efectivo o temporario
 let tipoDeOperario = "efectivo";
 
 function opTemporario() {
@@ -496,6 +497,8 @@ botonDescarga.addEventListener("click", () => {
     return;
   }
 
+  capturaAqui.classList.add("forzar-PDF"); // Agregamos la clase para forzar el estilo de PDF
+
   const configPDF = {
     margin: 5, // Un margen pequeño para aprovechar el espacio
     filename: "sueldo-calculado.pdf",
@@ -511,5 +514,11 @@ botonDescarga.addEventListener("click", () => {
     jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
   };
 
-  html2pdf().set(configPDF).from(capturaAqui).save();
+  html2pdf()
+    .set(configPDF)
+    .from(capturaAqui)
+    .save()
+    .then(() => {
+      capturaAqui.classList.remove("forzar-PDF"); // Quitamos la clase después de generar el PDF
+    });
 });

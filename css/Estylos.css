@@ -1,5 +1,10 @@
 :root {
-  --fondo-principal: url("../assets/imagenes/mujerescocechando.jpeg");
+  --fondo-principal: linear-gradient(
+    349deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 50%,
+    rgba(150, 0, 0, 1) 100%
+  );
   --color-sec1: #000000;
   --color-texto: #ffffff;
   --fondo-formulario: #0000006e;
@@ -17,7 +22,7 @@
   --fondo-tajeta-legal: #00000000;
 }
 body.modo-claro {
-  --fondo-principal: url("../assets/imagenes/mujeres.modoclaro.jpg");
+  --fondo-principal: #e3e3e3;
   --color-sec1: #ffffff;
   --color-texto: #000000;
   --fondo-formulario: #ffffff;
@@ -1346,6 +1351,36 @@ summary ::hover {
   vertical-align: middle;
 }
 /* Estilo para PDF */
+.forzar-PDF {
+  background-color: trasnparent !important;
+  background-image: none !important;
+  color: #000000 !important;
+}
+.forzar-PDF * {
+  position: relative;
+  z-index: 2;
+
+  color: #000000 !important;
+  background-color: transparent !important;
+}
+/* MARCA DE AGUA PARA EL PDF */
+.fuerza-pdf::before {
+  content: "SUELDOBODEGA.com.ar";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+
+  font-size: 30px;
+  font-family: "verdana";
+  font-weight: bold;
+  color: rgba(125, 125, 125, 0.427);
+
+  white-space: nowrap;
+  z-index: 1;
+  pointer-events: none; /* Hace que no interfiera si alguien intenta hacer clic */
+}
+
 @media print {
   .no-pdf {
     display: none !important;
@@ -1366,11 +1401,10 @@ summary ::hover {
     position: relative !important;
   }
 
-  #divPDF span,
-  #divPDF p {
-    color: black !important;
+  #divPDF,
+  #divPDF * {
+    color: #000000 !important;
   }
-
   #divPDF hr {
     background-color: #ccc !important;
   }
