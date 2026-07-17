@@ -466,7 +466,7 @@ async function controladorPrincipal() {
         <span> Anticipo: </span>
         <span> $${inpAnticipo.toLocaleString("es-AR")} </span>
     </div> 
-    <hr>
+  
     <div class="resultadoFinal"> 
         <span class="tituloTotal"> Total: </span>
         <div class="resultEnMonedas">
@@ -480,6 +480,9 @@ async function controladorPrincipal() {
         </div>
         <div class="resultEnMonedas no-pdf">
         <span class="tituloEnChilenos"> En chilenos:  </span> <span class="numeroChileno"> ${totalEnChilenos.toLocaleString("es-CL", { style: "currency", currency: "CLP" })} </span>
+        </div>
+        <div class="sello-de-agua">
+        <span class="sello-texto">SUELDOBODEGA.com.ar</span>
         </div>
     </div>
 </div>
@@ -519,6 +522,6 @@ botonDescarga.addEventListener("click", () => {
     .from(capturaAqui)
     .save()
     .then(() => {
-      capturaAqui.classList.remove("forzar-PDF"); // Quitamos la clase después de generar el PDF
+      capturaAqui.classList.remove("forzar-PDF");
     });
 });

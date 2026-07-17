@@ -332,7 +332,6 @@ async function controladorIndemnizacion(event) {
     </div>`
         : ""
     }
-<hr />
     ${
       tipoDespido === "Sin_causa"
         ? `
@@ -350,6 +349,9 @@ async function controladorIndemnizacion(event) {
         <div class="resultEnMonedas no-pdf">
             <span class="tituloEnChilenos"> En pesos chilenos: </span> <span class="numeroChileno">${totalEnChilenosSC.toLocaleString("es-CL", { style: "currency", currency: "CLP" })}</span>
         </div> 
+                <div class="sello-de-agua">
+        <span class="sello-texto">SUELDOBODEGA.com.ar</span>
+        </div>
     </div>
   `
         : `
@@ -366,6 +368,9 @@ async function controladorIndemnizacion(event) {
         </div>
         <div class="resultEnMonedas no-pdf">
             <span class="tituloEnChilenos"> En pesos chilenos: </span> <span class="numeroChileno">${totalEnChilenosCC.toLocaleString("es-CL", { style: "currency", currency: "CLP" })}</span>
+        </div>
+                <div class="sello-de-agua">
+        <span class="sello-texto">SUELDOBODEGA.com.ar</span>
         </div>
     </div>
     </div>
@@ -400,6 +405,8 @@ botonDescarga.addEventListener("click", () => {
     return;
   }
 
+  capturaAqui.classList.add("forzar-PDF");
+
   const configPDF = {
     margin: 5, // Un margen pequeño para aprovechar el espacio
     filename: "sueldo-calculado.pdf",
@@ -415,5 +422,11 @@ botonDescarga.addEventListener("click", () => {
     jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
   };
 
-  html2pdf().set(configPDF).from(capturaAqui).save();
+  html2pdf()
+    .set(configPDF)
+    .from(capturaAqui)
+    .save()
+    .then(() => {
+      capturaAqui.classList.remove("forzar-PDF");
+    });
 });

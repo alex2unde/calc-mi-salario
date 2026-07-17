@@ -964,6 +964,7 @@ hr {
 }
 
 .tituloTotal {
+  margin-top: 20px;
   font-size: 20px;
   color: var(--color-texto);
   text-align: center;
@@ -1364,17 +1365,18 @@ summary ::hover {
   background-color: transparent !important;
 }
 /* MARCA DE AGUA PARA EL PDF */
-.fuerza-pdf::before {
+.fuerza-pdf,
+.sello-de-agua {
   content: "SUELDOBODEGA.com.ar";
   position: absolute;
-  top: 50%;
+  top: 98%;
   left: 50%;
-  transform: translate(-50%, -50%) rotate(-45deg);
+  transform: translate(-50%, -50%);
 
-  font-size: 30px;
+  font-size: 20px;
   font-family: "verdana";
   font-weight: bold;
-  color: rgba(125, 125, 125, 0.427);
+  color: rgba(125, 125, 125, 0.427) !important;
 
   white-space: nowrap;
   z-index: 1;
