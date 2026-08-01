@@ -39,8 +39,10 @@ body.modo-claro {
   --fondo-body: #f8f1f1;
   --fondo-tajeta-legal: #ffffff;
 }
-
+/* boton para cambiar el modo de la pagina (claro/oscuro) */
 .toggleModo {
+  display: flex;
+  flex-direction: column;
   font-size: 30px;
   position: fixed;
   top: 120px;
@@ -50,10 +52,13 @@ body.modo-claro {
   cursor: pointer;
   z-index: 1000;
 }
-
 .toggleModo i {
   color: var(--color-botones);
   transition: color 0.3s;
+}
+.modo-texto {
+  font-size: 15px;
+  color: var(--color-botones);
 }
 
 html,
@@ -372,6 +377,12 @@ body {
   align-items: center;
   margin-top: 20px;
   margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+.irAcalcular:hover {
+  background-color: rgb(36, 53, 180);
+  color: #ffffff !important;
+  transform: scale(1.1);
 }
 
 .irAindemnizacion {
@@ -391,6 +402,13 @@ body {
     color 0.3s;
   align-items: center;
   margin: 20px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+.irAindemnizacion:hover {
+  background-color: rgb(180, 36, 36);
+  color: #ffffff !important;
+  transform: scale(1.1);
 }
 
 /*estilo del boton para descargar la app*/
@@ -804,7 +822,12 @@ hr {
   background-color: rgba(0, 0, 0, 0.39);
   max-width: 90px;
 }
-
+.mayor-sueldo-recuerda {
+  border: var(--borde-form) 1px solid;
+  font-family: "verdana";
+  border-radius: 5px;
+  padding: 5px;
+}
 #ultimoSueldo {
   color: var(--color-texto);
   font-size: 20px;
@@ -812,6 +835,27 @@ hr {
   padding: 5px;
   background-color: var(--cuadro-selecInput);
   max-width: 130px;
+}
+.cuadro-recuerda {
+  border: #ff0000 1px solid;
+  font-family: "verdana";
+  border-radius: 5px;
+  padding: 5px;
+  background-color: var(--cuadro-selecInput);
+}
+.aviso-recuerda {
+  font-family: "verdana";
+  border-radius: 5px;
+
+  background-color: #f8f8f8;
+  color: #000000;
+}
+.recuerda {
+  font-size: 15px;
+  text-align: left;
+  font-family: "verdana";
+
+  color: var(--color-texto);
 }
 
 #dias-suspencion {
@@ -1095,6 +1139,11 @@ select::-webkit-scrollbar-thumb:hover {
   width: 50px;
   height: 45px;
   color: var(--color-texto);
+}
+.div-sugerencias-titulo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .formularioSugerencias {
   display: none;

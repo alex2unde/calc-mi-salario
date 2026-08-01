@@ -2,11 +2,10 @@
 const botonMenu = document.getElementById("menu");
 const navDesplega = document.getElementById("nav__links");
 
+//modo claro/oscuro.
 botonMenu.addEventListener("click", () => {
   navDesplega.classList.toggle("active");
 });
-
-//modo claro/oscuro.
 const btnModo = document.getElementById("toggleModo");
 // Buscamos específicamente la etiqueta <i> que está adentro del botón
 const iconoModo = btnModo.querySelector("i");
@@ -62,7 +61,6 @@ const formularioSug = document.getElementById("formularioSugerencias");
 formularioSug.addEventListener("click", (event) => {
   event.stopPropagation(); // El clic muere en el form, no llega al div padre
 });
-
 // 2. Abrir y cerrar con el ícono
 iconoSugerencias.addEventListener("click", () => {
   if (formularioSug.style.display === "block") {
@@ -71,7 +69,6 @@ iconoSugerencias.addEventListener("click", () => {
     formularioSug.style.display = "block";
   }
 });
-
 // 3. Cerrar al hacer clic afuera
 document.addEventListener("click", (event) => {
   if (formularioSug.style.display === "block") {
@@ -83,7 +80,6 @@ document.addEventListener("click", (event) => {
     }
   }
 });
-
 // 4. SOLUCIÓN AL ENVÍO: Enviar "en silencio" sin recargar la página
 formularioSug.addEventListener("submit", async (event) => {
   // Frenamos la recarga automática
