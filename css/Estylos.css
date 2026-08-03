@@ -11,7 +11,7 @@
   --color-botones: #ffffff;
   --cuadro-selecInput: rgba(0, 0, 0, 0.39);
   --borde-form: #888888;
-  --fondo-explica-donacion: #d48618;
+  --fondo-explica-donacion: #d4861860;
   --tiulo-feriado: #ffff;
   --feriado-tipo: rgb(234, 255, 0);
   --tarjeta-feriado: #515151;
@@ -27,16 +27,16 @@ body.modo-claro {
   --color-texto: #000000;
   --fondo-formulario: #ffffff;
   --color-botones: #000000;
-  --fondo-explica-donacion: #ff9a0d;
+  --fondo-explica-donacion: #ff9a0d4c;
   --borde-form: #000000;
   --cuadro-selecInput: rgb(230, 230, 230);
   --tiulo-feriado: #515151;
-  --feriado-tipo: rgb(63 64 52);
-  --tarjeta-feriado: rgb(184 186 134);
-  --fondo-parrafo: #e8e0e0;
+  --feriado-tipo: rgb(0, 0, 0);
+  --tarjeta-feriado: rgb(255, 255, 254);
+  --fondo-parrafo: #eeeeee;
   --fondo-informacion-legal: #ffffff;
   --summary-fondo: #eeeeee;
-  --fondo-body: #f8f1f1;
+  --fondo-body: #ffffff;
   --fondo-tajeta-legal: #ffffff;
 }
 /* boton para cambiar el modo de la pagina (claro/oscuro) */
@@ -75,6 +75,21 @@ body {
   background-color: var(--fondo-body);
 
   margin: 0;
+}
+
+.p-actualizacion {
+  font-size: 15px;
+  color: var(--color-texto);
+  border: var(--borde-form) 2px solid;
+  border-radius: 5px;
+  box-shadow: #000000 1px 1px 6px 0px;
+  background-color: var(--summary-fondo);
+
+  padding: 10px;
+  z-index: 100;
+  position: absolute;
+  right: 90px;
+  top: 120px;
 }
 
 /*body con imagen de fondo en la pagina de calculadora*/
@@ -1333,7 +1348,7 @@ svg .svgGmail {
 }
 
 details {
-  background-color: #1e1e1e;
+  background-color: var(--fondo-informacion-legal);
   border: 1px solid #333;
   border-radius: 8px;
   margin-bottom: 16px;
@@ -1344,10 +1359,12 @@ details {
 .details-calculadora strong {
   background-color: rgb(44 86 172);
   border-radius: 5px;
+  color: #ffffff;
 }
 .details-indeminzacion strong {
   background-color: rgb(212, 35, 35);
   border-radius: 5px;
+  color: #ffffff;
 }
 
 summary {
@@ -1370,6 +1387,7 @@ summary ::hover {
 .acordeon-legal-sueldo {
 }
 .tarjeta-legal-sueldo {
+  background-color: var(--fondo-informacion-legal);
 }
 .tarjeta-legal-descuentos {
 }
@@ -1541,6 +1559,13 @@ summary ::hover {
   }
   .nav__links li {
     padding: 15px;
+  }
+
+  .p-actualizacion {
+    right: 20px;
+    box-shadow: 0px 0px 0px 0px #000000;
+    border: var(--borde-form) 2px solid;
+    background-color: var(--fondo-formulario);
   }
 
   /* main */
@@ -1763,7 +1788,7 @@ summary ::hover {
     grid-template-rows: auto auto auto auto;
     gap: 20px;
     margin: auto;
-    margin-top: 30px;
+    margin-top: 80px;
     max-width: 100vw;
     width: 100%;
     padding: 30px;
@@ -1983,6 +2008,24 @@ summary ::hover {
     font-size: 17px;
     padding: 5px;
     max-width: 180px;
+  }
+  /* MARCA DE AGUA PARA EL PDF */
+  .fuerza-pdf,
+  .sello-de-agua {
+    content: "SUELDOBODEGA.com.ar";
+    position: absolute;
+    top: 98%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    font-size: 20px;
+    font-family: "verdana";
+    font-weight: bold;
+    color: rgba(12, 12, 12, 0.427) !important;
+
+    white-space: nowrap;
+    z-index: 1;
+    pointer-events: none; /* Hace que no interfiera si alguien intenta hacer clic */
   }
 
   .div-donacion {
