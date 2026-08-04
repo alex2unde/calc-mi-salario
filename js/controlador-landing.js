@@ -89,6 +89,9 @@ function obtenerFeriados() {
   // la fecha solo hasta la t.
   const hoy = new Date().toISOString().split("T")[0];
 
+  const contenedor = document.getElementById("contenedor-feriados");
+  contenedor.innerHTML = `<p class="cargando">Cargando feriados...</p>`;
+
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
