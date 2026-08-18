@@ -1342,7 +1342,7 @@ select::-webkit-scrollbar-thumb:hover {
 .div-sugerencias svg {
   width: 50px;
   height: 45px;
-  color: var(--color-texto);
+  color: #ffffff;
 }
 .div-sugerencias-titulo {
   display: flex;
@@ -2470,7 +2470,7 @@ summary ::hover {
   .div-sugerencias svg {
     width: 40px;
     height: 40px;
-    color: var(--color-texto);
+    color: #ffffff;
   }
   .iconoSugerencias {
     border-radius: 50px;
@@ -2490,21 +2490,21 @@ summary ::hover {
     list-style: none;
     text-decoration: none;
     padding: 10px;
+    color: #ffffff;
   }
   .a-nav-inferior:hover {
-    color: var(--color-texto);
     background-color: #ca0303;
     border-radius: 20px 20px 5px 5px;
   }
   .modo-texto {
-    color: var(--color-texto);
+    color: #ffffff;
     font-family: "verdana";
     font-size: 15px;
   }
   .icono-calc-nav-inf {
     width: 40px;
     height: 40px;
-    color: var(--color-texto);
+    color: #ffffff;
   }
 
   /* footer del index */
