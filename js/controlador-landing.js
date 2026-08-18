@@ -2,8 +2,14 @@
 const botonMenu = document.getElementById("menu");
 const navDesplega = document.getElementById("nav__links");
 
+// ESCUDO: Solo ejecuta si el menú existe en esta página
+if (botonMenu && navDesplega) {
+  botonMenu.addEventListener("click", () => {
+    navDesplega.classList.toggle("active");
+  });
+}
+
 // PWA -------------------------------------------------------------------------------------
-// Verificamos si el navegador del usuario soporta Service Workers
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
@@ -23,100 +29,61 @@ if ("serviceWorker" in navigator) {
 let eventoInstalacion;
 const botonInstalar = document.getElementById("btnInstalarApp");
 
-// 1. Atrapamos el evento del navegador
 window.addEventListener("beforeinstallprompt", (e) => {
-  // Frenamos el mini-cartel automático del navegador
   e.preventDefault();
-
-  // Guardamos el evento en nuestra variable para usarlo después
   eventoInstalacion = e;
 
-  // ¡Mostramos tu botón en la página!
-  botonInstalar.style.display = "block";
+  // ESCUDO: Solo intenta mostrar el botón si existe en el HTML
+  if (botonInstalar) {
+    botonInstalar.style.display = "block";
+  }
 });
 
-// 2. Le damos vida a tu botón
-botonInstalar.addEventListener("click", async () => {
-  if (eventoInstalacion !== null) {
-    // Cuando hacen clic, disparamos el cartel oficial de instalación del celular
-    eventoInstalacion.prompt();
-
-    // Esperamos a ver qué elige el usuario (Aceptar o Cancelar)
-    const { outcome } = await eventoInstalacion.userChoice;
-
-    if (outcome === "accepted") {
-      console.log("¡El usuario instaló la aplicación!");
-      // Como ya la instaló, volvemos a ocultar el botón
-      botonInstalar.style.display = "none";
+// ESCUDO: Solo le agrega el evento click si el botón existe
+if (botonInstalar) {
+  botonInstalar.addEventListener("click", async () => {
+    if (eventoInstalacion !== null) {
+      eventoInstalacion.prompt();
+      const { outcome } = await eventoInstalacion.userChoice;
+      if (outcome === "accepted") {
+        console.log("¡El usuario instaló la aplicación!");
+        botonInstalar.style.display = "none";
+      }
+      eventoInstalacion = null;
     }
+  });
+}
 
-    // Limpiamos la variable
-    eventoInstalacion = null;
-  }
-});
-
-// -------------------------------------------------------------------------------------------------
-botonMenu.addEventListener("click", () => {
-  navDesplega.classList.toggle("active");
-});
-//modo claro/oscuro.
+//modo claro/oscuro. ------------------------------------------------------------------------
 const btnModo = document.getElementById("toggleModo");
-// Buscamos específicamente la etiqueta <i> que está adentro del botón
-const iconoModo = btnModo.querySelector("i");
 
-btnModo.addEventListener("click", () => {
-  // 1. Cambiamos el modo de la página
-  document.body.classList.toggle("modo-claro");
+// ESCUDO: Solo busca el ícono y cambia el tema si el botón de modo existe
+if (btnModo) {
+  const iconoModo = btnModo.querySelector("i");
 
-  // 2. Cambiamos el ícono
-  if (document.body.classList.contains("modo-claro")) {
-    // Si pasamos a modo claro, sacamos el sol y ponemos la luna
-    iconoModo.classList.remove("fa-sun");
-    iconoModo.classList.add("fa-moon");
-  } else {
-    // Si volvemos a modo oscuro, sacamos la luna y ponemos el sol
-    iconoModo.classList.remove("fa-moon");
-    iconoModo.classList.add("fa-sun");
-  }
-});
+  btnModo.addEventListener("click", () => {
+    document.body.classList.toggle("modo-claro");
 
-// --------------------------------------------------------------------------------------------------
+    if (document.body.classList.contains("modo-claro")) {
+      iconoModo.classList.remove("fa-sun");
+      iconoModo.classList.add("fa-moon");
+    } else {
+      iconoModo.classList.remove("fa-moon");
+      iconoModo.classList.add("fa-sun");
+    }
+  });
+}
 
-// function obtenerFeriados() {
-//   const url = "https://api.argentinadatos.com/v1/feriados/2026";
-
-//   // la fecha solo hasta la t.
-//   const hoy = new Date().toISOString().split("T")[0];
-
-//   const contenedor = document.getElementById("contenedor-feriados");
-//   contenedor.innerHTML = `<p class="cargando">Cargando feriados...</p>`;
-
-//   fetch(url)
-//     .then((response) => response.json())
-//     .then((data) => {
-//       // 1. Filtramos: solo los feriados cuya fecha sea igual o mayor a HOY
-//       const feriadosFuturos = data.filter((feriado) => feriado.fecha >= hoy);
-
-//       // 2. Tomamos solo los próximos 3 para mostrar en la interfaz
-//       const proximosTres = feriadosFuturos.slice(0, 3);
-
-//       // 3. Llamamos a la función que los dibuja en el HTML
-//       renderizarFeriados(proximosTres);
-//     })
-//     .catch((error) =>
-//       console.error("Error al cargar feriados para la landing:", error),
-//     );
-// }
-
-//version offline por pwa
+// ------------------------------------------------------------------------------------------
+// Feriados (Versión offline)
+// ------------------------------------------------------------------------------------------
 function obtenerFeriados() {
-  // 1. Calculamos la fecha de hoy
-  const hoy = new Date().toISOString().split("T")[0];
   const contenedor = document.getElementById("contenedor-feriados");
 
-  // 2. NUESTRA "API" LOCAL Y OFFLINE:
-  // Una lista estática con los feriados que quedan en el año.
-  // Como esto es texto en tu archivo .js, el Service Worker lo guarda en el celular.
+  // ESCUDO: Si no estamos en la página de inicio (no hay contenedor), cortamos la función acá
+  if (!contenedor) return;
+
+  const hoy = new Date().toISOString().split("T")[0];
   const feriados2026 = [
     {
       fecha: "2026-10-12",
@@ -136,23 +103,22 @@ function obtenerFeriados() {
     { fecha: "2026-12-25", nombre: "Navidad", tipo: "inamovible" },
   ];
 
-  // 3. Hacemos exactamente la misma lógica que ya tenías, pero usando nuestra lista local
   const feriadosFuturos = feriados2026.filter(
     (feriado) => feriado.fecha >= hoy,
   );
   const proximosTres = feriadosFuturos.slice(0, 3);
-
-  // 4. Se los mandamos a tu función dibujante
   renderizarFeriados(proximosTres);
 }
 
-// Esta función se encarga de pintar las tarjetitas en el HTML
 function renderizarFeriados(listaFeriados) {
   const contenedor = document.getElementById("contenedor-feriados");
-  contenedor.innerHTML = ""; // Limpiamos por si hay algo antes
+
+  // ESCUDO DE SEGURIDAD EXTRA
+  if (!contenedor) return;
+
+  contenedor.innerHTML = "";
 
   listaFeriados.forEach((feriado) => {
-    // Separamos la fecha para mostrarla más linda (ej: "25/05")
     const [anio, mes, dia] = feriado.fecha.split("-");
     const fechaObjeto = new Date(anio, mes - 1, dia);
     let nombreDia = fechaObjeto.toLocaleDateString("es-AR", {
