@@ -2,10 +2,6 @@
 const botonMenu = document.getElementById("menu");
 const navDesplega = document.getElementById("nav__links");
 
-botonMenu.addEventListener("click", () => {
-  navDesplega.classList.toggle("active");
-});
-
 // PWA -------------------------------------------------------------------------------------
 // Verificamos si el navegador del usuario soporta Service Workers
 if ("serviceWorker" in navigator) {
@@ -60,6 +56,9 @@ botonInstalar.addEventListener("click", async () => {
 });
 
 // -------------------------------------------------------------------------------------------------
+botonMenu.addEventListener("click", () => {
+  navDesplega.classList.toggle("active");
+});
 //modo claro/oscuro.
 const btnModo = document.getElementById("toggleModo");
 // Buscamos específicamente la etiqueta <i> que está adentro del botón
@@ -83,30 +82,68 @@ btnModo.addEventListener("click", () => {
 
 // --------------------------------------------------------------------------------------------------
 
+// function obtenerFeriados() {
+//   const url = "https://api.argentinadatos.com/v1/feriados/2026";
+
+//   // la fecha solo hasta la t.
+//   const hoy = new Date().toISOString().split("T")[0];
+
+//   const contenedor = document.getElementById("contenedor-feriados");
+//   contenedor.innerHTML = `<p class="cargando">Cargando feriados...</p>`;
+
+//   fetch(url)
+//     .then((response) => response.json())
+//     .then((data) => {
+//       // 1. Filtramos: solo los feriados cuya fecha sea igual o mayor a HOY
+//       const feriadosFuturos = data.filter((feriado) => feriado.fecha >= hoy);
+
+//       // 2. Tomamos solo los próximos 3 para mostrar en la interfaz
+//       const proximosTres = feriadosFuturos.slice(0, 3);
+
+//       // 3. Llamamos a la función que los dibuja en el HTML
+//       renderizarFeriados(proximosTres);
+//     })
+//     .catch((error) =>
+//       console.error("Error al cargar feriados para la landing:", error),
+//     );
+// }
+
+//version offline por pwa
 function obtenerFeriados() {
-  const url = "https://api.argentinadatos.com/v1/feriados/2026";
-
-  // la fecha solo hasta la t.
+  // 1. Calculamos la fecha de hoy
   const hoy = new Date().toISOString().split("T")[0];
-
   const contenedor = document.getElementById("contenedor-feriados");
-  contenedor.innerHTML = `<p class="cargando">Cargando feriados...</p>`;
 
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      // 1. Filtramos: solo los feriados cuya fecha sea igual o mayor a HOY
-      const feriadosFuturos = data.filter((feriado) => feriado.fecha >= hoy);
+  // 2. NUESTRA "API" LOCAL Y OFFLINE:
+  // Una lista estática con los feriados que quedan en el año.
+  // Como esto es texto en tu archivo .js, el Service Worker lo guarda en el celular.
+  const feriados2026 = [
+    {
+      fecha: "2026-10-12",
+      nombre: "Día del Respeto a la Diversidad Cultural",
+      tipo: "trasladable",
+    },
+    {
+      fecha: "2026-11-20",
+      nombre: "Día de la Soberanía Nacional",
+      tipo: "trasladable",
+    },
+    {
+      fecha: "2026-12-08",
+      nombre: "Inmaculada Concepción de María",
+      tipo: "inamovible",
+    },
+    { fecha: "2026-12-25", nombre: "Navidad", tipo: "inamovible" },
+  ];
 
-      // 2. Tomamos solo los próximos 3 para mostrar en la interfaz
-      const proximosTres = feriadosFuturos.slice(0, 3);
+  // 3. Hacemos exactamente la misma lógica que ya tenías, pero usando nuestra lista local
+  const feriadosFuturos = feriados2026.filter(
+    (feriado) => feriado.fecha >= hoy,
+  );
+  const proximosTres = feriadosFuturos.slice(0, 3);
 
-      // 3. Llamamos a la función que los dibuja en el HTML
-      renderizarFeriados(proximosTres);
-    })
-    .catch((error) =>
-      console.error("Error al cargar feriados para la landing:", error),
-    );
+  // 4. Se los mandamos a tu función dibujante
+  renderizarFeriados(proximosTres);
 }
 
 // Esta función se encarga de pintar las tarjetitas en el HTML

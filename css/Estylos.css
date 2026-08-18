@@ -9,9 +9,9 @@
   --color-texto: #ffffff;
   --fondo-formulario: #0000006e;
   --color-botones: #ffffff;
+  --color-boton-rubro-activo: #ca0303;
   --cuadro-selecInput: rgba(0, 0, 0, 0.39);
   --borde-form: #888888;
-  --fondo-explica-donacion: #d4861860;
   --tiulo-feriado: #ffff;
   --feriado-tipo: rgb(234, 255, 0);
   --tarjeta-feriado: #515151;
@@ -20,14 +20,17 @@
   --summary-fondo: #373737;
   --fondo-body: #000000;
   --fondo-tajeta-legal: #00000000;
+  --sello-de-agua: #888888 !important;
+  --color-boton-rubro: rgb(35, 35, 35);
+  --fondo-resultado: #000000;
 }
 body.modo-claro {
   --fondo-principal: #e3e3e3;
   --color-sec1: #ffffff;
   --color-texto: #000000;
-  --fondo-formulario: #ffffff;
-  --color-botones: #000000;
-  --fondo-explica-donacion: #ff9a0d4c;
+  --fondo-formulario: #d1cece54;
+  --color-botones: #ffffff;
+  --color-boton-rubro-activo: #0351ca;
   --borde-form: #000000;
   --cuadro-selecInput: rgb(230, 230, 230);
   --tiulo-feriado: #515151;
@@ -38,6 +41,8 @@ body.modo-claro {
   --summary-fondo: #eeeeee;
   --fondo-body: #ffffff;
   --fondo-tajeta-legal: #ffffff;
+  --color-boton-rubro: rgb(140 136 136);
+  --fondo-resultado: #ffffff;
 }
 /* boton para cambiar el modo de la pagina (claro/oscuro) */
 .toggleModo {
@@ -80,11 +85,10 @@ body {
 .p-actualizacion {
   font-size: 15px;
   color: var(--color-texto);
-  border: var(--borde-form) 2px solid;
   border-radius: 5px;
-  box-shadow: #000000 1px 1px 6px 0px;
-  background-color: var(--summary-fondo);
-
+  border-radius: 5px;
+  box-shadow: #00000059 2px 2px 6px 0px;
+  background-color: var(--fondo-formulario);
   padding: 10px;
   z-index: 100;
   position: absolute;
@@ -100,16 +104,11 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
 
   display: flex;
   flex-direction: column;
   margin: 0;
   padding: 0;
-  transition:
-    background-image 0.5s ease,
-    background-color 0.5s ease,
-    color 0.5s ease;
 }
 
 .info1 {
@@ -122,7 +121,6 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
 
   display: flex;
   flex-direction: column;
@@ -378,25 +376,27 @@ body {
 .div-btns-calculadoras {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 /*estilo del enlace para ir a la calculadora*/
 .irAcalcular {
-  font-size: 25px;
+  font-size: 1rem;
   color: rgb(255, 255, 255);
   border: 2px solid var(--borde-form);
   border-radius: 10px;
-  box-shadow: #000000 0px 4px 10px;
+  box-shadow: #00000096 0px 4px 10px;
   background-color: rgb(64, 117, 224);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 
   text-align: center;
   text-decoration: none;
   padding: 15px 25px;
+  margin-left: 20px;
+  margin-right: 20px;
   transition:
     background-color 0.3s,
     color 0.3s;
   align-items: center;
-  margin-top: 20px;
   margin-bottom: 20px;
   transition: transform 0.3s ease;
 }
@@ -407,11 +407,11 @@ body {
 }
 
 .irAindemnizacion {
-  font-size: 25px;
+  font-size: 1rem;
   color: rgb(255, 255, 255);
   border: 2px solid var(--borde-form);
   border-radius: 10px;
-  box-shadow: #000000 0px 4px 10px;
+  box-shadow: #00000096 0px 4px 10px;
   background-color: rgb(212, 35, 35);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 
@@ -422,7 +422,6 @@ body {
     background-color 0.3s,
     color 0.3s;
   align-items: center;
-  margin: 20px;
   margin-bottom: 20px;
   transition: transform 0.3s ease;
 }
@@ -434,14 +433,15 @@ body {
 
 /*estilo del boton para descargar la app*/
 .botonDescargar {
-  font-size: 25px;
+  font-size: 1rem;
   color: rgb(255, 255, 255);
   text-align: center;
   text-decoration: none;
   padding: 15px 25px;
+  margin-bottom: 20px;
   border: 2px solid rgb(255, 255, 255);
+  background-color: #000000;
   border-radius: 10px;
-  margin-top: 20px;
 }
 
 /*contenedor del primer ejemplo*/
@@ -552,7 +552,7 @@ hr {
   margin-bottom: 20px;
   position: relative;
   display: grid;
-  grid-template-columns: 489px 480fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto auto;
   gap: 30px;
   padding: 20px;
@@ -575,69 +575,155 @@ hr {
   font-family: "verdana";
   box-shadow: #000000 0px 0px 10px;
   max-height: auto;
-  max-width: 450px;
+
   padding: 20px;
   background-color: var(--fondo-formulario);
   transition: background-color 0.5s ease;
 }
+.items-indemnizacion {
+  padding: 10px;
+  display: flex;
+  border: 0.1px solid #ffffff73;
+  border-radius: 10px;
+  flex-direction: column;
+  /* background-color: var(--fondo-formulario); */
+  background: linear-gradient(
+    26deg,
+    rgba(10, 10, 10, 0) 79%,
+    rgb(196 188 188 / 29%) 100%
+  );
+  font-family: "verdana";
+}
 
+/* botones para seleccionar el tipo de rubro (bodega, viña o contratista) */
+.tipoDeRubro {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+.btnBodega {
+  color: #ffffff;
+  font-size: 20px;
+  border-radius: 5px;
+  border: solid 1px rgb(98, 97, 97);
+  padding: 5px;
+  background-color: var(--color-boton-rubro);
+  cursor: pointer;
+}
+.btnBodega:hover {
+  background: var(--color-boton-rubro-activo);
+  color: #ffffff !important;
+  transition: all 0.1s ease;
+}
+.btnBodega.activo {
+  background: var(--color-boton-rubro-activo);
+  color: #ffffff !important;
+}
+.btnViña {
+  color: #ffffff;
+  font-size: 20px;
+  border-radius: 5px;
+  border: solid 1px rgb(98, 97, 97);
+  padding: 5px;
+  background-color: var(--color-boton-rubro);
+  cursor: pointer;
+}
+.btnViña:hover {
+  background: var(--color-boton-rubro-activo);
+  color: #ffffff !important;
+  transition: all 0.1s ease;
+}
+.btnViña.activo {
+  background: var(--color-boton-rubro-activo);
+  color: #ffffff !important;
+}
+.btnContrato {
+  color: #ffffff;
+  font-size: 20px;
+  border-radius: 5px;
+  border: solid 1px rgb(98, 97, 97);
+  padding: 5px;
+  background-color: var(--color-boton-rubro);
+  cursor: pointer;
+}
+.btnContrato:hover {
+  background: var(--color-boton-rubro-activo);
+  color: #ffffff !important;
+  transition: all 0.1s ease;
+}
+.btnContrato.activo {
+  background: var(--color-boton-rubro-activo);
+  color: #ffffff !important;
+}
+
+/* botones para seleccionar el tipo de operario (temporal o mensual) */
 .tipoDeOperario {
   display: flex;
   justify-content: space-evenly;
   padding: 10px;
   margin-bottom: 10px;
 }
-
 .btnTemp {
-  color: rgb(5, 139, 14);
+  color: #ffffff;
   font-size: 20px;
   border-radius: 5px;
-  border: solid 3px rgb(5, 139, 14);
+  border: solid 1px rgb(98, 97, 97);
   padding: 5px;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--color-boton-rubro);
   cursor: pointer;
 }
-
 .btnTemp:hover {
-  background: #19b501;
+  background: var(--color-boton-rubro-activo);
   color: #ffffff !important;
   transition: all 0.1s ease;
 }
-
 .btnMnsual {
-  background: rgb(36, 53, 180);
-  color: rgb(36, 53, 180);
+  color: #fefefe;
   font-size: 20px;
   border-radius: 5px;
-  border: solid 3px rgb(36, 53, 180);
+  border: solid 1px rgb(98, 97, 97);
   padding: 5px;
-  background-color: rgb(252, 253, 255);
+  background-color: var(--color-boton-rubro);
   cursor: pointer;
 }
-
 .btnMnsual:hover {
-  background: rgb(36, 53, 180);
+  background: var(--color-boton-rubro-activo);
   color: #ffffff !important;
   transition: all 0.1s ease;
 }
 
 /* Estado encendido fijo para el botón VERDE */
 .btnTemp.activo {
-  background: #19b501;
+  background: var(--color-boton-rubro-activo);
   color: #ffffff !important;
 }
-
-/* Estado encendido fijo para el botón AZUL */
 .btnMnsual.activo {
-  background: rgb(36, 53, 180);
+  background: var(--color-boton-rubro-activo);
   color: #ffffff !important;
 }
-
+/* mostrar o no el select con los meses */
 .mesOpcion {
   display: none;
   padding-bottom: 10px;
 }
+.mesOpcion.visible {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  padding: 10px;
+  margin: 5px;
+  align-items: center;
 
+  color: var(--color-texto);
+  background-color: #1e1e1e54;
+  font-size: 20px;
+  border: solid 0.2px #363232;
+  font-family: "verdana";
+}
+.mesOpcion span {
+  width: 100%;
+}
 .compartirWhatsApp {
   display: flex;
   text-decoration: none;
@@ -646,10 +732,10 @@ hr {
   align-items: center;
   justify-content: center;
   justify-items: center;
-  max-height: 410px;
-  max-width: 480px;
-  padding: 20px;
+  width: 100%;
+  padding: 10px;
   position: relative;
+  gap: 5px;
 
   font-size: 20px;
   border-radius: 10px;
@@ -664,57 +750,63 @@ hr {
   text-decoration: none;
   list-style: none;
   color: var(--color-texto);
+  font-size: 1rem;
 
   position: relative;
   display: inline-block;
   align-items: center;
   justify-content: center;
 }
-
-.aDonacion {
-  display: flex;
-  text-decoration: none;
-  flex-direction: column;
-  text-align: left;
-  align-items: center;
-  justify-content: center;
-  justify-items: center;
-  max-height: 410px;
-  max-width: 480px;
-  position: relative;
-
-  font-family: "verdana";
-  color: var(--color-texto);
-  font-size: 25px;
-}
-.valor-donacion {
-  background-color: #ffffff;
-  color: #525151;
-
-  padding: 2px;
-  border-radius: 10px;
-  /* border: 1px solid #000000; */
-}
-
 .iconoW {
-  height: 50px;
+  height: 30px;
   width: auto;
   border-radius: 10px;
   justify-content: center;
   align-items: center;
 }
 
+.div-horasExtra {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 5px;
+  gap: 10px;
+
+  color: var(--color-texto);
+  font-size: 1rem;
+}
+.horasEx {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 10px;
+  width: 100%;
+  background: var(--fondo-formulario);
+}
+.div-al50 {
+  width: 100%;
+
+  border: solid 0.2px #363232;
+  border-radius: 7px;
+}
+.div-al100 {
+  width: 100%;
+
+  border: solid 0.2px #363232;
+  border-radius: 7px;
+}
 #horasEx50 {
   color: var(--color-texto);
   background-color: var(--cuadro-selecInput);
   border-radius: 5px;
   border: solid 1px var(--borde-form);
 
-  margin-left: 10px;
   font-size: 20px;
   padding: 5px;
+  margin-top: 5px;
 }
-
 #horasEx100 {
   background-color: var(--cuadro-selecInput);
   color: var(--color-texto);
@@ -727,24 +819,9 @@ hr {
   margin-top: 5px;
 }
 
-.resultado1 {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  color: var(--color-texto);
-}
-
-#resultado hr {
-  border: none;
-  height: 1px;
-  background-color: var(--color-texto);
-  width: 100%;
-  margin: 15px 0;
-}
-
 /* cuadro de resultado */
 #resultado {
-  background-color: var(--fondo-formulario);
+  background-color: var(--fondo-resultado);
   border: 2px solid var(--borde-form);
   backdrop-filter: blur(12px);
   color: var(--color-texto);
@@ -753,23 +830,68 @@ hr {
   font-size: 1.2em;
   font-family: "verdana";
 
-  max-width: 480px;
   padding: 20px;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
   /* margin-top: 200px; */
 }
-
-.ant,
-.Sec,
-.mes,
-.horasEx {
-  padding-bottom: 10px;
+.resultado1 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color: var(--color-texto);
+}
+#resultado hr {
+  border: none;
+  height: 1px;
+  background-color: var(--color-texto);
+  width: 100%;
+  margin: 15px 0;
 }
 
 .anticipo {
-  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 10px;
+  width: 100%;
+
+  background: var(--fondo-formulario);
+  border: solid 0.2px #363232;
+  border-radius: 7px;
+  font-size: 1rem;
+}
+
+.ant {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 5px;
+  gap: 20px;
+
+  color: var(--color-texto);
+  background: var(--fondo-formulario);
+  font-size: 1rem;
+  border: solid 0.2px #363232;
+  border-radius: 7px;
+}
+
+.suspendido {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 5px;
+
+  color: var(--color-texto);
+  background: var(--fondo-formulario);
+  font-size: 1rem;
+  border: solid 0.2px #363232;
+  border-radius: 7px;
 }
 
 #anticipo {
@@ -809,25 +931,52 @@ hr {
   font-weight: 10;
   color: var(--color-texto);
   font-size: 20px;
-  text-align: left;
   background-color: var(--cuadro-selecInput);
   font-family: "verdana";
   border-radius: 5px;
   border: solid 1px var(--borde-form);
-  max-width: 80%;
-  gap: 0px;
+
+  padding: 5px;
+  width: 100%;
+  text-align: left;
+}
+.plataNegro-anticipo {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  margin: 5px;
+}
+
+.enNegro {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: left;
+  padding: 10px;
+  width: 100%;
+  justify-content: space-between;
+
+  background: var(--fondo-formulario);
+  border: solid 0.2px #363232;
+  border-radius: 7px;
+}
+.enNegro span {
+  font-size: 1rem;
 }
 
 #opcionesCat {
   font-weight: 10;
   color: var(--color-texto);
-  font-size: 20px;
+  font-size: 1rem;
   text-align: left;
-  background-color: var(--cuadro-selecInput);
   font-family: "verdana";
+
+  background-color: var(--cuadro-selecInput);
   border-radius: 5px;
   border: solid 1px var(--borde-form);
-  max-width: 290px;
+
+  width: 100%;
+  padding: 5px;
 }
 
 #diasVacaciones {
@@ -857,7 +1006,7 @@ hr {
   font-family: "verdana";
   border-radius: 5px;
   padding: 5px;
-  background-color: var(--cuadro-selecInput);
+  background-color: rgb(102 0 0 / 99%);
 }
 .aviso-recuerda {
   font-family: "verdana";
@@ -877,7 +1026,7 @@ hr {
 #dias-suspencion {
   padding: 20px;
   color: var(--color-texto);
-  font-size: 20px;
+  font-size: 1rem;
   border-radius: 5px;
   border: solid 1px var(--borde-form);
   padding: 5px;
@@ -885,36 +1034,89 @@ hr {
 }
 
 .secundarioDiv {
-  flex-direction: row;
-  justify-content: space-evenly;
+  display: flex;
+  flex-direction: column;
+
+  font-size: 1rem;
   margin: 5px;
 }
+.secundarioDiv span {
+  font-size: 1rem;
+  color: var(--color-texto);
 
-.secundario {
   padding-bottom: 10px;
 }
+.radiosSecundario {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
+.secundario {
+  display: flex;
+  flex-direction: row;
+}
+input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+}
+.mes-completo {
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
+  font-size: 1rem;
+}
+.mes-completo span {
+  font-size: 1rem;
+  color: var(--color-texto);
+
+  padding-bottom: 10px;
+}
 .mesDiv {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  gap: 15px;
 }
-
-.mesCompleto {
-  padding-bottom: 10px;
-  margin: 5px;
+.mesOpcion.visible {
+  width: 100%;
+}
+.radiosSecundario {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.radio-btn {
+  display: inline-block;
+  padding: 8px 10px;
+  background-color: #181b21; /* Fondo oscuro */
+  color: #9aa0a6; /* Texto inactivo */
+  border: 1px solid #3a404e;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+input[type="radio"]:checked + .radio-btn {
+  background-color: #ca0303; /* Tu azul principal */
+  color: #ffffff; /* Texto blanco */
+  border-color: #f74f4f;
 }
 
 #enNegro {
   color: var(--color-texto);
-  margin-left: 10px;
-  padding-top: 10px;
   font-size: 20px;
   border-radius: 5px;
   border: solid 1px var(--borde-form);
-  padding: 5px;
   background-color: var(--cuadro-selecInput);
-  max-width: 500px;
+
+  padding: 5px;
+}
+
+/* div para dividir el form para version escritotio */
+.division-version-escritorio {
+  display: flex;
 }
 
 .labelVacacionesDeuda {
@@ -937,8 +1139,6 @@ hr {
 
 /* div del btn calcular */
 .calcular {
-  grid-column: 1;
-  grid-row: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -948,47 +1148,33 @@ hr {
 .btnCalc {
   font-size: 20px;
   text-align: center;
-  background: #000000;
-  background: linear-gradient(
-    326deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 1) 50%,
-    rgba(189, 189, 189, 1) 100%
-  );
+  background: var(--color-boton-rubro-activo);
   font-family: "verdana";
   border-bottom: 2px solid #000000;
   border-right: 2px solid #000000;
   color: rgb(255, 255, 255);
   box-shadow: 0px 0px 5px 0px #000000;
-  border-radius: 25px;
+  border-radius: 10px;
+  border: var(--color-boton-rubro-activo) 2px solid;
+
+  margin-top: 15px;
+  width: 100%;
   cursor: pointer;
   padding: 20px;
-}
-
-.btnCalc:hover {
-  background: linear-gradient(
-    326deg,
-    rgb(81, 0, 255) 0%,
-    rgb(16, 27, 243) 50%,
-    rgb(78, 93, 255) 100%
-  ); /* ✅ Usa gradiente en lugar de background-color */
-
-  color: #ffffff !important;
-  transition: all 0.3s ease; /* ✅ Transición suave */
 }
 
 .labelsIndem {
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
-  color: var(--color-texto);
-  font-size: 20px;
-  text-align: left;
-  font-family: "verdana";
-  max-height: auto;
   padding: 10px;
-  padding-left: 0px;
-  gap: 0px;
+  margin: 5px;
+  color: var(--color-texto);
+  background-color: var(--fondo-formulario);
+  font-size: 1rem;
+  border: solid 0.2px #333236;
+  border-radius: 7px;
 }
 
 .resultadoIndem {
@@ -1001,7 +1187,7 @@ hr {
 
   font-family: "verdana";
   color: rgb(255, 255, 255);
-  font-size: 20px;
+  font-size: 1rem;
   border: 2px solid var(--borde-form);
   background-color: var(--fondo-formulario);
   backdrop-filter: blur(12px);
@@ -1106,6 +1292,7 @@ hr {
   justify-content: space-between;
   align-items: center;
   padding: 5px;
+  gap: 20px;
 }
 
 /* Barra de dezplazamiento para los select */
@@ -1126,12 +1313,12 @@ select::-webkit-scrollbar-thumb:hover {
 .compartir_y_btnPDF {
   display: flex;
   flex-direction: row;
-  align-items: stretch;
   justify-content: space-between;
   gap: 10px;
+  margin-top: 30px;
 }
 
-.div-donacion {
+.div-ads-sense {
   grid-column: 2;
   display: flex;
   flex-direction: column;
@@ -1147,7 +1334,7 @@ select::-webkit-scrollbar-thumb:hover {
   flex-direction: column;
   justify-content: center;
   margin-left: 20px;
-  position: fixed;
+
   align-items: center;
   flex-direction: row-reverse;
 }
@@ -1204,6 +1391,7 @@ select::-webkit-scrollbar-thumb:hover {
   padding: 10px;
 }
 
+/* footer del index */
 .footer {
   display: flex;
   flex-direction: column;
@@ -1240,20 +1428,42 @@ svg.instagram-icono {
   height: 30px;
   width: 30px;
 }
-
 svg .svgGmail {
   color: #ffffff;
+}
+.icono-linkedin {
+  color: #ffffff;
+
+  height: 30px;
+  width: 30px;
+}
+.icono-facebook {
+  color: #ffffff;
+
+  height: 30px;
+  width: 30px;
+}
+.footer-calculadora {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  margin: 0;
+  width: 100%;
+  box-shadow: #000000 0px 0px 10px;
+  background-color: #0f0f0f;
+  color: #919090;
 }
 
 .btnPDF {
   display: flex;
   flex-direction: row;
   border-radius: 10px;
-  font-size: 20px;
+  font-size: 1rem;
   font-family: "verdana";
-  max-height: 410px;
-  max-width: 480px;
-  padding: 20px;
+  width: 100%;
+  padding: 10px;
   position: relative;
   text-align: left;
   align-items: center;
@@ -1265,8 +1475,8 @@ svg .svgGmail {
   color: var(--color-texto);
   border: 2px solid var(--borde-form);
   box-shadow: #000000 0px 0px 5px;
+  cursor: pointer;
 }
-
 #divPDF {
   display: flex;
   flex-direction: column;
@@ -1274,6 +1484,13 @@ svg .svgGmail {
   margin: 0; /* Elimina cualquier centrado automático que lo empuje a la derecha */
   padding: 10px; /* Dale un pequeño respiro para que las letras no choquen con el borde */
   box-sizing: border-box; /* Evita que el padding agrande el div más del 100% */
+}
+.icono-pdf {
+  height: 30px;
+  width: auto;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .seccion-informativa-legal {
@@ -1384,18 +1601,17 @@ summary ::hover {
   background-color: #fffdfd;
 }
 /* details */
-.acordeon-legal-sueldo {
-}
+
 .tarjeta-legal-sueldo {
   background-color: var(--fondo-informacion-legal);
 }
-.tarjeta-legal-descuentos {
-}
+
 .tarjeta-titulo-calculadora {
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
   justify-content: center;
+  padding-bottom: 10px;
 }
 .tarjeta-titulo-indemnizacion {
   display: flex;
@@ -1403,6 +1619,7 @@ summary ::hover {
   justify-content: center;
   align-content: center;
   align-items: center;
+  padding-bottom: 10px;
 }
 
 .icono-h3-salario {
@@ -1456,6 +1673,11 @@ summary ::hover {
   pointer-events: none; /* Hace que no interfiera si alguien intenta hacer clic */
 }
 
+/* solo para celulares */
+.nav-inferior {
+  display: none;
+}
+
 @media print {
   .no-pdf {
     display: none !important;
@@ -1504,12 +1726,18 @@ summary ::hover {
     flex-direction: column;
   }
 
-  header {
-    width: 100%;
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
+  .header {
+    background-color: rgba(0, 0, 0, 0);
+    -webkit-backdrop-filter: blur(10px); /* Para iPhone/Safari */
+    backdrop-filter: blur(10px); /* Para Android/Chrome estándar */
+    font-size: 10px;
+    box-shadow: #00000000 0px 0px 10px;
+
+    display: flex;
     position: fixed;
+    justify-content: space-between;
+    width: 100%;
+    z-index: 1000;
   }
   .logo {
     margin-left: 5px;
@@ -1517,19 +1745,29 @@ summary ::hover {
   /*estilo de la barra de navegacion*/
   .btn-menu {
     display: flex;
-    padding: 20px;
     margin: 10px;
+    align-items: center;
+    width: 100%;
+    font-size: 20px;
+    padding: 15px;
 
-    background-color: rgb(4, 4, 4);
-    color: rgb(255, 255, 255);
-    font-size: 18px;
+    color: var(--color-texto);
+    border-radius: 10px;
+    border: 2px solid var(--borde-form);
+    background: #0a0a0a;
+    background: linear-gradient(
+      26deg,
+      rgba(10, 10, 10, 0) 79%,
+      rgb(196 188 188 / 29%) 100%
+    );
+    backdrop-filter: blur(15px);
+    box-shadow: #000000 0px 0px 10px;
     font-family: "verdana";
-    border-radius: 5px;
   }
   .nav {
     align-items: center;
     color: rgb(255, 255, 255);
-    padding: 0px;
+
     font-family: "verdana";
     background-color: none;
     margin: 0px;
@@ -1562,9 +1800,8 @@ summary ::hover {
   }
 
   .p-actualizacion {
-    right: 20px;
-    box-shadow: 0px 0px 0px 0px #000000;
-    border: var(--borde-form) 2px solid;
+    border-radius: 5px;
+    box-shadow: #00000059 2px 2px 6px 0px;
     background-color: var(--fondo-formulario);
   }
 
@@ -1577,42 +1814,66 @@ summary ::hover {
     margin-top: 130px;
   }
 
-  .toggleModo {
+  .toggleModo-escritorio {
     font-size: 35px;
     position: fixed;
-    top: 110px;
-    left: 20px;
+    top: 520px;
+    left: 330px;
     background-color: transparent;
     border: none;
     cursor: pointer;
     z-index: 1000;
+    align-items: center;
+    flex-direction: column;
+    display: none;
+  }
+  .modo-texto-escritorio {
+    display: none;
+  }
+  .toggleModo-index {
+    display: flex;
+    flex-direction: column;
+    font-size: 30px;
+    position: fixed;
+    top: 120px;
+    left: 30px;
+    background-color: transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 1000;
+    padding: 5px;
+    background-color: #000000;
   }
   .toggleModo i {
     color: var(--color-botones);
     transition: color 0.3s;
   }
-
-  /* .imagenPrincipal {
+  .toggleModo-calculadora {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    min-width: 100%;
-    background-image: url("../assets/imagenes/bandera-argentina.png");
-    mask-image: linear-gradient(90deg, rgb(0, 0, 0) 0%, transparent);
-  } */
+    justify-content: center;
 
-  /*estilo de la imagen de la primer seccion del home*/
-  /* .imgSec1 {
-    mask-image: linear-gradient(180deg, rgb(0, 0, 0) 0%, transparent);
-    max-height: 600px;
-    max-width: 100%;
-  } */
+    border: none;
+    background-color: #00000000;
+    border-right-color: #ffffff;
+  }
+  .toggleModo-calculadora:hover {
+    background-color: #ff000000;
+  }
+  .toggleModo-calculadora i {
+    font-size: 39px;
+    font-weight: 100;
+    color: var(--color-botones);
+    transition: color 0.3s;
+  }
 
   .h1-home {
-    font-size: 44px;
+    font-size: 39px;
     margin-top: 30px;
     color: var(--color-texto);
     margin-bottom: 0px;
+    text-align: center;
   }
 
   .parrafoSec1 {
@@ -1639,7 +1900,6 @@ summary ::hover {
 
     margin: 0px;
     width: 100%;
-    padding: 0px;
   }
   .bodyCalculadora {
     background-image: var(--fondo-principal);
@@ -1651,19 +1911,30 @@ summary ::hover {
     padding: 0px;
     min-height: 100vh;
     box-sizing: border-box;
+    padding-bottom: 100px;
   }
 
   /* botones para ir a las paginas de la calculadora */
   .div-btns-calculadoras {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     margin-top: 20px;
+    justify-content: space-between;
   }
   .irAindemnizacion {
-    margin: 5px;
+    padding: 15px;
+    margin: 0px;
   }
   .irAcalcular {
+    padding: 15px;
     margin: 5px;
+  }
+  .botonDescargar {
+    margin: 0px;
+  }
+  .soloAndroid {
+    display: block;
+    color: #ffffff;
   }
 
   .div2-seccion1 {
@@ -1687,7 +1958,6 @@ summary ::hover {
     justify-content: center;
     margin-top: 20px;
   }
-
   .div-feriados {
     display: flex;
     flex-direction: column;
@@ -1697,7 +1967,6 @@ summary ::hover {
     margin: 10px;
     background-color: var(--cuadro-selecInput);
   }
-
   .titulo-feriados {
     font-size: 24px;
     color: var(--tiulo-feriado);
@@ -1705,13 +1974,11 @@ summary ::hover {
     font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     margin-top: 10px;
   }
-
   .feriado-nombre {
     margin-top: 10px;
     font-size: 14px;
     color: var(--color-texto);
   }
-
   .feriado-tipo {
     font-size: 18px;
     color: var(--feriado-tipo);
@@ -1795,7 +2062,10 @@ summary ::hover {
     align-items: center;
     justify-items: center;
   }
-
+  .division-version-escritorio {
+    display: flex;
+    flex-direction: column;
+  }
   .items hr {
     border: none;
     height: 1px;
@@ -1809,7 +2079,7 @@ summary ::hover {
     flex-direction: column;
     text-align: center;
     width: 95%;
-    margin: 0;
+    padding: 15px;
     grid-column: 1;
     grid-row: 1;
     justify-content: space-between;
@@ -1819,29 +2089,120 @@ summary ::hover {
     color: var(--color-texto);
     font-size: 1.2em;
     border-radius: 10px;
-    border: 2px solid var(--borde-form);
-    background-color: var(--fondo-formulario);
+    border: 1px solid var(--borde-form);
+    background: #0a0a0a;
+    background: linear-gradient(
+      26deg,
+      rgba(10, 10, 10, 0) 79%,
+      rgb(196 188 188 / 29%) 100%
+    );
     backdrop-filter: blur(15px);
     font-family: "verdana";
     box-shadow: #000000 0px 0px 10px;
   }
+  .items-indemnizacion {
+    padding: 10px;
+    display: flex;
+    border: 0.1px solid #ffffff73;
+    margin-top: 50px;
+    border-radius: 10px;
+    flex-direction: column;
+    /* background-color: var(--fondo-formulario); */
+    background: linear-gradient(
+      26deg,
+      rgba(10, 10, 10, 0) 79%,
+      rgb(196 188 188 / 29%) 100%
+    );
+  }
+  .items-indemnizacion hr {
+    border: none;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 100%;
+    margin: 15px 0;
+  }
 
-  .labelsIndem,
-  .cat {
+  .labelsIndem {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     text-align: left;
     max-height: auto;
     padding: 10px;
-    padding-left: 0px;
-    gap: 0px;
-    flex-direction: column;
+    margin: 5px;
     align-items: center;
 
     color: var(--color-texto);
+    background-color: var(--fondo-formulario);
     font-size: 20px;
+    border: solid 0.2px #363232;
+    border-radius: 7px;
     font-family: "verdana";
+  }
+  .secundarioDiv {
+    display: flex;
+    flex-direction: column;
+
+    margin: 5px;
+  }
+  .secundarioDiv span {
+    font-size: 19px;
+    color: var(--color-texto);
+
+    padding-bottom: 10px;
+  }
+  .radiosSecundario {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+  }
+  .secundario {
+    display: flex;
+    flex-direction: row;
+  }
+  input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+  }
+  .mes-completo {
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .mes-completo span {
+    font-size: 19px;
+    color: var(--color-texto);
+
+    padding-bottom: 10px;
+  }
+  .mesDiv {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  .radiosSecundario {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+  .radio-btn {
+    display: inline-block;
+    padding: 12px 16px;
+    background-color: #181b21; /* Fondo oscuro */
+    color: #9aa0a6; /* Texto inactivo */
+    border: 1px solid #3a404e;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+  }
+  input[type="radio"]:checked + .radio-btn {
+    background-color: #ca0303; /* Tu azul principal */
+    color: #ffffff; /* Texto blanco */
+    border-color: #f74f4f;
   }
 
   .compartirWhatsApp {
@@ -1864,20 +2225,59 @@ summary ::hover {
     padding: 10px;
     position: relative;
   }
+  .iconoW {
+    height: 50px;
+    width: auto;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+  }
 
+  .tipoDeRubro {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+  }
   .tipoDeOperario {
     margin-bottom: 0%;
     padding-top: 0%;
+    gap: 4px;
   }
 
   .br-sec {
     display: none;
   }
   .horasEx {
-    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    padding: 10px;
+
+    background: var(--fondo-formulario);
   }
-  .anticipo {
-    padding-left: 0px;
+  .div-horasExtra {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    margin: 5px;
+  }
+  .div-al50 {
+    width: 100%;
+
+    border: solid 0.2px #363232;
+    border-radius: 7px;
+  }
+  .div-al100 {
+    width: 100%;
+
+    border: solid 0.2px #363232;
+    border-radius: 7px;
+  }
+  .div-horasExtra span {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 17.5px;
   }
 
   .items small {
@@ -1924,14 +2324,14 @@ summary ::hover {
     font-size: 1em;
     text-align: center;
     padding: 10px;
-    width: 300px;
+    width: 90%px;
     margin: 0;
     border-radius: 12px;
     box-shadow: #000000 0px 0px 10px;
-    background-color: var(--fondo-formulario);
+    background-color: var(--fondo-resultado);
     backdrop-filter: blur(15px);
     color: rgb(235, 234, 234);
-    padding: 5px;
+
     padding-top: 20px;
     box-sizing: border-box;
     justify-content: center;
@@ -1966,21 +2366,16 @@ summary ::hover {
   }
 
   .calcular {
-    grid-column: 1;
-    grid-row: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
+    width: 100%;
   }
 
   .btnCalc {
-    width: 50vw;
+    width: 100%;
     font-size: 1em;
     padding: 10px;
     margin: auto;
+    margin-top: 25px;
     color: rgb(255, 255, 255);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     box-shadow: 10px 8px 15px rgba(0, 0, 0, 0.3);
   }
 
@@ -2003,11 +2398,17 @@ summary ::hover {
     gap: 5px;
     max-width: 400px;
   }
-
   .btnPDF {
     font-size: 17px;
     padding: 5px;
     max-width: 180px;
+  }
+  .icono-pdf {
+    height: 80px;
+    width: auto;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
   }
   /* MARCA DE AGUA PARA EL PDF */
   .fuerza-pdf,
@@ -2021,84 +2422,100 @@ summary ::hover {
     font-size: 20px;
     font-family: "verdana";
     font-weight: bold;
-    color: rgba(12, 12, 12, 0.427) !important;
-
+    color: rgb(194 187 187 / 43%) !important;
     white-space: nowrap;
     z-index: 1;
     pointer-events: none; /* Hace que no interfiera si alguien intenta hacer clic */
   }
 
-  .div-donacion {
+  .div-ads-sense {
     grid-column: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin: 0;
+    margin-bottom: 90px;
   }
 
-  .aDonacion {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    align-items: center;
-    justify-content: center;
-    justify-items: center;
-    max-height: 410px;
-    max-width: 480px;
+  /* tool bar solo en paginas de calculadoras*/
+  .nav-inferior {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
     padding: 10px;
-    position: relative;
+    padding-bottom: 17px;
 
-    text-decoration: none;
-    color: var(--color-texto);
-    font-size: 20px;
-    font-weight: 559;
-    border-radius: 10px;
-    border: 2px solid var(--borde-form);
-    background: var(--fondo-explica-donacion);
-    backdrop-filter: blur(12px);
-    font-family: "verdana";
-    box-shadow: #000000 0px 0px 10px;
-  }
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
 
-  .explica-donacion {
-    margin: 3px;
-    font: lighter 20px "Franklin Gothic Medium";
-    font-size: 14px;
-    color: var(--color-texto);
-    text-align: center;
-    background: var(--fondo-explica-donacion);
+    background-color: #181b21;
   }
 
   .div-sugerencias {
-    bottom: 165px;
-    right: 20px;
+    bottom: auto;
+    right: auto;
     z-index: 10;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: 20px;
-    position: fixed;
     align-items: center;
-    flex-direction: row-reverse;
+    margin-left: 0px;
+    position: relative;
+    padding: 10px;
   }
   .div-sugerencias svg {
-    width: 50px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
+    color: var(--color-texto);
+  }
+  .iconoSugerencias {
+    border-radius: 50px;
+    padding: 5px;
+  }
+  .formularioSugerencias {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    margin-bottom: 15px;
+  }
+  .a-nav-inferior {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    list-style: none;
+    text-decoration: none;
+    padding: 10px;
+  }
+  .a-nav-inferior:hover {
+    color: var(--color-texto);
+    background-color: #ca0303;
+    border-radius: 20px 20px 5px 5px;
+  }
+  .modo-texto {
+    color: var(--color-texto);
+    font-family: "verdana";
+    font-size: 15px;
+  }
+  .icono-calc-nav-inf {
+    width: 40px;
+    height: 40px;
     color: var(--color-texto);
   }
 
+  /* footer del index */
   .footer {
-    font-size: 0.8em;
-    padding: 5px;
-    margin: 0;
-    margin-top: 20px;
-    width: 100%;
-    box-sizing: border-box;
-    padding-bottom: 30px;
-    background-color: #0f0f0f;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ffffff;
   }
-
+  /* footer de las paginas de calculadaroa */
+  .footer-calculadora {
+    display: none;
+  }
   .logoFooter {
     height: 50px;
   }

@@ -19,15 +19,23 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sueldo bodega / Indemnizacion</title>
+    <meta
+      name="description"
+      content="Calculadora de indemnizacion / liquidacion por despido para trabajadores bodega y viña."
+    />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="css/Estylos.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
-    <link rel="manifest" href="manifest.json" />
-    <meta name="theme-color" content="#1a1a1a" />
-    <title>Calculo indenmizacion</title>
+    <!-- Vincula el manifiesto para Android/Chrome -->
+    <link rel="manifest" href="/manifest.json" />
+    <!-- Soporte extra para que el ícono funcione perfecto en iPhone/Safari -->
+    <link rel="apple-touch-icon" href="/assets/imagenes/logo-png-192.png" />
+    <!-- Le da el color oscuro a la barra superior del celular -->
+    <meta name="theme-color" content="#000000" />
   </head>
 
   <body class="bodyCalculadora">
@@ -225,7 +233,7 @@
           </li>
 
           <li class="infoIndex">
-            <a href="#informacion"> Informacion </a>
+            <a href="index.html#informacion"> Informacion </a>
           </li>
 
           <!-- <li class="rubros"><a href="#">Rubro</a>
@@ -256,28 +264,48 @@
                   Instagram
                 </a>
               </li>
+              <li>
+                <a
+                  href="https://www.facebook.com/profile.php?id=61592866108341&locale=es_LA"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="instagram-link"
+                  aria-label="Seguinos en Facebook"
+                  >Facebook</a
+                >
+              </li>
+              <li>
+                <a
+                  href="www.linkedin.com/in/alexis-cortez-046253422"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="instagram-link"
+                  aria-label="Seguinos en Linkedin"
+                  >Linkedin</a
+                >
+              </li>
             </ul>
           </li>
         </ul>
       </nav>
     </header>
 
-    <button type="button" id="toggleModo" class="toggleModo">
+    <button type="button" id="toggleModo" class="toggleModo-escritorio">
       <i class="fa-solid fa-sun"></i>
-      <span class="modo-texto">Noche/dia</span>
+      <span class="modo-texto-escritorio">Noche/dia</span>
     </button>
 
     <main class="principal">
       <form
-        class="items"
+        class="items-indemnizacion"
         id="formulario"
         onsubmit="controladorIndemnizacion(event)"
       >
         <small> Panel de Carga </small>
         <hr />
 
-        <div>
-          <label for="opcionesCat" class="labelsIndem"
+        <div class="labelsIndem">
+          <label for="opcionesCat" class="cat"
             >Categoria:
             <select id="opcionesCat" name="categoria" required>
               <option value="525154" name="categoria">Op. Común</option>
@@ -360,154 +388,99 @@
         <button class="btnCalc" type="submit" id="calcularBtn">Calcular</button>
       </form>
 
-      <div class="resultadoIndem">
-        <small> Resultado </small>
-        <hr />
-        <div id="resultadoIndemnizacion"></div>
-      </div>
-
-      <div class="compartir_y_btnPDF">
-        <button class="btnPDF" id="botonPDF">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="80"
-            height="80"
-            viewBox="0 0 128 128"
-          >
-            <path
-              d="M10 10 v108 a6 6 0 0 0 6 6 h96 a6 6 0 0 0 6 -6 v-84 L96 10 Z"
-              fill="#F0F0F0"
-            />
-
-            <path
-              d="M118 34 h-16 a6 6 0 0 1 -6 -6 v-18 L118 34 Z"
-              fill="#DCDCDC"
-            />
-
-            <rect
-              x="25"
-              y="25"
-              width="60"
-              height="4"
-              rx="2"
-              ry="2"
-              fill="#A0A0A0"
-            />
-            <rect
-              x="25"
-              y="37"
-              width="50"
-              height="4"
-              rx="2"
-              ry="2"
-              fill="#A0A0A0"
-            />
-
-            <rect
-              x="20"
-              y="70"
-              width="88"
-              height="48"
-              rx="8"
-              ry="8"
-              fill="#E53935"
-            />
-
-            <text
-              x="64"
-              y="105"
-              font-family="Arial, sans-serif"
-              font-size="36"
-              font-weight="bold"
-              fill="#FFFFFF"
-              text-anchor="middle"
+      <div class="resumen">
+        <div class="resultadoIndem">
+          <small> Resultado </small>
+          <hr />
+          <div id="resultadoIndemnizacion"></div>
+        </div>
+        <div class="compartir_y_btnPDF">
+          <button class="btnPDF" id="botonPDF">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="80"
+              height="80"
+              viewBox="0 0 128 128"
+              class="icono-pdf"
             >
-              PDF
-            </text>
-          </svg>
+              <path
+                d="M10 10 v108 a6 6 0 0 0 6 6 h96 a6 6 0 0 0 6 -6 v-84 L96 10 Z"
+                fill="#F0F0F0"
+              />
 
-          <span class="comparWhas">Descargar PDF</span>
-        </button>
+              <path
+                d="M118 34 h-16 a6 6 0 0 1 -6 -6 v-18 L118 34 Z"
+                fill="#DCDCDC"
+              />
 
-        <a
-          class="compartirWhatsApp"
-          href="https://wa.me/?text=¡Mirá%20esta%20calculadora%20de%20indemnización%20de%20bodega!%20%0Ahttps:
+              <rect
+                x="25"
+                y="25"
+                width="60"
+                height="4"
+                rx="2"
+                ry="2"
+                fill="#A0A0A0"
+              />
+              <rect
+                x="25"
+                y="37"
+                width="50"
+                height="4"
+                rx="2"
+                ry="2"
+                fill="#A0A0A0"
+              />
+
+              <rect
+                x="20"
+                y="70"
+                width="88"
+                height="48"
+                rx="8"
+                ry="8"
+                fill="#E53935"
+              />
+
+              <text
+                x="64"
+                y="105"
+                font-family="Arial, sans-serif"
+                font-size="36"
+                font-weight="bold"
+                fill="#FFFFFF"
+                text-anchor="middle"
+              >
+                PDF
+              </text>
+            </svg>
+
+            <span class="comparWhas">Descargar PDF</span>
+          </button>
+
+          <a
+            class="compartirWhatsApp"
+            href="https://wa.me/?text=¡Mirá%20esta%20calculadora%20de%20indemnización%20de%20bodega!%20%0Ahttps:
   //https://sueldobodega.com.ar/Indemnizacion.html"
-          target="_blank"
-        >
-          <svg class="iconoW" fill="none" viewBox="0 0 360 362">
-            <path
-              fill="#25D366"
-              fill-rule="evenodd"
-              d="M307.546 52.566C273.709 18.684 228.706.017 180.756 0 81.951 0 1.538 80.404 1.504 179.235c-.017 31.594 8.242 62.432 23.928 89.609L0 361.736l95.024-24.925c26.179 14.285 55.659 21.805 85.655 21.814h.077c98.788 0 179.21-80.413 179.244-179.244.017-47.898-18.608-92.926-52.454-126.807v-.008Zm-126.79 275.788h-.06c-26.73-.008-52.952-7.194-75.831-20.765l-5.44-3.231-56.391 14.791 15.05-54.981-3.542-5.638c-14.912-23.721-22.793-51.139-22.776-79.286.035-82.14 66.867-148.973 149.051-148.973 39.793.017 77.198 15.53 105.328 43.695 28.131 28.157 43.61 65.596 43.593 105.398-.035 82.149-66.867 148.982-148.982 148.982v.008Zm81.719-111.577c-4.478-2.243-26.497-13.073-30.606-14.568-4.108-1.496-7.09-2.243-10.073 2.243-2.982 4.487-11.568 14.577-14.181 17.559-2.613 2.991-5.226 3.361-9.704 1.117-4.477-2.243-18.908-6.97-36.02-22.226-13.313-11.878-22.304-26.54-24.916-31.027-2.613-4.486-.275-6.91 1.959-9.136 2.011-2.011 4.478-5.234 6.721-7.847 2.244-2.613 2.983-4.486 4.478-7.469 1.496-2.991.748-5.603-.369-7.847-1.118-2.243-10.073-24.289-13.812-33.253-3.636-8.732-7.331-7.546-10.073-7.692-2.613-.13-5.595-.155-8.586-.155-2.991 0-7.839 1.118-11.947 5.604-4.108 4.486-15.677 15.324-15.677 37.361s16.047 43.344 18.29 46.335c2.243 2.991 31.585 48.225 76.51 67.632 10.684 4.615 19.029 7.374 25.535 9.437 10.727 3.412 20.49 2.931 28.208 1.779 8.604-1.289 26.498-10.838 30.228-21.298 3.73-10.46 3.73-19.433 2.613-21.298-1.117-1.865-4.108-2.991-8.586-5.234l.008-.017Z"
-              clip-rule="evenodd"
-            />
-          </svg>
-          <span class="comparWhas">Compartir</span>
-        </a>
+            target="_blank"
+          >
+            <svg class="iconoW" fill="none" viewBox="0 0 360 362">
+              <path
+                fill="#25D366"
+                fill-rule="evenodd"
+                d="M307.546 52.566C273.709 18.684 228.706.017 180.756 0 81.951 0 1.538 80.404 1.504 179.235c-.017 31.594 8.242 62.432 23.928 89.609L0 361.736l95.024-24.925c26.179 14.285 55.659 21.805 85.655 21.814h.077c98.788 0 179.21-80.413 179.244-179.244.017-47.898-18.608-92.926-52.454-126.807v-.008Zm-126.79 275.788h-.06c-26.73-.008-52.952-7.194-75.831-20.765l-5.44-3.231-56.391 14.791 15.05-54.981-3.542-5.638c-14.912-23.721-22.793-51.139-22.776-79.286.035-82.14 66.867-148.973 149.051-148.973 39.793.017 77.198 15.53 105.328 43.695 28.131 28.157 43.61 65.596 43.593 105.398-.035 82.149-66.867 148.982-148.982 148.982v.008Zm81.719-111.577c-4.478-2.243-26.497-13.073-30.606-14.568-4.108-1.496-7.09-2.243-10.073 2.243-2.982 4.487-11.568 14.577-14.181 17.559-2.613 2.991-5.226 3.361-9.704 1.117-4.477-2.243-18.908-6.97-36.02-22.226-13.313-11.878-22.304-26.54-24.916-31.027-2.613-4.486-.275-6.91 1.959-9.136 2.011-2.011 4.478-5.234 6.721-7.847 2.244-2.613 2.983-4.486 4.478-7.469 1.496-2.991.748-5.603-.369-7.847-1.118-2.243-10.073-24.289-13.812-33.253-3.636-8.732-7.331-7.546-10.073-7.692-2.613-.13-5.595-.155-8.586-.155-2.991 0-7.839 1.118-11.947 5.604-4.108 4.486-15.677 15.324-15.677 37.361s16.047 43.344 18.29 46.335c2.243 2.991 31.585 48.225 76.51 67.632 10.684 4.615 19.029 7.374 25.535 9.437 10.727 3.412 20.49 2.931 28.208 1.779 8.604-1.289 26.498-10.838 30.228-21.298 3.73-10.46 3.73-19.433 2.613-21.298-1.117-1.865-4.108-2.991-8.586-5.234l.008-.017Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span class="comparWhas">Compartir</span>
+          </a>
+        </div>
       </div>
 
-      <div class="div-donacion">
-        <a
-          href="https://mpago.la/2Xpn2Fm"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="aDonacion"
-        >
-          🥯 ¿Donar una tortita?
-          <div>
-            <span class="valor-donacion">$ 325</span>
-            <small class="explica-donacion"
-              >Para mantener la calculadora al día.</small
-            >
-          </div>
-          <small>Solo dos click en Mp!</small>
-        </a>
-      </div>
+      <div class="div-ads-sense"></div>
     </main>
 
-    <div class="div-sugerencias" id="divSugerencias">
-      <div class="div-sugerencias-titulo">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path
-            d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z"
-          />
-          <path d="M8 9h8" />
-          <path d="M8 13h6" />
-        </svg>
-        <span class="modo-texto">Sugerencias</span>
-      </div>
-      <form
-        class="formularioSugerencias"
-        id="formularioSugerencias"
-        action="https://formspree.io/f/mkoagbwv"
-        method="POST"
-      >
-        <small>¿Tenés alguna sugerencia?</small>
-        <hr />
-        <label for="sugerencias">
-          <textarea
-            id="sugerencias"
-            placeholder="Escribí tu sugerencia aquí..."
-            maxlength="500"
-            name="sugerencia"
-            required
-          ></textarea>
-        </label>
-        <button class="btnEnviar" id="enviarSugerencia">Enviar</button>
-      </form>
-    </div>
-
-    <footer class="footer">
+    <footer class="footer-calculadora">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         version="1.0"
@@ -945,8 +918,147 @@
             <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
           </svg>
         </a>
+
+        <a href="www.linkedin.com/in/alexis-cortez-046253422">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="icono-linkedin"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"
+            />
+          </svg>
+        </a>
+
+        <a
+          href="https://www.facebook.com/profile.php?id=61592866108341&locale=es_LA"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="icono-facebook"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"
+            />
+          </svg>
+        </a>
       </div>
     </footer>
+
+    <nav class="nav-inferior">
+      <div class="a-nav-inferior">
+        <button type="button" id="toggleModo" class="toggleModo-calculadora">
+          <i class="fa-solid fa-sun"></i>
+          <span class="modo-texto">Noche/dia</span>
+        </button>
+      </div>
+      <a href="calculadora.html" class="a-nav-inferior">
+        <svg
+          class="icono-calc-nav-inf"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+
+          <line x1="8" y1="6" x2="16" y2="6"></line>
+
+          <line x1="8" y1="11" x2="8" y2="11"></line>
+          <line x1="12" y1="11" x2="12" y2="11"></line>
+          <line x1="16" y1="11" x2="16" y2="11"></line>
+
+          <line x1="8" y1="15" x2="8" y2="15"></line>
+          <line x1="12" y1="15" x2="12" y2="15"></line>
+
+          <line x1="16" y1="14" x2="16" y2="14"></line>
+          <line x1="16" y1="17" x2="16" y2="17"></line></svg
+        ><span class="modo-texto">Salario</span></a
+      >
+      <a href="index.html#feriados" class="a-nav-inferior">
+        <svg
+          class="icono-calc-nav-inf"
+          fill="currentColor"
+          viewBox="0 0 485.213 485.212"
+          width="48px"
+          height="48px"
+        >
+          <g>
+            <path
+              d="M60.652,75.816V15.163C60.652,6.781,67.433,0,75.817,0c8.38,0,15.161,6.781,15.161,15.163v60.653
+		c0,8.38-6.781,15.161-15.161,15.161C67.433,90.978,60.652,84.196,60.652,75.816z M318.424,90.978
+		c8.378,0,15.163-6.781,15.163-15.161V15.163C333.587,6.781,326.802,0,318.424,0c-8.382,0-15.168,6.781-15.168,15.163v60.653
+		C303.256,84.196,310.042,90.978,318.424,90.978z M485.212,363.906c0,66.996-54.312,121.307-121.303,121.307
+		c-66.986,0-121.302-54.311-121.302-121.307c0-66.986,54.315-121.3,121.302-121.3C430.9,242.606,485.212,296.919,485.212,363.906z
+		 M454.89,363.906c0-50.161-40.81-90.976-90.98-90.976c-50.166,0-90.976,40.814-90.976,90.976c0,50.171,40.81,90.98,90.976,90.98
+		C414.08,454.886,454.89,414.077,454.89,363.906z M121.305,181.955H60.652v60.651h60.653V181.955z M60.652,333.584h60.653V272.93
+		H60.652V333.584z M151.629,242.606h60.654v-60.651h-60.654V242.606z M151.629,333.584h60.654V272.93h-60.654V333.584z
+		 M30.328,360.891V151.628h333.582v60.653h30.327V94c0-18.421-14.692-33.349-32.843-33.349h-12.647v15.166
+		c0,16.701-13.596,30.325-30.322,30.325c-16.731,0-30.326-13.624-30.326-30.325V60.651H106.14v15.166
+		c0,16.701-13.593,30.325-30.322,30.325c-16.733,0-30.327-13.624-30.327-30.325V60.651H32.859C14.707,60.651,0.001,75.579,0.001,94
+		v266.892c0,18.36,14.706,33.346,32.858,33.346h179.424v-30.331H32.859C31.485,363.906,30.328,362.487,30.328,360.891z
+		 M303.256,242.606v-60.651h-60.648v60.651H303.256z M409.399,363.906h-45.49v-45.49c0-8.377-6.781-15.158-15.163-15.158
+		s-15.159,6.781-15.159,15.158v60.658c0,8.378,6.777,15.163,15.159,15.163h60.653c8.382,0,15.163-6.785,15.163-15.163
+		C424.562,370.692,417.781,363.906,409.399,363.906z"
+            />
+          </g>
+        </svg>
+        <span class="modo-texto">Feriados</span></a
+      >
+      <div class="div-sugerencias" id="divSugerencias">
+        <div class="div-sugerencias-titulo">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icono-calc-nav-inf"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z"
+            />
+            <path d="M8 9h8" />
+            <path d="M8 13h6" />
+          </svg>
+          <span class="modo-texto">Sugerencias</span>
+        </div>
+
+        <form
+          class="formularioSugerencias"
+          id="formularioSugerencias"
+          action="https://formspree.io/f/mkoagbwv"
+          method="POST"
+        >
+          <small>¿Tenés alguna sugerencia?</small>
+          <hr />
+          <label for="sugerencias">
+            <textarea
+              id="sugerencias"
+              placeholder="Escribí tu sugerencia aquí..."
+              maxlength="500"
+              name="sugerencia"
+              required
+            ></textarea>
+          </label>
+          <button class="btnEnviar" id="enviarSugerencia">Enviar</button>
+        </form>
+      </div>
+    </nav>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="js/modelo.js"></script>

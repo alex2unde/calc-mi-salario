@@ -1,4 +1,4 @@
-//boton del menu responsive-----------------------------------------------------------------
+// boton del menu responsive-----------------------------------------------------------------
 const botonMenu = document.getElementById("menu");
 const navDesplega = document.getElementById("nav__links");
 
@@ -27,26 +27,49 @@ btnModo.addEventListener("click", () => {
   }
 });
 
-// Variable global para saber si el operario es efectivo o temporario
+// //Botones con el tipo de rubro (Bodega, Viñedo, Contratista)--------------------------------
+// Primero, quitamos la clase "activo" de viña y contratista, para que solo quede activo el de bodega por defecto.
+
+// btnViña.classList.remove("activo");
+// btnContratista.classList.remove("activo");
+// const btnBodega = document.getElementById("Bodega");
+// const btnViña = document.getElementById("Viña");
+// const btnContratista = document.getElementById("Contratista");
+
+// addEventListener("click", () => {
+//   if (rubro === "Viña") {
+//     btnViña.classList.add("activo");
+//     btnBodega.classList.remove("activo");
+//     btnContratista.classList.remove("activo");
+//   } else if (rubro === "Contratista") {
+//     btnContratista.classList.add("activo");
+//     btnBodega.classList.remove("activo");
+//     btnViña.classList.remove("activo");
+//   }
+// });
+
+// Variable global para saber si el operario es efectivo o temporario----------------------
 let tipoDeOperario = "efectivo";
 
-function opTemporario() {
-  const opcionMesOp = document.getElementById("selectMes");
+const opcionMesOp = document.getElementById("selectMes");
+const btnTemporario = document.getElementById("temporario");
+const btnEfectivo = document.getElementById("efectivo");
+
+btnTemporario.addEventListener("click", () => {
   tipoDeOperario = "temporario";
 
-  opcionMesOp.style.display = "block";
+  opcionMesOp.classList.add("visible");
   document.getElementById("temporario").classList.add("activo");
   document.getElementById("efectivo").classList.remove("activo");
-}
+});
 
-function opEfectivo() {
-  const opcionMesOp = document.getElementById("selectMes");
+btnEfectivo.addEventListener("click", () => {
   tipoDeOperario = "efectivo";
 
-  opcionMesOp.style.display = "none";
+  opcionMesOp.classList.remove("visible");
   document.getElementById("efectivo").classList.add("activo");
   document.getElementById("temporario").classList.remove("activo");
-}
+});
 
 function capturaValores() {
   const numeroMes = Number(document.getElementById("opcionesMes").value);
