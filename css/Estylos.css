@@ -717,14 +717,13 @@ hr {
   align-items: center;
 
   color: var(--color-texto);
-  background-color: #1e1e1e54;
-  font-size: 20px;
+  background-color: var(--fondo-formulario);
+  font-size: 1rem;
   border: solid 0.2px #363232;
+  border-radius: 7px;
   font-family: "verdana";
 }
-.mesOpcion span {
-  width: 100%;
-}
+
 .compartirWhatsApp {
   display: flex;
   text-decoration: none;
@@ -1078,9 +1077,6 @@ input[type="radio"] {
   display: flex;
   flex-direction: row;
   gap: 15px;
-}
-.mesOpcion.visible {
-  width: 100%;
 }
 .radiosSecundario {
   display: flex;
