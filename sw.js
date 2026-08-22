@@ -7,7 +7,7 @@ const urlsToCache = [
   "/css/Estylos.css",
   "/js/controlador-landing.js",
   "/js/controlador-calculadora.js",
-  "/js/controlador-indemnizacion.js",
+  "/js/controlador-Indemnizacion.js",
   "/js/modelo.js",
   "/manifest.json",
   "/assets/imagenes/logo-png-192.png",
