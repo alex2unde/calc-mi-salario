@@ -525,6 +525,9 @@ small {
   text-align: left;
   background: #ffffff00;
 }
+.resultado hr {
+  margin: 10px;
+}
 
 /*estilo de las lineas divisorias*/
 hr {
@@ -580,6 +583,10 @@ hr {
   padding: 20px;
   background-color: var(--fondo-formulario);
   transition: background-color 0.5s ease;
+}
+.items hr {
+  height: 1px;
+  border: none;
 }
 .items-indemnizacion {
   padding: 10px;
@@ -664,10 +671,11 @@ hr {
   justify-content: space-evenly;
   padding: 10px;
   margin-bottom: 10px;
+  gap: 10px;
 }
 .btnTemp {
   color: #ffffff;
-  font-size: 20px;
+  font-size: 1rem;
   border-radius: 5px;
   border: solid 1px rgb(98, 97, 97);
   padding: 5px;
@@ -681,7 +689,7 @@ hr {
 }
 .btnMnsual {
   color: #fefefe;
-  font-size: 20px;
+  font-size: 1rem;
   border-radius: 5px;
   border: solid 1px rgb(98, 97, 97);
   padding: 5px;
@@ -828,7 +836,7 @@ hr {
   color: var(--color-texto);
   border-radius: 10px;
   box-shadow: #000000 0px 0px 10px;
-  font-size: 1.2em;
+  font-size: 1em;
   font-family: "verdana";
 
   padding: 20px;
@@ -848,7 +856,7 @@ hr {
   height: 1px;
   background-color: var(--color-texto);
   width: 100%;
-  margin: 15px 0;
+  margin: 10px 0;
 }
 
 .anticipo {
@@ -1158,7 +1166,7 @@ input[type="radio"]:checked + .radio-btn {
   margin-top: 15px;
   width: 100%;
   cursor: pointer;
-  padding: 20px;
+  padding: 10px;
 }
 
 .labelsIndem {
@@ -2172,7 +2180,7 @@ summary ::hover {
     align-items: center;
   }
   .mes-completo span {
-    font-size: 19px;
+    font-size: 17px;
     color: var(--color-texto);
 
     padding-bottom: 10px;

@@ -1,6 +1,4 @@
-// Cambiamos a v2 para que el navegador sepa que hay una actualización
-const CACHE_NAME = "bodega-cache-v2";
-
+const CACHE_NAME = "bodega-cache-v8";
 const urlsToCache = [
   "/",
   "/index.html",
@@ -16,45 +14,34 @@ const urlsToCache = [
   "/assets/imagenes/logo-png-512.png",
 ];
 
-// 1. INSTALACIÓN
+// Instalación: Guardamos todos los archivos
 self.addEventListener("install", (event) => {
-  // Poder 1: Obliga al SW nuevo a instalarse inmediatamente (ignora el estado de "espera")
-  self.skipWaiting();
-
+  self.skipWaiting(); // <--- TOMA EL CONTROL INMEDIATO
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(urlsToCache);
-    }),
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache)),
   );
 });
 
-// 2. ACTIVACIÓN (Limpieza y toma de control)
-self.addEventListener("activate", (event) => {
-  // Poder 2: Toma el control de la pestaña al instante
-  event.waitUntil(clients.claim());
-});
-
-// 3. FETCH (Intercepción de red a prueba de fallos)
+// Intercepción: Prioridad a la caché
 self.addEventListener("fetch", (event) => {
   event.respondWith(
-    // Poder 3: ignoreSearch en true ignora los parámetros extra de Live Server
-    caches.match(event.request, { ignoreSearch: true }).then((response) => {
-      // Si el archivo está en la caché, lo devolvemos al instante
-      if (response) {
-        return response;
-      }
-
-      return fetch(event.request).catch(() => {
-        console.log(
-          "Estás offline y el archivo no está en caché: ",
-          event.request.url,
-        );
-        // El parche: devolvemos una respuesta oficial para que no explote la promesa
-        return new Response("Página no disponible offline", {
-          status: 503,
-          headers: { "Content-Type": "text/plain" },
-        });
-      });
+    caches.match(event.request).then((response) => {
+      // Si está en caché, lo devuelve. Si no, va a la red.
+      return response || fetch(event.request);
     }),
   );
+});
+
+// Activación: Limpiamos cachés viejas
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cache) => {
+          if (cache !== CACHE_NAME) return caches.delete(cache);
+        }),
+      );
+    }),
+  );
+  self.clients.claim();
 });
