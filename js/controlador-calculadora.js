@@ -1,4 +1,4 @@
-// boton del menu responsive-----------------------------------------------------------------
+// boton del menu desplegable responsive-----------------------------------------------------------------
 const botonMenu = document.getElementById("menu");
 const navDesplega = document.getElementById("nav__links");
 
@@ -8,8 +8,8 @@ botonMenu.addEventListener("click", () => {
 
 //modo claro/oscuro.
 const btnModo = document.getElementById("toggleModo");
-// Buscamos específicamente la etiqueta <i> que está adentro del botón
-const iconoModo = btnModo.querySelector("i");
+// Buscamos específicamente la etiqueta de class que está adentro del botón
+const iconoModo = btnModo.querySelector("icono-calc-nav-inf");
 
 btnModo.addEventListener("click", () => {
   // 1. Cambiamos el modo de la página

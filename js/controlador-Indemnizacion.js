@@ -1,4 +1,4 @@
-//boton del menu responsive-----------------------------------------------------------------
+// boton del menu responsive-----------------------------------------------------------------
 const botonMenu = document.getElementById("menu");
 const navDesplega = document.getElementById("nav__links");
 
