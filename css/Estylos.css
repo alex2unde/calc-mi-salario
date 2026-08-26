@@ -3,7 +3,7 @@
     349deg,
     rgba(0, 0, 0, 1) 0%,
     rgba(0, 0, 0, 1) 50%,
-    rgba(150, 0, 0, 1) 100%
+    rgb(99, 15, 15) 100%
   );
   --color-sec1: #000000;
   --color-texto: #ffffff;
@@ -365,7 +365,7 @@ body {
 
 /*estilo del parrafo debajo del h1*/
 .parrafoSec1 {
-  font-size: 20px;
+  font-size: 1rem;
   color: var(--color-texto);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 
@@ -376,6 +376,7 @@ body {
 .div-btns-calculadoras {
   display: flex;
   flex-direction: row;
+  width: 100%;
   align-items: center;
 }
 /*estilo del enlace para ir a la calculadora*/
@@ -385,7 +386,7 @@ body {
   border: 2px solid var(--borde-form);
   border-radius: 10px;
   box-shadow: #00000096 0px 4px 10px;
-  background-color: rgb(64, 117, 224);
+  background-color: rgb(1 55 160);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 
   text-align: center;
@@ -1751,7 +1752,7 @@ summary ::hover {
   /*estilo de la barra de navegacion*/
   .btn-menu {
     display: flex;
-    margin: 10px;
+    margin: 10px 25px;
     align-items: center;
     width: 100%;
     font-size: 20px;
@@ -1838,18 +1839,20 @@ summary ::hover {
   }
   .toggleModo-index {
     display: flex;
+    align-items: center;
     flex-direction: column;
     font-size: 30px;
     position: fixed;
     top: 120px;
     left: 30px;
     background-color: transparent;
-    border-radius: 10px;
+    border-radius: 30px;
     cursor: pointer;
     z-index: 1000;
     padding: 5px;
     color: #ffffff;
     background-color: #000000;
+    box-shadow: #000000 0px 0px 10px;
   }
   .toggleModo i {
     color: var(--color-texto);
@@ -1886,6 +1889,12 @@ summary ::hover {
   .parrafoSec1 {
     background-color: var(--fondo-parrafo);
     color: var(--color-texto);
+
+    margin-top: 0px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
   }
 
   .info1 {
@@ -1935,6 +1944,7 @@ summary ::hover {
   .irAcalcular {
     padding: 15px;
     margin: 5px;
+    width: 100%;
   }
   .botonDescargar {
     margin: 0px;
@@ -1953,10 +1963,6 @@ summary ::hover {
   }
   .div2-seccion1 {
     margin: 10px;
-  }
-
-  .parrafoSec1 {
-    margin-top: 0px;
   }
 
   #contenedor-feriados {
