@@ -19,7 +19,7 @@
   --fondo-informacion-legal: #0d0c0c;
   --summary-fondo: #373737;
   --fondo-body: #000000;
-  --fondo-tajeta-legal: #00000000;
+  --fondo-tajeta-legal: #242323;
   --sello-de-agua: #888888 !important;
   --color-boton-rubro: rgb(35, 35, 35);
   --fondo-resultado: #000000;
@@ -31,7 +31,7 @@ body.modo-claro {
   --fondo-formulario: #d1cece54;
   --color-botones: #ffffff;
   --color-boton-rubro-activo: #0351ca;
-  --borde-form: #000000;
+  --borde-form: #00000000;
   --cuadro-selecInput: rgb(230, 230, 230);
   --tiulo-feriado: #515151;
   --feriado-tipo: rgb(0, 0, 0);
@@ -85,10 +85,9 @@ body {
 .p-actualizacion {
   font-size: 15px;
   color: var(--color-texto);
-  border-radius: 5px;
-  border-radius: 5px;
+  border-radius: 15px 0px 0px 15px;
   box-shadow: #00000059 2px 2px 6px 0px;
-  background-color: var(--fondo-formulario);
+  background-color: var(--tarjeta-feriado);
   padding: 10px;
   z-index: 100;
   position: absolute;
@@ -142,11 +141,11 @@ body {
   width: 100%;
   z-index: 1000;
 }
-.logo {
+.logo-header {
   height: 100px;
   width: auto;
   border-radius: 10px;
-  margin-left: 70px;
+  margin-left: 35px;
 }
 .btn-menu {
   display: none;
@@ -228,7 +227,7 @@ body {
   justify-content: space-between;
   align-items: center;
   flex: 1;
-  margin-top: 180px;
+  margin-top: 110px;
   margin-bottom: 60px;
 }
 
@@ -239,27 +238,239 @@ body {
   margin-left: 50px;
 }
 
-.imagenPrincipal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 100%;
-  background-image: url("../assets/imagenes/bandera-argentina.png");
-  mask-image: linear-gradient(90deg, rgb(0, 0, 0) 0%, transparent);
-}
-
-/*estilo de la imagen de la primer seccion del home*/
-.imgSec1 {
-  mask-image: linear-gradient(90deg, rgb(0, 0, 0) 0%, transparent);
-  max-height: 600px;
-  margin: auto;
-}
-
 .div2-seccion1 {
   margin: 20px;
   margin-left: 80px;
 }
+.btnCalculadoras {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  text-decoration: none;
+  padding: 15px 25px;
+  border: none;
+  box-shadow: #00000096 0px 4px 10px;
+  background: #e51227;
+  background: linear-gradient(
+    26deg,
+    rgba(229, 18, 39, 1) 39%,
+    rgba(40, 92, 193, 1) 87%
+  );
+  border-radius: 10px;
+  width: 30%;
+  cursor: pointer;
 
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  transition: transform 0.3s ease;
+}
+.btnCalculadoras:hover {
+  transform: scale(1.1);
+}
+
+/* conetenedor modal con las card de calculadoras */
+.modalPrincipal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centra la tarjeta verticalmente */
+
+  /* ⚠️ ESTO FALTABA: Ocultar cuando NO tiene la clase .activo */
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.3s ease-in-out,
+    backdrop-filter 0.3s ease-in-out;
+}
+.modalPrincipal.activo {
+  opacity: 1;
+  pointer-events: auto;
+  backdrop-filter: blur(5px);
+}
+.modal-header {
+  display: flex;
+  flex-direction: row;
+  color: #ffffff;
+  margin: 15px;
+  align-items: center;
+  justify-content: space-between;
+}
+.btnCerrarModal {
+  border: none;
+  background: transparent;
+}
+/* El botón recibe el clic */
+#btnCerrarModal {
+  pointer-events: auto;
+  cursor: pointer;
+}
+/* El SVG no interfiere con el clic del botón */
+#btnCerrarModal svg,
+#btnCerrarModal path {
+  pointer-events: none;
+}
+
+.icono-cerrar {
+  color: #ffffff;
+}
+.modal-contenido {
+  transform: translateY(20px);
+  transition: transform 0.3s ease-in-out;
+}
+.modalPrincipal.activo .modal-contenido {
+  transform: translateY(0);
+}
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+}
+.card-bodega {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(251, 252, 252);
+  width: 80%;
+  border-radius: 15px;
+  padding: 8px;
+  position: relative;
+}
+.overlay-contenido-bodega {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  position: absolute;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  padding: 30px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+.overlay-contenido-bodega h3 {
+  font-size: 1.3rem;
+  grid-row: 1;
+  justify-self: start;
+  margin: 20px 0px 0px;
+  z-index: 1900;
+  box-shadow: #00000096 0px 4px 10px;
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 15px;
+  padding: 8px;
+}
+.card-bodega p {
+  font-size: 1.3rem;
+  grid-row: 3;
+  color: rgb(255, 255, 255);
+  backdrop-filter: blur(3px);
+  background: #0000002e;
+  border-radius: 15px;
+  font-size: 1.3rem;
+  justify-self: start;
+  margin: 20px 0px 0px;
+  z-index: 1900;
+  box-shadow: #00000096 0px 4px 10px;
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 15px;
+  padding: 8px;
+}
+.botones-card-bodega {
+  grid-row: 4;
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 30px;
+  margin-top: 20px;
+}
+.card-viña {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(251, 252, 252);
+  width: 80%;
+  border-radius: 15px;
+  padding: 8px;
+  position: relative;
+}
+.overlay-contenido-viña {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  position: absolute;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  padding: 30px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+.overlay-contenido-viña h3 {
+  font-size: 1.3rem;
+  grid-row: 1;
+  justify-self: start;
+  margin: 20px 0px 0px;
+  z-index: 1900;
+  box-shadow: #00000096 0px 4px 10px;
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 15px;
+  padding: 8px;
+}
+.card-viña p {
+  font-size: 1.3rem;
+  grid-row: 3;
+  color: rgb(255, 255, 255);
+  backdrop-filter: blur(3px);
+  background: #0000002e;
+  border-radius: 15px;
+  font-size: 1.3rem;
+  justify-self: start;
+  margin: 20px 0px 0px;
+  z-index: 1900;
+  box-shadow: #00000096 0px 4px 10px;
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 15px;
+  padding: 8px;
+}
+.botones-card-viña {
+  grid-row: 4;
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 30px;
+  margin-top: 20px;
+}
+.img-bodega-card {
+  border-radius: 10px;
+  width: 100%;
+  object-fit: cover;
+}
+.img-viña-card {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* feriados------------------------- */
 .div-feriados {
   display: flex;
   flex-direction: column;
@@ -269,7 +480,6 @@ body {
   margin: 20px;
   margin-right: 80px;
 }
-
 #contenedor-feriados {
   display: flex;
   gap: 15px;
@@ -358,7 +568,7 @@ body {
   margin-top: 35px;
   margin-bottom: 30px;
 
-  font-size: 80px;
+  font-size: 70px;
   color: var(--color-texto);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
@@ -378,27 +588,25 @@ body {
   flex-direction: row;
   width: 100%;
   align-items: center;
+  gap: 20px;
 }
 /*estilo del enlace para ir a la calculadora*/
 .irAcalcular {
-  font-size: 1rem;
+  font-size: 1.3rem;
   color: rgb(255, 255, 255);
-  border: 2px solid var(--borde-form);
   border-radius: 10px;
   box-shadow: #00000096 0px 4px 10px;
   background-color: rgb(1 55 160);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-
   text-align: center;
   text-decoration: none;
   padding: 15px 25px;
-  margin-left: 20px;
-  margin-right: 20px;
+  width: 30%;
+
+  align-items: center;
   transition:
     background-color 0.3s,
     color 0.3s;
-  align-items: center;
-  margin-bottom: 20px;
   transition: transform 0.3s ease;
 }
 .irAcalcular:hover {
@@ -408,23 +616,22 @@ body {
 }
 
 .irAindemnizacion {
-  font-size: 1rem;
+  font-size: 1.3rem;
   color: rgb(255, 255, 255);
-  border: 2px solid var(--borde-form);
   border-radius: 10px;
   box-shadow: #00000096 0px 4px 10px;
   background-color: rgb(212, 35, 35);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-
   text-align: center;
   text-decoration: none;
   padding: 15px 25px;
+  width: 50%;
+
   transition:
     background-color 0.3s,
     color 0.3s;
   align-items: center;
-  margin-bottom: 20px;
-  transition: transform 0.3s ease;
+  width: 40%;
 }
 .irAindemnizacion:hover {
   background-color: rgb(180, 36, 36);
@@ -436,14 +643,23 @@ body {
 .botonDescargar {
   font-size: 1rem;
   color: rgb(255, 255, 255);
-  text-align: center;
-  text-decoration: none;
-  padding: 15px 25px;
-  margin-bottom: 20px;
   border: 2px solid rgb(255, 255, 255);
   box-shadow: #00000096 0px 4px 10px;
   background-color: #000000;
   border-radius: 10px;
+
+  text-align: center;
+  text-decoration: none;
+  padding: 15px 25px;
+  cursor: pointer;
+
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  align-items: center;
+}
+.botonDescargar:hover {
+  transform: scale(1.1);
 }
 
 /*contenedor del primer ejemplo*/
@@ -530,6 +746,19 @@ small {
   margin: 10px;
 }
 
+.resultado h4 {
+  font: lighter 20px "Franklin Gothic Medium";
+  font-size: 20px;
+  color: var(--color-texto);
+  text-align: left;
+}
+.h4-titulo-arriba {
+  margin: 2px 0px 2px 0px;
+}
+.h4-enMedio {
+  margin: 15px 0px 2px 0px;
+}
+
 /*estilo de las lineas divisorias*/
 hr {
   height: 2.4px;
@@ -562,7 +791,7 @@ hr {
   gap: 30px;
   padding: 20px;
   align-items: start;
-  margin-top: 200px;
+  margin-top: 160px;
 }
 
 /* Todo el cuadro de categoria, antiguedad, secundario, vinos, mes, horas extra, obra social */
@@ -576,7 +805,6 @@ hr {
   border: 2px solid var(--borde-form);
   text-align: left;
   background-color: #0000006e;
-  backdrop-filter: blur(12px);
   font-family: "verdana";
   box-shadow: #000000 0px 0px 10px;
   max-height: auto;
@@ -605,73 +833,57 @@ hr {
   border: 1px solid var(--borde-form);
 }
 
-/* botones para seleccionar el tipo de rubro (bodega, viña o contratista) */
-.tipoDeRubro {
+.top-form {
   display: flex;
-  justify-content: space-between;
-  margin: 10px;
+  align-items: center;
 }
-.btnBodega {
-  color: #ffffff;
-  font-size: 20px;
-  border-radius: 5px;
-  border: solid 1px rgb(98, 97, 97);
-  padding: 5px;
-  background-color: var(--color-boton-rubro);
-  cursor: pointer;
-}
-.btnBodega:hover {
-  background: var(--color-boton-rubro-activo);
-  color: #ffffff !important;
-  transition: all 0.1s ease;
-}
-.btnBodega.activo {
-  background: var(--color-boton-rubro-activo);
-  color: #ffffff !important;
-}
-.btnViña {
-  color: #ffffff;
-  font-size: 20px;
-  border-radius: 5px;
-  border: solid 1px rgb(98, 97, 97);
-  padding: 5px;
-  background-color: var(--color-boton-rubro);
-  cursor: pointer;
-}
-.btnViña:hover {
-  background: var(--color-boton-rubro-activo);
-  color: #ffffff !important;
-  transition: all 0.1s ease;
-}
-.btnViña.activo {
-  background: var(--color-boton-rubro-activo);
-  color: #ffffff !important;
-}
-.btnContrato {
-  color: #ffffff;
-  font-size: 20px;
-  border-radius: 5px;
-  border: solid 1px rgb(98, 97, 97);
-  padding: 5px;
-  background-color: var(--color-boton-rubro);
-  cursor: pointer;
-}
-.btnContrato:hover {
-  background: var(--color-boton-rubro-activo);
-  color: #ffffff !important;
-  transition: all 0.1s ease;
-}
-.btnContrato.activo {
-  background: var(--color-boton-rubro-activo);
-  color: #ffffff !important;
+.icono-form-top {
+  color: var(--color-boton-rubro-activo);
 }
 
+.btnPagoQuincenal {
+  color: #ffffff;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: solid 1px rgb(98, 97, 97);
+  background-color: var(--color-boton-rubro);
+  cursor: pointer;
+  width: 100%;
+  padding: 5px;
+}
+.btnPagoQuincenal:hover {
+  background: var(--color-boton-rubro-activo);
+  color: #ffffff !important;
+  transition: all 0.1s ease;
+}
+.btnPagoQuincenal.activo {
+  background: var(--color-boton-rubro-activo);
+  color: #ffffff !important;
+}
+.btnPagoMensual {
+  color: #ffffff;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: solid 1px rgb(98, 97, 97);
+  background-color: var(--color-boton-rubro);
+  cursor: pointer;
+  width: 100%;
+  padding: 5px;
+}
+.btnPagoMensual:hover {
+  background: var(--color-boton-rubro-activo);
+  color: #ffffff !important;
+  transition: all 0.1s ease;
+}
+.btnPagoMensual.activo {
+  background: var(--color-boton-rubro-activo);
+  color: #ffffff !important;
+}
 /* botones para seleccionar el tipo de operario (temporal o mensual) */
 .tipoDeOperario {
   display: flex;
-  justify-content: space-evenly;
-  padding: 10px;
-  margin-bottom: 10px;
+  justify-content: space-between;
+  padding: 5px 5px 5px 5px;
   gap: 10px;
 }
 .btnTemp {
@@ -679,9 +891,9 @@ hr {
   font-size: 1rem;
   border-radius: 5px;
   border: solid 1px rgb(98, 97, 97);
-  padding: 5px;
   background-color: var(--color-boton-rubro);
   cursor: pointer;
+  width: 100%;
 }
 .btnTemp:hover {
   background: var(--color-boton-rubro-activo);
@@ -693,9 +905,9 @@ hr {
   font-size: 1rem;
   border-radius: 5px;
   border: solid 1px rgb(98, 97, 97);
-  padding: 5px;
   background-color: var(--color-boton-rubro);
   cursor: pointer;
+  width: 100%;
 }
 .btnMnsual:hover {
   background: var(--color-boton-rubro-activo);
@@ -725,6 +937,7 @@ hr {
   padding: 10px;
   margin: 5px;
   align-items: center;
+  width: 100%;
 
   color: var(--color-texto);
   background-color: var(--fondo-formulario);
@@ -833,7 +1046,6 @@ hr {
 #resultado {
   background-color: var(--fondo-resultado);
   border: 2px solid var(--borde-form);
-  backdrop-filter: blur(12px);
   color: var(--color-texto);
   border-radius: 10px;
   box-shadow: #000000 0px 0px 10px;
@@ -848,8 +1060,10 @@ hr {
 }
 .resultado1 {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
+
   color: var(--color-texto);
 }
 #resultado hr {
@@ -858,6 +1072,9 @@ hr {
   background-color: var(--color-texto);
   width: 100%;
   margin: 10px 0;
+}
+.h4-total {
+  margin: 15px 0px 5px 0px;
 }
 
 .anticipo {
@@ -891,11 +1108,9 @@ hr {
 
 .suspendido {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
   padding: 10px;
-  margin: 5px;
 
   color: var(--color-texto);
   background: var(--fondo-formulario);
@@ -940,7 +1155,6 @@ hr {
 #tipoDespido {
   font-weight: 10;
   color: var(--color-texto);
-  font-size: 20px;
   background-color: var(--cuadro-selecInput);
   font-family: "verdana";
   border-radius: 5px;
@@ -975,6 +1189,20 @@ hr {
 }
 
 #opcionesCat {
+  font-weight: 10;
+  color: var(--color-texto);
+  font-size: 1rem;
+  text-align: left;
+  font-family: "verdana";
+
+  background-color: var(--cuadro-selecInput);
+  border-radius: 5px;
+  border: solid 1px var(--borde-form);
+
+  width: 100%;
+  padding: 5px;
+}
+#opcionesCat-viña {
   font-weight: 10;
   color: var(--color-texto);
   font-size: 1rem;
@@ -1220,7 +1448,7 @@ input[type="radio"]:checked + .radio-btn {
   font-size: 30px;
   font-weight: bold;
   text-align: center;
-  padding: 8px;
+  /* padding: 8px; */
 }
 
 .tituloTotal {
@@ -1271,6 +1499,7 @@ input[type="radio"]:checked + .radio-btn {
   background-color: #19b501;
   border-radius: 10px;
   padding: 3px;
+  margin: 2px;
   text-align: center;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
@@ -1280,6 +1509,8 @@ input[type="radio"]:checked + .radio-btn {
   background-color: #fff700;
   border-radius: 10px;
   padding: 3px;
+  margin: 2px;
+
   text-align: center;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
@@ -1289,6 +1520,8 @@ input[type="radio"]:checked + .radio-btn {
   background-color: #ff0000;
   border-radius: 10px;
   padding: 3px;
+  margin: 2px;
+
   text-align: center;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
@@ -1298,7 +1531,7 @@ input[type="radio"]:checked + .radio-btn {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 5px;
+  /* padding: 5px; */
   gap: 20px;
 }
 
@@ -1477,7 +1710,7 @@ svg .svgGmail {
   justify-content: center;
   justify-items: center;
 
-  background-color: var(--fondo-formulario);
+  background-color: var(--fondo-tajeta-legal);
   backdrop-filter: blur(12px);
   color: var(--color-texto);
   border: 2px solid var(--borde-form);
@@ -1487,9 +1720,8 @@ svg .svgGmail {
 #divPDF {
   display: flex;
   flex-direction: column;
-  width: 100%; /* Obliga al div a usar todo el ancho de la "foto" */
+  width: 100%;
   margin: 0; /* Elimina cualquier centrado automático que lo empuje a la derecha */
-  padding: 10px; /* Dale un pequeño respiro para que las letras no choquen con el borde */
   box-sizing: border-box; /* Evita que el padding agrande el div más del 100% */
 }
 .icono-pdf {
@@ -1666,8 +1898,24 @@ summary ::hover {
 .sello-de-agua {
   content: "SUELDOBODEGA.com.ar";
   position: absolute;
-  top: 98%;
-  left: 50%;
+  top: 77%;
+  left: 75%;
+  transform: translate(-50%, -50%);
+
+  font-size: 20px;
+  font-family: "verdana";
+  font-weight: bold;
+  color: rgba(125, 125, 125, 0.427) !important;
+
+  white-space: nowrap;
+  z-index: 1;
+  pointer-events: none; /* Hace que no interfiera si alguien intenta hacer clic */
+}
+.sello-de-agua-viña {
+  content: "SUELDOBODEGA.com.ar";
+  position: absolute;
+  top: 77%;
+  left: 75%;
   transform: translate(-50%, -50%);
 
   font-size: 20px;
@@ -1683,6 +1931,18 @@ summary ::hover {
 /* solo para celulares */
 .nav-inferior {
   display: none;
+}
+
+/* mostrar u ocultar el input de dias insalubre segun la categoria seleccionada */
+.divInputDiasInsalubre {
+  display: none;
+}
+.divInputDiasInsalubre.visible {
+  display: block;
+  color: var(--color-texto);
+  font-size: 1rem;
+  padding: 5px;
+  background-color: var(--cuadro-selecInput);
 }
 
 @media print {
@@ -1744,19 +2004,20 @@ summary ::hover {
     position: fixed;
     justify-content: space-between;
     width: 100%;
+    height: 110px;
     z-index: 1000;
   }
-  .logo {
-    margin-left: 5px;
+  .logo-header {
+    margin-left: -29px;
   }
   /*estilo de la barra de navegacion*/
   .btn-menu {
     display: flex;
-    margin: 10px 25px;
+    margin: 0px;
     align-items: center;
     width: 100%;
     font-size: 20px;
-    padding: 15px;
+    padding: 10px;
 
     color: var(--color-texto);
     border-radius: 10px;
@@ -1807,9 +2068,12 @@ summary ::hover {
   }
 
   .p-actualizacion {
-    border-radius: 5px;
+    border-radius: 25px 0px 0px 25px;
     box-shadow: #00000059 2px 2px 6px 0px;
-    background-color: var(--fondo-formulario);
+    background-color: var(--fondo-tajeta-legal);
+
+    margin-right: 10px;
+    right: 0px;
   }
 
   /* main */
@@ -1852,7 +2116,7 @@ summary ::hover {
     padding: 5px;
     color: #ffffff;
     background-color: #000000;
-    box-shadow: #000000 0px 0px 10px;
+    box-shadow: #00000066 4px 3px 10px;
   }
   .toggleModo i {
     color: var(--color-texto);
@@ -1930,28 +2194,216 @@ summary ::hover {
     padding-bottom: 100px;
   }
 
+  .btnCalculadoras {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    text-decoration: none;
+    padding: 15px 25px;
+    border: none;
+    box-shadow: #00000096 0px 4px 10px;
+    background: #e51227;
+    background: linear-gradient(
+      26deg,
+      rgba(229, 18, 39, 1) 39%,
+      rgba(40, 92, 193, 1) 87%
+    );
+    border-radius: 10px;
+    width: 100%;
+  }
+  .btnCalculadoras:hover {
+    transition: transform 0.3s ease;
+
+    color: #ffffff !important;
+    transform: scale(1.1);
+  }
+
+  .modalPrincipal {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+
+    background: rgb(0 0 0 / 58%);
+  }
+  .modalPrincipal.activo {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    backdrop-filter: blur(5px);
+  }
+  .modal-contenido {
+    transform: translateY(20px);
+    transition: transform 0.3s ease-in-out;
+  }
+  .grid-cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+  .modal-header {
+    display: flex;
+    flex-direction: row;
+    color: #ffffff;
+    margin: 15px;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .btnCerrarModal {
+    border: none;
+    background: transparent;
+  }
+  .icono-cerrar {
+    color: #ffffff;
+  }
+  .card-bodega {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(251, 252, 252);
+    width: 80%;
+    border-radius: 15px;
+    padding: 8px;
+    position: relative;
+  }
+  .overlay-contenido-bodega {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    padding: 20px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .overlay-contenido-viña {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    padding: 20px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .strong-card {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 2px;
+    border-radius: 10px;
+  }
+  .card-viña {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(251, 252, 252);
+    width: 80%;
+    border-radius: 15px;
+    padding: 8px;
+    position: relative;
+  }
+  .overlay-contenido-bodega h3 {
+    grid-row: 1;
+    justify-self: start;
+    margin: 0px;
+    z-index: 1900;
+
+    box-shadow: #00000096 0px 4px 10px;
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 15px;
+    padding: 8px;
+  }
+  .overlay-contenido-viña h3 {
+    grid-row: 1;
+    justify-self: start;
+    margin: 0px;
+    z-index: 1900;
+
+    box-shadow: #00000096 0px 4px 10px;
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 15px;
+    padding: 8px;
+  }
+  .card-bodega p {
+    grid-row: 3;
+    display: ruby;
+    font-size: 1rem;
+
+    color: rgb(255, 255, 255);
+    backdrop-filter: blur(3px);
+    background: #0000002e;
+    border-radius: 15px;
+  }
+  .card-viña p {
+    grid-row: 3;
+    display: ruby;
+    font-size: 1rem;
+
+    color: rgb(255, 255, 255);
+    backdrop-filter: blur(3px);
+    background: #0000002e;
+    border-radius: 15px;
+  }
+  .botones-card-bodega {
+    grid-row: 4;
+    margin: 0px;
+  }
+  .botones-card-viña {
+    grid-row: 4;
+    margin: 0px;
+  }
+  .img-bodega-card {
+    width: 98%;
+    border-radius: 10px;
+  }
+  .img-viña-card {
+    width: 98%;
+    border-radius: 10px;
+  }
   /* botones para ir a las paginas de la calculadora */
   .div-btns-calculadoras {
     display: flex;
     flex-direction: row;
     margin-top: 20px;
-    justify-content: space-between;
+    gap: 15px;
   }
   .irAindemnizacion {
-    padding: 15px;
-    margin: 0px;
-  }
-  .irAcalcular {
-    padding: 15px;
+    padding: 10px;
     margin: 5px;
     width: 100%;
+    font-size: 1.1rem;
+    border-radius: 15px;
+  }
+  .irAcalcular {
+    padding: 10px;
+    margin: 5px;
+    width: 100%;
+    font-size: 1.1rem;
+    border-radius: 15px;
   }
   .botonDescargar {
     margin: 0px;
+    font-size: 1.3rem;
+    width: 70%;
   }
-  .soloAndroid {
-    display: block;
-    color: #ffffff;
+  .botonDescargar:hover {
+    transition: transform 0.3s ease;
+
+    color: #ffffff !important;
+    transform: scale(1.1);
   }
 
   .div2-seccion1 {
@@ -2075,6 +2527,15 @@ summary ::hover {
     align-items: center;
     justify-items: center;
   }
+
+  .btnMnsual {
+    width: 100%;
+    padding: 5px;
+  }
+  .btnTemp {
+    width: 100%;
+    padding: 5px;
+  }
   .division-version-escritorio {
     display: flex;
     flex-direction: column;
@@ -2103,13 +2564,11 @@ summary ::hover {
     font-size: 1.2em;
     border-radius: 10px;
     border: 1px solid var(--borde-form);
-    background: #0a0a0a;
     background: linear-gradient(
       26deg,
       rgba(10, 10, 10, 0) 79%,
       rgb(196 188 188 / 29%) 100%
     );
-    backdrop-filter: blur(15px);
     font-family: "verdana";
     box-shadow: #000000 0px 0px 10px;
   }
@@ -2120,7 +2579,6 @@ summary ::hover {
     margin-top: 50px;
     border-radius: 10px;
     flex-direction: column;
-    /* background-color: var(--fondo-formulario); */
     background: linear-gradient(
       26deg,
       rgba(10, 10, 10, 0) 79%,
@@ -2225,7 +2683,7 @@ summary ::hover {
     font-size: 17px;
     border-radius: 10px;
     border: 2px solid var(--borde-form);
-    background-color: var(--fondo-formulario);
+    background-color: var(--fondo-tajeta-legal);
     backdrop-filter: blur(12px);
     font-family: "verdana";
     box-shadow: #000000 0px 0px 5px;
@@ -2248,15 +2706,12 @@ summary ::hover {
     align-items: center;
   }
 
-  .tipoDeRubro {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px;
-  }
   .tipoDeOperario {
+    display: flex;
     margin-bottom: 0%;
     padding-top: 0%;
-    gap: 4px;
+    gap: 10px;
+    width: 100%;
   }
 
   .br-sec {
@@ -2344,7 +2799,6 @@ summary ::hover {
     border-radius: 12px;
     box-shadow: #000000 0px 0px 10px;
     background-color: var(--fondo-resultado);
-    backdrop-filter: blur(15px);
     color: rgb(235, 234, 234);
 
     padding-top: 20px;
@@ -2425,12 +2879,30 @@ summary ::hover {
     justify-content: center;
     align-items: center;
   }
+  #divPDF {
+    padding: 15px;
+  }
   /* MARCA DE AGUA PARA EL PDF */
   .fuerza-pdf,
+  .sello-de-agua-viña {
+    content: "SUELDOBODEGA.com.ar";
+    position: absolute;
+    top: 81%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    font-size: 20px;
+    font-family: "verdana";
+    font-weight: bold;
+    color: rgb(194 187 187 / 43%) !important;
+    white-space: nowrap;
+    z-index: 1;
+    pointer-events: none; /* Hace que no interfiera si alguien intenta hacer clic */
+  }
   .sello-de-agua {
     content: "SUELDOBODEGA.com.ar";
     position: absolute;
-    top: 98%;
+    top: 83.2%;
     left: 50%;
     transform: translate(-50%, -50%);
 

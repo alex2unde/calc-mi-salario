@@ -60,7 +60,7 @@
 
   <body class="bodyHome">
     <header class="header">
-      <a href="index.html">
+      <a href="index.html" class="logo-header">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           version="1.1"
@@ -69,7 +69,6 @@
           width="180"
           height="110"
           preserveAspectRatio="none"
-          class="logo-header"
         >
           <path
             transform="translate(0,0)"
@@ -336,28 +335,26 @@
 
     <!-- cartel de mes de paritaria actualizado -->
     <div>
-      <p class="p-actualizacion">🗯 Actualizado: Julio - Agosto.</p>
+      <p class="p-actualizacion">✔ Septiembre - Octubre.</p>
     </div>
 
     <!-- Titulo h1 seccion bienvenida -->
     <main class="sec1">
       <div class="div2-seccion1">
-        <h1 class="h1-home">Calculadora de salario e indemnización</h1>
+        <h1 class="h1-home">Calculadora de indemnización y salario</h1>
         <br />
 
         <p class="parrafoSec1">
           Calculá tu sueldo neto según la escala de<br />
-          <strong>Bodega C.C.T. 85/89</strong> y conocé estimativamente <br />
+          <strong>Bodega C.C.T. 85/89 y de Viña C.C.T. 154/91. </strong>Conocé
+          estimativamente <br />
           lo que te corresponde por <strong>indemnización</strong>.
         </p>
 
         <div class="div-btns-calculadoras">
-          <a class="irAindemnizacion" href="indemnizacion.html"
-            >Indemnización
-          </a>
-          <a class="irAcalcular" href="calculadora.html"
-            >Salario <i class="fa-solid fa-circle-right"></i
-          ></a>
+          <button class="btnCalculadoras" id="btnCalculadoras">
+            Calculadoras
+          </button>
           <button
             id="btnInstalarApp"
             class="botonDescargar"
@@ -365,9 +362,79 @@
           >
             Instalar
           </button>
-          <p class="soloAndroid" style="display: none">
-            Instalar para usar sin internet.
-          </p>
+        </div>
+
+        <div class="modalPrincipal" id="modalPrincipal">
+          <div class="modal-contenido">
+            <div class="modal-header">
+              <h2 class="h2-modal">Elejí una calculadora</h2>
+              <button class="btnCerrarModal" id="btnCerrarModal">
+                <svg
+                  version="1.1"
+                  id="Capa_1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 84 84"
+                  width="32"
+                  height="32"
+                  class="icono-cerrar"
+                >
+                  <path
+                    style="fill: currentColor"
+                    d="M42,0C18.803,0,0,18.807,0,42c0,23.197,18.803,42,42,42c23.193,0,42-18.803,42-42
+    C84,18.807,65.193,0,42,0z M50.643,42l15.303,15.302l-8.643,8.642L42.002,50.643L26.699,65.944l-8.641-8.642L33.359,42
+    l-15.3-15.298l8.641-8.646L42,33.357l15.301-15.299l8.643,8.641L50.643,42z"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <div class="grid-cards">
+              <div class="card-bodega">
+                <img
+                  class="img-bodega-card"
+                  src="assets\imagenes\trabajadores-bodega-card-cropped.webp"
+                />
+                <div class="overlay-contenido-bodega">
+                  <h3>Bodega</h3>
+                  <p>
+                    Calculá tu sueldo neto según la escala de<br />
+                    <strong class="strong-card">Bodega C.C.T. 85/89</strong>
+                  </p>
+                  <div class="botones-card-bodega">
+                    <a class="irAcalcular" href="calculadora.html"
+                      >Salario <i class="fa-solid fa-circle-right"></i
+                    ></a>
+                    <a class="irAindemnizacion" href="indemnizacion.html"
+                      >Indemnización
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-viña">
+                <img
+                  class="img-viña-card"
+                  src="assets\imagenes\trabajadores-viña-card-cropped.webp"
+                />
+                <div class="overlay-contenido-viña">
+                  <h3>Viña</h3>
+
+                  <p>
+                    Calculá tu sueldo neto según la escala de<br />
+                    <strong class="strong-card">Viña C.C.T. 154/91</strong>
+                  </p>
+                  <div class="botones-card-viña">
+                    <a class="irAcalcular" href="calculadora-viña.html"
+                      >Salario <i class="fa-solid fa-circle-right"></i
+                    ></a>
+                    <a class="irAindemnizacion" href="indemnizacion-viña.html"
+                      >Indemnización
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1242,6 +1309,6 @@
         </a>
       </div>
     </footer>
-    <script src="js/controlador-landing.js"></script>
+    <script src="js/controlador-landing.js" defer></script>
   </body>
 </html>

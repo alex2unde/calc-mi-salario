@@ -1,3 +1,35 @@
+import {
+  anioDiasTotales,
+  diasTrabajadosTotales,
+  calcularMes,
+  calcularAños,
+  calcularAntiguedadIndem,
+  calcularAguinaldoProporcional,
+  diasTrabajadosUltAnio,
+  vacacionesSegunAntiguedad,
+  vacacionesProporcionales,
+  vacacionesSAC,
+  vacacionesAdeudadas,
+  vacacionesAdeudadasSAC,
+  diasDelUltimoMes,
+  diasUltMes,
+  valorHora,
+  valorUltimoMes,
+  IntegracionMesDespido,
+  integracionMesDespidoSAC,
+  preAvisoCalculo,
+  SACsobrePreaviso,
+  totalSinCausayCP,
+  totalConCausaOrenuncia,
+  cotizacionDolar,
+  convertirPesosADolares,
+  cotizacionReal,
+  convertirPesosAReales,
+  cotizacionChileno,
+  convertirAchilenos,
+  DIVISOR_JORNALERO,
+} from "./modelo.js";
+
 // boton del menu responsive-----------------------------------------------------------------
 const botonMenu = document.getElementById("menu");
 const navDesplega = document.getElementById("nav__links");
@@ -110,9 +142,7 @@ formularioSug.addEventListener("submit", async (event) => {
   }
 });
 
-async function controladorIndemnizacion(event) {
-  event.preventDefault();
-
+async function controladorIndemnizacion() {
   const divResultado = document.getElementById("resultadoIndemnizacion");
 
   const {
@@ -374,6 +404,13 @@ async function controladorIndemnizacion(event) {
     }
   `;
 }
+
+//boton para calcular
+const formulario = document.getElementById("formulario-indemnizacion");
+formulario.addEventListener("submit", (event) => {
+  event.preventDefault(); //asi no se recarga la pagina al presionar el boton.
+  controladorIndemnizacion();
+});
 
 // 1. Identificamos los elementos una sola vez
 const checkVacaciones = document.getElementById("vacaciones");

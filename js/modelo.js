@@ -1,27 +1,101 @@
-const ASIGNACION_COMUN = 188978;
-const ASIGNACION_AYUDANTE_REPARTO = 196537;
-const ASIGNACION_ESPECIAL = 207875;
-const ASIGNACION_MEDIO_OFICIAL = 215434;
-const ASIGNACION_CALIFICADO = 222994;
-const ASIGNACION_LARGA_DISTANCIA = 230554;
-const ASIGNACION_FOGUISTA = 238112;
-const ASIGNACION_ENCARGADO = 245671;
+//---------------------------------------viña----------------------------------------------
+//valores globales para viña
+//checkbox de trabajo insalubre.
 
-const REFRIGERIO = 192779;
-const sepelio = 15234;
+//mensajes eque aparecen en la impresion mostrando en los resulatdos la antiguedad ya seleccionada.
+export const MENSAJES_ANTIGUEDAD_VINA = {
+  0: "0 a 3 años",
+  1: "3 a 6 años",
+  2: "6 a 9 años",
+  3: "9 a 12 años",
+  4: "12 a 15 años",
+  5: "15 a 18 años",
+  6: "18 a 21 años",
+  7: "21 a 24 años",
+  8: "24 a 27 años",
+  9: "27 a 30 años",
+  10: "mas de 30 años",
+};
 
-const DIVISOR_JORNALERO = 200;
+// suma mensual no remunerativa
+export const ASIGNACION_VINA = 198978;
+// valor mensual por refrigerio
+export const REFRIGERIO_VIÑA = 158016;
+// Subsidio de Sepelio: 40% de un Jornal del obrero Común
+export const SEPELIO_VIÑA = 13068;
 
-function calculoBaseJornal(valorHora, horasDelMes) {
+//se obtiene el % de la antiguedad por categoria.
+export function antiguedadViña(basico) {
+  return basico * 0.025;
+}
+export function valorDiaViña(basico, antiguedadViña) {
+  return (basico + antiguedadViña) / 25;
+}
+//funcion para calcular el valor de la hora segun si es insalubre o no. pero decidi no utilizarlo por ahora para poner en funcionamiento ya.
+// export function valorHoraViña(valorDiaViña, insalubre) {
+//   if (insalubre === true) {
+//     return valorDiaViña / 6;
+//   } else {
+//     return valorDiaViña / 8;
+//   }
+// }
+export function valorHoraViña(valorDiaViña) {
+  return valorDiaViña / 8;
+}
+
+//El Encargado percibirá el 30% sobre el sueldo establecido para el Obrero Común (Art.32)
+function valorEncargado(valorObComun) {
+  return valorObComun * 0.3;
+}
+// El Capataz percibirá el 35% sobre el sueldo establecido para el Obrero Común (Art. 32)
+function valorCapataz(valorObComun) {
+  return valorObComun * 0.35;
+}
+//suma de los haberes percibidos
+export function sumaHaberesViña(
+  basico,
+  antiguedadViñacorrespondiente,
+  presentismo,
+  horasAl50,
+  horasAl100,
+) {
+  return (
+    basico +
+    antiguedadViñacorrespondiente +
+    presentismo +
+    horasAl50 +
+    horasAl100
+  );
+}
+
+//-----------------------------------------bodega--------------------------------------
+// valores globales para bodega
+// asignacion no remunerativa
+const ASIGNACION_COMUN = 195781;
+const ASIGNACION_AYUDANTE_REPARTO = 203612;
+const ASIGNACION_ESPECIAL = 215359;
+const ASIGNACION_MEDIO_OFICIAL = 223190;
+const ASIGNACION_CALIFICADO = 231022;
+const ASIGNACION_LARGA_DISTANCIA = 238853;
+const ASIGNACION_FOGUISTA = 246684;
+const ASIGNACION_ENCARGADO = 254515;
+
+export const REFRIGERIO = 199719;
+export const sepelio = 15783;
+
+export const DIVISOR_JORNALERO = 200;
+
+export function calculoBaseJornal(valorHora, horasDelMes) {
   return valorHora * horasDelMes;
 }
-function diaDelJornal(valorHora) {
+export function diaDelJornal(valorHora) {
   return valorHora * 8;
 }
-function verificarHorasHabiles(mesSeleccionado) {
+//funcion para saber cuantas horas habiles tiene el mes seleccionado.
+export function verificarHorasHabiles(mesSeleccionado) {
   const fechaActual = new Date();
   const anioActual = fechaActual.getFullYear();
-  const diaDeInicio = new Date(anioActual, Number(mesSeleccionado) + 1, 1);
+  const diaDeInicio = new Date(anioActual, Number(mesSeleccionado) - 1, 1);
   const diasDelMes = new Date(anioActual, Number(mesSeleccionado), 0).getDate();
 
   let diaHabil = 0;
@@ -47,8 +121,9 @@ function verificarHorasHabiles(mesSeleccionado) {
 
   let horasHabiles = horasSabado + horasSemana;
 
-  return horasHabiles;
+  return Math.floor(horasHabiles);
 }
+//regex para validar que solo se ingresen numeros en los input.
 function validarNumeros(numeros) {
   const regexNumero = /^\d+$/;
 
@@ -60,36 +135,36 @@ function validarNumeros(numeros) {
     return 0;
   }
 }
-function tituloSiNo(tieneTitulo, titulo) {
+export function tituloSiNo(tieneTitulo, titulo) {
   const valorDelTitulo = tieneTitulo ? titulo : 0;
 
   return valorDelTitulo;
 }
-function valorHora(categoria, divisorJornalero) {
+export function valorHora(categoria, divisorJornalero) {
   return categoria / divisorJornalero;
 }
-function valorHoraConItemsPext(categoria, divisorJornalero, antiguedad) {
+export function valorHoraConItemsPext(categoria, divisorJornalero, antiguedad) {
   return (categoria + antiguedad) / divisorJornalero;
 }
-function horasExtra50(valorHoraCitems) {
+export function horasExtra50(valorHoraCitems) {
   return valorHoraCitems * 1.5;
 }
-function horasExtra100(valorHoraCitems) {
+export function horasExtra100(valorHoraCitems) {
   return valorHoraCitems * 2;
 }
-function valorDiaEfectivo(basico) {
+export function valorDiaEfectivo(basico) {
   return basico / 25;
 }
-function calcularSuspensionEfectivo(diasSuspension, valorDiaSuspension) {
+export function calcularSuspensionEfectivo(diasSuspension, valorDiaSuspension) {
   return diasSuspension * valorDiaSuspension;
 }
-function calcularSuspensionJornal(diasSuspension, valorDiaJornal) {
+export function calcularSuspensionJornal(diasSuspension, valorDiaJornal) {
   return diasSuspension * valorDiaJornal;
 }
 function calculoHorasMes(horasInput, valorHoras) {
   return Number(horasInput) * Number(valorHoras);
 }
-function asignacionNoRem(nombreCategoria) {
+export function asignacionNoRem(nombreCategoria) {
   switch (nombreCategoria) {
     case "Op. Común":
       return ASIGNACION_COMUN;
@@ -103,7 +178,7 @@ function asignacionNoRem(nombreCategoria) {
       return ASIGNACION_CALIFICADO;
     case "Larga distancia/Tonelero":
       return ASIGNACION_LARGA_DISTANCIA;
-    case "Oficiales. Mecanicos tetrabrick. Foguistas. Destiladores":
+    case "Mecanico/ tetrabrick/ Foguista/ Oficial/ Destilador":
       return ASIGNACION_FOGUISTA;
     case "Oficiales toneleros vasija grande. Encargados de sección":
       return ASIGNACION_ENCARGADO;
@@ -111,16 +186,17 @@ function asignacionNoRem(nombreCategoria) {
       return console.log("Error en asignacionNoRem");
   }
 }
-function calculoPresCompleto(basicoComun) {
+export function calculoPresCompleto(basicoComun) {
   return basicoComun * 0.1;
 }
-function calculoPresPerfecto(basicoComun) {
+// Tambien sirve para viña
+export function calculoPresPerfecto(basicoComun) {
   return basicoComun * 0.05;
 }
-function calcularAntiguedad(categoria) {
-  return categoria * 0.01;
+export function calcularAntiguedad(categoria, PORCENTAJE_ANTIGUEDAD) {
+  return categoria * PORCENTAJE_ANTIGUEDAD;
 }
-function sumaHaberes(
+export function sumaHaberes(
   radioMes,
   categoria,
   antiguedad,
@@ -144,7 +220,7 @@ function sumaHaberes(
     return categoria + antiguedad + titulo + horasEx50 + horasEx100;
   }
 }
-function totalNeto(
+export function totalNeto(
   totalHaberes,
   descuentos,
   anticipo,
@@ -161,19 +237,19 @@ function totalNeto(
     dineroEnNegro
   );
 }
-function jubilacion(sueldoBruto) {
+export function jubilacion(sueldoBruto) {
   return sueldoBruto * 0.11;
 }
-function ley19032(sueldoBruto) {
+export function ley19032(sueldoBruto) {
   return sueldoBruto * 0.03;
 }
-function sindicato(sueldoBruto) {
+export function sindicato(sueldoBruto) {
   return sueldoBruto * 0.02;
 }
-function obraSocial(sueldoBruto) {
+export function obraSocial(sueldoBruto) {
   return sueldoBruto * 0.03;
 }
-function totalDescuentos(
+export function totalDescuentos(
   sepelio,
   descuentoJubilacion,
   descuentoLey19032,
@@ -190,14 +266,14 @@ function totalDescuentos(
     suspensiones
   );
 }
-function sueldoFinal(totalSuma, totalDescuentos) {
+export function sueldoFinal(totalSuma, totalDescuentos) {
   return totalSuma - totalDescuentos;
 }
 
 // -------------Indemnizacion-------------------------------------------------
 
 //Dias totales del año de despido.
-function anioDiasTotales(fechaFin) {
+export function anioDiasTotales(fechaFin) {
   const parteFecha = fechaFin.split("-");
   const anio = Number(parteFecha[0]);
   const milisegundosPorDia = 1000 * 60 * 60 * 24;
@@ -212,7 +288,7 @@ function anioDiasTotales(fechaFin) {
 }
 
 //Dias totales del mes de despido.
-function diasDelUltimoMes(fechaFin) {
+export function diasDelUltimoMes(fechaFin) {
   const parteFecha = fechaFin.split("-");
   const anio = Number(parteFecha[0]);
   const mes = Number(parteFecha[1]);
@@ -228,12 +304,12 @@ function diasDelUltimoMes(fechaFin) {
 }
 
 //Liquidacion por antiguedad.
-function calcularAntiguedadIndem(años, mejorSueldo) {
+export function calcularAntiguedadIndem(años, mejorSueldo) {
   return años * mejorSueldo;
 }
 
 //Dias trabajados por el operario.
-function diasTrabajadosTotales(fechaInicio, fechaFin) {
+export function diasTrabajadosTotales(fechaInicio, fechaFin) {
   const fechaIngreso = new Date(fechaInicio);
   const fechaEgreso = new Date(fechaFin);
 
@@ -246,7 +322,7 @@ function diasTrabajadosTotales(fechaInicio, fechaFin) {
 }
 
 //Meses trabajados.
-function calcularMes(fechaInicio, fechaFin) {
+export function calcularMes(fechaInicio, fechaFin) {
   const fechaIngreso = fechaInicio.split("-");
   const fechaEgreso = fechaFin.split("-");
 
@@ -262,7 +338,7 @@ function calcularMes(fechaInicio, fechaFin) {
 }
 
 //Años proporcionales. si años >= 3 meses cuenta un año mas.
-function calcularAños(diasTrabajados) {
+export function calcularAños(diasTrabajados) {
   const años = Math.floor(diasTrabajados / 365);
 
   if (diasTrabajados % 365 >= 90) {
@@ -273,7 +349,7 @@ function calcularAños(diasTrabajados) {
 }
 
 //Dias trabajados el ultimo mes.
-function diasUltMes(fechaFin) {
+export function diasUltMes(fechaFin) {
   const parteFecha = fechaFin.split("-");
   const anio = Number(parteFecha[0]);
   const mes = Number(parteFecha[1]) - 1;
@@ -284,18 +360,19 @@ function diasUltMes(fechaFin) {
 
   const milisegundosPorDia = 1000 * 60 * 60 * 24;
   const milisegundosTrabajados = fechaEgreso - fechaInicioMes;
-  const diasTrabajados = milisegundosTrabajados / milisegundosPorDia;
+  const diasTrabajados =
+    Math.floor(milisegundosTrabajados / milisegundosPorDia) + 1;
 
   return diasTrabajados;
 }
 
 //para saber cuanto le corresponde por el ultimo mes trabajado.
-function valorUltimoMes(diasTrabajadosUltMes, valorHora) {
+export function valorUltimoMes(diasTrabajadosUltMes, valorHora) {
   return diasTrabajadosUltMes * 8 * valorHora;
 }
 
 //Dias trabajados el ultimo añó.
-function diasTrabajadosUltAnio(fechaFin) {
+export function diasTrabajadosUltAnio(fechaFin) {
   const parteFecha = fechaFin.split("-");
   const anio = Number(parteFecha[0]);
   const mes = Number(parteFecha[1]) - 1;
@@ -313,7 +390,7 @@ function diasTrabajadosUltAnio(fechaFin) {
   return diasTrabajados;
 }
 
-function vacacionesSegunAntiguedad(antiguedad) {
+export function vacacionesSegunAntiguedad(antiguedad) {
   if (antiguedad < 5) {
     return 14;
   } else if (antiguedad >= 5 && antiguedad < 10) {
@@ -326,7 +403,7 @@ function vacacionesSegunAntiguedad(antiguedad) {
 }
 
 //Pago de aguinaldo en base a los meses trabajados en el semestre.
-function calcularAguinaldoProporcional(fechaFin, mejorSueldo) {
+export function calcularAguinaldoProporcional(fechaFin, mejorSueldo) {
   const parteFecha = fechaFin.split("-");
   const anio = Number(parteFecha[0]);
   const mes = Number(parteFecha[1]) - 1;
@@ -364,7 +441,7 @@ function calcularAguinaldoProporcional(fechaFin, mejorSueldo) {
 }
 
 //Pago de vacaciones segun los dias trabajados el ultimo año.
-function vacacionesProporcionales(
+export function vacacionesProporcionales(
   diasSegAntiguedad,
   mayorSueldo,
   diasTrabajadosDelAnio,
@@ -377,24 +454,24 @@ function vacacionesProporcionales(
   return vacacionesCorrespondientes * valorDiaVacaciones;
 }
 
-function vacacionesSAC(vacacionesProporcionales) {
+export function vacacionesSAC(vacacionesProporcionales) {
   return vacacionesProporcionales / 12;
 }
 
 //Si le deben vacaciones de años anteriores.
-function vacacionesAdeudadas(diasQueLeDeben, mayorSueldo) {
+export function vacacionesAdeudadas(diasQueLeDeben, mayorSueldo) {
   const valorDiaVacaciones = mayorSueldo / 25;
   return diasQueLeDeben * valorDiaVacaciones;
 }
 
-function vacacionesAdeudadasSAC(deudaVacaciones) {
+export function vacacionesAdeudadasSAC(deudaVacaciones) {
   return deudaVacaciones / 12;
 }
 
 // 1. Menos de 3 meses (Período de prueba)
 // 2. Si ya pasó los 90 días, verificamos si tiene 5 años o menos.
 // 3. Si no es menor a 90 días ni menor a 5 años, por descarte tiene más de 5 años
-function preAvisoCalculo(diasTrabajados, mayorSueldo, antiguedad) {
+export function preAvisoCalculo(diasTrabajados, mayorSueldo, antiguedad) {
   if (diasTrabajados < 90) {
     return mayorSueldo / 2;
   } else if (antiguedad <= 5) {
@@ -404,22 +481,26 @@ function preAvisoCalculo(diasTrabajados, mayorSueldo, antiguedad) {
   }
 }
 
-function SACsobrePreaviso(mayorSueldo) {
+export function SACsobrePreaviso(mayorSueldo) {
   return mayorSueldo / 12;
 }
 
-function IntegracionMesDespido(diasUltMes, mayorSueldo, diasDelMes = 30) {
+export function IntegracionMesDespido(
+  diasUltMes,
+  mayorSueldo,
+  diasDelMes = 30,
+) {
   const diasNoTrabajados = diasDelMes - diasUltMes;
 
   const valorDiaNormal = mayorSueldo / diasDelMes;
 
   return diasNoTrabajados * valorDiaNormal;
 }
-function integracionMesDespidoSAC(integracionMesDespido) {
+export function integracionMesDespidoSAC(integracionMesDespido) {
   return integracionMesDespido / 12;
 }
 
-function totalSinCausayCP(
+export function totalSinCausayCP(
   vacacionesPropo,
   SACvacaciones,
   SACaguinaldo,
@@ -459,7 +540,7 @@ function totalSinCausayCP(
   }
 }
 
-function totalConCausaOrenuncia(
+export function totalConCausaOrenuncia(
   diasTrabajadosDelMes,
   SACsemestre,
   vacacionesNoGozadas,
@@ -477,9 +558,9 @@ function totalConCausaOrenuncia(
   );
 }
 
-//---------------------Dolar-------------------------------------------------
+//---------------------Conversion a dolar, real y chilenos-------------------------------------------------
 
-async function cotizacionDolar() {
+export async function cotizacionDolar() {
   try {
     const respuesta = await fetch("https://dolarapi.com/v1/dolares/blue");
     const datos = await respuesta.json();
@@ -491,7 +572,7 @@ async function cotizacionDolar() {
   }
 }
 
-function convertirPesosADolares(montoEnPesos, cotizacionDolar) {
+export function convertirPesosADolares(montoEnPesos, cotizacionDolar) {
   if (cotizacionDolar) {
     return montoEnPesos / cotizacionDolar;
   } else {
@@ -499,7 +580,7 @@ function convertirPesosADolares(montoEnPesos, cotizacionDolar) {
   }
 }
 
-async function cotizacionReal() {
+export async function cotizacionReal() {
   try {
     const respuesta = await fetch("https://dolarapi.com/v1/cotizaciones/brl");
     const datos = await respuesta.json();
@@ -511,7 +592,7 @@ async function cotizacionReal() {
   }
 }
 
-function convertirPesosAReales(montoEnPesos, cotizacionReal) {
+export function convertirPesosAReales(montoEnPesos, cotizacionReal) {
   if (cotizacionReal) {
     return montoEnPesos / cotizacionReal;
   } else {
@@ -519,7 +600,7 @@ function convertirPesosAReales(montoEnPesos, cotizacionReal) {
   }
 }
 
-async function cotizacionChileno() {
+export async function cotizacionChileno() {
   try {
     const respuesta = await fetch("https://dolarapi.com/v1/cotizaciones/clp");
     const datos = await respuesta.json();
@@ -531,7 +612,7 @@ async function cotizacionChileno() {
   }
 }
 
-function convertirAchilenos(montoEnPesos, cotizacionChileno) {
+export function convertirAchilenos(montoEnPesos, cotizacionChileno) {
   if (cotizacionChileno) {
     return montoEnPesos / cotizacionChileno;
   } else {

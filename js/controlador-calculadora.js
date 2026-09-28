@@ -1,3 +1,37 @@
+import {
+  calculoBaseJornal,
+  diaDelJornal,
+  tituloSiNo,
+  calcularAntiguedad,
+  valorHora,
+  DIVISOR_JORNALERO,
+  valorHoraConItemsPext,
+  horasExtra50,
+  horasExtra100,
+  valorDiaEfectivo,
+  calcularSuspensionEfectivo,
+  asignacionNoRem,
+  calculoPresPerfecto,
+  calculoPresCompleto,
+  verificarHorasHabiles,
+  calcularSuspensionJornal,
+  sumaHaberes,
+  jubilacion,
+  ley19032,
+  sindicato,
+  sepelio,
+  obraSocial,
+  REFRIGERIO,
+  totalDescuentos,
+  totalNeto,
+  cotizacionDolar,
+  convertirPesosADolares,
+  cotizacionReal,
+  convertirPesosAReales,
+  cotizacionChileno,
+  convertirAchilenos,
+} from "./modelo.js";
+
 // boton del menu desplegable responsive-----------------------------------------------------------------
 const botonMenu = document.getElementById("menu");
 const navDesplega = document.getElementById("nav__links");
@@ -26,27 +60,6 @@ btnModo.addEventListener("click", () => {
     iconoModo.classList.add("fa-sun");
   }
 });
-
-// //Botones con el tipo de rubro (Bodega, Viñedo, Contratista)--------------------------------
-// Primero, quitamos la clase "activo" de viña y contratista, para que solo quede activo el de bodega por defecto.
-
-// btnViña.classList.remove("activo");
-// btnContratista.classList.remove("activo");
-// const btnBodega = document.getElementById("Bodega");
-// const btnViña = document.getElementById("Viña");
-// const btnContratista = document.getElementById("Contratista");
-
-// addEventListener("click", () => {
-//   if (rubro === "Viña") {
-//     btnViña.classList.add("activo");
-//     btnBodega.classList.remove("activo");
-//     btnContratista.classList.remove("activo");
-//   } else if (rubro === "Contratista") {
-//     btnContratista.classList.add("activo");
-//     btnBodega.classList.remove("activo");
-//     btnViña.classList.remove("activo");
-//   }
-// });
 
 // Variable global para saber si el operario es efectivo o temporario----------------------
 let tipoDeOperario = "efectivo";
@@ -180,6 +193,7 @@ formularioSug.addEventListener("submit", async (event) => {
   }
 });
 
+//se exporta para usar algunas variables o funciones para el caluculo en viña.
 async function controladorPrincipal() {
   const divResultado = document.getElementById("resultado");
 
@@ -188,7 +202,6 @@ async function controladorPrincipal() {
     elementCategoria,
     selectCategoria,
     valorTitulo,
-    tieneTitulo,
     tieneTituloSi,
     inpHoras50,
     inpHoras100,
@@ -204,8 +217,17 @@ async function controladorPrincipal() {
 
   const secundarioCompleto = tituloSiNo(tieneTituloSi, valorTitulo);
 
-  const antiguedadCalculo = calcularAntiguedad(selectCategoria);
+  //0.01 es el porcentaje de antiguedad que se le suma al basico comun por cada año de antiguedad.
+  const antiguedadCalculo = calcularAntiguedad(selectCategoria, 0.01);
   const antiguedad = antiguedadCalculo * selectAntiguedad;
+  console.log(
+    "Antiguedad calculada: ",
+    antiguedadCalculo,
+    " * ",
+    selectAntiguedad,
+    " = ",
+    antiguedad,
+  );
 
   const precioHora = valorHora(selectCategoria, DIVISOR_JORNALERO);
   //valor de la hora con antiguedad agregada por recibo de balbo.
@@ -228,8 +250,13 @@ async function controladorPrincipal() {
 
   const noRemunerativo = asignacionNoRem(nombreCategoria);
 
-  const presentismoPerfecto = calculoPresPerfecto(basicoComun);
-  const presentismoCompleto = calculoPresCompleto(basicoComun);
+  //no sera variable constante por si hay suspensiones.
+  let presentismoPerfecto = calculoPresPerfecto(basicoComun);
+  let presentismoCompleto = calculoPresCompleto(basicoComun);
+  if (suspenciones > 0) {
+    presentismoPerfecto = 0;
+    presentismoCompleto = 0;
+  }
 
   const radioMesCompleto = document.getElementById("mesCompleto1").checked;
 
@@ -322,91 +349,121 @@ async function controladorPrincipal() {
 
     divResultado.innerHTML = `
 <div id="divPDF">
+
+  <h4 class="h4-titulo-arriba" >Haberes Remunerativos</h4>
+
     <div class="resultado1">
         <span> Basico: </span>
         <span> $${baseJornal.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span> 
     </div>
+
     <div class="resultado1"> 
         <span> Antiguedad: </span>
         <span> $${antiguedad.toLocaleString("es-AR")} </span>
     </div>
+
     <div class="resultado1"> 
         <span> Horas Extra al 50%: </span>
         <span> $${valorHoraAl50.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
     </div> 
+
     <div class="resultado1"> 
         <span> Horas Extra al 100%: </span>
         <span> $${valorHoraAl100.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
     </div> 
+
     <div class="resultado1">
         <span> Suspencion: (${diasSuspension}) dias</span>
         <span> $${SuspensionJornal.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
     </div>
+
     <div class="resultado1">
         <span> Titulo Secundario: </span>
         <span> $${secundarioCompleto.toLocaleString("es-AR")} </span>
     </div> 
+
     ${
       radioMesCompleto
         ? `<div class="resultado1"> 
         <span> Presentismo Perf.: </span>
         <span> $${presentismoPerfecto.toLocaleString("es-AR")} </span>
     </div> 
+
     <div class="resultado1">  
         <span> Presentismo Comp.: </span>
         <span> $${presentismoCompleto.toLocaleString("es-AR")} </span>
     </div>`
         : ""
     }
+
+    <h4 class="h4-enMedio">Haberes No Remunerativos</h4>
+
     <div class="resultado1"> 
         <span> No Remunerativo: </span>
         <span> $${noRemunerativo.toLocaleString("es-AR")} </span>
     </div> 
+
     <div class="resultado1"> 
         <span> Refrigerio: </span>
         <span> $${REFRIGERIO.toLocaleString("es-AR")} </span>
     </div> 
+
     <div class="resultado1">
         <span> Dinero en negro: </span>
         <span> $${dineroEnNegro.toLocaleString("es-AR")} </span>
     </div>
-    <hr>
+
+      <h4 class="h4-enMedio">Deducciones</h4>
+
     <div class="resultado1"> 
         <span> Jubilacion: </span>
         <span> $${jubilacionTemp.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
     </div> 
+
     <div class="resultado1"> 
         <span> Ley 19032: </span>
         <span> $${ley19032Temp.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
     </div> 
+
     <div class="resultado1"> 
         <span> Obra social: </span>
         <span> $${obraSocialTemp.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
     </div>
+
     <div class="resultado1"> 
         <span> Sindicato: </span>
         <span> $${sindicatoTemp.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
     </div> 
+
     <div class="resultado1"> 
         <span> Sepelio: </span>
         <span> $${sepelio.toLocaleString("es-AR")} </span>
     </div>
+
     <div class="resultado1"> 
         <span> Anticipo: </span>
         <span> $${inpAnticipo.toLocaleString("es-AR")} </span>
     </div> 
-    <hr>
+
+  <div class="resultado1">
+<h4 class="h4-total">Total Neto</h4>
+</div>  
+
     <div class="resultadoFinal"> 
         <span class="tituloTotal"> Total: </span>
+
         <div class="resultEnMonedas">
         <span class="tituloEnPesos"> En pesos: </span> <span class="numeroPesos"> $${totalFinalTemp.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
         </div>
+
         <div class="resultEnMonedas no-pdf">
         <span class="tituloEnDolares"> En dolares:  </span> <span class="numeroDolares"> $${totalEnDolares.toLocaleString("en-US", { style: "currency", currency: "USD" })} </span>
         </div>
+
         <div class="resultEnMonedas no-pdf">
         <span class="tituloEnReales"> En reales:  </span> <span class="numeroReal"> ${totalEnReales.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })} </span>
         </div>
+
         <div class="resultEnMonedas no-pdf">
         <span class="tituloEnChilenos"> En chilenos:  </span> <span class="numeroChileno"> ${totalEnChilenos.toLocaleString("es-CL", { style: "currency", currency: "CLP" })} </span>
         </div>
@@ -416,26 +473,34 @@ async function controladorPrincipal() {
   } else {
     divResultado.innerHTML = `
 <div id="divPDF">
+
+  <h4 class="h4-titulo-arriba" >Haberes Remunerativos</h4>
+
     <div class="resultado1">
         <span> Basico: </span>
         <span> $${selectCategoria.toLocaleString("es-AR")} </span> 
     </div> 
+
     <div class="resultado1"> 
         <span> Antiguedad: </span>
         <span> $${antiguedad.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
     </div> 
+
     <div class="resultado1"> 
         <span> Horas Extra al 50%: </span>
         <span> $${valorHoraAl50.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
     </div> 
+
     <div class="resultado1"> 
         <span> Horas Extra al 100%: </span>
         <span> $${valorHoraAl100.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
     </div> 
+
     <div class="resultado1">
         <span> Suspencion: (${diasSuspension}) dias</span>
         <span> $${suspenciones.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
     </div>
+
     <div class="resultado1">
         <span> Titulo Secundario: </span>
         <span> $${secundarioCompleto.toLocaleString("es-AR")} </span>
@@ -452,46 +517,61 @@ async function controladorPrincipal() {
     </div>`
         : ""
     }
+
+    <h4 class="h4-enMedio">Haberes No Remunerativos</h4>
+
     <div class="resultado1"> 
         <span> No Remunerativo: </span>
         <span> $${noRemunerativo.toLocaleString("es-AR")} </span>
     </div> 
+
     <div class="resultado1"> 
         <span> Refrigerio: </span>
         <span> $${REFRIGERIO.toLocaleString("es-AR")} </span>
     </div> 
+
         <div class="resultado1">
         <span> Dinero en negro: </span>
         <span> $${dineroEnNegro.toLocaleString("es-AR")} </span>
     </div>
-    <hr>
+
+ <h4 class="h4-enMedio">Deducciones</h4>
+
     <div class="resultado1"> 
         <span> Jubilacion: </span>
         <span> $${descuentoJubilacion.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
     </div> 
+
     <div class="resultado1"> 
         <span> Ley 19032: </span>
         <span> $${descuentoLey19032.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
     </div> 
+
     <div class="resultado1"> 
         <span> Obra social: </span>
         <span> $${obraSocialDesc.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
     </div>
+
     <div class="resultado1"> 
         <span> Sindicato: </span>
         <span> $${descuentoSindicato.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
     </div> 
+
     <div class="resultado1"> 
         <span> Sepelio: </span>
         <span> $${sepelio.toLocaleString("es-AR")} </span>
     </div>
+
     <div class="resultado1"> 
         <span> Anticipo: </span>
         <span> $${inpAnticipo.toLocaleString("es-AR")} </span>
     </div> 
   
+  <div class="resultado1">
+<h4 class="h4-total">Total Neto</h4>
+</div>  
+
     <div class="resultadoFinal"> 
-        <span class="tituloTotal"> Total: </span>
         <div class="resultEnMonedas">
         <span class="tituloEnPesos"> En pesos:  </span> <span class="numeroPesos"> $${totalFinal.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
         </div>
@@ -512,6 +592,13 @@ async function controladorPrincipal() {
     `;
   }
 }
+
+//boton para calcular
+const formulario = document.getElementById("formulario");
+formulario.addEventListener("submit", (event) => {
+  event.preventDefault(); //asi no se recarga la pagina al presionar el boton.
+  controladorPrincipal();
+});
 
 // Generar PDF.
 const botonDescarga = document.getElementById("botonPDF");

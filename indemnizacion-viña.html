@@ -17,26 +17,25 @@
       gtag("config", "G-Q19W7VFZ97");
     </script>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SB/ Indemnizacion Viña</title>
+    <meta
+      name="description"
+      content="Calculadora de indemnizacion / liquidacion por despido para trabajadores de viña."
+    />
     <link
       rel="icon"
       type="image/png"
       sizes="32x32"
       href="/assets/imagenes/logo-png-192.png"
     />
-    <title>Sueldo bodega / Calculadora</title>
-    <meta
-      name="description"
-      content="Calculadora de sueldo para trabajadores bodega y viña, calcula tu sueldo neto segun el convenio vitivinicola, categorias, adicionales, horas extras y escala salarial."
-    />
     <link rel="stylesheet" href="css/Estylos.css" />
 
     <!-- Vincula el manifiesto para Android/Chrome -->
     <link rel="manifest" href="/manifest.json" />
-
     <!-- Soporte extra para que el ícono funcione perfecto en iPhone/Safari -->
     <link rel="apple-touch-icon" href="/assets/imagenes/logo-png-192.png" />
-
     <!-- Le da el color oscuro a la barra superior del celular -->
     <meta name="theme-color" content="#000000" />
   </head>
@@ -231,20 +230,13 @@
             <a href="#">Calculadoras</a>
             <ul class="navContacto">
               <li><a href="calculadora.html">De salario</a></li>
-              <li><a href="indemnizacion.html">De indemnizacion</a></li>
+              <li><a href="Indemnizacion.html">De indemnizacion</a></li>
             </ul>
           </li>
 
           <li class="infoIndex">
             <a href="index.html#informacion"> Informacion </a>
           </li>
-
-          <!-- <li class="rubros"><a href="#">Rubro</a>
-      <ul class="rubro">
-       <li><a href="#">Bodega</a></li>
-       <li><a href="#">Viñedo</a></li>
-      </ul>
-    </li> -->
 
           <li class="gmail">
             <a href="#">Contacto</a>
@@ -293,295 +285,99 @@
       </nav>
     </header>
 
-    <!-- cartel de actualizacion con fecha -->
-    <div>
-      <p class="p-actualizacion">🗯 Actualizado: Julio - Agosto.</p>
-    </div>
-
     <main class="principal">
-      <form class="items" id="formulario">
-        <div class="top-form">
-          <svg
-            viewBox="0 0 512 512"
-            xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
-            class="icono-form-top"
-            fill="#ca0303"
-          >
-            <g id="Serving_wine">
-              <path
-                d="M418.9666,439.75H371.9353V355.4126a76.2455,76.2455,0,0,0,63.053-74.9653c0-40.8106-18.2947-92.3282-19.0723-94.4986A13.1246,13.1246,0,0,0,403.56,177.25h-89.491a13.1247,13.1247,0,0,0-12.356,8.6987c-.675,1.8853-14.552,41-18.1921,77.9917a13.08,13.08,0,0,0-.376,2.9971c0,.2427.06.47.0728.7095-.3462,4.331-.5769,8.6279-.5769,12.8a76.2437,76.2437,0,0,0,63.0444,74.9643V439.75H298.6541a13.125,13.125,0,1,0,0,26.25H418.9666a13.125,13.125,0,0,0,0-26.25ZM308.8909,280.4473c0-.1241.0149-.26.0149-.3848h99.8176c0,.125.0149.2607.0149.3848a49.9237,49.9237,0,1,1-99.8474,0Z"
-              />
-              <path
-                d="M199.5117,169.6523V111.625h-70v57.9922c-30.9028,13.999-52.5,45.9678-52.5,83.167h87.5V396h-87.5v57.0234A12.9768,12.9768,0,0,0,89.9885,466H239.0347a12.977,12.977,0,0,0,12.977-12.9766V252.7842C252.0117,215.5913,230.408,183.6543,199.5117,169.6523Z"
-              />
-              <path
-                d="M199.5117,59.1592A13.1593,13.1593,0,0,0,186.3523,46H142.6709a13.1592,13.1592,0,0,0-13.1592,13.1592V85.375h70Z"
-              />
-            </g>
-          </svg>
-          <small>Bodega / Fraccionamiento </small>
-        </div>
+      <form class="items-indemnizacion" id="formulario-indemnizacion">
+        <small> Panel de Carga </small>
         <hr />
 
-        <div class="division-version-escritorio">
-          <div class="division-versio-escritorio-1">
-            <!-- botones para elñegir el tipo de liquidacion mensual o quincenal -->
+        <div class="labelsIndem">
+          <label for="opcionesCat" class="cat"
+            >Categoria:
+            <select id="opcionesCat" name="categoria" required>
+              <option value="460493">Obrero Común</option>
+              <option value="483518">Obrero especializado</option>
+              <option value="506543">Obrero con oficio</option>
+              <option value="529567">
+                Tractorista/ Topadoristas/ Choferes
+              </option>
+              <option value="552592">Parraleros/ Injertador</option>
+              <option value="575617">Mecanico</option>
+              <option value="598640">Encargado</option>
+              <option value="621665">Capataz</option>
+            </select>
+          </label>
+        </div>
 
-            <!-- <div class="tipoDeOperario">
-              <button
-                type="button"
-                class="btnTemp"
-                name="tipoPago"
-                id="quincenal"
-                value="1"
-              >
-                Quincenal
-              </button>
+        <div>
+          <label for="fechaInicio" class="labelsIndem">
+            <span>Fecha de ingreso:</span>
+            <input type="date" name="fechaInicio" id="fechaInicio" required />
+          </label>
+        </div>
 
-              <button
-                type="button"
-                class="btnTemp"
-                name="tipoPago"
-                id="mensual"
-                value="2"
-              >
-                Mensual
-              </button>
-            </div> -->
-            <!-- botones para seleccionar el tipo de operario, temporal o efectivo. -->
-            <div class="tipoDeOperario">
-              <button
-                type="button"
-                class="btnTemp"
-                name="tipoOperario"
-                id="temporario"
-                value="1"
-              >
-                Temp./jornalero
-              </button>
+        <div>
+          <label for="fechaFin" class="labelsIndem">
+            <span>Fecha de egreso:</span>
+            <input type="date" name="fechaFin" id="fechaFin" required />
+          </label>
+        </div>
 
-              <button
-                type="button"
-                class="btnMnsual"
-                name="tipoOperario"
-                id="efectivo"
-                value="2"
-              >
-                Efectivo/mensual
-              </button>
-            </div>
-
-            <!-- meses del año -->
-            <label class="mesOpcion" for="opcionesMes" id="selectMes">
-              <span>Seleccione el mes:</span>
-              <select id="opcionesMes">
-                <option value="1">Enero</option>
-                <option value="2">Febrero</option>
-                <option value="3">Marzo</option>
-                <option value="4">Abril</option>
-                <option value="5">Mayo</option>
-                <option value="6">Junio</option>
-                <option value="7">Julio</option>
-                <option value="8">Agosto</option>
-                <option value="9">Septiembre</option>
-                <option value="10">Octubre</option>
-                <option value="11">Noviembre</option>
-                <option value="12">Diciembre</option>
-              </select>
-            </label>
-
-            <!-- categorias y su valor -->
-            <div class="labelsIndem">
-              <label class="cat" for="opcionesCat">
-                <span>Categoria:</span>
-                <select id="opcionesCat">
-                  <option value="590917">Op. Común</option>
-                  <option value="614553">Ayudante de Reparto</option>
-                  <option value="650008">Op. Especializado</option>
-                  <option value="673645">1/2 oficial</option>
-                  <option value="697282">Calificado/Clarkista</option>
-                  <option value="720918">Larga distancia/Tonelero</option>
-                  <option value="744555">
-                    Mecanico/ tetrabrick/ Foguista/ Oficial/ Destilador
-                  </option>
-                  <option value="768192">
-                    Oficiales toneleros vasija grande. Encargados de sección
-                  </option>
-                </select>
-              </label>
-            </div>
-
-            <!-- titulo o secundario completo y presentismo-->
-            <div class="labelsIndem">
-              <div class="secundarioDiv">
-                <span>¿Titulo?</span>
-                <div class="radiosSecundario">
-                  <!-- div para poner los radios en linea. -->
-                  <input
-                    type="radio"
-                    name="titulo"
-                    id="tituloSec1"
-                    value="29546"
-                  />
-
-                  <label class="radio-btn" for="tituloSec1"> Si </label>
-                  <input type="radio" name="titulo" id="tituloSec2" value="0" />
-
-                  <label class="radio-btn" for="tituloSec2">No </label>
-                </div>
-              </div>
-
-              <div class="mes-completo">
-                <span>¿Mes completo?</span>
-
-                <div class="radiosSecundario">
-                  <!-- div para ordenar los radios en linea. -->
-
-                  <input
-                    type="radio"
-                    name="opcion"
-                    value="1"
-                    id="mesCompleto1"
-                  />
-                  <label class="radio-btn" for="mesCompleto1"> Si</label>
-
-                  <input
-                    type="radio"
-                    name="opcion"
-                    value="2"
-                    id="mesCompleto2"
-                  />
-                  <label class="radio-btn" for="mesCompleto2">No </label>
-                </div>
-              </div>
-            </div>
-
-            <div class="div-horasExtra">
-              <div class="div-al50">
-                <label class="horasEx" for="horasEx50">
-                  <span>Horas al 50%</span>
-                  <input
-                    type="number"
-                    name="horasExtra"
-                    id="horasEx50"
-                    min="0"
-                    max="99"
-                    placeholder=" 0"
-                  />
-                </label>
-              </div>
-
-              <div class="div-al100">
-                <label class="horasEx" for="horasEx100">
-                  <span>Horas al 100%</span>
-                  <input
-                    type="number"
-                    name="horasExtra"
-                    id="horasEx100"
-                    min="0"
-                    max="99"
-                    placeholder=" 0"
-                  />
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <div class="division-versio-escritorio-2">
-            <label class="suspendido" for="dias-suspencion">
-              <span>Dias de suspension</span>
-              <input
-                type="number"
-                name="suspendido"
-                id="dias-suspencion"
-                min="0"
-                max="31"
-                placeholder=" 0"
-              />
-
-              <!-- div para el input de horas trabajadas, se muestra solo si el usuario
-        selecciona que no trabajo el mes completo. queda comentado por que no
-        se va a pedir el input de horas trabajadas. Se va a obviar para solo
-        se vera reflejado la diferencia en cuanto a presentismos. -->
-              <!-- <label class="horasTrabajadas" for="horasTrab" id="horasLabel"
-          >Horas trabajadas:
-          <input type="number" id="horasTrab" min="0" max="199" /> -->
-            </label>
-
-            <!-- seleccionar antiguedad -->
-            <label class="ant" for="opcionesAnt">
-              <span>Antiguedad:</span>
-              <select id="opcionesAnt">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="20">20</option>
-                <option value="21">21</option>
-                <option value="22">22</option>
-                <option value="23">23</option>
-                <option value="24">24</option>
-                <option value="25">25</option>
-              </select>
-            </label>
-
-            <div class="plataNegro-anticipo">
-              <label class="enNegro" for="enNegro">
-                <span>Plata en negro</span>
-                <input
-                  type="number"
-                  id="enNegro"
-                  min="0"
-                  max="999999"
-                  placeholder=" 0"
-                />
-              </label>
-
-              <label class="anticipo" for="anticipo">
-                <span>Anticipo</span>
-                <input
-                  type="number"
-                  id="anticipo"
-                  min="0"
-                  max="999999"
-                  placeholder=" 0"
-                />
-              </label>
-            </div>
+        <div class="mayor-sueldo-recuerda">
+          <label for="ultimoSueldo" class="labelsIndem">
+            <span>Mayor sueldo bruto: </span>
+            <input
+              type="number"
+              name="ultimoSueldo"
+              id="ultimoSueldo"
+              required
+            />
+          </label>
+          <div class="cuadro-recuerda">
+            <span class="recuerda"
+              ><strong class="aviso-recuerda">Recuerda:</strong> No incluir
+              horas extras ni conceptos no remunerativos.</span
+            >
           </div>
         </div>
 
-        <div class="calcular">
-          <button class="btnCalc" type="submit" id="calcularBtn">
-            Calcular
-          </button>
+        <div>
+          <label for="tipoDespido" class="labelsIndem">
+            <span>Tipo de despido:</span>
+            <select name="tipoDespido" id="tipoDespido" required>
+              <option value="Sin_causa">Sin causa</option>
+              <option value="Con_causa">Con causa</option>
+              <option value="Renuncia">Renuncia</option>
+            </select>
+          </label>
         </div>
+
+        <div>
+          <label class="labelsIndem">
+            <span>¿Pre aviso?</span>
+            <input type="checkbox" name="preAviso" id="preAviso" />
+          </label>
+        </div>
+
+        <div>
+          <label class="labelsIndem">
+            <span>¿Le deben vaciones?</span>
+            <input type="checkbox" name="vacaciones" id="vacaciones" />
+          </label>
+          <label for="diasVacaciones" class="labelVacacionesDeuda">
+            <span>Dias que le deben:</span>
+            <input type="number" name="diasVacaciones" id="diasVacaciones" />
+          </label>
+        </div>
+
+        <button class="btnCalc" type="submit" id="calcularBtn">Calcular</button>
       </form>
 
       <div class="resumen">
-        <div id="resultado" class="resultado">
-          <small>Detalle</small>
+        <div class="resultadoIndem">
+          <small> Resultado </small>
           <hr />
+          <div id="resultadoIndemnizacion"></div>
         </div>
-
         <div class="compartir_y_btnPDF">
           <button class="btnPDF" id="botonPDF">
             <svg
@@ -648,8 +444,8 @@
 
           <a
             class="compartirWhatsApp"
-            href="https://wa.me/?text=¡Mirá%20esta%20calculadora%20de%20salarios%20de%20bodega!%20%0Ahttps:
-  //https://sueldobodega.com.ar/calculadora.html"
+            href="https://wa.me/?text=¡Mirá%20esta%20calculadora%20de%20indemnización%20de%20bodega!%20%0Ahttps:
+  //https://sueldobodega.com.ar/Indemnizacion.html"
             target="_blank"
           >
             <svg class="iconoW" fill="none" viewBox="0 0 360 362">
@@ -1171,7 +967,7 @@
         <span class="modo-texto">Noche/dia</span>
       </button>
 
-      <a href="indemnizacion.html" class="a-nav-inferior">
+      <a href="calculadora.html" class="a-nav-inferior">
         <svg
           class="icono-calc-nav-inf"
           xmlns="http://www.w3.org/2000/svg"
@@ -1195,7 +991,7 @@
 
           <line x1="16" y1="14" x2="16" y2="14"></line>
           <line x1="16" y1="17" x2="16" y2="17"></line></svg
-        ><span class="modo-texto">Indemnizacion</span></a
+        ><span class="modo-texto">Salario</span></a
       >
       <a href="index.html#feriados" class="a-nav-inferior">
         <svg
@@ -1272,6 +1068,6 @@
     </nav>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script type="module" src="js/controlador-calculadora.js"></script>
+    <script type="module" src="js/controlador-Indemnizacion.js"></script>
   </body>
 </html>

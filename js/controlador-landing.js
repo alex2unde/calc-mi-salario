@@ -9,6 +9,18 @@ if (botonMenu && navDesplega) {
   });
 }
 
+//modal para las calculadoras--------------------------------------------------------------
+const botonPabrirModal = document.getElementById("btnCalculadoras");
+const divOcultoModal = document.getElementById("modalPrincipal");
+const btnCerrarModal = document.getElementById("btnCerrarModal");
+console.log(botonPabrirModal, divOcultoModal);
+botonPabrirModal.addEventListener("click", () => {
+  divOcultoModal.classList.add("activo");
+});
+btnCerrarModal.addEventListener("click", () => {
+  divOcultoModal.classList.remove("activo");
+});
+
 // PWA -------------------------------------------------------------------------------------
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
