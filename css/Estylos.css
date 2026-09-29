@@ -13,7 +13,7 @@
   --cuadro-selecInput: rgba(0, 0, 0, 0.39);
   --borde-form: #888888;
   --tiulo-feriado: #ffff;
-  --feriado-tipo: rgb(234, 255, 0);
+  --feriado-tipo: rgb(70 99 255);
   --tarjeta-feriado: #515151;
   --fondo-parrafo: #151212;
   --fondo-informacion-legal: #0d0c0c;
@@ -517,7 +517,7 @@ body {
 }
 
 .fecha-badge {
-  background: #2786d3;
+  background: #000000;
   color: white;
   padding: 3px 8px;
   border-radius: 5px;
@@ -541,7 +541,7 @@ body {
 
 .dia-nombre {
   font-size: 18px;
-  color: rgb(52, 105, 227);
+  color: rgb(0, 0, 0);
   font-weight: bold;
   border-radius: 5px;
   padding: 3px 8px;
@@ -556,7 +556,7 @@ body {
   font-weight: bold;
   border-radius: 5px;
   padding: 3px 8px;
-  background: #2786d3;
+  background: #000000;
   margin-top: 2px;
   margin-bottom: 0px;
   border: 1px solid #ffffff;
@@ -1710,8 +1710,7 @@ svg .svgGmail {
   justify-content: center;
   justify-items: center;
 
-  background-color: var(--fondo-tajeta-legal);
-  backdrop-filter: blur(12px);
+  background-color: #24232300;
   color: var(--color-texto);
   border: 2px solid var(--borde-form);
   box-shadow: #000000 0px 0px 5px;
@@ -2372,6 +2371,7 @@ summary ::hover {
   .img-viña-card {
     width: 98%;
     border-radius: 10px;
+    height: 231px;
   }
   /* botones para ir a las paginas de la calculadora */
   .div-btns-calculadoras {
@@ -2419,9 +2419,12 @@ summary ::hover {
 
   #contenedor-feriados {
     display: flex;
-    gap: 10px;
+    flex-direction: column;
+    gap: 5px;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 10px;
+    width: 100%;
+    padding: 5px;
   }
   .div-feriados {
     display: flex;
@@ -2430,7 +2433,7 @@ summary ::hover {
     justify-content: center;
     margin-top: 20px;
     margin: 10px;
-    background-color: var(--cuadro-selecInput);
+    width: 100%;
   }
   .titulo-feriados {
     font-size: 24px;
@@ -2453,15 +2456,13 @@ summary ::hover {
   }
   .tarjeta-feriado {
     display: flex;
-    flex-direction: column;
-    background: var(--tarjeta-feriado);
-    backdrop-filter: blur(10px);
+    flex-direction: row;
+    min-width: 100%;
+
+    background: #51515169;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 10px;
-    padding: 15px;
-    text-align: center;
-    max-width: 124px;
-    justify-content: space-between;
+    padding: 5px;
   }
 
   .h2-informacion {
@@ -2683,7 +2684,7 @@ summary ::hover {
     font-size: 17px;
     border-radius: 10px;
     border: 2px solid var(--borde-form);
-    background-color: var(--fondo-tajeta-legal);
+    background-color: #24232300;
     backdrop-filter: blur(12px);
     font-family: "verdana";
     box-shadow: #000000 0px 0px 5px;

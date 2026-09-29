@@ -98,20 +98,20 @@ function obtenerFeriados() {
   const feriados2026 = [
     {
       fecha: "2026-10-12",
-      nombre: "Día del Respeto a la Diversidad Cultural",
-      tipo: "trasladable",
+      nombre: "Día de la raza.",
+      tipo: "Móvil",
     },
     {
       fecha: "2026-11-20",
-      nombre: "Día de la Soberanía Nacional",
-      tipo: "trasladable",
+      nombre: "Soberanía Nacional",
+      tipo: "Móvil",
     },
     {
       fecha: "2026-12-08",
-      nombre: "Inmaculada Concepción de María",
-      tipo: "inamovible",
+      nombre: "Dia de la Virgen María",
+      tipo: "Fijo",
     },
-    { fecha: "2026-12-25", nombre: "Navidad", tipo: "inamovible" },
+    { fecha: "2026-12-25", nombre: "Navidad", tipo: "Fijo" },
   ];
 
   const feriadosFuturos = feriados2026.filter(
@@ -143,7 +143,7 @@ function renderizarFeriados(listaFeriados) {
             <div class="tarjeta-feriado">
                 <span class="fecha-badge">${dia}/${mes}</span>
                 <p class="dia-nombre">${nombreDia}</p>
-                ${faltanDias === 0 ? '<p class="faltan-dias">Hoy</p>' : `<p class="faltan-dias">Faltan ${faltanDias} días</p>`}
+                ${faltanDias === 0 ? '<p class="faltan-dias">Hoy</p>' : `<p class="faltan-dias">En ${faltanDias} días</p>`}
                 <p class="feriado-nombre">${feriado.nombre}</p>
                 <small class="feriado-tipo">${feriado.tipo}</small>
             </div>
