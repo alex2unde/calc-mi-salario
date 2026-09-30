@@ -18,11 +18,11 @@ export const MENSAJES_ANTIGUEDAD_VINA = {
 };
 
 // suma mensual no remunerativa
-export const ASIGNACION_VINA = 198978;
+export const ASIGNACION_VINA = 204949;
 // valor mensual por refrigerio
-export const REFRIGERIO_VIÑA = 158016;
+export const REFRIGERIO_VIÑA = 163389;
 // Subsidio de Sepelio: 40% de un Jornal del obrero Común
-export const SEPELIO_VIÑA = 13068;
+export const SEPELIO_VIÑA = 13512;
 
 //se obtiene el % de la antiguedad por categoria.
 export function antiguedadViña(basico) {
