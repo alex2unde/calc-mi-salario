@@ -1,6 +1,7 @@
-const CACHE_NAME = "bodega-cache-v9";
+const CACHE_NAME = "bodega-cache-v11";
 const urlsToCache = [
   "/",
+  "./",
   "/index.html",
   "/calculadora.html",
   "/indemnizacion.html",
