@@ -449,24 +449,26 @@ async function controladorPrincipal() {
 <h4 class="h4-total">Total Neto</h4>
 </div>  
 
-    <div class="resultadoFinal"> 
-        <span class="tituloTotal"> Total: </span>
+    <div class="resultadoFinal">
+      <div class="resultEnMonedaFinal moneda-pesos">
+        <h4 class="h4-titulo-arriba">Total</h4>
+        <span class="numeroPesos">$${totalFinalTemp.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+      </div>
 
-        <div class="resultEnMonedas">
-        <span class="tituloEnPesos"> En pesos: </span> <span class="numeroPesos"> $${totalFinalTemp.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
+      <div class="div-conversion">
+        <div class="resultEnMonedas no-pdf numeroDolares">
+          <span>${totalEnDolares.toLocaleString("en-US", { style: "currency", currency: "USD" })}</span>
+          <img class="bandera-conversion" src="assets/imagenes/bandera-eeuu.svg" alt="Bandera de Estados Unidos">
         </div>
-
-        <div class="resultEnMonedas no-pdf">
-        <span class="tituloEnDolares"> En dolares:  </span> <span class="numeroDolares"> $${totalEnDolares.toLocaleString("en-US", { style: "currency", currency: "USD" })} </span>
+        <div class="resultEnMonedas no-pdf numeroReal">
+          <span>${totalEnReales.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
+          <img class="bandera-conversion" src="assets/imagenes/bandera-brasil.svg" alt="Bandera de Brasil">
         </div>
-
-        <div class="resultEnMonedas no-pdf">
-        <span class="tituloEnReales"> En reales:  </span> <span class="numeroReal"> ${totalEnReales.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })} </span>
+        <div class="resultEnMonedas no-pdf numeroChileno">
+          <span>${totalEnChilenos.toLocaleString("es-CL", { style: "currency", currency: "CLP" })}</span>
+          <img class="bandera-conversion" src="assets/imagenes/bandera-chile.svg" alt="Bandera de Chile">
         </div>
-
-        <div class="resultEnMonedas no-pdf">
-        <span class="tituloEnChilenos"> En chilenos:  </span> <span class="numeroChileno"> ${totalEnChilenos.toLocaleString("es-CL", { style: "currency", currency: "CLP" })} </span>
-        </div>
+      </div>
     </div>
 </div>
 `;
@@ -568,22 +570,28 @@ async function controladorPrincipal() {
     </div> 
   
   <div class="resultado1">
-<h4 class="h4-total">Total Neto</h4>
 </div>  
 
-    <div class="resultadoFinal"> 
-        <div class="resultEnMonedas">
-        <span class="tituloEnPesos"> En pesos:  </span> <span class="numeroPesos"> $${totalFinal.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </span>
+    <div class="resultadoFinal">
+      <div class="resultEnMonedaFinal moneda-pesos">
+        <h4 class="h4-titulo-arriba">Total</h4>
+        <span class="numeroPesos">$${totalFinal.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+      </div>
+
+      <div class="div-conversion">
+        <div class="resultEnMonedas no-pdf numeroDolares">
+          <span>${totalEnDolares.toLocaleString("en-US", { style: "currency", currency: "USD" })}</span>
+          <img class="bandera-conversion" src="assets/imagenes/bandera-eeuu.svg" alt="Bandera de Estados Unidos">
         </div>
-        <div class="resultEnMonedas no-pdf">
-        <span class="tituloEnDolares"> En dolares:  </span> <span class="numeroDolares"> $${totalEnDolares.toLocaleString("en-US", { style: "currency", currency: "USD" })} </span>
+        <div class="resultEnMonedas no-pdf numeroReal">
+          <span>${totalEnReales.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
+          <img class="bandera-conversion" src="assets/imagenes/bandera-brasil.svg" alt="Bandera de Brasil">
         </div>
-        <div class="resultEnMonedas no-pdf">
-        <span class="tituloEnReales"> En reales:  </span> <span class="numeroReal"> ${totalEnReales.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })} </span>
+        <div class="resultEnMonedas no-pdf numeroChileno">
+          <span>${totalEnChilenos.toLocaleString("es-CL", { style: "currency", currency: "CLP" })}</span>
+          <img class="bandera-conversion" src="assets/imagenes/bandera-chile.svg" alt="Bandera de Chile">
         </div>
-        <div class="resultEnMonedas no-pdf">
-        <span class="tituloEnChilenos"> En chilenos:  </span> <span class="numeroChileno"> ${totalEnChilenos.toLocaleString("es-CL", { style: "currency", currency: "CLP" })} </span>
-        </div>
+      </div>
         <div class="sello-de-agua">
         <span class="sello-texto">SUELDOBODEGA.com.ar</span>
         </div>
@@ -622,6 +630,7 @@ botonDescarga.addEventListener("click", () => {
       useCORS: true, // Importante si usas imágenes o estilos externos
       letterRendering: true,
       scrollY: 0, // Asegura que no se corte si hay scroll en la página
+      ignoreElements: (element) => element.classList.contains("no-pdf"),
     },
     // Cambiamos a A4 y definimos orientación vertical
     jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },

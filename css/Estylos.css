@@ -1,17 +1,17 @@
 :root {
-  --fondo-principal: linear-gradient(
-    349deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 1) 50%,
-    rgb(99, 15, 15) 100%
+  --fondo-principal: radial-gradient(
+    circle at 50% 0%,
+    #3d0e12 0%,
+    #0d0607 70%,
+    #000000 100%
   );
   --color-sec1: #000000;
   --color-texto: #ffffff;
-  --fondo-formulario: #0000006e;
+  --fondo-formulario: rgba(18, 18, 20, 0.65);
   --color-botones: #ffffff;
-  --color-boton-rubro-activo: #ca0303;
+  --color-boton-rubro-activo: linear-gradient(180deg, #d31a28 0%, #8b0811 100%);
   --cuadro-selecInput: rgba(0, 0, 0, 0.39);
-  --borde-form: #888888;
+  --borde-form: rgba(255, 255, 255, 0.12);
   --tiulo-feriado: #ffff;
   --feriado-tipo: rgb(70 99 255);
   --tarjeta-feriado: #515151;
@@ -22,8 +22,9 @@
   --fondo-tajeta-legal: #242323;
   --sello-de-agua: #888888 !important;
   --color-boton-rubro: rgb(35, 35, 35);
-  --fondo-resultado: #000000;
+  --fondo-resultado: #040306;
 }
+
 body.modo-claro {
   --fondo-principal: #e3e3e3;
   --color-sec1: #ffffff;
@@ -98,16 +99,19 @@ body {
 /*body con imagen de fondo en la pagina de calculadora*/
 .bodyCalculadora {
   background-image: var(--fondo-principal);
+  background-color: var(--fondo-body);
   color: var(--color-texto);
 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 
   display: flex;
   flex-direction: column;
   margin: 0;
   padding: 0;
+  min-height: 100vh;
 }
 
 .info1 {
@@ -644,8 +648,7 @@ body {
 .botonDescargar {
   font-size: 1rem;
   color: rgb(255, 255, 255);
-  border: 2px solid rgb(255, 255, 255);
-  box-shadow: #00000096 0px 4px 10px;
+  box-shadow: #f9f6f696 1px 1px 14px 0px;
   background-color: #000000;
   border-radius: 10px;
 
@@ -800,20 +803,53 @@ hr {
   display: flex;
   flex-direction: column;
   color: var(--color-texto);
-  background-color: var(--fondo-formulario);
   font-size: 20px;
   border-radius: 10px;
-  border: 2px solid var(--borde-form);
   text-align: left;
-  background-color: #0000006e;
   font-family: "verdana";
-  box-shadow: #000000 0px 0px 10px;
   max-height: auto;
-
   padding: 20px;
   background-color: var(--fondo-formulario);
   transition: background-color 0.5s ease;
+
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
 }
+
+.bodyCalculadora .items input:not([type="radio"]),
+.bodyCalculadora .items #selectIntercaladas,
+.bodyCalculadora .items #selectFrutalesIntercalados,
+#tipoCultivo {
+  font-weight: 10;
+  color: #767676;
+  font-size: 1rem;
+  text-align: left;
+  font-family: "verdana";
+  background-color: var(--cuadro-selecInput);
+  border-radius: 5px;
+  border: solid 1px var(--borde-form);
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+/* div de input para calc de contratista */
+.labelsContrato {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 5px;
+  color: var(--color-texto);
+  background-color: var(--fondo-formulario);
+  font-size: 1rem;
+  border: solid 0.2px #333236;
+  border-radius: 7px;
+  width: 50%;
+}
+
 .items hr {
   height: 1px;
   border: none;
@@ -904,6 +940,7 @@ hr {
 .btnMnsual {
   color: #fefefe;
   font-size: 1rem;
+  padding: 5px;
   border-radius: 5px;
   border: solid 1px rgb(98, 97, 97);
   background-color: var(--color-boton-rubro);
@@ -938,7 +975,6 @@ hr {
   padding: 10px;
   margin: 5px;
   align-items: center;
-  width: 100%;
 
   color: var(--color-texto);
   background-color: var(--fondo-formulario);
@@ -964,7 +1000,7 @@ hr {
   font-size: 20px;
   border-radius: 10px;
   border: 2px solid var(--borde-form);
-  background-color: var(--fondo-formulario);
+  background-color: var(--fondo-resultado);
   backdrop-filter: blur(12px);
   font-family: "verdana";
   box-shadow: #000000 0px 0px 5px;
@@ -1009,17 +1045,24 @@ hr {
   width: 100%;
   background: var(--fondo-formulario);
 }
+
 .div-al50 {
   width: 100%;
 
   border: solid 0.2px #363232;
   border-radius: 7px;
 }
+.div-al50 span {
+  font-size: 0.9rem;
+}
 .div-al100 {
   width: 100%;
 
   border: solid 0.2px #363232;
   border-radius: 7px;
+}
+.div-al100 span {
+  font-size: 0.87rem;
 }
 #horasEx50 {
   color: var(--color-texto);
@@ -1045,8 +1088,9 @@ hr {
 
 /* cuadro de resultado */
 #resultado {
+  position: relative;
   background-color: var(--fondo-resultado);
-  border: 2px solid var(--borde-form);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: var(--color-texto);
   border-radius: 10px;
   box-shadow: #000000 0px 0px 10px;
@@ -1057,7 +1101,15 @@ hr {
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  /* margin-top: 200px; */
+  max-width: 400px;
+}
+#resultado .sello-de-agua {
+  top: auto;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: none;
+  text-align: center;
 }
 .resultado1 {
   display: flex;
@@ -1160,10 +1212,14 @@ hr {
   font-family: "verdana";
   border-radius: 5px;
   border: solid 1px var(--borde-form);
+  font-size: 1rem;
 
   padding: 5px;
   width: 100%;
   text-align: left;
+}
+.division-versio-escritorio-1 {
+  width: 60%;
 }
 .plataNegro-anticipo {
   display: flex;
@@ -1335,9 +1391,13 @@ input[type="radio"] {
   transition: all 0.2s ease;
 }
 input[type="radio"]:checked + .radio-btn {
-  background-color: #ca0303; /* Tu azul principal */
-  color: #ffffff; /* Texto blanco */
+  color: #ffffff;
   border-color: #f74f4f;
+  background: linear-gradient(180deg, #d31a28 0%, #8b0811 100%);
+  color: #ffffff;
+  box-shadow:
+    0 0 15px rgba(211, 26, 40, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.4);
 }
 
 #enNegro {
@@ -1388,10 +1448,13 @@ input[type="radio"]:checked + .radio-btn {
   font-family: "verdana";
   border-bottom: 2px solid #000000;
   border-right: 2px solid #000000;
-  color: rgb(255, 255, 255);
-  box-shadow: 0px 0px 5px 0px #000000;
   border-radius: 10px;
   border: var(--color-boton-rubro-activo) 2px solid;
+  background: linear-gradient(180deg, #d31a28 0%, #8b0811 100%);
+  color: #ffffff;
+  box-shadow:
+    0 0 15px rgba(211, 26, 40, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.4);
 
   margin-top: 15px;
   width: 100%;
@@ -1488,7 +1551,7 @@ input[type="radio"]:checked + .radio-btn {
 .numeroPesos {
   font-size: 25px;
   color: rgb(0, 0, 0);
-  background-color: #ffffff;
+  background: linear-gradient(180deg, #fffdfd 0%, #d2d0d0 100%);
   border-radius: 10px;
   padding: 3px;
   text-align: center;
@@ -1497,7 +1560,7 @@ input[type="radio"]:checked + .radio-btn {
 .numeroDolares {
   font-size: 20px;
   color: rgb(255, 255, 255);
-  background-color: #19b501;
+  background: linear-gradient(180deg, #37ff23 0%, #0a720c 100%);
   border-radius: 10px;
   padding: 3px;
   margin: 2px;
@@ -1507,7 +1570,7 @@ input[type="radio"]:checked + .radio-btn {
 .numeroReal {
   font-size: 20px;
   color: rgb(0, 0, 0);
-  background-color: #fff700;
+  background: linear-gradient(180deg, #f7f70a 0%, #b6b307 100%);
   border-radius: 10px;
   padding: 3px;
   margin: 2px;
@@ -1518,7 +1581,7 @@ input[type="radio"]:checked + .radio-btn {
 .numeroChileno {
   font-size: 20px;
   color: rgb(255, 255, 255);
-  background-color: #ff0000;
+  background: linear-gradient(180deg, #d31a28 0%, #8b0811 100%);
   border-radius: 10px;
   padding: 3px;
   margin: 2px;
@@ -1529,11 +1592,32 @@ input[type="radio"]:checked + .radio-btn {
 
 .resultEnMonedas {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   /* padding: 5px; */
+  gap: 8px;
+}
+.bandera-conversion {
+  width: 40px;
+  height: 20px;
+  object-fit: cover;
+}
+.resultEnMonedaFinal {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   gap: 20px;
+  margin: 8px 0px 8px 0px;
+}
+
+.bandera-moneda {
+  width: 32px;
+  height: 22px;
+  flex-shrink: 0;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
 }
 
 /* Barra de dezplazamiento para los select */
@@ -1711,9 +1795,9 @@ svg .svgGmail {
   justify-content: center;
   justify-items: center;
 
-  background-color: #24232300;
+  background-color: var(--fondo-resultado);
   color: var(--color-texto);
-  border: 2px solid var(--borde-form);
+  border: 1px solid var(--borde-form);
   box-shadow: #000000 0px 0px 5px;
   cursor: pointer;
 }
@@ -1880,6 +1964,13 @@ summary ::hover {
   flex-shrink: 0;
   vertical-align: middle;
 }
+
+.div-conversion {
+  display: flex;
+  margin-top: 10px;
+  justify-content: flex-end;
+}
+
 /* Estilo para PDF */
 .forzar-PDF {
   background-color: trasnparent !important;
@@ -1976,6 +2067,11 @@ summary ::hover {
 
 /*Diseño responsivo*/
 @media (max-width: 600px) {
+  .div-conversion {
+    display: flex;
+    margin-top: 10px;
+  }
+
   * {
     box-sizing: border-box;
     margin: 0;
@@ -2005,6 +2101,7 @@ summary ::hover {
     justify-content: space-between;
     width: 100%;
     height: 110px;
+    padding-right: 30px;
     z-index: 1000;
   }
   .logo-header {
@@ -2015,7 +2112,6 @@ summary ::hover {
     display: flex;
     margin: 0px;
     align-items: center;
-    width: 100%;
     font-size: 20px;
     padding: 10px;
 
@@ -2039,6 +2135,7 @@ summary ::hover {
     font-family: "verdana";
     background-color: none;
     margin: 0px;
+    padding: 0;
     position: relative;
   }
   .nav__links {
@@ -2532,7 +2629,16 @@ summary ::hover {
     align-items: center;
     justify-items: center;
   }
-
+  .division-versio-escritorio-2 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .division-versio-escritorio-1 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
   .btnMnsual {
     width: 100%;
     padding: 5px;
@@ -2617,6 +2723,9 @@ summary ::hover {
     border-radius: 7px;
     font-family: "verdana";
   }
+  .suspendido {
+    margin: 5px;
+  }
   .secundarioDiv {
     display: flex;
     flex-direction: column;
@@ -2680,16 +2789,14 @@ summary ::hover {
   input[type="radio"]:checked + .radio-btn {
     background-color: var(--color-boton-rubro-activo);
     color: #ffffff; /* Texto blanco */
-    border-color: #ffffff;
   }
 
   .compartirWhatsApp {
     color: var(--color-texto);
     font-size: 17px;
     border-radius: 10px;
-    border: 2px solid var(--borde-form);
-    background-color: #24232300;
-    backdrop-filter: blur(12px);
+    border: 1px solid var(--borde-form);
+    background-color: var(--fondo-resultado);
     font-family: "verdana";
     box-shadow: #000000 0px 0px 5px;
 
@@ -2794,12 +2901,23 @@ summary ::hover {
     padding-bottom: 20px;
   }
 
+  .resumen {
+    color: rgb(255, 255, 255);
+    font-size: 1.2em;
+    font-family: "verdana";
+    width: 100%;
+    margin: 0;
+    grid-column: 1;
+    grid-row: 2;
+    box-sizing: border-box;
+  }
+
   #resultado {
     grid-row: 3;
     font-size: 1em;
     text-align: center;
     padding: 10px;
-    width: 90%px;
+    width: 100%;
     margin: 0;
     border-radius: 12px;
     box-shadow: #000000 0px 0px 10px;
@@ -2869,8 +2987,9 @@ summary ::hover {
     flex-direction: row;
     align-items: stretch;
     justify-content: center;
-    gap: 5px;
+    gap: 20px;
     max-width: 400px;
+    margin-top: 20px;
   }
   .btnPDF {
     font-size: 17px;

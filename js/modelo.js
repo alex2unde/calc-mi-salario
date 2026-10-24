@@ -1,3 +1,110 @@
+//------------------------------contrato--------------------------------------------
+
+// Escala vigente de contratistas de viñas y frutales (octubre de 2026).
+export const PARITARIA_VIGENTE = {
+  cultivos: {
+    vinasProduccion: { rem: 16398.25, noRem: 26002.0 },
+    vinasSinProduccion: { rem: 24376.76, noRem: 38646.67 },
+    frutalesProduccion: { rem: 13625.94, noRem: 21602.42 },
+    frutalesSinProduccion: { rem: 23931.87, noRem: 37941.54 },
+  },
+  intercaladas: {
+    unaHilera: { rem: 1572.74, noRem: 2491.28 },
+    dosHileras: { rem: 2262.01, noRem: 3292.31 },
+    tresHileras: { rem: 2711.42, noRem: 4285.77 },
+  },
+  tareasUnidad: {
+    enguanados: { rem: 234.48, noRem: 361.33 },
+    sinEnguanar: { rem: 181.07, noRem: 289.45 },
+    rodrigones: { rem: 181.07, noRem: 289.45 },
+    cabeceros: { rem: 234.48, noRem: 361.33 },
+  },
+  sepelioFijo: 7708.85,
+  fondoDesempleoPorHa: 1168.27,
+  cuotaExtraPorHa: 848.0,
+};
+
+function sumarTareas(tipoImporte, tareas) {
+  return Object.entries(tareas).reduce((total, [tipoTarea, cantidad]) => {
+    const tarifa = PARITARIA_VIGENTE.tareasUnidad[tipoTarea];
+    return total + (tarifa ? tarifa[tipoImporte] * Number(cantidad || 0) : 0);
+  }, 0);
+}
+
+function calcularSubtotal(
+  tipoImporte,
+  tipoCultivo,
+  hectareas,
+  intercaladas,
+  tareas,
+) {
+  const cultivo = PARITARIA_VIGENTE.cultivos[tipoCultivo];
+  if (!cultivo) return 0;
+
+  const tarifaIntercalada =
+    intercaladas === "ninguna"
+      ? 0
+      : PARITARIA_VIGENTE.intercaladas[intercaladas]?.[tipoImporte] || 0;
+
+  return (
+    (cultivo[tipoImporte] + tarifaIntercalada) * Number(hectareas) +
+    sumarTareas(tipoImporte, tareas)
+  );
+}
+
+// Las tareas se reciben como cantidades por unidad: { enguanados: 2, rodrigones: 1 }.
+// Los importes del cultivo y de las hileras se multiplican por hectáreas.
+export function calcularRemunerativo(
+  tipoCultivo,
+  hectareas,
+  intercaladas,
+  tareas = {},
+) {
+  return calcularSubtotal("rem", tipoCultivo, hectareas, intercaladas, tareas);
+}
+
+export function calcularNoRemunerativo(
+  tipoCultivo,
+  hectareas,
+  intercaladas,
+  tareas = {},
+) {
+  return calcularSubtotal(
+    "noRem",
+    tipoCultivo,
+    hectareas,
+    intercaladas,
+    tareas,
+  );
+}
+
+export function desgloseDescuentos(totalRem, hectareas) {
+  const retencionesDeLey = Number(totalRem) * 0.17;
+  const seguroSepelio = PARITARIA_VIGENTE.sepelioFijo;
+  const fondoDesempleo =
+    PARITARIA_VIGENTE.fondoDesempleoPorHa * Number(hectareas);
+  const cuotaExtraordinaria =
+    PARITARIA_VIGENTE.cuotaExtraPorHa * Number(hectareas);
+
+  return [
+    { nombre: "Retenciones", importe: retencionesDeLey },
+    { nombre: "Sepelio", importe: seguroSepelio },
+    { nombre: "F. Desempleo", importe: fondoDesempleo },
+    { nombre: "Cuota extr.", importe: cuotaExtraordinaria },
+  ];
+}
+
+export function calcularDescuentos(totalRem, hectareas) {
+  return desgloseDescuentos(totalRem, hectareas).reduce(
+    (total, descuento) => total + descuento.importe,
+    0,
+  );
+}
+
+export function calcularSueldoNeto(totalRem, totalNoRem, totalDescuentos) {
+  return Number(totalRem) + Number(totalNoRem) - Number(totalDescuentos);
+}
+
 //---------------------------------------viña----------------------------------------------
 //valores globales para viña
 //checkbox de trabajo insalubre.
