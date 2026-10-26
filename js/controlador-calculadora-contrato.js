@@ -1,3 +1,4 @@
+import { montarNavegacionInferior } from "./navegacion-compartida.js";
 import {
   calcularRemunerativo,
   calcularNoRemunerativo,
@@ -11,6 +12,8 @@ import {
   cotizacionChileno,
   convertirAchilenos,
 } from "./modelo.js";
+
+montarNavegacionInferior();
 
 const tareasPorUnidad = [
   { inputId: "cantMugronEnguanado", tarifa: "enguanados" },

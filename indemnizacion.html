@@ -19,6 +19,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./sw.js").catch((error) => {
+          console.error("Falló el registro del Service Worker:", error);
+        });
+      }
+    </script>
     <title>SB / Indemnizacion Bodega</title>
     <meta
       name="description"
@@ -294,7 +301,7 @@
 
     <main class="principal">
       <form class="items-indemnizacion" id="formulario-indemnizacion">
-        <small> Panel de Carga </small>
+        <small> Indemnizacion bodega </small>
         <hr />
 
         <div class="labelsIndem">
@@ -1076,7 +1083,22 @@
       </div>
     </nav>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+      window.html2pdfReady = new Promise((resolve) => {
+        window.addEventListener("html2pdf-ready", () => resolve(true), {
+          once: true,
+        });
+        window.addEventListener("html2pdf-error", () => resolve(false), {
+          once: true,
+        });
+      });
+    </script>
+    <script
+      async
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+      onload="window.dispatchEvent(new Event('html2pdf-ready'))"
+      onerror="window.dispatchEvent(new Event('html2pdf-error'))"
+    ></script>
     <script type="module" src="js/controlador-Indemnizacion.js"></script>
   </body>
 </html>

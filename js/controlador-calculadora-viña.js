@@ -1,3 +1,4 @@
+import { montarNavegacionInferior } from "./navegacion-compartida.js";
 import {
   valorHora,
   DIVISOR_JORNALERO,
@@ -30,6 +31,8 @@ import {
   cotizacionChileno,
   convertirAchilenos,
 } from "./modelo.js";
+
+montarNavegacionInferior();
 
 //variable dinamica para trabajar con diferentes liquidaciones--------------------------------------------
 // let tipoDePago = "mensual";

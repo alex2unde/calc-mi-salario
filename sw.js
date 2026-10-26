@@ -1,75 +1,106 @@
-const CACHE_NAME = "bodega-cache-v12";
-const urlsToCache = [
-  "./",
+const CACHE_NAME = "bodega-cache-v14";
+const CACHE_PREFIX = "bodega-cache-";
+const URLS_TO_CACHE = [
+  "/",
   "/index.html",
   "/calculadora.html",
-  "/indemnizacion.html",
+  "/calculadora-contrato.html",
   "/calculadora-viña.html",
+  "/indemnizacion.html",
+  "/indemnizacion-viña.html",
   "/css/Estylos.css",
   "/js/controlador-landing.js",
   "/js/controlador-calculadora.js",
-  "/js/controlador-Indemnizacion.js",
+  "/js/controlador-calculadora-contrato.js",
   "/js/controlador-calculadora-viña.js",
+  "/js/controlador-Indemnizacion.js",
+  "/js/navegacion-compartida.js",
   "/js/modelo.js",
   "/manifest.json",
+  "/assets/imagenes/bandera-brasil.svg",
+  "/assets/imagenes/bandera-chile.svg",
+  "/assets/imagenes/bandera-eeuu.svg",
   "/assets/imagenes/logo-png-192.png",
   "/assets/imagenes/logo-png-512.png",
   "/assets/imagenes/trabajadores-bodega-card-cropped.webp",
   "/assets/imagenes/trabajadores-cocechando-card-cropped.webp",
+  "/assets/imagenes/trabajadores-viña-card-cropped.webp",
 ];
 
-// Instalación: Guardamos todos los archivos
 self.addEventListener("install", (event) => {
-  self.skipWaiting(); // <--- TOMA EL CONTROL INMEDIATO
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache)),
+    (async () => {
+      try {
+        const cache = await caches.open(CACHE_NAME);
+        await cache.addAll(URLS_TO_CACHE);
+      } catch (error) {
+        await caches.delete(CACHE_NAME);
+        throw error;
+      }
+    })(),
   );
 });
 
-// Activación: Borramos cachés antiguas y tomamos control de las pestañas
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches
-      .keys()
-      .then((cacheNames) => {
-        return Promise.all(
-          cacheNames.map((cache) => {
-            // Si el nombre de la caché en el navegador NO coincide con la actual, se borra
-            if (cache !== CACHE_NAME) {
-              console.log("Eliminando caché antigua:", cache);
-              return caches.delete(cache);
-            }
-          }),
-        );
-      })
-      .then(() => self.clients.claim()), // Fuerza a todas las pestañas abiertas a usar el nuevo SW
+    (async () => {
+      const cacheNames = await caches.keys();
+      const oldAppCaches = cacheNames.filter(
+        (cacheName) =>
+          cacheName.startsWith(CACHE_PREFIX) && cacheName !== CACHE_NAME,
+      );
+
+      await Promise.all(oldAppCaches.map((cacheName) => caches.delete(cacheName)));
+      await self.clients.claim();
+    })(),
   );
 });
 
+async function getCachedResponse(request) {
+  const cache = await caches.open(CACHE_NAME);
+  const cachedResponse = await cache.match(request, {
+    ignoreSearch: request.mode === "navigate",
+  });
+
+  if (cachedResponse) {
+    return cachedResponse;
+  }
+
+  const networkResponse = await fetch(request);
+
+  if (networkResponse.status === 200 && networkResponse.type === "basic") {
+    try {
+      await cache.put(request, networkResponse.clone());
+    } catch (error) {
+      console.error("No se pudo guardar el recurso en caché:", request.url, error);
+    }
+  }
+
+  return networkResponse;
+}
+
 self.addEventListener("fetch", (event) => {
-  // 1. Ignorar solicitudes que no sean HTTP o HTTPS (como chrome-extension://)
-  if (!event.request.url.startsWith("http")) {
+  const requestUrl = new URL(event.request.url);
+
+  if (
+    event.request.method !== "GET" ||
+    requestUrl.origin !== self.location.origin
+  ) {
     return;
   }
 
   event.respondWith(
-    fetch(event.request)
-      .then((networkResponse) => {
-        // 2. Solo guardamos si la respuesta es válida y exitosa
-        if (
-          networkResponse &&
-          networkResponse.status === 200 &&
-          networkResponse.type === "basic" // Evita también problemas con recursos de terceros opacos
-        ) {
-          const responseToCache = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseToCache);
-          });
+    getCachedResponse(event.request).catch(async (error) => {
+      if (event.request.mode === "navigate") {
+        const cache = await caches.open(CACHE_NAME);
+        const offlinePage = await cache.match("/index.html");
+
+        if (offlinePage) {
+          return offlinePage;
         }
-        return networkResponse;
-      })
-      .catch(() => {
-        return caches.match(event.request);
-      }),
+      }
+
+      throw error;
+    }),
   );
 });

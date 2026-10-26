@@ -1,3 +1,4 @@
+import { montarNavegacionInferior } from "./navegacion-compartida.js";
 import {
   anioDiasTotales,
   diasTrabajadosTotales,
@@ -30,6 +31,8 @@ import {
   DIVISOR_JORNALERO,
 } from "./modelo.js";
 
+montarNavegacionInferior();
+
 // boton del menu responsive-----------------------------------------------------------------
 const botonMenu = document.getElementById("menu");
 const navDesplega = document.getElementById("nav__links");
@@ -38,26 +41,6 @@ const navDesplega = document.getElementById("nav__links");
 botonMenu.addEventListener("click", () => {
   navDesplega.classList.toggle("active");
 });
-const btnModo = document.getElementById("toggleModo");
-// Buscamos específicamente la etiqueta <i> que está adentro del botón
-const iconoModo = btnModo.querySelector("i");
-
-btnModo.addEventListener("click", () => {
-  // 1. Cambiamos el modo de la página
-  document.body.classList.toggle("modo-claro");
-
-  // 2. Cambiamos el ícono
-  if (document.body.classList.contains("modo-claro")) {
-    // Si pasamos a modo claro, sacamos el sol y ponemos la luna
-    iconoModo.classList.remove("fa-sun");
-    iconoModo.classList.add("fa-moon");
-  } else {
-    // Si volvemos a modo oscuro, sacamos la luna y ponemos el sol
-    iconoModo.classList.remove("fa-moon");
-    iconoModo.classList.add("fa-sun");
-  }
-});
-
 function obtencionDeDatos() {
   const selectCategoria = Number(document.getElementById("opcionesCat").value);
   const fechaInit = document.getElementById("fechaInicio").value;
@@ -430,11 +413,16 @@ checkVacaciones.addEventListener("change", function () {
 
 // Generar PDF.
 const botonDescarga = document.getElementById("botonPDF");
-botonDescarga.addEventListener("click", () => {
+botonDescarga.addEventListener("click", async () => {
   const capturaAqui = document.getElementById("divPDF");
 
   if (!capturaAqui) {
     alert("Primero debes realizar el cálculo para generar el PDF.");
+    return;
+  }
+
+  if (!(await window.html2pdfReady)) {
+    alert("No se pudo cargar el generador de PDF. Revisá tu conexión e intentá nuevamente.");
     return;
   }
 

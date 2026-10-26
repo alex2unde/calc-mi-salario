@@ -21,23 +21,6 @@ btnCerrarModal.addEventListener("click", () => {
   divOcultoModal.classList.remove("activo");
 });
 
-// PWA -------------------------------------------------------------------------------------
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker
-      .register("./sw.js")
-      .then((registration) => {
-        console.log(
-          "¡Service Worker registrado con éxito!",
-          registration.scope,
-        );
-      })
-      .catch((error) => {
-        console.log("Falló el registro del Service Worker:", error);
-      });
-  });
-}
-
 let eventoInstalacion;
 const botonInstalar = document.getElementById("btnInstalarApp");
 
@@ -100,6 +83,11 @@ function obtenerFeriados() {
       fecha: "2026-10-12",
       nombre: "Día de la raza.",
       tipo: "Móvil",
+    },
+    {
+      fecha: "2026-11-09",
+      nombre: "Visita papal",
+      tipo: "Fijo",
     },
     {
       fecha: "2026-11-20",

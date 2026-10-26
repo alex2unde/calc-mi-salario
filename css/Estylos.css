@@ -3064,6 +3064,42 @@ summary ::hover {
     background-color: #181b21;
   }
 
+  .nav-inferior > * {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .nav-inferior .btnCalculadoras {
+    width: auto;
+    font-size: inherit;
+    font-weight: normal;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    padding: 5px 2px;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    border-radius: 0;
+    cursor: pointer;
+    transition: none;
+  }
+
+  .nav-inferior .btnCalculadoras:hover {
+    transform: none;
+  }
+
+  .nav-inferior .a-nav-inferior,
+  .nav-inferior .div-sugerencias {
+    padding: 5px 2px;
+  }
+
+  .nav-inferior .modo-texto {
+    font-size: 0.77rem;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
   .div-sugerencias {
     bottom: auto;
     right: auto;
