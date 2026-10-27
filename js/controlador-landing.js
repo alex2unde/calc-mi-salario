@@ -1,3 +1,8 @@
+import { diferenciaEnDias, obtenerAnioLocal, obtenerFeriados } from "./feriados.js";
+import { montarModalFeriados } from "./navegacion-compartida.js";
+
+montarModalFeriados();
+
 //boton del menu responsive-----------------------------------------------------------------
 const botonMenu = document.getElementById("menu");
 const navDesplega = document.getElementById("nav__links");
@@ -69,74 +74,64 @@ if (btnModo) {
   });
 }
 
-// Feriados (Versión offline)
-// ------------------------------------------------------------------------------------------
-function obtenerFeriados() {
-  const contenedor = document.getElementById("contenedor-feriados");
+function renderizarFeriados(contenedor, feriados) {
+  const hoy = new Date();
+  const hoyIso = `${hoy.getFullYear()}-${String(hoy.getMonth() + 1).padStart(2, "0")}-${String(hoy.getDate()).padStart(2, "0")}`;
+  const proximos = feriados
+    .filter((feriado) => feriado.fecha >= hoyIso)
+    .slice(0, 1);
 
-  // ESCUDO: Si no estamos en la página de inicio (no hay contenedor), cortamos la función acá
-  if (!contenedor) return;
+  contenedor.replaceChildren();
 
-  const hoy = new Date().toISOString().split("T")[0];
-  const feriados2026 = [
-    {
-      fecha: "2026-10-12",
-      nombre: "Día de la raza.",
-      tipo: "Móvil",
-    },
-    {
-      fecha: "2026-11-09",
-      nombre: "Visita papal",
-      tipo: "Fijo",
-    },
-    {
-      fecha: "2026-11-20",
-      nombre: "Soberanía Nacional",
-      tipo: "Móvil",
-    },
-    {
-      fecha: "2026-12-08",
-      nombre: "Dia de la Virgen María",
-      tipo: "Fijo",
-    },
-    { fecha: "2026-12-25", nombre: "Navidad", tipo: "Fijo" },
-  ];
+  if (proximos.length === 0) {
+    const mensaje = document.createElement("p");
+    mensaje.className = "cargando";
+    mensaje.textContent = `No hay feriados próximos disponibles para ${obtenerAnioLocal()}.`;
+    contenedor.append(mensaje);
+    return;
+  }
 
-  const feriadosFuturos = feriados2026.filter(
-    (feriado) => feriado.fecha >= hoy,
-  );
-  const proximosTres = feriadosFuturos.slice(0, 3);
-  renderizarFeriados(proximosTres);
-}
-
-function renderizarFeriados(listaFeriados) {
-  const contenedor = document.getElementById("contenedor-feriados");
-
-  // ESCUDO DE SEGURIDAD EXTRA
-  if (!contenedor) return;
-
-  contenedor.innerHTML = "";
-
-  listaFeriados.forEach((feriado) => {
+  proximos.forEach((feriado) => {
     const [anio, mes, dia] = feriado.fecha.split("-");
-    const fechaObjeto = new Date(anio, mes - 1, dia);
-    let nombreDia = fechaObjeto.toLocaleDateString("es-AR", {
+    const fecha = new Date(Number(anio), Number(mes) - 1, Number(dia));
+    const diasRestantes = diferenciaEnDias(feriado.fecha);
+    const tarjeta = document.createElement("div");
+    tarjeta.className = "tarjeta-feriado";
+
+    const fechaBadge = document.createElement("span");
+    fechaBadge.className = "fecha-badge";
+    fechaBadge.textContent = `${dia}/${mes}`;
+
+    const diaNombre = document.createElement("p");
+    diaNombre.className = "dia-nombre";
+    diaNombre.textContent = fecha.toLocaleDateString("es-AR", {
       weekday: "long",
     });
-    let faltanDias = Math.ceil(
-      (fechaObjeto - new Date()) / (1000 * 60 * 60 * 24),
-    );
 
-    contenedor.innerHTML += `
-            <div class="tarjeta-feriado">
-                <span class="fecha-badge">${dia}/${mes}</span>
-                <p class="dia-nombre">${nombreDia}</p>
-                ${faltanDias === 0 ? '<p class="faltan-dias">Hoy</p>' : `<p class="faltan-dias">En ${faltanDias} días</p>`}
-                <p class="feriado-nombre">${feriado.nombre}</p>
-                <small class="feriado-tipo">${feriado.tipo}</small>
-            </div>
-        `;
+    const cuentaRegresiva = document.createElement("p");
+    cuentaRegresiva.className = "faltan-dias";
+    cuentaRegresiva.textContent =
+      diasRestantes === 0 ? "Hoy" : `En ${diasRestantes} días`;
+
+    const nombre = document.createElement("p");
+    nombre.className = "feriado-nombre";
+    nombre.textContent = feriado.nombre;
+
+    const tipo = document.createElement("small");
+    tipo.className = "feriado-tipo";
+    tipo.textContent = feriado.tipo;
+
+    tarjeta.append(fechaBadge, diaNombre, cuentaRegresiva, nombre, tipo);
+    contenedor.append(tarjeta);
   });
 }
 
-window.onload = obtenerFeriados;
+const contenedorFeriados = document.getElementById("contenedor-feriados");
+
+if (contenedorFeriados) {
+  obtenerFeriados(obtenerAnioLocal(), (datos) => {
+    renderizarFeriados(contenedorFeriados, datos.feriados);
+  }).then((datos) => {
+    renderizarFeriados(contenedorFeriados, datos.feriados);
+  });
+}

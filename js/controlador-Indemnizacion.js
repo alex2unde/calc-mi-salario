@@ -344,41 +344,57 @@ async function controladorIndemnizacion() {
     ${
       tipoDespido === "Sin_causa"
         ? `
+    <div class="resultado1">
+      <h4 class="h4-total">Total Neto</h4>
+    </div>
     <div class="resultadoFinal">
-        <p class="tituloTotal">Total indemnización sin causa: </p>
-        <div class="resultEnMonedas">
-            <span class="tituloEnPesos"> En pesos: </span> <span> <span class="numeroPesos">$${totalIndemnizacionSCP.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> </span>
+        <div class="resultEnMonedaFinal moneda-pesos">
+            <h4 class="h4-titulo-arriba">Total</h4>
+            <span class="numeroPesos">$${totalIndemnizacionSCP.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
         </div>
-        <div class="resultEnMonedas no-pdf">
-            <span class="tituloEnDolares"> En dólares: </span> <span class="numeroDolares">$${totalEnDolaresSC.toLocaleString("en-US", { style: "currency", currency: "USD" })}</span>
+        <div class="div-conversion">
+          <div class="resultEnMonedas no-pdf numeroDolares">
+            <span>${totalEnDolaresSC.toLocaleString("en-US", { style: "currency", currency: "USD" })}</span>
+            <img class="bandera-conversion" src="assets/imagenes/bandera-eeuu.svg" alt="Bandera de Estados Unidos">
+          </div>
+          <div class="resultEnMonedas no-pdf numeroReal">
+            <span>${totalEnRealesSC.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
+            <img class="bandera-conversion" src="assets/imagenes/bandera-brasil.svg" alt="Bandera de Brasil">
+          </div>
+          <div class="resultEnMonedas no-pdf numeroChileno">
+            <span>${totalEnChilenosSC.toLocaleString("es-CL", { style: "currency", currency: "CLP" })}</span>
+            <img class="bandera-conversion" src="assets/imagenes/bandera-chile.svg" alt="Bandera de Chile">
+          </div>
         </div>
-        <div class="resultEnMonedas no-pdf">
-            <span class="tituloEnReales"> En reales: </span> <span class="numeroReal">${totalEnRealesSC.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
-        </div>   
-        <div class="resultEnMonedas no-pdf">
-            <span class="tituloEnChilenos"> En pesos chilenos: </span> <span class="numeroChileno">${totalEnChilenosSC.toLocaleString("es-CL", { style: "currency", currency: "CLP" })}</span>
-        </div> 
-                <div class="sello-de-agua">
+        <div class="sello-de-agua">
         <span class="sello-texto">SUELDOBODEGA.com.ar</span>
         </div>
     </div>
   `
         : `
+    <div class="resultado1">
+      <h4 class="h4-total">Total Neto</h4>
+    </div>
     <div class="resultadoFinal">
-        <p class="tituloTotal">Total indemnización con causa: </p>
-        <div class="resultEnMonedas">
-            <span class="tituloEnPesos"> En pesos: </span> <span> <span class="numeroPesos">$${totalIndemnizacionConCausa.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> </span>
+        <div class="resultEnMonedaFinal moneda-pesos">
+            <h4 class="h4-titulo-arriba">Total</h4>
+            <span class="numeroPesos">$${totalIndemnizacionConCausa.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
         </div>
-        <div class="resultEnMonedas no-pdf">
-            <span class="tituloEnDolares"> En dólares: </span> <span class="numeroDolares">$${totalEnDolaresCC.toLocaleString("en-US", { style: "currency", currency: "USD" })}</span>
+        <div class="div-conversion">
+          <div class="resultEnMonedas no-pdf numeroDolares">
+            <span>${totalEnDolaresCC.toLocaleString("en-US", { style: "currency", currency: "USD" })}</span>
+            <img class="bandera-conversion" src="assets/imagenes/bandera-eeuu.svg" alt="Bandera de Estados Unidos">
+          </div>
+          <div class="resultEnMonedas no-pdf numeroReal">
+            <span>${totalEnRealesCC.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
+            <img class="bandera-conversion" src="assets/imagenes/bandera-brasil.svg" alt="Bandera de Brasil">
+          </div>
+          <div class="resultEnMonedas no-pdf numeroChileno">
+            <span>${totalEnChilenosCC.toLocaleString("es-CL", { style: "currency", currency: "CLP" })}</span>
+            <img class="bandera-conversion" src="assets/imagenes/bandera-chile.svg" alt="Bandera de Chile">
+          </div>
         </div>
-        <div class="resultEnMonedas no-pdf">
-            <span class="tituloEnReales"> En reales: </span> <span class="numeroReal">${totalEnRealesCC.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
-        </div>
-        <div class="resultEnMonedas no-pdf">
-            <span class="tituloEnChilenos"> En pesos chilenos: </span> <span class="numeroChileno">${totalEnChilenosCC.toLocaleString("es-CL", { style: "currency", currency: "CLP" })}</span>
-        </div>
-                <div class="sello-de-agua">
+        <div class="sello-de-agua">
         <span class="sello-texto">SUELDOBODEGA.com.ar</span>
         </div>
     </div>

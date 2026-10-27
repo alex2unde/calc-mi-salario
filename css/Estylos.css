@@ -505,6 +505,43 @@ body {
   margin-top: 10px;
 }
 
+.titulo-feriados-boton {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 6px 12px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.titulo-feriados-boton::after {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  content: "+";
+  font-family: Arial, sans-serif;
+  font-size: 1.5rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.titulo-feriados-boton[aria-expanded="true"]::after {
+  content: "×";
+  font-size: 1.8rem;
+}
+
+.titulo-feriados-boton:focus-visible {
+  outline: 3px solid #ffca28;
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
 .tarjeta-feriado {
   display: flex;
   flex-direction: column;
@@ -1273,7 +1310,55 @@ hr {
   width: 100%;
   padding: 5px;
 }
+.cat {
+  width: stretch;
+}
+.cat-y-tipo-despido {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 5px;
+  color: var(--color-texto);
+  background-color: var(--fondo-formulario);
+  font-size: 1rem;
+  border: solid 0.2px #333236;
+  border-radius: 7px;
+}
+.tipoDespido {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+  width: stretch;
 
+  padding: 10px;
+  margin: 5px;
+  color: var(--color-texto);
+  background-color: var(--fondo-formulario);
+  font-size: 1rem;
+}
+
+.fecha-ingreso-egreso {
+  display: flex;
+  flex-direction: row;
+}
+.label-ingreso-egreso {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: stretch;
+
+  padding: 10px;
+  margin: 5px;
+  color: var(--color-texto);
+  background-color: var(--fondo-formulario);
+  font-size: 1rem;
+  border: solid 0.2px #333236;
+  border-radius: 7px;
+}
 #diasVacaciones {
   color: rgb(255, 255, 255);
   font-size: 20px;
@@ -1987,34 +2072,20 @@ summary ::hover {
 /* MARCA DE AGUA PARA EL PDF */
 .fuerza-pdf,
 .sello-de-agua {
-  content: "SUELDOBODEGA.com.ar";
-  position: absolute;
-  top: 77%;
-  left: 75%;
-  transform: translate(-50%, -50%);
-
   font-size: 20px;
   font-family: "verdana";
   font-weight: bold;
   color: rgba(125, 125, 125, 0.427) !important;
 
-  white-space: nowrap;
   z-index: 1;
   pointer-events: none; /* Hace que no interfiera si alguien intenta hacer clic */
 }
 .sello-de-agua-viña {
-  content: "SUELDOBODEGA.com.ar";
-  position: absolute;
-  top: 77%;
-  left: 75%;
-  transform: translate(-50%, -50%);
-
   font-size: 20px;
   font-family: "verdana";
   font-weight: bold;
   color: rgba(125, 125, 125, 0.427) !important;
 
-  white-space: nowrap;
   z-index: 1;
   pointer-events: none; /* Hace que no interfiera si alguien intenta hacer clic */
 }
@@ -2706,6 +2777,14 @@ summary ::hover {
     margin: 15px 0;
   }
 
+  .fecha-ingreso-egreso {
+    flex-direction: row;
+    max-width: fit-content;
+  }
+  .label-ingreso-egreso {
+    width: 100%;
+  }
+
   .labelsIndem {
     display: flex;
     flex-direction: row;
@@ -2795,8 +2874,8 @@ summary ::hover {
     color: var(--color-texto);
     font-size: 17px;
     border-radius: 10px;
-    border: 1px solid var(--borde-form);
-    background-color: var(--fondo-resultado);
+    border: var(--borde-form) 2px solid;
+    background-color: var(--fondo-formulario);
     font-family: "verdana";
     box-shadow: #000000 0px 0px 5px;
 
@@ -2995,6 +3074,8 @@ summary ::hover {
     font-size: 17px;
     padding: 5px;
     max-width: 180px;
+    border: var(--borde-form) 2px solid;
+    background-color: var(--fondo-formulario);
   }
   .icono-pdf {
     height: 80px;
@@ -3009,32 +3090,20 @@ summary ::hover {
   /* MARCA DE AGUA PARA EL PDF */
   .fuerza-pdf,
   .sello-de-agua-viña {
-    content: "SUELDOBODEGA.com.ar";
-    position: absolute;
-    top: 81%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
     font-size: 20px;
     font-family: "verdana";
     font-weight: bold;
     color: rgb(194 187 187 / 43%) !important;
-    white-space: nowrap;
+
     z-index: 1;
     pointer-events: none; /* Hace que no interfiera si alguien intenta hacer clic */
   }
   .sello-de-agua {
-    content: "SUELDOBODEGA.com.ar";
-    position: absolute;
-    top: 83.2%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
     font-size: 20px;
     font-family: "verdana";
     font-weight: bold;
     color: rgb(194 187 187 / 43%) !important;
-    white-space: nowrap;
+
     z-index: 1;
     pointer-events: none; /* Hace que no interfiera si alguien intenta hacer clic */
   }
@@ -3165,5 +3234,401 @@ summary ::hover {
   }
   .logoFooter {
     height: 50px;
+  }
+}
+
+.modal-feriados {
+  position: fixed;
+  inset: 0;
+  isolation: isolate;
+  z-index: 1200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  background: rgb(0 0 0 / 72%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.modal-feriados.activo {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-feriados.detalle-abierto::before {
+  position: fixed;
+  z-index: 1;
+  inset: 0;
+  background: rgb(0 0 0 / 48%);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  content: "";
+}
+
+body.detalle-feriados-abierto {
+  overflow: hidden;
+}
+
+.contenido-modal-feriados {
+  width: min(1200px, 100%);
+  max-height: min(92dvh, 960px);
+  overflow: auto;
+  padding: 20px;
+  border: 1px solid var(--borde-form);
+  border-radius: 16px;
+  color: var(--color-texto);
+  background: var(--fondo-body);
+  box-shadow: 0 12px 40px rgb(0 0 0 / 40%);
+}
+
+.encabezado-modal-feriados {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.encabezado-modal-feriados h2 {
+  margin: 0;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+}
+
+.selector-anio-feriados {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 8px;
+  font-size: 1.15rem;
+}
+
+.selector-anio-feriados button,
+.btn-cerrar-feriados {
+  display: inline-grid;
+  min-width: 44px;
+  min-height: 44px;
+  place-items: center;
+  color: var(--color-texto);
+  border: 1px solid var(--borde-form);
+  border-radius: 8px;
+  background: var(--fondo-formulario);
+  cursor: pointer;
+}
+
+.selector-anio-feriados button {
+  font-size: 1.5rem;
+}
+
+.btn-cerrar-feriados svg {
+  width: 26px;
+  height: 26px;
+  fill: currentColor;
+}
+
+.estado-datos-feriados {
+  margin: 12px 0;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.estado-datos-feriados[data-verificacion="fallida"] {
+  padding: 10px 12px;
+  border-left: 4px solid #e6a700;
+  background: rgb(230 167 0 / 14%);
+}
+
+.leyenda-feriados {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin: 12px 0 18px;
+  font-size: 1rem;
+}
+
+.leyenda-feriados span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.leyenda-feriados i {
+  width: 18px;
+  height: 18px;
+  border: 2px solid currentColor;
+  border-radius: 5px;
+}
+
+.leyenda-pasado {
+  background: #d3d6dc;
+}
+
+.leyenda-futuro {
+  background: #c62828;
+}
+
+.leyenda-seleccionado {
+  outline: 2px solid #e6a700;
+  outline-offset: 2px;
+}
+
+.contenido-calendario-feriados {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 0.34fr);
+  align-items: start;
+  gap: 20px;
+}
+
+.calendario-anual-feriados {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.mes-calendario-feriados {
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid var(--borde-form);
+  border-radius: 10px;
+  background: var(--fondo-formulario);
+}
+
+.mes-calendario-feriados h3 {
+  margin: 0 0 8px;
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 1rem;
+}
+
+.grilla-mes-feriados,
+.almanaque-feriado {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 3px;
+  text-align: center;
+}
+
+.encabezado-dia-feriados,
+.dia-vacio-feriados,
+.dia-normal-feriados,
+.dia-feriado,
+.almanaque-feriado > span {
+  display: grid;
+  min-width: 0;
+  min-height: 32px;
+  place-items: center;
+}
+
+.encabezado-dia-feriados {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.dia-normal-feriados,
+.almanaque-feriado > span {
+  font-size: 0.95rem;
+}
+
+.dia-feriado {
+  position: relative;
+  padding: 0;
+  color: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 7px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.feriado-futuro {
+  background: #b71c1c;
+}
+
+.feriado-pasado {
+  color: #30343b;
+  background: #d3d6dc;
+}
+
+.dia-feriado[data-cantidad]::after {
+  position: absolute;
+  top: -5px;
+  right: -4px;
+  display: grid;
+  width: 16px;
+  height: 16px;
+  place-items: center;
+  color: #111111;
+  border-radius: 50%;
+  background: #ffd54f;
+  content: attr(data-cantidad);
+  font-size: 0.65rem;
+}
+
+.dia-feriado.feriado-seleccionado {
+  border-color: #ffca28;
+  box-shadow: 0 0 0 2px #111111;
+}
+
+.dia-feriado:focus-visible,
+.selector-anio-feriados button:focus-visible,
+.btn-cerrar-feriados:focus-visible {
+  outline: 3px solid #ffca28;
+  outline-offset: 2px;
+}
+
+.detalle-feriado {
+  position: sticky;
+  top: 0;
+  padding: 16px;
+  border: 1px solid var(--borde-form);
+  border-radius: 12px;
+  background: var(--fondo-formulario);
+}
+
+.modal-feriados.detalle-abierto .detalle-feriado {
+  position: fixed;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  width: min(560px, calc(100vw - 32px));
+  max-height: min(82dvh, 760px);
+  overflow-y: auto;
+  padding: 64px 24px 24px;
+  transform: translate(-50%, -50%);
+  overscroll-behavior: contain;
+  box-shadow: 0 16px 48px rgb(0 0 0 / 48%);
+}
+
+.btn-volver-calendario {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: none;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  color: var(--color-texto);
+  border: 1px solid var(--borde-form);
+  border-radius: 10px;
+  background: var(--fondo-body);
+  font: inherit;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modal-feriados.detalle-abierto .btn-volver-calendario {
+  display: grid;
+}
+
+.btn-volver-calendario:focus-visible {
+  outline: 3px solid #ffca28;
+  outline-offset: 2px;
+}
+
+.detalle-feriado h3 {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+  line-height: 1.35;
+}
+
+.detalle-feriado h4 {
+  margin: 18px 0 8px;
+  text-transform: capitalize;
+  font-size: 1rem;
+}
+
+.detalle-feriado p {
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.cuenta-feriado {
+  padding: 9px 10px;
+  border-radius: 8px;
+  background: rgb(183 28 28 / 18%);
+  font-weight: 700;
+}
+
+.nombre-detalle-feriado {
+  margin: 8px 0;
+}
+
+.dia-detalle-seleccionado {
+  color: #ffffff;
+  border-radius: 50%;
+  background: #c62828;
+  font-weight: 800;
+}
+
+.sin-datos-calendario-feriados {
+  grid-column: 1 / -1;
+  padding: 18px;
+  border: 1px solid #e6a700;
+  border-radius: 10px;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.nav-inferior #btnAbrirFeriados {
+  border: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+@media (max-width: 850px) {
+  .contenido-calendario-feriados {
+    grid-template-columns: 1fr;
+  }
+
+  .calendario-anual-feriados {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .detalle-feriado {
+    position: static;
+  }
+}
+
+@media (max-width: 600px) {
+  .modal-feriados {
+    align-items: flex-start;
+    padding: 8px;
+  }
+
+  .contenido-modal-feriados {
+    max-height: calc(100dvh - 16px);
+    padding: 14px 12px;
+    border-radius: 12px;
+  }
+
+  .modal-feriados.detalle-abierto .detalle-feriado {
+    width: calc(100vw - 24px);
+    max-height: calc(100dvh - 24px);
+    padding: 64px 18px 20px;
+  }
+
+  .calendario-anual-feriados {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .mes-calendario-feriados {
+    padding: 7px 5px;
+  }
+
+  .encabezado-dia-feriados,
+  .dia-vacio-feriados,
+  .dia-normal-feriados,
+  .dia-feriado,
+  .almanaque-feriado > span {
+    min-height: 34px;
+  }
+
+  .estado-datos-feriados,
+  .leyenda-feriados,
+  .detalle-feriado p {
+    font-size: 0.98rem;
   }
 }

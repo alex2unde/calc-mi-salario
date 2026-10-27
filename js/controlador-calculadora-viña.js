@@ -445,10 +445,11 @@ ${
           <img class="bandera-conversion" src="assets/imagenes/bandera-chile.svg" alt="Bandera de Chile">
         </div>
 
+  
+    </div>  
         <div class="sello-de-agua-viña">
         <span class="sello-texto">SUELDOBODEGA.com.ar</span>
-        </div>
-    </div>`;
+        </div>`;
 }
 
 //boton para calcular

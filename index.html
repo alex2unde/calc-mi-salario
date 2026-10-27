@@ -475,7 +475,17 @@
       </div>
 
       <div class="div-feriados" id="feriados">
-        <span class="titulo-feriados">Proximos feriados</span>
+        <button
+          type="button"
+          class="titulo-feriados titulo-feriados-boton"
+          id="btnAbrirFeriadosInicio"
+          aria-label="Ver calendario anual de feriados"
+          aria-haspopup="dialog"
+          aria-controls="modalFeriados"
+          aria-expanded="false"
+        >
+          Proximos feriados
+        </button>
         <div id="contenedor-feriados"></div>
       </div>
     </main>
@@ -1347,6 +1357,6 @@
         </a>
       </div>
     </footer>
-    <script src="js/controlador-landing.js" defer></script>
+    <script type="module" src="js/controlador-landing.js"></script>
   </body>
 </html>

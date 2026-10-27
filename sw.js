@@ -1,4 +1,4 @@
-const CACHE_NAME = "bodega-cache-v14";
+const CACHE_NAME = "bodega-cache-v15";
 const CACHE_PREFIX = "bodega-cache-";
 const URLS_TO_CACHE = [
   "/",
@@ -16,6 +16,8 @@ const URLS_TO_CACHE = [
   "/js/controlador-Indemnizacion.js",
   "/js/navegacion-compartida.js",
   "/js/modelo.js",
+  "/js/feriados.js",
+  "/datos/feriados-iniciales.json",
   "/manifest.json",
   "/assets/imagenes/bandera-brasil.svg",
   "/assets/imagenes/bandera-chile.svg",

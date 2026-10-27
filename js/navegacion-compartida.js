@@ -1,3 +1,9 @@
+import {
+  diferenciaEnDias,
+  obtenerAnioLocal,
+  obtenerFeriados,
+} from "./feriados.js";
+
 const barraInferior = () => `
   <nav class="nav-inferior">
     <button type="button" id="toggleModo" class="toggleModo-calculadora">
@@ -46,7 +52,13 @@ const barraInferior = () => `
       <span class="modo-texto">Calculadoras</span>
     </button>
 
-    <a href="index.html#feriados" class="a-nav-inferior">
+    <button
+      type="button"
+      class="a-nav-inferior"
+      id="btnAbrirFeriados"
+      aria-haspopup="dialog"
+      aria-controls="modalFeriados"
+    >
       <svg
         class="icono-calc-nav-inf"
         fill="currentColor"
@@ -75,7 +87,7 @@ const barraInferior = () => `
         </g>
       </svg>
       <span class="modo-texto">Feriados</span>
-    </a>
+    </button>
 
     <div class="div-sugerencias" id="divSugerencias">
       <div class="div-sugerencias-titulo">
@@ -120,6 +132,71 @@ const barraInferior = () => `
       </form>
     </div>
   </nav>
+`;
+
+const modalFeriados = `
+  <div
+    class="modal-feriados"
+    id="modalFeriados"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="tituloModalFeriados"
+    aria-hidden="true"
+  >
+    <section class="contenido-modal-feriados">
+      <header class="encabezado-modal-feriados">
+        <div>
+          <h2 id="tituloModalFeriados">Calendario de feriados</h2>
+          <div class="selector-anio-feriados">
+            <button type="button" id="anioFeriadosAnterior" aria-label="Año anterior">‹</button>
+            <strong id="anioFeriados"></strong>
+            <button type="button" id="anioFeriadosSiguiente" aria-label="Año siguiente">›</button>
+          </div>
+        </div>
+        <button
+          type="button"
+          class="btnCerrarModal btn-cerrar-feriados"
+          id="btnCerrarFeriados"
+          aria-label="Cerrar calendario de feriados"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 84 84"
+            class="icono-cerrar"
+            aria-hidden="true"
+          >
+            <path
+              d="M42,0C18.803,0,0,18.807,0,42c0,23.197,18.803,42,42,42c23.193,0,42-18.803,42-42C84,18.807,65.193,0,42,0z M50.643,42l15.303,15.302l-8.643,8.642L42.002,50.643L26.699,65.944l-8.641-8.642L33.359,42l-15.3-15.298l8.641-8.646L42,33.357l15.301-15.299l8.643,8.641L50.643,42z"
+            />
+          </svg>
+        </button>
+      </header>
+      <p class="estado-datos-feriados" id="estadoDatosFeriados" role="status" aria-live="polite">
+        Cargando datos locales...
+      </p>
+      <div class="leyenda-feriados" aria-label="Estados de feriados">
+        <span><i class="leyenda-pasado"></i> Ya pasó</span>
+        <span><i class="leyenda-futuro"></i> Próximo</span>
+        <span><i class="leyenda-seleccionado"></i> Seleccionado</span>
+      </div>
+      <div class="contenido-calendario-feriados">
+        <div class="calendario-anual-feriados" id="calendarioAnualFeriados"></div>
+        <aside class="detalle-feriado" id="detalleFeriado" aria-live="polite">
+          <button
+            type="button"
+            class="btn-volver-calendario"
+            id="btnVolverCalendario"
+            aria-label="Volver al calendario"
+          >
+            ×
+          </button>
+          <div id="contenidoDetalleFeriado">
+            <p>Seleccioná una fecha marcada para ver el detalle.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </div>
 `;
 
 const modalCalculadoras = `
@@ -223,7 +300,16 @@ function manejarClicNavegacion(evento) {
   const botonModo = evento.target.closest("#toggleModo");
   const botonAbrir = evento.target.closest("#btnCalculadoras");
   const botonCerrar = evento.target.closest("#btnCerrarModal");
-  const modal = document.getElementById("modalPrincipal");
+  const botonAbrirFeriados = evento.target.closest(
+    "#btnAbrirFeriados, #btnAbrirFeriadosInicio",
+  );
+  const botonCerrarFeriados = evento.target.closest("#btnCerrarFeriados");
+  const botonVolverCalendario = evento.target.closest("#btnVolverCalendario");
+  const botonAnioAnterior = evento.target.closest("#anioFeriadosAnterior");
+  const botonAnioSiguiente = evento.target.closest("#anioFeriadosSiguiente");
+  const botonDiaFeriado = evento.target.closest("[data-fecha-feriado]");
+  const modalCalculadorasElemento = document.getElementById("modalPrincipal");
+  const modalFeriadosElemento = document.getElementById("modalFeriados");
 
   if (botonModo) {
     document.body.classList.toggle("modo-claro");
@@ -237,11 +323,343 @@ function manejarClicNavegacion(evento) {
       iconoModo.classList.add("fa-sun");
     }
   } else if (botonAbrir) {
-    modal.classList.add("activo");
+    modalFeriadosElemento.classList.remove("activo");
+    modalFeriadosElemento.setAttribute("aria-hidden", "true");
+    modalCalculadorasElemento.classList.add("activo");
   } else if (botonCerrar) {
-    modal.classList.remove("activo");
+    modalCalculadorasElemento.classList.remove("activo");
+  } else if (botonAbrirFeriados) {
+    modalCalculadorasElemento.classList.remove("activo");
+    modalFeriadosElemento.classList.add("activo");
+    modalFeriadosElemento.setAttribute("aria-hidden", "false");
+    botonAbrirFeriados.setAttribute("aria-expanded", "true");
+    abrirCalendarioFeriados(obtenerAnioLocal());
+  } else if (botonCerrarFeriados) {
+    cerrarCalendarioFeriados();
+  } else if (botonVolverCalendario) {
+    cerrarDetalleFeriado();
+  } else if (botonAnioAnterior || botonAnioSiguiente) {
+    const anioActual = Number(
+      document.getElementById("anioFeriados").textContent,
+    );
+    abrirCalendarioFeriados(anioActual + (botonAnioAnterior ? -1 : 1));
+  } else if (botonDiaFeriado) {
+    seleccionarFechaFeriado(botonDiaFeriado.dataset.fechaFeriado);
+  } else if (evento.target === modalFeriadosElemento) {
+    cerrarCalendarioFeriados();
   }
 }
+
+let anioCalendarioActual;
+let feriadosCalendarioActual = [];
+let fechaFeriadoSeleccionada = null;
+let desuscribirActualizaciones = () => {};
+
+function mostrarFechaCompleta(fechaIso) {
+  const [anio, mes, dia] = fechaIso.split("-").map(Number);
+  return new Date(anio, mes - 1, dia).toLocaleDateString("es-AR", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+
+function actualizarEstadoFeriados(datos) {
+  const estado = document.getElementById("estadoDatosFeriados");
+  estado.textContent = datos.mensaje;
+  estado.dataset.verificacion = datos.verificacion;
+  estado.dataset.origen = datos.origen;
+}
+
+function crearCeldaDia(anio, mes, dia, feriadosPorFecha) {
+  if (!dia) {
+    const espacio = document.createElement("span");
+    espacio.className = "dia-vacio-feriados";
+    return espacio;
+  }
+
+  const fecha = `${anio}-${String(mes + 1).padStart(2, "0")}-${String(dia).padStart(2, "0")}`;
+  const feriados = feriadosPorFecha.get(fecha);
+
+  if (!feriados) {
+    const diaNormal = document.createElement("span");
+    diaNormal.className = "dia-normal-feriados";
+    diaNormal.textContent = String(dia);
+    return diaNormal;
+  }
+
+  const boton = document.createElement("button");
+  const diferencia = diferenciaEnDias(fecha);
+  boton.type = "button";
+  boton.className = `dia-feriado ${diferencia < 0 ? "feriado-pasado" : "feriado-futuro"}`;
+  boton.dataset.fechaFeriado = fecha;
+  boton.setAttribute(
+    "aria-label",
+    `${fecha}: ${feriados.map((feriado) => feriado.nombre).join(", ")}`,
+  );
+  boton.setAttribute(
+    "aria-pressed",
+    String(fecha === fechaFeriadoSeleccionada),
+  );
+  boton.title = feriados.map((feriado) => feriado.nombre).join("; ");
+  boton.textContent = String(dia);
+
+  if (fecha === fechaFeriadoSeleccionada) {
+    boton.classList.add("feriado-seleccionado");
+  }
+
+  if (feriados.length > 1) {
+    boton.dataset.cantidad = String(feriados.length);
+  }
+
+  return boton;
+}
+
+function renderizarCalendarioAnual() {
+  const calendario = document.getElementById("calendarioAnualFeriados");
+  const feriadosPorFecha = new Map();
+
+  document.getElementById("anioFeriados").textContent = String(
+    anioCalendarioActual,
+  );
+  calendario.replaceChildren();
+
+  if (feriadosCalendarioActual.length === 0) {
+    const mensaje = document.createElement("p");
+    mensaje.className = "sin-datos-calendario-feriados";
+    mensaje.textContent =
+      "No hay datos válidos disponibles para mostrar los feriados de este año.";
+    calendario.append(mensaje);
+    return;
+  }
+
+  feriadosCalendarioActual.forEach((feriado) => {
+    const lista = feriadosPorFecha.get(feriado.fecha) || [];
+    lista.push(feriado);
+    feriadosPorFecha.set(feriado.fecha, lista);
+  });
+
+  for (let mes = 0; mes < 12; mes += 1) {
+    const seccionMes = document.createElement("section");
+    seccionMes.className = "mes-calendario-feriados";
+
+    const tituloMes = document.createElement("h3");
+    tituloMes.textContent = new Date(
+      anioCalendarioActual,
+      mes,
+      1,
+    ).toLocaleDateString("es-AR", { month: "long" });
+
+    const grilla = document.createElement("div");
+    grilla.className = "grilla-mes-feriados";
+    ["L", "M", "M", "J", "V", "S", "D"].forEach((diaSemana, indice) => {
+      const encabezado = document.createElement("span");
+      encabezado.className = "encabezado-dia-feriados";
+      encabezado.setAttribute("aria-label", ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"][indice]);
+      encabezado.textContent = diaSemana;
+      grilla.append(encabezado);
+    });
+
+    const primerDiaSemana = (new Date(anioCalendarioActual, mes, 1).getDay() + 6) % 7;
+    const cantidadDias = new Date(anioCalendarioActual, mes + 1, 0).getDate();
+
+    for (let posicion = 0; posicion < primerDiaSemana; posicion += 1) {
+      grilla.append(crearCeldaDia(anioCalendarioActual, mes, null, feriadosPorFecha));
+    }
+
+    for (let dia = 1; dia <= cantidadDias; dia += 1) {
+      grilla.append(crearCeldaDia(anioCalendarioActual, mes, dia, feriadosPorFecha));
+    }
+
+    seccionMes.append(tituloMes, grilla);
+    calendario.append(seccionMes);
+  }
+
+}
+
+function renderizarAlmanaqueDetalle(fechaIso) {
+  const [anio, mes, diaSeleccionado] = fechaIso.split("-").map(Number);
+  const primerDiaSemana = (new Date(anio, mes - 1, 1).getDay() + 6) % 7;
+  const cantidadDias = new Date(anio, mes, 0).getDate();
+  const calendario = document.createElement("div");
+  calendario.className = "almanaque-feriado";
+
+  ["L", "M", "M", "J", "V", "S", "D"].forEach((diaSemana) => {
+    const encabezado = document.createElement("span");
+    encabezado.className = "encabezado-dia-feriados";
+    encabezado.textContent = diaSemana;
+    calendario.append(encabezado);
+  });
+
+  for (let posicion = 0; posicion < primerDiaSemana; posicion += 1) {
+    calendario.append(document.createElement("span"));
+  }
+
+  for (let dia = 1; dia <= cantidadDias; dia += 1) {
+    const celda = document.createElement("span");
+    celda.textContent = String(dia);
+
+    if (dia === diaSeleccionado) {
+      celda.className = "dia-detalle-seleccionado";
+    }
+
+    calendario.append(celda);
+  }
+
+  return calendario;
+}
+
+function seleccionarFechaFeriado(fechaIso) {
+  fechaFeriadoSeleccionada = fechaIso;
+  const feriados = feriadosCalendarioActual.filter(
+    (feriado) => feriado.fecha === fechaIso,
+  );
+  const detalle = document.getElementById("contenidoDetalleFeriado");
+  const diferencia = diferenciaEnDias(fechaIso);
+  const estadoFecha =
+    diferencia < 0
+      ? `Este feriado ya pasó hace ${Math.abs(diferencia)} ${Math.abs(diferencia) === 1 ? "día" : "días"}.`
+      : diferencia === 0
+        ? "Este feriado es hoy."
+        : `Faltan ${diferencia} ${diferencia === 1 ? "día" : "días"} para este feriado.`;
+
+  detalle.replaceChildren();
+  const titulo = document.createElement("h3");
+  titulo.textContent =
+    feriados.length > 1 ? "Feriados de esta fecha" : feriados[0].nombre;
+
+  const fecha = document.createElement("p");
+  fecha.className = "fecha-completa-feriado";
+  fecha.textContent = mostrarFechaCompleta(fechaIso);
+
+  const estado = document.createElement("p");
+  estado.className = "cuenta-feriado";
+  estado.textContent = estadoFecha;
+
+  detalle.append(titulo, fecha, estado);
+
+  feriados.forEach((feriado) => {
+    const nombre = document.createElement("p");
+    nombre.className = "nombre-detalle-feriado";
+    nombre.textContent = `${feriado.nombre} — ${feriado.tipo}`;
+    detalle.append(nombre);
+  });
+
+  const tituloAlmanaque = document.createElement("h4");
+  tituloAlmanaque.textContent = new Date(
+    Number(fechaIso.slice(0, 4)),
+    Number(fechaIso.slice(5, 7)) - 1,
+    1,
+  ).toLocaleDateString("es-AR", { month: "long", year: "numeric" });
+  detalle.append(tituloAlmanaque, renderizarAlmanaqueDetalle(fechaIso));
+  renderizarCalendarioAnual();
+  establecerVistaDetalle(true);
+}
+
+function establecerVistaDetalle(abierta) {
+  const modal = document.getElementById("modalFeriados");
+  const calendario = document.getElementById("calendarioAnualFeriados");
+  const yaEstabaAbierta = modal.classList.contains("detalle-abierto");
+
+  modal.classList.toggle("detalle-abierto", abierta);
+  document.body.classList.toggle("detalle-feriados-abierto", abierta);
+  calendario.inert = abierta;
+  calendario.setAttribute("aria-hidden", String(abierta));
+
+  if (abierta && !yaEstabaAbierta) {
+    document.getElementById("btnVolverCalendario").focus();
+  }
+}
+
+function cerrarDetalleFeriado() {
+  establecerVistaDetalle(false);
+  document
+    .querySelector(`[data-fecha-feriado="${fechaFeriadoSeleccionada}"]`)
+    ?.focus();
+}
+
+async function abrirCalendarioFeriados(anio) {
+  establecerVistaDetalle(false);
+  anioCalendarioActual = anio;
+  fechaFeriadoSeleccionada = null;
+  feriadosCalendarioActual = [];
+  document.getElementById("anioFeriados").textContent = String(anio);
+  document.getElementById("calendarioAnualFeriados").replaceChildren();
+  document.getElementById("contenidoDetalleFeriado").innerHTML =
+    "<p>Seleccioná una fecha marcada para ver el detalle.</p>";
+  actualizarEstadoFeriados({
+    origen: "local",
+    verificacion: "pendiente",
+    mensaje: "Cargando los datos locales disponibles...",
+  });
+
+  desuscribirActualizaciones();
+  const datos = await obtenerFeriados(anio, (datosActualizados) => {
+    if (anioCalendarioActual !== anio) {
+      return;
+    }
+
+    feriadosCalendarioActual = datosActualizados.feriados;
+    actualizarEstadoFeriados(datosActualizados);
+    renderizarCalendarioAnual();
+
+    if (fechaFeriadoSeleccionada) {
+      seleccionarFechaFeriado(fechaFeriadoSeleccionada);
+    }
+  });
+
+  if (anioCalendarioActual !== anio) {
+    datos.desuscribir();
+    return;
+  }
+
+  desuscribirActualizaciones = datos.desuscribir;
+  feriadosCalendarioActual = datos.feriados;
+  actualizarEstadoFeriados(datos);
+  renderizarCalendarioAnual();
+
+  if (feriadosCalendarioActual.length === 0) {
+    document.getElementById("contenidoDetalleFeriado").textContent =
+      `No hay una copia local válida de los feriados de ${anio}.`;
+  }
+}
+
+function cerrarCalendarioFeriados() {
+  establecerVistaDetalle(false);
+  const modal = document.getElementById("modalFeriados");
+  modal.classList.remove("activo");
+  modal.setAttribute("aria-hidden", "true");
+  document
+    .querySelectorAll("#btnAbrirFeriados, #btnAbrirFeriadosInicio")
+    .forEach((boton) => boton.setAttribute("aria-expanded", "false"));
+  desuscribirActualizaciones();
+}
+
+function manejarTecladoNavegacion(evento) {
+  if (evento.key === "Escape") {
+    cerrarCalendarioFeriados();
+    document.getElementById("modalPrincipal").classList.remove("activo");
+  }
+}
+
+function registrarEventosNavegacion() {
+  document.addEventListener("click", manejarClicNavegacion);
+  document.addEventListener("keydown", manejarTecladoNavegacion);
+}
+
+export function montarModalFeriados() {
+  if (!document.getElementById("modalFeriados")) {
+    document.body.insertAdjacentHTML("beforeend", modalFeriados);
+  }
+
+  if (!eventosNavegacionRegistrados) {
+    registrarEventosNavegacion();
+    eventosNavegacionRegistrados = true;
+  }
+}
+
+let eventosNavegacionRegistrados = false;
 
 export function montarNavegacionInferior() {
   const puntoMontaje =
@@ -266,5 +684,5 @@ export function montarNavegacionInferior() {
   );
   puntoMontaje.remove();
 
-  document.addEventListener("click", manejarClicNavegacion);
+  montarModalFeriados();
 }

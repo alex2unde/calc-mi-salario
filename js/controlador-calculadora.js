@@ -451,6 +451,9 @@ async function controladorPrincipal() {
           <img class="bandera-conversion" src="assets/imagenes/bandera-chile.svg" alt="Bandera de Chile">
         </div>
       </div>
+        <div class="sello-de-agua">
+        <span class="sello-texto">SUELDOBODEGA.com.ar</span>
+        </div>
     </div>
 </div>
 `;
@@ -574,10 +577,11 @@ async function controladorPrincipal() {
           <img class="bandera-conversion" src="assets/imagenes/bandera-chile.svg" alt="Bandera de Chile">
         </div>
       </div>
+
+    </div>
         <div class="sello-de-agua">
         <span class="sello-texto">SUELDOBODEGA.com.ar</span>
         </div>
-    </div>
 </div>
     `;
   }
@@ -601,7 +605,9 @@ botonDescarga.addEventListener("click", async () => {
   }
 
   if (!(await window.html2pdfReady)) {
-    alert("No se pudo cargar el generador de PDF. Revisá tu conexión e intentá nuevamente.");
+    alert(
+      "No se pudo cargar el generador de PDF. Revisá tu conexión e intentá nuevamente.",
+    );
     return;
   }
 

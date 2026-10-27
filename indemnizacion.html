@@ -304,7 +304,7 @@
         <small> Indemnizacion bodega </small>
         <hr />
 
-        <div class="labelsIndem">
+        <div class="cat-y-tipo-despido">
           <label for="opcionesCat" class="cat"
             >Categoria:
             <select id="opcionesCat" name="categoria" required>
@@ -322,18 +322,25 @@
               </option>
             </select>
           </label>
-        </div>
 
-        <div>
-          <label for="fechaInicio" class="labelsIndem">
-            <span>Fecha de ingreso:</span>
-            <input type="date" name="fechaInicio" id="fechaInicio" required />
+          <label for="tipoDespido" class="tipoDespido">
+            <span>Tipo de despido:</span>
+            <select name="tipoDespido" id="tipoDespido" required>
+              <option value="Sin_causa">Sin causa</option>
+              <option value="Con_causa">Con causa</option>
+              <option value="Renuncia">Renuncia</option>
+            </select>
           </label>
         </div>
 
-        <div>
-          <label for="fechaFin" class="labelsIndem">
-            <span>Fecha de egreso:</span>
+        <div class="fecha-ingreso-egreso">
+          <label for="fechaInicio" class="label-ingreso-egreso">
+            <span>Fecha ingreso:</span>
+            <input type="date" name="fechaInicio" id="fechaInicio" required />
+          </label>
+
+          <label for="fechaFin" class="label-ingreso-egreso">
+            <span>Fecha egreso:</span>
             <input type="date" name="fechaFin" id="fechaFin" required />
           </label>
         </div>
@@ -356,33 +363,24 @@
           </div>
         </div>
 
-        <div>
-          <label for="tipoDespido" class="labelsIndem">
-            <span>Tipo de despido:</span>
-            <select name="tipoDespido" id="tipoDespido" required>
-              <option value="Sin_causa">Sin causa</option>
-              <option value="Con_causa">Con causa</option>
-              <option value="Renuncia">Renuncia</option>
-            </select>
-          </label>
-        </div>
+        <div class="fecha-ingreso-egreso">
+          <div>
+            <label class="labelsIndem">
+              <span>¿Pre aviso?</span>
+              <input type="checkbox" name="preAviso" id="preAviso" />
+            </label>
+          </div>
 
-        <div>
-          <label class="labelsIndem">
-            <span>¿Pre aviso?</span>
-            <input type="checkbox" name="preAviso" id="preAviso" />
-          </label>
-        </div>
-
-        <div>
-          <label class="labelsIndem">
-            <span>¿Le deben vaciones?</span>
-            <input type="checkbox" name="vacaciones" id="vacaciones" />
-          </label>
-          <label for="diasVacaciones" class="labelVacacionesDeuda">
-            <span>Dias que le deben:</span>
-            <input type="number" name="diasVacaciones" id="diasVacaciones" />
-          </label>
+          <div>
+            <label class="labelsIndem">
+              <span>¿Le deben vaciones?</span>
+              <input type="checkbox" name="vacaciones" id="vacaciones" />
+            </label>
+            <label for="diasVacaciones" class="labelVacacionesDeuda">
+              <span>Dias que le deben:</span>
+              <input type="number" name="diasVacaciones" id="diasVacaciones" />
+            </label>
+          </div>
         </div>
 
         <button class="btnCalc" type="submit" id="calcularBtn">Calcular</button>
