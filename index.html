@@ -54,7 +54,10 @@
       rel="preload"
       as="style"
       href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
-      onload="this.onload=null;this.rel='stylesheet'"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
     />
     <noscript>
       <link
@@ -369,7 +372,31 @@
 
         <div class="div-btns-calculadoras">
           <button class="btnCalculadoras" id="btnCalculadoras">
-            Calculadoras
+            <svg
+              class="icono-btnCalculadoras"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+
+              <line x1="8" y1="6" x2="16" y2="6"></line>
+
+              <line x1="8" y1="11" x2="8" y2="11"></line>
+              <line x1="12" y1="11" x2="12" y2="11"></line>
+              <line x1="16" y1="11" x2="16" y2="11"></line>
+
+              <line x1="8" y1="15" x2="8" y2="15"></line>
+              <line x1="12" y1="15" x2="12" y2="15"></line>
+
+              <line x1="16" y1="14" x2="16" y2="14"></line>
+              <line x1="16" y1="17" x2="16" y2="17"></line>
+            </svg>
+            <span>Calculadoras</span>
           </button>
           <button
             id="btnInstalarApp"
@@ -453,7 +480,7 @@
               <div class="card-bodega">
                 <img
                   class="img-bodega-card"
-                  src="assets/imagenes/trabajadores-cocechando-card-cropped.webp"
+                  src="assets\imagenes\trabajadores-contrato-card-cropped.webp"
                   alt="Trabajador cosechando"
                 />
                 <div class="overlay-contenido-bodega">
@@ -485,6 +512,18 @@
           aria-expanded="false"
         >
           Proximos feriados
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 48 48"
+            width="32"
+            height="32"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <circle cx="24" cy="24" r="20" fill="#000000" />
+            <path d="M21 14h6v20h-6z" fill="#ffffff" />
+            <path d="M14 21h20v6H14z" fill="#ffffff" />
+          </svg>
         </button>
         <div id="contenedor-feriados"></div>
       </div>

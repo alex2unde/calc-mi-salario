@@ -54,26 +54,6 @@ if (botonInstalar) {
   });
 }
 
-//modo claro/oscuro. ------------------------------------------------------------------------
-const btnModo = document.getElementById("toggleModo");
-
-// ESCUDO: Solo busca el ícono y cambia el tema si el botón de modo existe
-if (btnModo) {
-  const iconoModo = btnModo.querySelector("i");
-
-  btnModo.addEventListener("click", () => {
-    document.body.classList.toggle("modo-claro");
-
-    if (document.body.classList.contains("modo-claro")) {
-      iconoModo.classList.remove("fa-sun");
-      iconoModo.classList.add("fa-moon");
-    } else {
-      iconoModo.classList.remove("fa-moon");
-      iconoModo.classList.add("fa-sun");
-    }
-  });
-}
-
 function renderizarFeriados(contenedor, feriados) {
   const hoy = new Date();
   const hoyIso = `${hoy.getFullYear()}-${String(hoy.getMonth() + 1).padStart(2, "0")}-${String(hoy.getDate()).padStart(2, "0")}`;
