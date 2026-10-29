@@ -215,12 +215,7 @@ function actualizarDesdeApi(anio, datosActuales) {
 
   if (Date.now() - ultimoIntento < INTERVALO_REINTENTO_MS) {
     if (fallosPorAnio.has(anio)) {
-      notificarActualizacion(anio, {
-        ...datosActuales,
-        verificacion: "fallida",
-        mensaje:
-          "No se pudo verificar la actualización reciente. Se conservan los datos disponibles; la API no confirma si la lista anual está completa.",
-      });
+      notificarActualizacion(anio, datosActuales);
     }
 
     return Promise.resolve(datosActuales);
@@ -230,23 +225,13 @@ function actualizarDesdeApi(anio, datosActuales) {
   const solicitud = consultarApi(anio)
     .then((datosActualizados) => {
       fallosPorAnio.delete(anio);
-      notificarActualizacion(anio, {
-        ...datosActualizados,
-        verificacion: "actualizado",
-        mensaje:
-          "Datos actualizados desde ArgentinaDatos. La API no confirma si la lista anual está completa.",
-      });
+      notificarActualizacion(anio, datosActualizados);
       return datosActualizados;
     })
     .catch((error) => {
       fallosPorAnio.add(anio);
       console.warn(`No se pudieron actualizar los feriados de ${anio}.`, error);
-      notificarActualizacion(anio, {
-        ...datosActuales,
-        verificacion: "fallida",
-        mensaje:
-          "No se pudo verificar la actualización. Se conservan los datos disponibles; la API no confirma si la lista anual está completa.",
-      });
+      notificarActualizacion(anio, datosActuales);
       return datosActuales;
     })
     .finally(() => {
@@ -263,7 +248,6 @@ export async function obtenerFeriados(anio, alActualizar) {
     : () => {};
   const guardados = leerDatosGuardados(anio);
   let locales = guardados;
-  let errorInicial = null;
 
   if (!locales) {
     try {
@@ -279,28 +263,15 @@ export async function obtenerFeriados(anio, alActualizar) {
         consultadoEn: datosIniciales.obtenido || null,
       };
     } catch (error) {
-      errorInicial = error;
+      console.warn("No se pudieron cargar los datos locales de feriados.", error);
     }
   }
 
-  const datosActuales = locales
-    ? {
-        ...locales,
-        verificacion: "pendiente",
-        mensaje:
-          locales.origen === "inicial"
-            ? `Copia local obtenida de ArgentinaDatos el ${locales.consultadoEn}. La API no confirma si la lista anual está completa.`
-            : `Copia guardada de ArgentinaDatos (${new Date(locales.consultadoEn).toLocaleString("es-AR")}). La API no confirma si la lista anual está completa.`,
-      }
-    : {
-        feriados: [],
-        origen: "ninguno",
-        consultadoEn: null,
-        verificacion: "fallida",
-        mensaje: errorInicial
-          ? `No hay datos locales utilizables para ${anio} y no se pudieron cargar.`
-          : `No hay datos locales disponibles para ${anio}.`,
-      };
+  const datosActuales = locales || {
+    feriados: [],
+    origen: "ninguno",
+    consultadoEn: null,
+  };
 
   const datosGuardadosVigentes =
     guardados &&

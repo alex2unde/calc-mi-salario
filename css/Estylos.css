@@ -278,6 +278,7 @@ body {
   display: flex;
   align-items: center;
   text-align: center;
+  justify-content: center;
   text-decoration: none;
   padding: 10px 25px;
 
@@ -375,6 +376,9 @@ body {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   align-items: center;
+  max-height: calc(100vh - 120px);
+  max-height: calc(100dvh - 120px);
+  overflow-y: auto;
 }
 .card-bodega {
   display: flex;
@@ -560,7 +564,7 @@ body {
   flex-shrink: 0;
   width: 42px;
   height: 42px;
-  filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.647));
+  filter: drop-shadow(0 2px 4px #969494ff);
   transition:
     transform 0.2s ease,
     filter 0.2s ease;
@@ -578,12 +582,12 @@ body {
   68%,
   100% {
     transform: scale(1);
-    filter: drop-shadow(0 2px 4px rgba(96, 96, 96, 0.3));
+    filter: drop-shadow(0 2px 4px var(--color-texto));
   }
 
   82% {
     transform: scale(1.07);
-    filter: drop-shadow(0 3px 8px rgba(201, 200, 199, 0.55));
+    filter: drop-shadow(0 3px 8px var(--color-texto));
   }
 }
 
@@ -2511,6 +2515,7 @@ summary ::hover {
     flex-direction: column;
     align-items: center;
     gap: 25px;
+    overflow-y: auto;
   }
   .modal-header {
     display: flex;
@@ -3381,10 +3386,17 @@ body.detalle-feriados-abierto {
   overflow: hidden;
 }
 
+body.modal-feriados-abierto {
+  overflow: hidden;
+}
+
 .contenido-modal-feriados {
+  display: flex;
+  flex-direction: column;
   width: min(1200px, 100%);
+  height: min(92dvh, 960px);
   max-height: min(92dvh, 960px);
-  overflow: auto;
+  overflow: hidden;
   padding: 20px;
   border: 1px solid var(--borde-form);
   border-radius: 16px;
@@ -3395,6 +3407,7 @@ body.detalle-feriados-abierto {
 
 .encabezado-modal-feriados {
   display: flex;
+  flex-shrink: 0;
   align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
@@ -3436,20 +3449,9 @@ body.detalle-feriados-abierto {
   fill: currentColor;
 }
 
-.estado-datos-feriados {
-  margin: 12px 0;
-  font-size: 1rem;
-  line-height: 1.45;
-}
-
-.estado-datos-feriados[data-verificacion="fallida"] {
-  padding: 10px 12px;
-  border-left: 4px solid #e6a700;
-  background: rgb(230 167 0 / 14%);
-}
-
 .leyenda-feriados {
   display: flex;
+  flex-shrink: 0;
   flex-wrap: wrap;
   gap: 10px 18px;
   margin: 12px 0 18px;
@@ -3482,11 +3484,142 @@ body.detalle-feriados-abierto {
   outline-offset: 2px;
 }
 
+.vistas-feriados {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.panel-vista-feriados {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+.panel-vista-feriados[hidden] {
+  display: none;
+}
+
 .contenido-calendario-feriados {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(250px, 0.34fr);
   align-items: start;
   gap: 20px;
+}
+
+.lista-feriados-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 2px 6px 18px;
+}
+
+.tarjeta-feriado-modal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  max-width: none;
+  gap: 4px;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.tarjeta-feriado-modal.feriado-tarjeta-pasada {
+  border-color: #777777;
+  background: #373737;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 30%);
+}
+
+body.modo-claro .tarjeta-feriado-modal.feriado-tarjeta-pasada {
+  border-color: #b7b7b7;
+  background: #e4e4e4;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 14%);
+}
+
+.tarjeta-feriado-modal.feriado-tarjeta-vigente {
+  border-color: #c62828;
+  box-shadow: 0 4px 12px rgb(198 40 40 / 28%);
+}
+
+body.modo-claro .tarjeta-feriado-modal.feriado-tarjeta-vigente {
+  border-color: #174ea6;
+  box-shadow: 0 4px 12px rgb(23 78 166 / 22%);
+}
+
+.tarjeta-feriado-modal .feriado-tipo {
+  margin-top: 5px;
+  padding: 0;
+  color: var(--color-texto);
+  border-radius: 0;
+  background: transparent;
+  font-size: 1rem;
+}
+
+.tarjeta-feriado-modal.feriado-tarjeta-pasada .feriado-tipo {
+  color: #c3c3c3;
+}
+
+body.modo-claro .tarjeta-feriado-modal.feriado-tarjeta-pasada .feriado-tipo {
+  color: #555555;
+}
+
+.navegacion-vistas-feriados {
+  position: sticky;
+  z-index: 3;
+  bottom: 0;
+  display: flex;
+  flex-shrink: 0;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 8px 0 0;
+  border-top: 1px solid var(--borde-form);
+  background: var(--fondo-body);
+}
+
+.boton-vista-feriados {
+  display: inline-flex;
+  flex: 1;
+  min-width: 0;
+  min-height: 52px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 12px;
+  color: var(--color-texto);
+  border: 1px solid var(--borde-form);
+  border-radius: 10px;
+  background: var(--fondo-formulario);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.boton-vista-feriados svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.boton-vista-feriados.activo {
+  color: #ffffff;
+  border-color: #b71c1c;
+  background: #b71c1c;
+}
+
+body.modo-claro .boton-vista-feriados.activo {
+  border-color: #174ea6;
+  background: #174ea6;
+}
+
+.boton-vista-feriados:focus-visible {
+  outline: 3px solid #ffca28;
+  outline-offset: 2px;
 }
 
 .calendario-anual-feriados {
@@ -3708,6 +3841,7 @@ body.detalle-feriados-abierto {
   }
 
   .contenido-modal-feriados {
+    height: calc(100dvh - 16px);
     max-height: calc(100dvh - 16px);
     padding: 14px 12px;
     border-radius: 12px;
@@ -3736,9 +3870,24 @@ body.detalle-feriados-abierto {
     min-height: 34px;
   }
 
-  .estado-datos-feriados,
   .leyenda-feriados,
   .detalle-feriado p {
     font-size: 0.98rem;
+  }
+
+  .navegacion-vistas-feriados {
+    gap: 6px;
+  }
+
+  .boton-vista-feriados {
+    min-height: 56px;
+    gap: 6px;
+    padding: 8px 6px;
+    font-size: 0.92rem;
+  }
+
+  .boton-vista-feriados svg {
+    width: 20px;
+    height: 20px;
   }
 }
