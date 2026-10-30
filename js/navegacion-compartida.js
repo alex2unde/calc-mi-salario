@@ -426,7 +426,17 @@ function mostrarFechaCompleta(fechaIso) {
   });
 }
 
-function crearCeldaDia(anio, mes, dia, feriadosPorFecha) {
+function obtenerFechasFeriadosDestacados() {
+  const hoy = obtenerFechaLocal();
+  const fechas = feriadosCalendarioActual.map((feriado) => feriado.fecha);
+
+  return {
+    hoy: fechas.includes(hoy) ? hoy : null,
+    proximo: fechas.filter((fecha) => fecha > hoy).sort()[0] || null,
+  };
+}
+
+function crearCeldaDia(anio, mes, dia, feriadosPorFecha, fechasDestacadas) {
   if (!dia) {
     const espacio = document.createElement("span");
     espacio.className = "dia-vacio-feriados";
@@ -447,6 +457,12 @@ function crearCeldaDia(anio, mes, dia, feriadosPorFecha) {
   const diferencia = diferenciaEnDias(fecha);
   boton.type = "button";
   boton.className = `dia-feriado ${diferencia < 0 ? "feriado-pasado" : "feriado-futuro"}`;
+  if (fecha === fechasDestacadas.hoy) {
+    boton.classList.add("feriado-hoy");
+  }
+  if (fecha === fechasDestacadas.proximo) {
+    boton.classList.add("feriado-proximo");
+  }
   boton.dataset.fechaFeriado = fecha;
   boton.setAttribute(
     "aria-label",
@@ -473,6 +489,7 @@ function crearCeldaDia(anio, mes, dia, feriadosPorFecha) {
 function renderizarCalendarioAnual() {
   const calendario = document.getElementById("calendarioAnualFeriados");
   const feriadosPorFecha = new Map();
+  const fechasDestacadas = obtenerFechasFeriadosDestacados();
 
   document.getElementById("anioFeriados").textContent = String(
     anioCalendarioActual,
@@ -519,11 +536,27 @@ function renderizarCalendarioAnual() {
     const cantidadDias = new Date(anioCalendarioActual, mes + 1, 0).getDate();
 
     for (let posicion = 0; posicion < primerDiaSemana; posicion += 1) {
-      grilla.append(crearCeldaDia(anioCalendarioActual, mes, null, feriadosPorFecha));
+      grilla.append(
+        crearCeldaDia(
+          anioCalendarioActual,
+          mes,
+          null,
+          feriadosPorFecha,
+          fechasDestacadas,
+        ),
+      );
     }
 
     for (let dia = 1; dia <= cantidadDias; dia += 1) {
-      grilla.append(crearCeldaDia(anioCalendarioActual, mes, dia, feriadosPorFecha));
+      grilla.append(
+        crearCeldaDia(
+          anioCalendarioActual,
+          mes,
+          dia,
+          feriadosPorFecha,
+          fechasDestacadas,
+        ),
+      );
     }
 
     seccionMes.append(tituloMes, grilla);
@@ -546,6 +579,7 @@ function obtenerCondicionFeriado(tipo) {
 
 function renderizarListaFeriados() {
   const lista = document.getElementById("listaFeriadosModal");
+  const fechasDestacadas = obtenerFechasFeriadosDestacados();
   lista.replaceChildren();
 
   if (feriadosCalendarioActual.length === 0) {
@@ -568,6 +602,12 @@ function renderizarListaFeriados() {
         diferencia < 0 ? "feriado-tarjeta-pasada" : "feriado-tarjeta-vigente"
       }`;
       tarjeta.dataset.fecha = feriado.fecha;
+      if (feriado.fecha === fechasDestacadas.hoy) {
+        tarjeta.classList.add("feriado-hoy");
+      }
+      if (feriado.fecha === fechasDestacadas.proximo) {
+        tarjeta.classList.add("feriado-proximo");
+      }
 
       const fechaBadge = document.createElement("span");
       fechaBadge.className = "fecha-badge";

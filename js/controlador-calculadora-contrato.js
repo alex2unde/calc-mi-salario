@@ -1,4 +1,5 @@
 import { montarNavegacionInferior } from "./navegacion-compartida.js";
+import { registrarDescargaPDF } from "./pdf-compartido.js";
 import {
   calcularRemunerativo,
   calcularNoRemunerativo,
@@ -14,6 +15,15 @@ import {
 } from "./modelo.js";
 
 montarNavegacionInferior();
+
+const botonMenu = document.getElementById("menu");
+const navDesplega = document.getElementById("nav__links");
+
+botonMenu.addEventListener("click", () => {
+  navDesplega.classList.toggle("active");
+});
+
+registrarDescargaPDF();
 
 const tareasPorUnidad = [
   { inputId: "cantMugronEnguanado", tarifa: "enguanados" },

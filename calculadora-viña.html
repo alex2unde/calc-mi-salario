@@ -231,14 +231,6 @@
         </button>
 
         <ul class="nav__links" id="nav__links">
-          <li class="gmail">
-            <a href="#">Calculadoras</a>
-            <ul class="navContacto">
-              <li><a href="calculadora.html">De salario</a></li>
-              <li><a href="indemnizacion.html">De indemnizacion</a></li>
-            </ul>
-          </li>
-
           <li class="infoIndex">
             <a href="index.html#informacion"> Informacion </a>
           </li>
@@ -1221,6 +1213,26 @@
       </div>
     </nav>
 
+    <script>
+      window.html2pdfReady = new Promise((resolve) => {
+        window.addEventListener(
+          "html2pdf-ready",
+          () => resolve(true),
+          { once: true },
+        );
+        window.addEventListener(
+          "html2pdf-error",
+          () => resolve(false),
+          { once: true },
+        );
+      });
+    </script>
+    <script
+      async
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+      onload="window.dispatchEvent(new Event('html2pdf-ready'))"
+      onerror="window.dispatchEvent(new Event('html2pdf-error'))"
+    ></script>
     <script type="module" src="js/controlador-calculadora-viña.js"></script>
   </body>
 </html>

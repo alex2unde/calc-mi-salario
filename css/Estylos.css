@@ -3,11 +3,12 @@
     circle at 50% 0%,
     #3d0e12 0%,
     #0d0607 70%,
-    #000000 100%
+    #3d0e12 100%
   );
+
   --color-sec1: #000000;
   --color-texto: #ffffff;
-  --fondo-formulario: rgba(18, 18, 20, 0.65);
+  --fondo-formulario: rgb(18 18 27 / 80%);
   --color-botones: #ffffff;
   --color-boton-rubro-activo: linear-gradient(180deg, #d31a28 0%, #8b0811 100%);
   --cuadro-selecInput: rgba(0, 0, 0, 0.39);
@@ -27,7 +28,7 @@
   --fondo-tajeta-legal: #242323;
   --sello-de-agua: #888888 !important;
   --color-boton-rubro: rgb(35, 35, 35);
-  --fondo-resultado: #040306;
+  --fondo-resultado: rgb(18 18 27 / 80%);
 }
 
 body.modo-claro {
@@ -1227,7 +1228,7 @@ hr {
 #resultado {
   position: relative;
   background-color: var(--fondo-resultado);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: var(--borde-form) 2px solid;
   color: var(--color-texto);
   border-radius: 10px;
   box-shadow: #000000 0px 0px 10px;
@@ -1247,6 +1248,7 @@ hr {
   left: 0;
   transform: none;
   text-align: center;
+  margin: 20px 0px -20px 0px;
 }
 .resultado1 {
   display: flex;
@@ -1635,7 +1637,7 @@ input[type="radio"]:checked + .radio-btn {
   border-right: 2px solid #000000;
   border-radius: 10px;
   border: var(--color-boton-rubro-activo) 2px solid;
-  background: linear-gradient(180deg, #d31a28 0%, #8b0811 100%);
+  background: var(--color-boton-rubro-activo);
   color: #ffffff;
   box-shadow:
     0 0 15px rgba(211, 26, 40, 0.5),
@@ -2861,11 +2863,7 @@ summary ::hover {
     font-size: 1.2em;
     border-radius: 10px;
     border: 1px solid var(--borde-form);
-    background: linear-gradient(
-      26deg,
-      rgba(10, 10, 10, 0) 79%,
-      rgb(196 188 188 / 29%) 100%
-    );
+    background: var(--fondo-formulario);
     font-family: "verdana";
     box-shadow: #000000 0px 0px 10px;
   }
@@ -2876,11 +2874,7 @@ summary ::hover {
     margin-top: 50px;
     border-radius: 10px;
     flex-direction: column;
-    background: linear-gradient(
-      26deg,
-      rgba(10, 10, 10, 0) 79%,
-      rgb(196 188 188 / 29%) 100%
-    );
+    background: var(--fondo-formulario);
     border: 1px solid var(--borde-form);
     box-shadow: #000000;
   }
@@ -3245,7 +3239,7 @@ summary ::hover {
     justify-content: space-evenly;
     flex-direction: row;
 
-    background-color: #181b21;
+    background-color: #121212;
   }
 
   .nav-inferior > * {
@@ -3550,6 +3544,30 @@ body.modo-claro .tarjeta-feriado-modal.feriado-tarjeta-pasada {
 body.modo-claro .tarjeta-feriado-modal.feriado-tarjeta-vigente {
   border-color: #174ea6;
   box-shadow: 0 4px 12px rgb(23 78 166 / 22%);
+  background: #ffffff;
+}
+
+.tarjeta-feriado-modal.feriado-hoy,
+.tarjeta-feriado-modal.feriado-proximo {
+  color: #ffffff;
+  border-color: #ef5350;
+  background: #b71c1c;
+  box-shadow: 0 4px 14px rgb(183 28 28 / 35%);
+}
+
+body.modo-claro .tarjeta-feriado-modal.feriado-hoy,
+body.modo-claro .tarjeta-feriado-modal.feriado-proximo {
+  color: #ffffff;
+  border-color: #0d47a1;
+  background: #174ea6;
+  box-shadow: 0 4px 14px rgb(23 78 166 / 30%);
+}
+
+.tarjeta-feriado-modal.feriado-hoy .feriado-nombre,
+.tarjeta-feriado-modal.feriado-hoy .feriado-tipo,
+.tarjeta-feriado-modal.feriado-proximo .feriado-nombre,
+.tarjeta-feriado-modal.feriado-proximo .feriado-tipo {
+  color: #ffffff;
 }
 
 .tarjeta-feriado-modal .feriado-tipo {
@@ -3690,6 +3708,18 @@ body.modo-claro .boton-vista-feriados.activo {
 .feriado-pasado {
   color: #30343b;
   background: #d3d6dc;
+}
+
+.dia-feriado.feriado-hoy,
+.dia-feriado.feriado-proximo {
+  color: #ffffff;
+  background: #b71c1c;
+}
+
+body.modo-claro .dia-feriado.feriado-hoy,
+body.modo-claro .dia-feriado.feriado-proximo {
+  color: #ffffff;
+  background: #174ea6;
 }
 
 .dia-feriado[data-cantidad]::after {

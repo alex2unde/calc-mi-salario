@@ -1,4 +1,5 @@
 import { montarNavegacionInferior } from "./navegacion-compartida.js";
+import { registrarDescargaPDF } from "./pdf-compartido.js";
 import {
   calculoBaseJornal,
   diaDelJornal,
@@ -594,46 +595,4 @@ formulario.addEventListener("submit", (event) => {
   controladorPrincipal();
 });
 
-// Generar PDF.
-const botonDescarga = document.getElementById("botonPDF");
-botonDescarga.addEventListener("click", async () => {
-  const capturaAqui = document.getElementById("divPDF");
-
-  if (!capturaAqui) {
-    alert("Primero debes realizar el cálculo para generar el PDF.");
-    return;
-  }
-
-  if (!(await window.html2pdfReady)) {
-    alert(
-      "No se pudo cargar el generador de PDF. Revisá tu conexión e intentá nuevamente.",
-    );
-    return;
-  }
-
-  capturaAqui.classList.add("forzar-PDF"); // Agregamos la clase para forzar el estilo de PDF
-
-  const configPDF = {
-    margin: 5, // Un margen pequeño para aprovechar el espacio
-    filename: "sueldo-calculado.pdf",
-    image: { type: "jpeg", quality: 0.98 },
-    pagebreak: { mode: ["css", "legacy"] }, // Evita cortes bruscos
-    html2canvas: {
-      scale: 2,
-      useCORS: true, // Importante si usas imágenes o estilos externos
-      letterRendering: true,
-      scrollY: 0, // Asegura que no se corte si hay scroll en la página
-      ignoreElements: (element) => element.classList.contains("no-pdf"),
-    },
-    // Cambiamos a A4 y definimos orientación vertical
-    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-  };
-
-  html2pdf()
-    .set(configPDF)
-    .from(capturaAqui)
-    .save()
-    .then(() => {
-      capturaAqui.classList.remove("forzar-PDF");
-    });
-});
+registrarDescargaPDF();

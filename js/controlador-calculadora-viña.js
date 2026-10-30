@@ -1,4 +1,5 @@
 import { montarNavegacionInferior } from "./navegacion-compartida.js";
+import { registrarDescargaPDF } from "./pdf-compartido.js";
 import {
   valorHora,
   DIVISOR_JORNALERO,
@@ -33,6 +34,15 @@ import {
 } from "./modelo.js";
 
 montarNavegacionInferior();
+
+const botonMenu = document.getElementById("menu");
+const navDesplega = document.getElementById("nav__links");
+
+botonMenu.addEventListener("click", () => {
+  navDesplega.classList.toggle("active");
+});
+
+registrarDescargaPDF();
 
 //variable dinamica para trabajar con diferentes liquidaciones--------------------------------------------
 // let tipoDePago = "mensual";
