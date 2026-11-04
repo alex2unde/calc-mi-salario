@@ -294,7 +294,7 @@
 
     <!-- cartel de actualizacion con fecha -->
     <div>
-      <p class="p-actualizacion">✔ Septiembre - Octubre.</p>
+      <p class="p-actualizacion">✔ Noviembre - Diciembre.</p>
     </div>
 
     <main class="principal">
@@ -396,16 +396,16 @@
               <label class="cat" for="opcionesCat">
                 <span>Categoria:</span>
                 <select id="opcionesCat">
-                  <option value="590917">Op. Común</option>
-                  <option value="614553">Ayudante de Reparto</option>
-                  <option value="650008">Op. Especializado</option>
-                  <option value="673645">1/2 oficial</option>
-                  <option value="697282">Calificado/Clarkista</option>
-                  <option value="720918">Larga distancia/Tonelero</option>
-                  <option value="744555">
+                  <option value="611451">Op. Común</option>
+                  <option value="635909">Ayudante de Reparto</option>
+                  <option value="672596">Op. Especializado</option>
+                  <option value="697054">1/2 oficial</option>
+                  <option value="721512">Calificado/Clarkista</option>
+                  <option value="745970">Larga distancia/Tonelero</option>
+                  <option value="770428">
                     Mecanico/ tetrabrick/ Foguista/ Oficial/ Destilador
                   </option>
-                  <option value="768192">
+                  <option value="794886">
                     Oficiales toneleros vasija grande. Encargados de sección
                   </option>
                 </select>
@@ -422,7 +422,7 @@
                     type="radio"
                     name="titulo"
                     id="tituloSec1"
-                    value="29546"
+                    value="30573"
                   />
 
                   <label class="radio-btn" for="tituloSec1"> Si </label>
@@ -1155,16 +1155,12 @@
 
     <script>
       window.html2pdfReady = new Promise((resolve) => {
-        window.addEventListener(
-          "html2pdf-ready",
-          () => resolve(true),
-          { once: true },
-        );
-        window.addEventListener(
-          "html2pdf-error",
-          () => resolve(false),
-          { once: true },
-        );
+        window.addEventListener("html2pdf-ready", () => resolve(true), {
+          once: true,
+        });
+        window.addEventListener("html2pdf-error", () => resolve(false), {
+          once: true,
+        });
       });
     </script>
     <script

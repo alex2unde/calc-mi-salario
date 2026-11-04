@@ -291,7 +291,7 @@
 
     <!-- cartel de actualizacion con fecha -->
     <div>
-      <p class="p-actualizacion"> ✔️ Septiembre - Octubre</p>
+      <p class="p-actualizacion">✔ Noviembre - Diciembre</p>
     </div>
 
     <main class="principal">
@@ -393,14 +393,14 @@
           <label class="cat" for="opcionesCat-viña">
             <span for="opcionesAnt">Categoría</span>
             <select id="opcionesCat-viña" required>
-              <option value="476159">Obrero Común</option>
-              <option value="499958">Obrero especializado</option>
-              <option value="523765">Obrero con oficio</option>
-              <option value="547573">
+              <option value="491807">Obrero Común</option>
+              <option value="516398">Obrero especializado</option>
+              <option value="540988">Obrero con oficio</option>
+              <option value="565579">
                 Tractorista/ Topadoristas/ Choferes
               </option>
-              <option value="571380">Parraleros/ Injertador</option>
-              <option value="595188">Mecanico</option>
+              <option value="590169">Parraleros/ Injertador</option>
+              <option value="614759">Mecanico</option>
               <option value="619006">Encargado</option>
               <option value="642814">Capataz</option>
             </select>
@@ -484,32 +484,6 @@
             </label>
           </div>
         </div>
-
-        <!-- estos bloques comentados por ahora no van a estar funcionando, ya que no se si se van a usar o no. -->
-        <!-- <div class="grupo-input checkbox-especial">
-          <label for="checkInsalubre"> Tareas de sulfatado/ curaciones </label>
-          <input type="checkbox" id="checkInsalubre" value="6" />
-
-          <div class="divInputDiasInsalubre" id="divInputDiasInsalubre">
-            <label for="diasInsalubre" class="diasInsalubre_input"
-              >Dias trabajados:
-            </label>
-
-            <input
-              type="number"
-              name="diasInsalubre"
-              id="diasInsalubre"
-              min="0"
-              max="31"
-              placeholder=" 0"
-            />
-          </div>
-        </div>
-
-        <div class="grupo-input checkbox-especial">
-          <label for="checkVendimia"> ¿Trabajador afectado a cocecha? </label>
-          <input type="checkbox" id="checkVendimia" />
-        </div> -->
 
         <button class="btnCalc" type="submit" id="btn-calcular-vina">
           Calcular
@@ -1215,16 +1189,12 @@
 
     <script>
       window.html2pdfReady = new Promise((resolve) => {
-        window.addEventListener(
-          "html2pdf-ready",
-          () => resolve(true),
-          { once: true },
-        );
-        window.addEventListener(
-          "html2pdf-error",
-          () => resolve(false),
-          { once: true },
-        );
+        window.addEventListener("html2pdf-ready", () => resolve(true), {
+          once: true,
+        });
+        window.addEventListener("html2pdf-error", () => resolve(false), {
+          once: true,
+        });
       });
     </script>
     <script

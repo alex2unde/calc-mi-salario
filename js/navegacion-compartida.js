@@ -172,11 +172,6 @@ const modalFeriados = `
           </svg>
         </button>
       </header>
-      <div class="leyenda-feriados" aria-label="Estados de feriados">
-        <span><i class="leyenda-pasado"></i> Ya pasó</span>
-        <span><i class="leyenda-futuro"></i> Próximo</span>
-        <span><i class="leyenda-seleccionado"></i> Seleccionado</span>
-      </div>
       <div class="vistas-feriados">
         <section
           class="panel-vista-feriados"
@@ -186,6 +181,11 @@ const modalFeriados = `
         >
           <div class="contenido-calendario-feriados">
             <div class="calendario-anual-feriados" id="calendarioAnualFeriados"></div>
+            <div class="leyenda-feriados" aria-label="Estados de feriados">
+              <span><i class="leyenda-pasado"></i> Ya pasó</span>
+              <span><i class="leyenda-futuro"></i> Próximo</span>
+              <span><i class="leyenda-seleccionado"></i> Seleccionado</span>
+            </div>
             <aside class="detalle-feriado" id="detalleFeriado" aria-live="polite">
               <button
                 type="button"
@@ -319,7 +319,7 @@ const modalCalculadoras = `
         <div class="card-bodega">
           <img
             class="img-bodega-card"
-            src="assets/imagenes/trabajadores-cocechando-card-cropped.webp"
+src="assets/imagenes/trabajadores-contrato-card-cropped.webp"
             alt="Trabajador cosechando"
           />
           <div class="overlay-contenido-bodega">
@@ -392,7 +392,10 @@ function manejarClicNavegacion(evento) {
   } else if (botonVistaFeriados) {
     const mostrarLista = botonVistaFeriados.id === "btnVistaLista";
 
-    if (mostrarLista && modalFeriadosElemento.classList.contains("detalle-abierto")) {
+    if (
+      mostrarLista &&
+      modalFeriadosElemento.classList.contains("detalle-abierto")
+    ) {
       establecerVistaDetalle(false);
     }
 
@@ -491,9 +494,8 @@ function renderizarCalendarioAnual() {
   const feriadosPorFecha = new Map();
   const fechasDestacadas = obtenerFechasFeriadosDestacados();
 
-  document.getElementById("anioFeriados").textContent = String(
-    anioCalendarioActual,
-  );
+  document.getElementById("anioFeriados").textContent =
+    String(anioCalendarioActual);
   calendario.replaceChildren();
 
   if (feriadosCalendarioActual.length === 0) {
@@ -527,12 +529,24 @@ function renderizarCalendarioAnual() {
     ["L", "M", "M", "J", "V", "S", "D"].forEach((diaSemana, indice) => {
       const encabezado = document.createElement("span");
       encabezado.className = "encabezado-dia-feriados";
-      encabezado.setAttribute("aria-label", ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"][indice]);
+      encabezado.setAttribute(
+        "aria-label",
+        [
+          "lunes",
+          "martes",
+          "miércoles",
+          "jueves",
+          "viernes",
+          "sábado",
+          "domingo",
+        ][indice],
+      );
       encabezado.textContent = diaSemana;
       grilla.append(encabezado);
     });
 
-    const primerDiaSemana = (new Date(anioCalendarioActual, mes, 1).getDay() + 6) % 7;
+    const primerDiaSemana =
+      (new Date(anioCalendarioActual, mes, 1).getDay() + 6) % 7;
     const cantidadDias = new Date(anioCalendarioActual, mes + 1, 0).getDate();
 
     for (let posicion = 0; posicion < primerDiaSemana; posicion += 1) {
@@ -562,7 +576,6 @@ function renderizarCalendarioAnual() {
     seccionMes.append(tituloMes, grilla);
     calendario.append(seccionMes);
   }
-
 }
 
 function obtenerCondicionFeriado(tipo) {
@@ -683,8 +696,7 @@ function enfocarProximoFeriado() {
   const rectPanel = panel.getBoundingClientRect();
   const rectFeriado = feriadoProximo.getBoundingClientRect();
   const bordeSuperior = rectPanel.top + panel.clientTop;
-  const scrollDeseado =
-    panel.scrollTop + rectFeriado.top - bordeSuperior;
+  const scrollDeseado = panel.scrollTop + rectFeriado.top - bordeSuperior;
   const scrollMaximo = Math.max(0, panel.scrollHeight - panel.clientHeight);
 
   panel.scrollTop = Math.min(Math.max(0, scrollDeseado), scrollMaximo);
@@ -901,7 +913,9 @@ export function montarNavegacionInferior() {
     document.querySelector(".nav-inferior");
 
   if (!puntoMontaje) {
-    throw new Error("No se encontró la barra ni el punto de montaje de navegación.");
+    throw new Error(
+      "No se encontró la barra ni el punto de montaje de navegación.",
+    );
   }
 
   if (

@@ -125,11 +125,11 @@ export const MENSAJES_ANTIGUEDAD_VINA = {
 };
 
 // suma mensual no remunerativa
-export const ASIGNACION_VINA = 204949;
+export const ASIGNACION_VINA = 211688;
 // valor mensual por refrigerio
-export const REFRIGERIO_VIÑA = 163389;
+export const REFRIGERIO_VIÑA = 168761;
 // Subsidio de Sepelio: 40% de un Jornal del obrero Común
-export const SEPELIO_VIÑA = 13512;
+export const SEPELIO_VIÑA = 13957;
 
 //se obtiene el % de la antiguedad por categoria.
 export function antiguedadViña(basico) {
@@ -178,17 +178,17 @@ export function sumaHaberesViña(
 //-----------------------------------------bodega--------------------------------------
 // valores globales para bodega
 // asignacion no remunerativa
-const ASIGNACION_COMUN = 195781;
-const ASIGNACION_AYUDANTE_REPARTO = 203612;
-const ASIGNACION_ESPECIAL = 215359;
-const ASIGNACION_MEDIO_OFICIAL = 223190;
-const ASIGNACION_CALIFICADO = 231022;
-const ASIGNACION_LARGA_DISTANCIA = 238853;
-const ASIGNACION_FOGUISTA = 246684;
-const ASIGNACION_ENCARGADO = 254515;
+const ASIGNACION_COMUN = 202584;
+const ASIGNACION_AYUDANTE_REPARTO = 210687;
+const ASIGNACION_ESPECIAL = 222842;
+const ASIGNACION_MEDIO_OFICIAL = 230946;
+const ASIGNACION_CALIFICADO = 239049;
+const ASIGNACION_LARGA_DISTANCIA = 247152;
+const ASIGNACION_FOGUISTA = 255256;
+const ASIGNACION_ENCARGADO = 263359;
 
-export const REFRIGERIO = 199719;
-export const sepelio = 15783;
+export const REFRIGERIO = 206659;
+export const sepelio = 16331;
 
 export const DIVISOR_JORNALERO = 200;
 
