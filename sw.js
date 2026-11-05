@@ -1,4 +1,4 @@
-const CACHE_NAME = "bodega-cache-v16";
+const CACHE_NAME = "bodega-cache-v17";
 const CACHE_PREFIX = "bodega-cache-";
 const URLS_TO_CACHE = [
   "/",
@@ -26,7 +26,7 @@ const URLS_TO_CACHE = [
   "/assets/imagenes/logo-png-192.png",
   "/assets/imagenes/logo-png-512.png",
   "/assets/imagenes/trabajadores-bodega-card-cropped.webp",
-  "/assets/imagenes/trabajadores-cocechando-card-cropped.webp",
+  "/assets/imagenes/trabajadores-contrato-card-cropped.webp",
   "/assets/imagenes/trabajadores-viña-card-cropped.webp",
 ];
 
@@ -53,7 +53,9 @@ self.addEventListener("activate", (event) => {
           cacheName.startsWith(CACHE_PREFIX) && cacheName !== CACHE_NAME,
       );
 
-      await Promise.all(oldAppCaches.map((cacheName) => caches.delete(cacheName)));
+      await Promise.all(
+        oldAppCaches.map((cacheName) => caches.delete(cacheName)),
+      );
       await self.clients.claim();
     })(),
   );
@@ -75,7 +77,11 @@ async function getCachedResponse(request) {
     try {
       await cache.put(request, networkResponse.clone());
     } catch (error) {
-      console.error("No se pudo guardar el recurso en caché:", request.url, error);
+      console.error(
+        "No se pudo guardar el recurso en caché:",
+        request.url,
+        error,
+      );
     }
   }
 

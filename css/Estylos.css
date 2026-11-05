@@ -16,11 +16,6 @@
   --tiulo-feriado: #ffff;
   --feriado-tipo: rgb(229 18 39);
   --tarjeta-feriado: #515151;
-  --div--feriado-index: linear-gradient(
-    0deg,
-    rgba(21, 18, 18, 1) 0%,
-    rgba(0, 0, 0, 1) 100%
-  );
   --fondo-parrafo: #151212;
   --fondo-informacion-legal: #0d0c0c;
   --summary-fondo: #373737;
@@ -43,11 +38,6 @@ body.modo-claro {
   --tiulo-feriado: #515151;
   --feriado-tipo: rgb(70 99 255);
   --tarjeta-feriado: rgb(255, 255, 254);
-  --div--feriado-index: linear-gradient(
-    0deg,
-    rgb(238 238 238) 0%,
-    rgba(255, 255, 255, 1) 100%
-  );
   --fondo-parrafo: #eeeeee;
   --fondo-informacion-legal: #ffffff;
   --summary-fondo: #eeeeee;
@@ -1225,6 +1215,9 @@ hr {
 }
 
 /* cuadro de resultado */
+.resumen {
+  width: 400px;
+}
 #resultado {
   position: relative;
   background-color: var(--fondo-resultado);
@@ -2155,7 +2148,7 @@ summary ::hover {
 .div-conversion {
   display: flex;
   margin-top: 10px;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
 /* Estilo para PDF */
@@ -2712,8 +2705,6 @@ summary ::hover {
     margin-top: 20px;
     margin: 10px;
     width: 100%;
-
-    background: var(--div--feriado-index);
   }
   .titulo-feriados {
     font-size: 24px;

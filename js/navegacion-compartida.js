@@ -178,6 +178,7 @@ const modalFeriados = `
           id="panelVistaCalendario"
           role="tabpanel"
           aria-labelledby="btnVistaCalendario"
+          hidden
         >
           <div class="contenido-calendario-feriados">
             <div class="calendario-anual-feriados" id="calendarioAnualFeriados"></div>
@@ -206,7 +207,6 @@ const modalFeriados = `
           id="panelVistaLista"
           role="tabpanel"
           aria-labelledby="btnVistaLista"
-          hidden
         >
           <div class="lista-feriados-modal" id="listaFeriadosModal"></div>
         </section>
@@ -214,12 +214,12 @@ const modalFeriados = `
       <nav class="navegacion-vistas-feriados" role="tablist" aria-label="Vistas de feriados">
         <button
           type="button"
-          class="boton-vista-feriados activo"
+          class="boton-vista-feriados"
           id="btnVistaCalendario"
           role="tab"
           aria-controls="panelVistaCalendario"
-          aria-selected="true"
-          tabindex="0"
+          aria-selected="false"
+          tabindex="-1"
         >
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="4" width="18" height="17" rx="2"></rect>
@@ -229,12 +229,12 @@ const modalFeriados = `
         </button>
         <button
           type="button"
-          class="boton-vista-feriados"
+          class="boton-vista-feriados activo"
           id="btnVistaLista"
           role="tab"
           aria-controls="panelVistaLista"
-          aria-selected="false"
-          tabindex="-1"
+          aria-selected="true"
+          tabindex="0"
         >
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M8 6h13M8 12h13M8 18h13"></path>
@@ -385,7 +385,7 @@ function manejarClicNavegacion(evento) {
     modalFeriadosElemento.setAttribute("aria-hidden", "false");
     document.body.classList.add("modal-feriados-abierto");
     botonAbrirFeriados.setAttribute("aria-expanded", "true");
-    establecerVistaFeriados("calendario");
+    establecerVistaFeriados("lista");
     abrirCalendarioFeriados(obtenerAnioLocal());
   } else if (botonCerrarFeriados) {
     cerrarCalendarioFeriados();
