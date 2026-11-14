@@ -647,6 +647,102 @@ export function totalSinCausayCP(
   }
 }
 
+export function calcularIndemnizacionRapidaBodega(
+  mayorSueldo,
+  fechaInicio,
+  fechaFin,
+) {
+  if (typeof mayorSueldo !== "number") {
+    throw new TypeError("El sueldo debe ser un número.");
+  }
+  if (!Number.isFinite(mayorSueldo) || mayorSueldo <= 0) {
+    throw new RangeError("El sueldo debe ser un número positivo y finito.");
+  }
+
+  const validarFecha = (fecha, nombre) => {
+    if (typeof fecha !== "string") {
+      throw new TypeError(`${nombre} debe ser una fecha con formato AAAA-MM-DD.`);
+    }
+
+    const partes = /^(\d{4})-(\d{2})-(\d{2})$/.exec(fecha);
+    if (!partes) {
+      throw new RangeError(`${nombre} debe ser una fecha válida con formato AAAA-MM-DD.`);
+    }
+
+    const [, anio, mes, dia] = partes.map(Number);
+    const fechaValidada = new Date(0);
+    fechaValidada.setUTCHours(0, 0, 0, 0);
+    fechaValidada.setUTCFullYear(anio, mes - 1, dia);
+
+    if (
+      fechaValidada.getUTCFullYear() !== anio ||
+      fechaValidada.getUTCMonth() !== mes - 1 ||
+      fechaValidada.getUTCDate() !== dia
+    ) {
+      throw new RangeError(`${nombre} debe ser una fecha válida con formato AAAA-MM-DD.`);
+    }
+  };
+
+  validarFecha(fechaInicio, "La fecha de inicio");
+  validarFecha(fechaFin, "La fecha de fin");
+
+  if (fechaInicio > fechaFin) {
+    throw new RangeError("La fecha de inicio no puede ser posterior a la fecha de fin.");
+  }
+
+  const diasTrabajados = diasTrabajadosTotales(fechaInicio, fechaFin);
+  const añosTrabajados = calcularAños(diasTrabajados);
+  const indemnizacionAntiguedad = calcularAntiguedadIndem(
+    añosTrabajados,
+    mayorSueldo,
+  );
+  const SACaguinaldo = calcularAguinaldoProporcional(fechaFin, mayorSueldo);
+  const diasTrabajadosDelAnio = diasTrabajadosUltAnio(fechaFin);
+  const diasDelAnio = anioDiasTotales(fechaFin);
+  const diasVacacionesPorAntiguedad = vacacionesSegunAntiguedad(
+    añosTrabajados,
+  );
+  const vacacionesProp = vacacionesProporcionales(
+    diasVacacionesPorAntiguedad,
+    mayorSueldo,
+    diasTrabajadosDelAnio,
+    diasDelAnio,
+  );
+  const SACvacaciones = vacacionesSAC(vacacionesProp);
+  const diasTrabajadosUltimoMes = diasUltMes(fechaFin);
+  const intMesDespido = IntegracionMesDespido(
+    diasTrabajadosUltimoMes,
+    mayorSueldo,
+    30,
+  );
+  const intMesDespidoSAC = integracionMesDespidoSAC(intMesDespido);
+  const total = totalSinCausayCP(
+    vacacionesProp,
+    SACvacaciones,
+    SACaguinaldo,
+    indemnizacionAntiguedad,
+    intMesDespido,
+    intMesDespidoSAC,
+    0,
+    0,
+    true,
+    0,
+    0,
+  );
+
+  return {
+    diasTrabajados,
+    añosTrabajados,
+    indemnizacionAntiguedad,
+    SACaguinaldo,
+    vacacionesProp,
+    SACvacaciones,
+    intMesDespido,
+    intMesDespidoSAC,
+    total,
+  };
+}
+
 export function totalConCausaOrenuncia(
   diasTrabajadosDelMes,
   SACsemestre,

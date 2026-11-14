@@ -32,6 +32,7 @@ import {
   convertirPesosAReales,
   cotizacionChileno,
   convertirAchilenos,
+  calcularIndemnizacionRapidaBodega,
 } from "./modelo.js";
 
 montarNavegacionInferior();
@@ -178,14 +179,13 @@ formularioSug.addEventListener("submit", async (event) => {
 
 //se exporta para usar algunas variables o funciones para el caluculo en viña.
 async function controladorPrincipal() {
-  const divResultado = document.getElementById("resultado");
-
   const {
     numeroMes,
     elementCategoria,
     selectCategoria,
     valorTitulo,
     tieneTituloSi,
+    tieneTituloNo,
     inpHoras50,
     inpHoras100,
     diasSuspension,
@@ -287,6 +287,8 @@ async function controladorPrincipal() {
   const chilenoVenta = await cotizacionChileno();
   const totalEnChilenos = convertirAchilenos(totalFinal, chilenoVenta);
 
+  let resultadosTemporario = {};
+
   if (tipoDeOperario === "temporario") {
     // Si el operario es temporario, el básico se calcula en base a las horas trabajadas, sino, se toma el valor de la categoría.
     // const mesHorasInput = mostrarInputMes();
@@ -330,6 +332,108 @@ async function controladorPrincipal() {
       dineroEnNegro,
     );
 
+    resultadosTemporario = {
+      horasHabilesDelMes,
+      baseJornal,
+      valorDia,
+      SuspensionJornal,
+      haberesTemporario,
+      jubilacionTemp,
+      ley19032Temp,
+      sindicatoTemp,
+      obraSocialTemp,
+      descuentosTemp,
+      totalFinalTemp,
+    };
+  }
+
+  return {
+    tipoDeOperario,
+    numeroMes,
+    nombreCategoria,
+    basicoComun,
+    selectCategoria,
+    valorTitulo,
+    tieneTituloSi,
+    tieneTituloNo,
+    inpHoras50,
+    inpHoras100,
+    diasSuspension,
+    selectAntiguedad,
+    inpAnticipo,
+    dineroEnNegro,
+    secundarioCompleto,
+    antiguedadCalculo,
+    antiguedad,
+    precioHora,
+    precioHoraConItems,
+    horasAl50,
+    valorHoraAl50,
+    horasAl100,
+    valorHoraAl100,
+    valorDiaSuspension,
+    suspenciones,
+    noRemunerativo,
+    presentismoPerfecto,
+    presentismoCompleto,
+    radioMesCompleto,
+    totalHaberes,
+    descuentoJubilacion,
+    descuentoLey19032,
+    descuentoSindicato,
+    obraSocialDesc,
+    anticipo,
+    descuentos,
+    REFRIGERIO,
+    sepelio,
+    totalFinal,
+    dolarVenta,
+    totalEnDolares,
+    realVenta,
+    totalEnReales,
+    chilenoVenta,
+    totalEnChilenos,
+    ...resultadosTemporario,
+  };
+}
+
+function imprimirResultado(resultado) {
+  const divResultado = document.getElementById("resultado");
+  const {
+    tipoDeOperario,
+    selectCategoria,
+    baseJornal,
+    antiguedad,
+    valorHoraAl50,
+    valorHoraAl100,
+    diasSuspension,
+    SuspensionJornal,
+    suspenciones,
+    secundarioCompleto,
+    radioMesCompleto,
+    presentismoPerfecto,
+    presentismoCompleto,
+    noRemunerativo,
+    REFRIGERIO,
+    dineroEnNegro,
+    jubilacionTemp,
+    ley19032Temp,
+    sindicatoTemp,
+    obraSocialTemp,
+    descuentoJubilacion,
+    descuentoLey19032,
+    obraSocialDesc,
+    descuentoSindicato,
+    sepelio,
+    inpAnticipo,
+    totalFinalTemp,
+    totalFinal,
+    totalEnDolares,
+    totalEnReales,
+    totalEnChilenos,
+  } = resultado;
+
+  if (tipoDeOperario === "temporario") {
     divResultado.innerHTML = `
 <div id="divPDF">
 
@@ -588,11 +692,141 @@ async function controladorPrincipal() {
   }
 }
 
+const seccionIndemnizacionRapida = document.getElementById(
+  "indemnizacionRapida",
+);
+const formularioIndemnizacionRapida = document.getElementById(
+  "formularioIndemnizacionRapida",
+);
+const fechaIngresoRapida = document.getElementById("fechaIngresoRapida");
+const errorIndemnizacionRapida = document.getElementById(
+  "errorIndemnizacionRapida",
+);
+const resultadoIndemnizacionRapida = document.getElementById(
+  "resultadoIndemnizacionRapida",
+);
+let ultimoResultadoSalarial = null;
+let calcularIndemnizacionSeleccionado = false;
+
+function obtenerSueldoComputable(resultado) {
+  if (resultado.tipoDeOperario === "temporario") {
+    return (
+      resultado.totalFinalTemp +
+      resultado.descuentosTemp +
+      resultado.anticipo -
+      resultado.REFRIGERIO -
+      resultado.noRemunerativo -
+      resultado.dineroEnNegro
+    );
+  }
+
+  return resultado.totalHaberes;
+}
+
+function fechaActualLocal() {
+  const hoy = new Date();
+  const mes = String(hoy.getMonth() + 1).padStart(2, "0");
+  const dia = String(hoy.getDate()).padStart(2, "0");
+  return `${hoy.getFullYear()}-${mes}-${dia}`;
+}
+
+function formatoMoneda(valor) {
+  return `$${valor.toLocaleString("es-AR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`;
+}
+
+function limpiarResultadoIndemnizacionRapida() {
+  errorIndemnizacionRapida.textContent = "";
+  resultadoIndemnizacionRapida.hidden = true;
+  resultadoIndemnizacionRapida.replaceChildren();
+}
+
+function actualizarIndemnizacionRapida() {
+  limpiarResultadoIndemnizacionRapida();
+
+  const fechaInicio = fechaIngresoRapida.value;
+  if (!fechaInicio) {
+    return;
+  }
+
+  const fechaFin = fechaActualLocal();
+  if (fechaInicio > fechaFin) {
+    errorIndemnizacionRapida.textContent =
+      "La fecha de ingreso no puede ser posterior a la fecha actual.";
+    return;
+  }
+  if (!fechaIngresoRapida.validity.valid) {
+    errorIndemnizacionRapida.textContent =
+      "Ingresá una fecha de ingreso válida.";
+    return;
+  }
+
+  try {
+    const mayorSueldo = obtenerSueldoComputable(ultimoResultadoSalarial);
+    const calculo = calcularIndemnizacionRapidaBodega(
+      mayorSueldo,
+      fechaInicio,
+      fechaFin,
+    );
+
+    resultadoIndemnizacionRapida.innerHTML = `
+      <h4 class="h4-total">Total estimado</h4>
+      <p class="resultadoFinal">${formatoMoneda(calculo.total)}</p>
+      <details>
+        <summary>Ver desglose de conceptos</summary>
+        <div class="resultado1"><span>Indemnización por antigüedad:</span><span>${formatoMoneda(calculo.indemnizacionAntiguedad)}</span></div>
+        <div class="resultado1"><span>Aguinaldo proporcional:</span><span>${formatoMoneda(calculo.SACaguinaldo)}</span></div>
+        <div class="resultado1"><span>Vacaciones proporcionales:</span><span>${formatoMoneda(calculo.vacacionesProp)}</span></div>
+        <div class="resultado1"><span>SAC de vacaciones:</span><span>${formatoMoneda(calculo.SACvacaciones)}</span></div>
+        <div class="resultado1"><span>Integración del mes de despido:</span><span>${formatoMoneda(calculo.intMesDespido)}</span></div>
+        <div class="resultado1"><span>SAC de integración:</span><span>${formatoMoneda(calculo.intMesDespidoSAC)}</span></div>
+      </details>
+      <small>Estimación orientativa basada en el sueldo actual. El importe puede diferir de la indemnización que corresponda según el historial salarial y las circunstancias de la relación laboral.</small>
+      <p><a href="indemnizacion.html">Realizar un cálculo más detallado</a></p>
+    `;
+    resultadoIndemnizacionRapida.hidden = false;
+  } catch (error) {
+    console.error("No se pudo calcular la indemnización rápida:", error);
+    errorIndemnizacionRapida.textContent =
+      "No se pudo calcular la estimación. Revisá la fecha y volvé a intentar.";
+  }
+}
+
+document
+  .getElementById("calcularIndemnizacionSi")
+  .addEventListener("click", () => {
+    calcularIndemnizacionSeleccionado = true;
+    formularioIndemnizacionRapida.hidden = false;
+    fechaIngresoRapida.max = fechaActualLocal();
+    fechaIngresoRapida.focus();
+    actualizarIndemnizacionRapida();
+  });
+
+document
+  .getElementById("calcularIndemnizacionNo")
+  .addEventListener("click", () => {
+    calcularIndemnizacionSeleccionado = false;
+    formularioIndemnizacionRapida.hidden = true;
+    seccionIndemnizacionRapida.hidden = true;
+    limpiarResultadoIndemnizacionRapida();
+  });
+
+fechaIngresoRapida.addEventListener("input", actualizarIndemnizacionRapida);
+
 //boton para calcular
 const formulario = document.getElementById("formulario");
-formulario.addEventListener("submit", (event) => {
+formulario.addEventListener("submit", async (event) => {
   event.preventDefault(); //asi no se recarga la pagina al presionar el boton.
-  controladorPrincipal();
+  const resultado = await controladorPrincipal();
+  imprimirResultado(resultado);
+  ultimoResultadoSalarial = resultado;
+  fechaIngresoRapida.max = fechaActualLocal();
+  seccionIndemnizacionRapida.hidden = false;
+  if (calcularIndemnizacionSeleccionado) {
+    actualizarIndemnizacionRapida();
+  }
 });
 
 registrarDescargaPDF();

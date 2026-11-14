@@ -308,13 +308,13 @@ async function controladorPrincipalViña() {
     totalEnDolares,
     totalEnReales,
     totalEnChilenos,
+    tipoDeOperario,
   };
 }
 
-async function imprimirviña() {
+function imprimirviña(resultado) {
   const divVistaResultado = document.getElementById("resultado");
 
-  //des-estructura de la funcion controladorPrincipalViña.
   const {
     basico,
     antiguedadViñacorrespondiente,
@@ -339,7 +339,8 @@ async function imprimirviña() {
     totalEnDolares,
     totalEnReales,
     totalEnChilenos,
-  } = await controladorPrincipalViña();
+    tipoDeOperario,
+  } = resultado;
 
   divVistaResultado.innerHTML = `
   <div id="divPDF">
@@ -464,8 +465,8 @@ ${
 
 //boton para calcular
 const formulario = document.getElementById("formulario");
-formulario.addEventListener("submit", (event) => {
+formulario.addEventListener("submit", async (event) => {
   event.preventDefault(); //asi no se recarga la pagina al presionar el boton.
-  controladorPrincipalViña();
-  imprimirviña();
+  const resultado = await controladorPrincipalViña();
+  imprimirviña(resultado);
 });

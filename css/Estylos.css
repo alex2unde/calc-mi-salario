@@ -774,24 +774,13 @@ body {
 
 /*estilo del boton para descargar la app*/
 .botonDescargar {
-  font-size: 1rem;
-  color: rgb(255, 255, 255);
-  box-shadow: #f9f6f696 1px 1px 14px 0px;
-  background-color: #000000;
-  border-radius: 10px;
-
-  text-align: center;
-  text-decoration: none;
-  padding: 15px 25px;
-  cursor: pointer;
-
-  transition:
-    background-color 0.3s,
-    color 0.3s;
-  align-items: center;
+  display: none;
 }
-.botonDescargar:hover {
-  transform: scale(1.1);
+
+@media (min-width: 601px) {
+  #btnInstalarApp {
+    display: none !important;
+  }
 }
 
 /*contenedor del primer ejemplo*/
@@ -1692,6 +1681,7 @@ input[type="radio"]:checked + .radio-btn {
   font-size: 30px;
   font-weight: bold;
   text-align: center;
+
   /* padding: 8px; */
 }
 
@@ -2397,7 +2387,7 @@ summary ::hover {
   }
 
   .parrafoSec1 {
-    background-color: var(--fondo-parrafo);
+    background-color: #242323;
     color: var(--color-texto);
 
     margin-top: 0px;
@@ -2666,9 +2656,18 @@ summary ::hover {
     border-radius: 15px;
   }
   .botonDescargar {
+    display: block;
     margin: 0px;
-    font-size: 1.3rem;
     width: 70%;
+    padding: 15px 25px;
+
+    font-size: 1.3rem;
+    background: #000000;
+    color: #ffffff;
+
+    border-radius: 10px;
+    border: solid 0.5px #ffffff;
+    box-shadow: #9d9a9a -1px 4px 12px 0px;
   }
   .botonDescargar:hover {
     transition: transform 0.3s ease;
@@ -2695,7 +2694,7 @@ summary ::hover {
     justify-content: center;
     margin-top: 10px;
     width: 100%;
-    padding: 5px;
+    padding: 10px;
   }
   .div-feriados {
     display: flex;
@@ -3148,6 +3147,12 @@ summary ::hover {
     margin-top: 25px;
     color: rgb(255, 255, 255);
     box-shadow: 10px 8px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  #opcionesIndemnizacionRapida {
+    display: flex;
+    margin-bottom: 10px;
+    gap: 10px;
   }
 
   .comparWhas {

@@ -581,6 +581,43 @@
           <hr />
         </div>
 
+        <section
+          id="indemnizacionRapida"
+          aria-labelledby="tituloIndemnizacionRapida"
+          style="background-color: var(--fondo-resultado); border: var(--borde-form) 2px solid; border-radius: 10px; box-shadow: #000000 0px 0px 10px; box-sizing: border-box; color: var(--color-texto); margin-top: 16px; max-width: 400px; padding: 20px; width: 100%;"
+          hidden
+        >
+          <h3 id="tituloIndemnizacionRapida">
+            ¿Querés calcular tu indemnización?
+          </h3>
+          <div id="opcionesIndemnizacionRapida">
+            <button class="btnCalc" id="calcularIndemnizacionSi" type="button">
+              Sí, calcular
+            </button>
+            <button class="btnCalc" id="calcularIndemnizacionNo" type="button">
+              Ahora no
+            </button>
+          </div>
+          <div id="formularioIndemnizacionRapida" hidden>
+            <label for="fechaIngresoRapida">Fecha de ingreso</label>
+            <input
+              id="fechaIngresoRapida"
+              type="date"
+              style="box-sizing: border-box; margin: 8px 0; padding: 10px; width: 100%;"
+            />
+            <p
+              id="errorIndemnizacionRapida"
+              role="alert"
+              aria-live="polite"
+            ></p>
+            <div
+              id="resultadoIndemnizacionRapida"
+              aria-live="polite"
+              hidden
+            ></div>
+          </div>
+        </section>
+
         <div class="compartir_y_btnPDF">
           <button class="btnPDF" id="botonPDF">
             <svg
