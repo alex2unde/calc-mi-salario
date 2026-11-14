@@ -1,4 +1,4 @@
-const CACHE_NAME = "bodega-cache-v17";
+const CACHE_NAME = "bodega-cache-v18";
 const CACHE_PREFIX = "bodega-cache-";
 const URLS_TO_CACHE = [
   "/",
